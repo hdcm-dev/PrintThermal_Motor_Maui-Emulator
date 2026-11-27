@@ -4,14 +4,14 @@ titulo: Core: intérprete ESC/POS de 58 mm a PNG y almacén de tickets
 version: 1.0
 estado: lista
 velocidad: completa
-base_commit: 07d938ce85db406f4d06fd0fe1b2706a6ed07854
+base_commit: 9dec7ce0bdb56b1ee990cc97cba6015cf79c0afb
 sprint: SPR-01
 epica: REQ-EPI-Ticket-Png@v1
 historias:
   - REQ-HIS-Ticket-A-Png@v1
   - REQ-HIS-Almacen-De-Tickets@v1
 lee:
-  - REQ-HIS-Compilacion-Verificada@v1
+  - REQ-HIS-Compilacion-Verificada@v2
   - VIS@v1
   - REQ-EPI-Ticket-Png@v1
   - ADR-0005@v1
