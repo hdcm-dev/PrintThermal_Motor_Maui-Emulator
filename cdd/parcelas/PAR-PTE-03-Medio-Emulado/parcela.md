@@ -4,21 +4,20 @@ titulo: Bluetooth Classic propio en C# contra netsim: descubrimiento, emparejami
 version: 1.0
 estado: propuesta
 velocidad: completa
-base_commit: 07d938ce85db406f4d06fd0fe1b2706a6ed07854
+base_commit: 9dec7ce0bdb56b1ee990cc97cba6015cf79c0afb
 sprint: SPR-01
 epica: REQ-EPI-Medio-Emulado@v1
 historias:
   - REQ-HIS-Descubrimiento-Y-Emparejamiento@v1
   - REQ-HIS-Recepcion-Integra@v1
 lee:
-  - REQ-HIS-Compilacion-Verificada@v1
+  - REQ-HIS-Compilacion-Verificada@v2
   - VIS@v1
   - REQ-EPI-Medio-Emulado@v1
   - ADR-0004@v1
 modifica:
   - REQ-HIS-Descubrimiento-Y-Emparejamiento@v1
   - REQ-HIS-Recepcion-Integra@v1
-  - ADR-0004@v1
 appetite: tres días
 pendientes:
 decisiones:
