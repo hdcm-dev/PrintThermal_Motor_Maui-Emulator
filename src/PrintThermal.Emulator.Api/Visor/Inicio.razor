@@ -15,7 +15,7 @@
             <span class="medio__punto @(_estado?.MedioConectado == true ? "medio__punto--si" : "")" aria-hidden="true"></span>
             @if (_estado is null)
             {
-                <span>Consultando el estado…</span>
+                <span>@(_error is null ? "Consultando el estado…" : "Sin conexión con la API")</span>
             }
             else
             {

@@ -25,6 +25,8 @@ modifica:
   - REQ-HIS-Compilacion-Verificada@v2
 appetite: dos días
 pendientes:
+  - {que: "conectar el almacén en disco (PAR-PTE-02) y el medio Bluetooth (PAR-PTE-03) al host detrás de IAlmacenDeTickets e IEstadoDelMedio: ninguna parcela de SPR-01 lo nombra", registro: LAZ-0001}
+  - {que: "escala del visor con 8 puntos por mm, sin medir en la 58HB6 (D6)", registro: LAZ-0002}
 decisiones:
   - {id: D1, tema: "versiones fijas de Microsoft.AspNetCore.OpenApi 10.0.14, Scalar.AspNetCore 3.3.0 y Microsoft.AspNetCore.Mvc.Testing 10.0.14 (nuget.org, 2026-11-27; 10.0.14 es el runtime ASP.NET Core del SDK 10.0.403)", clase: K1}
   - {id: D2, tema: "cliente HTTP tipado propio en PrintThermal.Emulator.Client, que usan el visor y las pruebas (opción A de ADR-0003)", clase: K2, adr: ADR-0003}
@@ -74,12 +76,13 @@ Que quien prueba obtenga el PNG de cada ticket por HTTP y lo vea en un navegador
 
 ## Criterio ↔ prueba
 
-- Criterio REQ-01 → tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs · ElPngLlegaConLaMismaHuella
-- Criterio REQ-02 → tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs · LaEsperaVenceSinColgarse
-- Criterio REQ-03 → tests/PrintThermal.Emulator.Tests/Api/OpenApiTests.cs · OpenApiYScalarResponden
-- Criterio REQ-04 → tests/PrintThermal.Emulator.Tests/Visor/VisorTests.cs · ElVisorMuestraElUltimoTicket
-- Criterio REQ-05 → tests/PrintThermal.Emulator.Tests/Cliente/ClienteTests.cs · ElClienteDevuelveElMismoPngQueLaApi
-- Criterio REQ-06 → tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs · SinConfiguracionEscuchaSoloEnLocal
+- Criterio REQ-01 → tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs · ElPngLlegaConLaMismaHuella → [EV-2026-11-27-pruebas]
+- Criterio REQ-02 → tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs · LaEsperaVenceSinColgarse → [EV-2026-11-27-pruebas]
+- Criterio REQ-03 → tests/PrintThermal.Emulator.Tests/Api/OpenApiTests.cs · OpenApiYScalarResponden → [EV-2026-11-27-pruebas]
+- Criterio REQ-04 → tests/PrintThermal.Emulator.Tests/Visor/VisorTests.cs · ElVisorMuestraElUltimoTicket → [EV-2026-11-27-pruebas]
+- Criterio REQ-05 → tests/PrintThermal.Emulator.Tests/Cliente/ClienteTests.cs · ElClienteDevuelveElMismoPngQueLaApi → [EV-2026-11-27-pruebas]
+- Criterio REQ-06 → tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs · SinConfiguracionEscuchaSoloEnLocal → [EV-2026-11-27-pruebas]
+- Criterio N2 de interfaz de REQ-HIS-Visor-Web → `recorrido/guion.md`, con las capturas y `recorrido/consola.txt` (`Rules-Decisiones.md` §7)
 
 ## Plan
 
@@ -100,6 +103,32 @@ Esta corrida es un paso de un flujo de trabajo sin persona disponible para pregu
 
 ## Complexity Tracking
 
+- Precondición de 03 §2 («las olas anteriores, cerradas»): esta parcela es de la ola 3 y corrió con PAR-PTE-02 y PAR-PTE-03 (ola 2) abiertas, porque el flujo de trabajo pidió trabajar contra un almacén en memoria y una fuente simulada. La dependencia «PAR-PTE-02 antes que PAR-PTE-04 por REQ-HIS-Almacen-De-Tickets» se resolvió con D4: la parcela no toca `src/PrintThermal.Emulator.Core/Almacen/**` y declara la conexión en LAZ-0001. La fusión queda en orden de olas, a cargo de otra etapa.
+
 ## Cierre
 
-Pendiente.
+- Versiones subidas: REQ-HIS-Api-De-Tickets v1 → v2, REQ-HIS-Visor-Web v1 → v2 y REQ-HIS-Cliente-Tipado v2 → v3 (historias y `modifica`), y REQ-HIS-Compilacion-Verificada v2 → v3 (`modifica`, por `Directory.Packages.props`). Cada historia suma a sus `rutas:` la carpeta de sus pruebas.
+- Changelog: «PAR-PTE-04 · API de tickets con OpenAPI y Scalar, visor Blazor y cliente tipado…» en `cdd/corpus/CHANGELOG.md`.
+- Evidencia:
+  - `evidencia/2026-11-27-rojo.txt`: 29 de 37 en rojo sobre el esqueleto, con las seis pruebas de REQ-01 a REQ-06 en rojo por falta de comportamiento.
+  - `evidencia/2026-11-27-pruebas.txt` y `.trx`: 37 de 37 en verde con el código final.
+  - `evidencia/2026-11-27-mutacion.txt`: seis mutantes, uno por REQ; los seis en rojo.
+  - Todas las corridas: SDK 10.0.403 en contenedor con turno.
+  - La corrida de la CI pública del PR la mide la guarda del merge y no es evidencia de esta carpeta.
+- Recorrido en navegador real: `recorrido/guion.md`, nueve capturas a 1440 y 360 px y `recorrido/consola.txt`, sin errores. Se ven los estados vacío, datos (con llegada en vivo por la espera) y error, la elección de un ticket, las descargas y limpiar con confirmación. El estado «cargando» existe en el código, pero el recorrido no lo capturó: con prerenderizado no se llega a ver. La primera corrida del recorrido se descartó por un 404 de `/favicon.ico` y un rótulo equivocado en el estado de error; se corrigieron y el recorrido se repitió entero.
+- Decisiones:
+  - D1, D4, D5 y D6 son K1, y D7 es K0.
+  - D2 (ADR-0003, opción A) y D3 (contrato de la API sobre ADR-0001) son K2. Las decidió una mesa ciega del mismo modelo en otro contexto (`evidencia/2026-11-27-mesa.md`; garantía reducida) y van al lote de K2 de la Review de SPR-01.
+  - El contrato v1 cambió por la mesa en cinco puntos: espera sin `despuesDe`, ids ordenables con restricción de ruta, ProblemDetails, `limite` y documentación del patrón y del borrado.
+  - ADR-0003 sigue `propuesto` en su archivo (`gobierno: humano`): no se toca sin la K3 de la persona.
+- Divergencia corpus/código: ninguna que contradiga un ADR.
+  - ADR-0001 deja el contrato a la épica de acceso y queda escrito en REQ-HIS-Api-De-Tickets v2.
+  - `supuesto:` agregado al contrato: `despuesDe=0` («desde el principio»). Surgió al escribir la prueba del cliente: sin él, quien imprime con el almacén vacío pierde el ticket si llega antes de la espera.
+- Lo que queda abierto: LAZ-0001 (conectar el almacén y el medio reales) y LAZ-0002 (escala sin medir), en `pendientes:`.
+- NO VERIFICADO:
+  - el visor y la API con tickets reales del medio Bluetooth (esta parcela usa la fuente simulada);
+  - la escala de 8 puntos por mm en la 58HB6.
+- Auditor: `evidencia/2026-11-27-auditoria.md`.
+- Lo aprendido:
+  - el navegador de juicio corre en un contenedor de la red puente: alcanza al servicio por la dirección del puente de Docker del equipo, no por su `127.0.0.1`;
+  - una restricción `regex(...)` con corchetes escapados en la plantilla de ruta no enrutó, y una restricción propia (`IRouteConstraint`) sí.

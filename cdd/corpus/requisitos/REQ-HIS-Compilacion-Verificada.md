@@ -1,6 +1,6 @@
 ---
 id: REQ-HIS-Compilacion-Verificada
-version: 2
+version: 3
 epica: REQ-EPI-Distribucion
 gobierno: parcela
 tipo: referencia
@@ -38,3 +38,4 @@ La solución `PrintThermal.Emulator` (proyectos Core, Bluetooth, Api, Client y T
 |---|---|---|
 | v1 | siembra | Alta |
 | v2 | PAR-PTE-01 | Solución con los cinco proyectos en `net10.0`, SDK 10.0.403 fijado sin avance, versiones de paquetes centrales y exactas, CI .NET en `ubuntu-latest` sin la norma |
+| v3 | PAR-PTE-04 | `Directory.Packages.props` suma Microsoft.AspNetCore.OpenApi 10.0.14, Scalar.AspNetCore 3.3.0 y Microsoft.AspNetCore.Mvc.Testing 10.0.14, exactas (D1) |
