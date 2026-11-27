@@ -10,7 +10,7 @@ deuda:
 normalizado:
 parcela:
 ---
-# LAZ-0007 · Si el consentimiento de Android llega tarde, el vínculo queda inservible
+# LAZ-0007 · Un vínculo quedó inservible en la prueba real: consentimiento tardío o binario con pings
 
 ## Índice
 
@@ -24,8 +24,11 @@ parcela:
 PAR-PTE-03, 2026-11-27, prueba real (`cdd/parcelas/PAR-PTE-03-Medio-Emulado/evidencia/2026-11-27-prueba-real.txt` §3).
 El toque en «Pair» llegó 31 s después del pedido de confirmación. Android dejó el vínculo (state=12), pero su seguridad
 quedó en «AUTHENTICATING» y en la conexión siguiente no pidió la clave de enlace: el RFCOMM venció por tiempo. Se
-repitió con otra dirección y el toque a tiempo, y funcionó. Sin resolver: la causa (probablemente el temporizador de
-emparejamiento de Android, NO VERIFICADO), cómo se recupera un vínculo trabado (olvidar el equipo en Android, otra
+repitió con otra dirección y el toque a tiempo, y funcionó. La causa no está separada: el reintento cambió a la vez la
+dirección, el tiempo del toque y el binario (el del intento fallido mandaba pings de HTTP/2 a netsim, que cortó el flujo
+antes y después de ese intento). En el intento fallido el emulador no registró «cifrado», y en el exitoso sí. Hipótesis
+competidoras: el temporizador de emparejamiento de Android, o el binario con pings (NO VERIFICADO). Sin resolver además:
+cómo se recupera un vínculo trabado (olvidar el equipo en Android, otra
 dirección, borrar el archivo de claves) y quién confirma el diálogo en una prueba automática de extremo a extremo.
 
 ## 2. Clasificación

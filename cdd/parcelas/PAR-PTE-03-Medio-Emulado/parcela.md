@@ -2,7 +2,7 @@
 id: PAR-PTE-03
 titulo: Bluetooth Classic propio en C# contra netsim: descubrimiento, emparejamiento y recepción por RFCOMM
 version: 1.0
-estado: cerrada
+estado: en-curso
 velocidad: completa
 base_commit: 9dec7ce0bdb56b1ee990cc97cba6015cf79c0afb
 sprint: SPR-01
@@ -22,7 +22,8 @@ appetite: tres días
 pendientes:
   - {que: "el periférico en un contenedor propio con --network container: del emulador no está medido (la prueba real corrió dentro del contenedor del emulador)", registro: LAZ-0005}
   - {que: "la entrega de IReceptorDeBytes al almacén de tickets no tiene parcela que la conecte", registro: LAZ-0006}
-  - {que: "si el consentimiento de Android llega tarde el vínculo queda inservible; falta recuperación y confirmación automática", registro: LAZ-0007}
+  - {que: "un vínculo quedó inservible en la prueba real (causa sin separar: consentimiento tardío o binario con pings); falta recuperación y confirmación automática", registro: LAZ-0007}
+  - {que: "el consumo de tokens de la pila no se asienta frente al umbral firmado de 2,5 M (R:15)", registro: LAZ-0008}
 decisiones:
   - {id: D1, tema: "TS-2 y TS-3: pila propia frente a puente y emparejamiento emulado frente al real. Mesa de otro contexto (tres comisiones, refutador y jurado de cinco, mismo modelo): TS-3 = A y TS-2 = A por unanimidad; el texto para ADR-0004 va al lote de K2 de la Review", clase: K2, adr: ADR-0004}
   - {id: D2, tema: "gRPC de netsim sin paquetes: HTTP/2 sin TLS de HttpClient y protobuf escrito a mano para los cinco mensajes que se usan; no suma dependencias ni toca Directory.Packages.props", clase: K1}
@@ -92,7 +93,7 @@ Sin persona en esta corrida; no hubo huecos que reabrieran la parcela. Lo que el
     - SHA-256 igual 10 de 10 (5 de 64 KB y 5 del ticket de 4104 B), más un envío previo también igual;
     - reconecta sin reemparejar tras 2 reinicios del emulador de impresora.
 
-    La prueba midió el código del commit 2cec4b8. Los cambios posteriores (por el auditor y la mesa) están declarados en ese archivo y no recorren el camino que se midió.
+    Desde la segunda dirección la prueba midió el código del commit 2cec4b8; el descubrimiento con la primera dirección y el primer intento de emparejamiento corrieron con un binario anterior que mandaba pings de HTTP/2. Los cambios posteriores, por el auditor y la mesa, están declarados en ese archivo. El mínimo de MaximumAttributeByteCount de SDP queda en el camino que usó Android, pero sin efecto con los máximos que mandó.
 - Desvío de la prueba real: el periférico corrió dentro del contenedor del emulador, en su turno, porque netsim publica su gRPC sólo en loopback y desde el equipo de cómputo no se llega (medido, §1 de la evidencia). El contenedor propio unido a la red del emulador sigue sin medir: LAZ-0005.
 - Decisiones:
   - D1 (K2): la decidió una mesa de otro contexto. Expediente en el repositorio de documentación, `PROMPTs/SDD/02-Mesa-TS2-TS3/`: contrato, cuatro informes, jurado y dictamen. Resultado: TS-3 = A y TS-2 = A, 5 de 5. Los hallazgos h1 a h7 fueron procedentes 5 de 5 y h8, 4 de 5. Se aplicaron h6 (la transferencia previa explicada), h7 (el commit juzgado, en el dictamen) y h8 (la prueba sin pings y M11). h2 a h5 van al texto propuesto para ADR-0004. h1 cambia la medida de CE-2, que es de la persona, y va a la Review junto con LAZ-0007.
@@ -101,10 +102,18 @@ Sin persona en esta corrida; no hubo huecos que reabrieran la parcela. Lo que el
   - cómo empareja y qué registro SDP publica la 58HB6 real (Especificación, «[MEDIR]», segunda etapa);
   - el PIN heredado contra Android: con SSP activo en los dos lados ese camino no se recorre, y RootCanal no valida el PIN, así que no tiene criterio en el medio emulado;
   - el periférico con la librería cliente compilada: se usó la app Java mínima, que hace la misma llamada;
-  - el consumo de tokens de la pila frente al umbral firmado de 2,5 M (R:15), que no se asentó;
   - la causa de LAZ-0007.
 - Lo aprendido:
   - netsim corta el flujo gRPC si recibe pings de HTTP/2 cada 30 s sin datos: el transporte no los manda, y una prueba lo fija.
-  - Al automatizar el emparejamiento, el toque en «Pair» tiene que llegar enseguida.
+  - Hipótesis, sin separar (LAZ-0007): un consentimiento tardío o el binario con pings dejan el vínculo inservible.
+  - Conjetura: sin pings, un flujo gRPC medio caído podría no notarse hasta el próximo envío.
   - Android guarda la clase 0x1F00 si se vincula una dirección sin descubrirla antes.
-- Auditor: `evidencia/2026-11-27-auditoria.md`. La primera ronda dio «refutado», con 3 bloqueantes: la entrega al almacén sin dueño (LAZ-0006), el vínculo trabado sin registro (LAZ-0007) y la mesa sin terminar (terminada). Los menores 4 a 9 se corrigieron. El 10 se corrigió con el orden de los pasos. El 11 es conjetura y queda en «Lo aprendido». La segunda ronda está en el mismo archivo.
+- Auditor: `evidencia/2026-11-27-auditoria.md`, en rondas.
+  - Ronda 1, «refutado». Sus tres bloqueantes se resolvieron: la entrega al almacén (LAZ-0006), el vínculo trabado (LAZ-0007) y la mesa, que ya terminó. De los menores:
+    - 4, 5, 7 y 9: corregidos;
+    - 6: aceptado por la mesa (TS-2 = A, clave sin autenticar);
+    - 8: corregido, con prueba del mínimo;
+    - 10: `estado` volvió a `en-curso` hasta la última ronda;
+    - 11: es conjetura y quedó en «Lo aprendido».
+  - Ronda 2, «refutado». El consumo de tokens pasó a LAZ-0008 (N1). Se corrigió la prosa (N2), LAZ-0007 tiene ahora las dos hipótesis (N3) y se corrigió el alcance de los cambios posteriores (N4).
+  - Las rondas siguientes están en el mismo archivo.

@@ -8,11 +8,13 @@ la librería cliente). Emulador: Android 17, API 37, `emulator` 37.2.12 con nets
 2 vCPU / 6 GB. Direcciones: las del periférico (04:00:00:00:00:0X) son las fijas que se le pasan al emulador de impresora
 (sintéticas); la de Android va enmascarada como la muestra el propio Android.
 
-Código medido: el de `src/PrintThermal.Emulator.Bluetooth/` del commit 2cec4b8 de la rama (el binario se compiló de
-ese árbol). Cambios posteriores, por el auditor y la mesa, que la prueba real no recorrió: L2CAP rechaza opciones de
-configuración desconocidas que no son sugerencia (Android mandó sólo MTU); SDP corrige TotalServiceRecordCount y el
-mínimo de MaximumAttributeByteCount en ServiceSearch/ServiceAttribute (Android usó ServiceSearchAttribute con máximos
-grandes); el transporte declara explícito el ping de HTTP/2 desactivado, que ya era el valor del binario medido.
+Código medido: desde la segunda dirección (04:00:00:00:00:02), el de `src/PrintThermal.Emulator.Bluetooth/` del commit
+2cec4b8 de la rama (el binario de arriba se compiló de ese árbol). El descubrimiento con la primera dirección (§2) y el
+primer intento de emparejamiento (§3) corrieron con un binario anterior que mandaba pings de HTTP/2 cada 30 s (§6).
+Cambios posteriores, por el auditor y la mesa: L2CAP rechaza opciones de configuración desconocidas que no son sugerencia
+(Android mandó sólo MTU); SDP corrige TotalServiceRecordCount en ServiceSearch (Android no lo usó) y exige
+MaximumAttributeByteCount de 7 o más (en el camino de ServiceSearchAttribute que usó Android, sin efecto con sus máximos);
+el transporte declara explícito el ping de HTTP/2 desactivado, que ya era el valor del binario medido.
 
 ## 1. Red: el periférico no llega a netsim desde el equipo de cómputo (desvío)
 

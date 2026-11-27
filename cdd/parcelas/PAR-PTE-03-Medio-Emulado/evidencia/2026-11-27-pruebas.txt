@@ -1,23 +1,39 @@
 # Verde: dotnet test PrintThermal.Emulator.slnx (2026-11-27), PAR-PTE-03 implementado: 22 de 22 (18 nuevas + 4 del esqueleto).
-# Contenedor mcr.microsoft.com/dotnet/sdk:10.0.403, turno 262, 2 CPU / 4 GB.
+# Contenedor mcr.microsoft.com/dotnet/sdk:10.0.403, turno 264, 2 CPU / 4 GB.
 10.0.403
   Determining projects to restore...
   All projects are up-to-date for restore.
   PrintThermal.Emulator.Core -> /w/src/PrintThermal.Emulator.Core/bin/Debug/net10.0/PrintThermal.Emulator.Core.dll
-  PrintThermal.Emulator.Api -> /w/src/PrintThermal.Emulator.Api/bin/Debug/net10.0/PrintThermal.Emulator.Api.dll
-  PrintThermal.Emulator.Client -> /w/src/PrintThermal.Emulator.Client/bin/Debug/net10.0/PrintThermal.Emulator.Client.dll
   PrintThermal.Emulator.Bluetooth -> /w/src/PrintThermal.Emulator.Bluetooth/bin/Debug/net10.0/PrintThermal.Emulator.Bluetooth.dll
+  PrintThermal.Emulator.Client -> /w/src/PrintThermal.Emulator.Client/bin/Debug/net10.0/PrintThermal.Emulator.Client.dll
+  PrintThermal.Emulator.Api -> /w/src/PrintThermal.Emulator.Api/bin/Debug/net10.0/PrintThermal.Emulator.Api.dll
   PrintThermal.Emulator.Tests -> /w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll
 Test run for /w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll (.NETCoreApp,Version=v10.0)
 A total of 1 test files matched the specified pattern.
 [xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 10.0.14)
-[xUnit.net 00:00:00.09]   Discovering: PrintThermal.Emulator.Tests
-[xUnit.net 00:00:00.12]   Discovered:  PrintThermal.Emulator.Tests
-[xUnit.net 00:00:00.15]   Starting:    PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.11]   Discovering: PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.15]   Discovered:  PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.16]   Starting:    PrintThermal.Emulator.Tests
+  Passed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.UnCanalSinServidorSeRechazaConDm [59 ms]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.HciTests.SiNetsimNoRespondeElServicioLoInformaYReintenta [1 s]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LosBytesLleganIntegros [1 s]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.HciTests.UnaOpcionL2capDesconocidaQueNoEsSugerenciaSeRechaza [4 ms]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LaFcsCoincideConLasTramasDeReferencia [1 ms]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElRegistroSdpPublicaSppConNombre58HB6 [26 ms]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.BusquedaDeServiciosYPedidoDeAtributosPorHandle [3 ms]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.LaBusquedaConUuidDe16BitsYConContinuacionDevuelveLoMismo [< 1 ms]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.UnUuidQueNoEstaNoDevuelveRegistros [< 1 ms]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.UnaDesconexionAMitadDelTicketCierraLaConexionConLoRecibido [41 ms]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LaDireccionFijaViajaANetsimEnOrdenInvertido [2 ms]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElPerifericoSeAnunciaComo58HB6ConDireccionFijaYEscaneoAbierto [13 ms]
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10 [4 ms]
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado [1 ms]
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma [1 ms]
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral [1 ms]
 warn: Microsoft.AspNetCore.Server.Kestrel[0]
       Overriding address(es) 'http://*:8080'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:37177
+      Now listening on: http://127.0.0.1:42157
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -25,41 +41,25 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: /w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/2 POST http://127.0.0.1:37177/netsim.packet.PacketStreamer/StreamPackets - application/grpc -
+      Request starting HTTP/2 POST http://127.0.0.1:42157/netsim.packet.PacketStreamer/StreamPackets - application/grpc -
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
       Executing endpoint 'HTTP: POST /netsim.packet.PacketStreamer/StreamPackets'
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
       Executed endpoint 'HTTP: POST /netsim.packet.PacketStreamer/StreamPackets'
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/2 POST http://127.0.0.1:37177/netsim.packet.PacketStreamer/StreamPackets - 200 - application/grpc 92.6982ms
+      Request finished HTTP/2 POST http://127.0.0.1:42157/netsim.packet.PacketStreamer/StreamPackets - 200 - application/grpc 78.0257ms
 info: Microsoft.AspNetCore.Server.Kestrel[32]
-      Connection id "0HNQCJNLC0QQ3", Request id "0HNQCJNLC0QQ3:00000001": the application completed without reading the entire request body.
-  Passed PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests.ElTransporteNoMandaPingsDeHttp2 [3 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.UnCanalSinServidorSeRechazaConDm [118 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LosBytesLleganIntegros [33 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests.SinNetsimEscuchandoElServicioQuedaEnErrorYReintenta [141 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LaFcsCoincideConLasTramasDeReferencia [< 1 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.UnaDesconexionAMitadDelTicketCierraLaConexionConLoRecibido [944 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LaDireccionFijaViajaANetsimEnOrdenInvertido [2 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests.ElTransporteHablaGrpcSobreHttp2ConNetsim [983 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElEmparejamientoPorConfirmacionSeCompleta [33 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LosPaquetesHciViajanSinElByteH4 [3 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElPinHeredadoSeContestaConElDeLaImpresora [3 ms]
-  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10 [13 ms]
-  Passed PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado [1 ms]
-  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma [1 ms]
-  Passed PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral [2 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElRegistroSdpPublicaSppConNombre58HB6 [27 ms]
-[xUnit.net 00:00:01.46]   Finished:    PrintThermal.Emulator.Tests
-  Passed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.BusquedaDeServiciosYPedidoDeAtributosPorHandle [8 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.LaBusquedaConUuidDe16BitsYConContinuacionDevuelveLoMismo [< 1 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.UnUuidQueNoEstaNoDevuelveRegistros [< 1 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElPerifericoSeAnunciaComo58HB6ConDireccionFijaYEscaneoAbierto [4 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.HciTests.SiNetsimNoRespondeElServicioLoInformaYReintenta [63 ms]
-  Passed PrintThermal.Emulator.Tests.Bluetooth.HciTests.UnaOpcionL2capDesconocidaQueNoEsSugerenciaSeRechaza [4 ms]
+      Connection id "0HNQCJR7KKSEE", Request id "0HNQCJR7KKSEE:00000001": the application completed without reading the entire request body.
+[xUnit.net 00:00:01.61]   Finished:    PrintThermal.Emulator.Tests
+  Passed PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests.ElTransporteNoMandaPingsDeHttp2 [2 ms]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElEmparejamientoPorConfirmacionSeCompleta [56 ms]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LosPaquetesHciViajanSinElByteH4 [2 ms]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElPinHeredadoSeContestaConElDeLaImpresora [2 ms]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests.SinNetsimEscuchandoElServicioQuedaEnErrorYReintenta [88 ms]
+  Passed PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests.ElTransporteHablaGrpcSobreHttp2ConNetsim [192 ms]
 Test Run Successful.
 Total tests: 22
      Passed: 22
- Total time: 1.8758 Seconds
+ Total time: 1.9913 Seconds
 WARNING: Overwriting results file: /w/out/pruebas.trx
 Results File: /w/out/pruebas.trx
