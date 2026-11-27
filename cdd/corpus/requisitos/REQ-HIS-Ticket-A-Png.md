@@ -25,7 +25,7 @@ Un intérprete ESC/POS para papel de 58 mm (384 puntos de ancho) convierte los b
 
 - Dados los bytes que la librería cliente genera para un ticket, cuando se interpretan, entonces el PNG coincide con su vector dorado.
 - Dado un comando ESC/POS que el intérprete no conoce, cuando aparece en el ticket, entonces se registra y el resto del ticket se interpreta igual.
-- Dados los mismos bytes en trozos de 1, 7 o 256, cuando se interpretan, entonces el PNG es el mismo que con los bytes enteros.
+- Dados los mismos bytes en trozos de cualquier tamaño (probado con 1, 7, 256 y el ticket entero, también con comandos mal formados), cuando se interpretan, entonces el PNG, los bytes del ticket y los avisos son los mismos que con los bytes enteros.
 
 ## 3. Trazas
 

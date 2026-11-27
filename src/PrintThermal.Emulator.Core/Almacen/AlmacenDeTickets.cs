@@ -48,7 +48,17 @@ public sealed partial class AlmacenDeTickets
                     if (intento >= 9999) throw new IOException("no hay id libre en " + Carpeta);
                     continue;
                 }
-                if (!Escribir(id + ".png", ticket.Png))
+                bool png;
+                try
+                {
+                    png = Escribir(id + ".png", ticket.Png);
+                }
+                catch
+                {
+                    BorrarSiSePuede(Path.Combine(Carpeta, id + ".bin")); // sin .png el .bin quedaría huérfano
+                    throw;
+                }
+                if (!png)
                 {
                     File.Delete(Path.Combine(Carpeta, id + ".bin"));
                     if (intento >= 9999) throw new IOException("no hay id libre en " + Carpeta);
@@ -144,16 +154,31 @@ public sealed partial class AlmacenDeTickets
         var destino = Path.Combine(Carpeta, nombre);
         if (File.Exists(destino)) return false;
         var temporal = destino + "." + Guid.NewGuid().ToString("N") + ".tmp";
-        File.WriteAllBytes(temporal, contenido);
         try
         {
+            File.WriteAllBytes(temporal, contenido);
             File.Move(temporal, destino, overwrite: false);
             return true;
         }
         catch (IOException) when (File.Exists(destino))
         {
-            File.Delete(temporal);
             return false;
+        }
+        finally
+        {
+            BorrarSiSePuede(temporal);
+        }
+    }
+
+    private static void BorrarSiSePuede(string ruta)
+    {
+        try
+        {
+            if (File.Exists(ruta)) File.Delete(ruta);
+        }
+        catch (Exception e) when (e is IOException or UnauthorizedAccessException)
+        {
+            // Se informa el error original, no el de la limpieza.
         }
     }
 

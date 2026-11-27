@@ -71,7 +71,10 @@ public class InterpreteTests
             0x1D, 0x38, 0x4C, 0x03, 0x00, 0x00, 0x00, 0x30, 0x0A, 0x0A, "d", 0x0A,
             0x1C, 0x71, 0x01, 0x01, 0x00, 0x01, 0x00, Enumerable.Repeat((byte)0x0A, 8).ToArray(), "e", 0x0A,
             0x1D, 0x56, 0x01);
-        var flujos = Nombres.Select(v => (v, Dorados.Leer(v + ".bin"))).Append(("cargas", cargas));
+        // Mal formado (tercera auditoría): ESC D sin NUL dentro de su tope, seguido de una imagen cuya cabecera trae un 00.
+        var malformado = B(0x1B, 0x40, 0x1B, 0x44, Enumerable.Repeat((byte)0x41, 40).ToArray(), 0x0A,
+            0x1D, 0x76, 0x30, 0x00, 0x01, 0x00, 0x01, 0x00, 0xFF, 0x1D, 0x56, 0x01);
+        var flujos = Nombres.Select(v => (v, Dorados.Leer(v + ".bin"))).Append(("cargas", cargas)).Append(("malformado", malformado));
         foreach (var (nombre, bytes) in flujos)
         {
             var entero = Assert.Single(Interpretar(bytes, bytes.Length));
@@ -211,6 +214,82 @@ public class InterpreteTests
     }
 
     [Fact]
+    public void UnTicketQueSuperaSuTopeDeBytesSeCierraEntreComandos()
+    {
+        var perfil = new PerfilDeImpresora { BytesMaximosPorTicket = 50 };
+        var bytes = B(0x1B, 0x40, Enumerable.Repeat((byte)0x41, 60).ToArray(), 0x0A, 0x1D, 0x76, 0x30, 0x00, 0x01, 0x00, 0x01, 0x00, 0xFF, 0x1D, 0x56, 0x01);
+
+        var tickets = Interpretar(bytes, 256, perfil);
+
+        Assert.Equal(2, tickets.Count);
+        Assert.Contains(tickets[0].Avisos, a => a.Contains("superó 50 bytes"));
+        Assert.Equal(bytes, tickets.SelectMany(t => t.Bytes).ToArray());
+        Assert.Equal(51, tickets[0].Bytes.Length); // se cierra apenas termina el comando que lo supera
+    }
+
+    [Fact]
+    public void LasConsultasNoAbrenTicketNiQuedanEnEl()
+    {
+        var ticket = B(0x1B, 0x40, "x", 0x0A, 0x1D, 0x56, 0x01);
+        var bytes = B(0x1D, 0x72, 0x01, 0x1D, 0x61, 0x00, 0x10, 0x04, 0x01, 0x1D, 0x49, 0x43, ticket);
+
+        Assert.Equal(ticket, Assert.Single(Interpretar(bytes)).Bytes);
+    }
+
+    [Fact]
+    public void LosComandosConParametroNoSeDibujan()
+    {
+        // ESC ?, ESC r, ESC T, ESC W (8 bytes), GS b, GS \ y GS $ con parámetros imprimibles: no deben salir como letras.
+        var con = B(0x1B, 0x40, 0x1B, 0x3F, 0x41, 0x1B, 0x72, 0x41, 0x1B, 0x54, 0x41, 0x1B, 0x57, "ABCDEFGH",
+            0x1D, 0x62, 0x41, 0x1D, 0x5C, 0x41, 0x41, 0x1D, 0x24, 0x41, 0x41, "x", 0x0A, 0x1D, 0x56, 0x01);
+        var sin = B(0x1B, 0x40, "x", 0x0A, 0x1D, 0x56, 0x01);
+
+        Assert.Equal(Imagen.DePng(Assert.Single(Interpretar(sin)).Png).Negro, Imagen.DePng(Assert.Single(Interpretar(con)).Png).Negro);
+    }
+
+    [Fact]
+    public void UnasBarrasMasAnchasQue384SeRecortanConAviso()
+    {
+        var bytes = B(0x1B, 0x40, 0x1D, 0x77, 0x06, 0x1D, 0x6B, 0x02, "779123456789", 0x00, 0x1D, 0x56, 0x01);
+
+        var ticket = Assert.Single(Interpretar(bytes));
+
+        Assert.Contains(ticket.Avisos, a => a.Contains("código de barras de 570 puntos"));
+    }
+
+    [Fact]
+    public void UnSuscriptorQueFallaNoRepiteElComando()
+    {
+        var interprete = new Interprete();
+        int respuestas = 0;
+        var avisos = new List<string>();
+        interprete.Aviso += avisos.Add;
+        interprete.Respuesta += r => { respuestas++; throw new IOException("socket caído"); };
+
+        interprete.Alimentar([0x10, 0x04, 0x01]);
+        interprete.Alimentar([0x10, 0x04, 0x02]);
+
+        Assert.Equal(2, respuestas);
+        Assert.Equal(2, avisos.Count(a => a.Contains("socket caído")));
+    }
+
+    [Fact]
+    public void ElDobleTamanoYElSubrayadoSeDibujan()
+    {
+        Imagen Png(params object[] estilo) => Imagen.DePng(Assert.Single(Interpretar(B(0x1B, 0x40, B(estilo), "A", 0x0A, 0x1D, 0x56, 0x01))).Png);
+        var normal = Png();
+        var dobleEsc = Png(0x1B, 0x21, 0x30);
+        var dobleGs = Png(0x1D, 0x21, 0x11);
+        var subrayado = Png(0x1B, 0x2D, 0x01);
+
+        Assert.Equal(4 * normal.PuntosNegros, dobleEsc.PuntosNegros);
+        Assert.Equal(dobleEsc.Negro, dobleGs.Negro);
+        int fila = Enumerable.Range(0, subrayado.Alto).Last(y => subrayado[0, y]);
+        Assert.All(Enumerable.Range(0, 12), x => Assert.True(subrayado[x, fila]));
+        Assert.False(normal[0, fila] && normal[11, fila]);
+    }
+
+    [Fact]
     public void LaNegritaUsaOtraFuente()
     {
         bool[] Png(int negrita) => Imagen.DePng(Assert.Single(Interpretar(B(0x1B, 0x40, 0x1B, 0x45, negrita, "Acta", 0x0A, 0x1D, 0x56, 0x01))).Png).Negro;
@@ -331,14 +410,16 @@ public class InterpreteTests
         Assert.All(Enumerable.Range(0, 384), c => Assert.True(png[c, fila] && png[c, fila + 1]));
     }
 
-    [Fact]
-    public void UnaCargaDesmesuradaSeDescartaSinRomperNiBloquear()
+    [Theory]
+    [InlineData("1D 76", "30 00 FF FF FF FF")]    // GS v 0 de 65535 x 65535 bytes
+    [InlineData("1D 38", "4C 00 00 00 80")]       // GS 8 L con p4 >= 0x80 (largo de 32 bits sin signo)
+    [InlineData("1C 71", "01 00 01 00 08")]       // FS q de 256 x 2048 x 8 = 4 MiB, justo por encima del tope
+    public void UnaCargaDesmesuradaSeDescartaSinRomperNiBloquear(string comando, string cabecera)
     {
-        // GS v 0 de 65535 x 65535 bytes: no se espera esa carga; el resto del ticket se interpreta.
-        var bytes = B(0x1B, 0x40, 0x1D, 0x76, 0x30, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, "Texto", 0x0A, 0x1D, 0x56, 0x01);
-
-        // Referencia: sólo se descarta «1D 76»; el resto de la cabecera se interpreta como datos, igual que sin él.
-        var referencia = B(0x1B, 0x40, 0x30, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, "Texto", 0x0A, 0x1D, 0x56, 0x01);
+        // No se espera esa carga: se descartan los dos bytes del comando y el resto se interpreta, igual que sin ellos.
+        byte[] cmd = Convert.FromHexString(comando.Replace(" ", "")), resto = Convert.FromHexString(cabecera.Replace(" ", ""));
+        var bytes = B(0x1B, 0x40, cmd, resto, "Texto", 0x0A, 0x1D, 0x56, 0x01);
+        var referencia = B(0x1B, 0x40, resto, "Texto", 0x0A, 0x1D, 0x56, 0x01);
 
         var ticket = Assert.Single(Interpretar(bytes));
 

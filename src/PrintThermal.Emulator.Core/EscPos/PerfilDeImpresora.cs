@@ -27,6 +27,9 @@ public sealed record PerfilDeImpresora
     /// <summary>Alto máximo de un ticket en puntos (unos 2,5 m de papel a 8 puntos por mm): lo que sigue no se dibuja.</summary>
     public int AltoMaximo { get; init; } = 20_000;
 
+    /// <summary>Bytes de un ticket: al superarlos se cierra con aviso, entre dos comandos (32 MiB).</summary>
+    public long BytesMaximosPorTicket { get; init; } = 32L << 20;
+
     /// <summary>Respuesta a DLE EOT 1, 2 y 4 (tabla de Especificacion-58HB6 §4.3).</summary>
     public EstadoDelPapel Estado { get; init; } = EstadoDelPapel.Normal;
 

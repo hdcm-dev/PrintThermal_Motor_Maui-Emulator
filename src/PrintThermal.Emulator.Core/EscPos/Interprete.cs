@@ -25,8 +25,6 @@ public sealed class Interprete
     /// <summary>Avisos que guarda un ticket; los siguientes se cuentan en un último aviso (el evento <see cref="Aviso"/> los emite todos).</summary>
     private const int AvisosMaximos = 200;
 
-    /// <summary>Bytes de un ticket: al superarlos se cierra con aviso (un flujo sin fin no agota la memoria).</summary>
-    private const long BytesMaximos = 32L << 20;
 
     private readonly PerfilDeImpresora _perfil;
     private byte[] _pendiente = new byte[1024];
@@ -92,6 +90,12 @@ public sealed class Interprete
             if (consumidos == 0) break;
             _inicio += consumidos;
             _largoPendiente -= consumidos;
+            // Tope por ticket, medido entre comandos: un flujo sin fin no agota la memoria.
+            if (_bytes is not null && _bytes.Length > _perfil.BytesMaximosPorTicket)
+            {
+                Avisar($"el ticket superó {_perfil.BytesMaximosPorTicket} bytes: se cierra acá");
+                CerrarTicket();
+            }
         }
         if (_largoPendiente == 0) _inicio = 0;
     }
@@ -407,7 +411,8 @@ public sealed class Interprete
 
     private static int HastaNul(ReadOnlySpan<byte> b, int desde, int tope)
     {
-        int i = b[desde..].IndexOf((byte)0);
+        // El NUL se busca sólo dentro del tope: así el largo no depende de cuántos bytes hay ya en el búfer.
+        int i = b[desde..Math.Min(b.Length, desde + tope)].IndexOf((byte)0);
         if (i >= 0) return desde + i + 1;
         return b.Length - desde >= tope ? desde + tope : 0;
     }
@@ -465,7 +470,7 @@ public sealed class Interprete
         if (_avisosOmitidos > 0) _avisos.Add($"{_avisosOmitidos} avisos más no se guardaron en el ticket");
         var ticket = new TicketInterpretado(_bytes!.ToArray(), _lienzo.APng(), _lienzo.Ancho, _lienzo.Alto, _avisos);
         _bytes = null;
-        TicketTerminado?.Invoke(ticket);
+        Disparar(TicketTerminado, ticket, nameof(TicketTerminado));
     }
 
     /// <summary>Bytes de un comando que imprime o avanza papel: abre el ticket si hace falta.</summary>
@@ -473,11 +478,6 @@ public sealed class Interprete
     {
         if (_bytes is null) AbrirTicket();
         _bytes!.Write(cmd);
-        if (_bytes.Length > BytesMaximos)
-        {
-            Avisar($"el ticket superó {BytesMaximos} bytes: se cierra acá");
-            CerrarTicket();
-        }
     }
 
     /// <summary>Bytes de un comando que cambia el estado: forma parte del ticket, abriéndolo si hace falta.</summary>
@@ -495,10 +495,39 @@ public sealed class Interprete
             if (_avisos.Count < AvisosMaximos) _avisos.Add(mensaje);
             else _avisosOmitidos++;
         }
-        Aviso?.Invoke(mensaje);
+        foreach (var d in Aviso?.GetInvocationList() ?? Array.Empty<Delegate>())
+        {
+            try
+            {
+                ((Action<string>)d)(mensaje);
+            }
+            catch (Exception)
+            {
+                // Un suscriptor de avisos que falla no puede avisar de sí mismo.
+            }
+        }
     }
 
-    private void Responder(byte[] bytes) => Respuesta?.Invoke(bytes.ToArray());
+    private void Responder(byte[] bytes) => Disparar(Respuesta, bytes.ToArray(), nameof(Respuesta));
+
+    /// <summary>
+    /// Avisa a cada suscriptor por separado. Si uno lanza (por ejemplo, el socket de PAR-PTE-03 se cayó al responder),
+    /// se registra como aviso y el comando ya interpretado no se repite en el próximo trozo.
+    /// </summary>
+    private void Disparar<T>(Action<T>? evento, T valor, string nombre)
+    {
+        foreach (var d in evento?.GetInvocationList() ?? Array.Empty<Delegate>())
+        {
+            try
+            {
+                ((Action<T>)d)(valor);
+            }
+            catch (Exception e)
+            {
+                Avisar($"un suscriptor de {nombre} falló: {e.GetType().Name}: {e.Message}");
+            }
+        }
+    }
 
     private void Reiniciar()
     {

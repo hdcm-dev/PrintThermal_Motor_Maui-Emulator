@@ -38,6 +38,7 @@ Aclaración (L1): los valores son configurables (`PerfilDeImpresora`), salvo el 
 | Documento | Antes | Después |
 |---|---|---|
 | `PerfilDeImpresora`, `Interprete` | Supuestos rotulados NO VERIFICADO | Por decidir con la medida |
+| PAR-PTE-03 | No nombra la demora de la respuesta a GS I 67 | Por decidir: el transporte la aplica si la medida la pide |
 
 ## 4. Decisión
 
