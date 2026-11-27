@@ -2,6 +2,8 @@
 
 auditor: claude -p Claude Opus (mismo modelo que el ejecutor) en otro contexto que no vio la ejecución, sólo lectura (git log/diff/show, grep, lectura de archivos y capturas). Garantía reducida: mismo modelo.
 
+Nota de SHAs: la rama se rebasó sobre la re-planificación `e18e4a1` después de las dos rondas, con árbol idéntico. Equivalencias: `386c214` → `5f1eb6e` (rojo), `8bb17cb` → su contenido quedó en `e18e4a1` y `9755ab8`, `5ce52a4` → `be104f4`, `3ed4103` → `8429432`. Los informes citan los SHA anteriores al rebase.
+
 ## Ronda 1 (2026-11-27, sobre 8bb17cb)
 
 Informe literal:

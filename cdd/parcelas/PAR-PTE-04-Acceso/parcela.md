@@ -118,7 +118,7 @@ Esta corrida es un paso de un flujo de trabajo sin persona disponible para pregu
   Cada historia suma a sus `rutas:` la carpeta de sus pruebas. En REQ-HIS-Cliente-Tipado, `src/PrintThermal.Emulator.Client/**/*.cs` pasa a `*.cs`: la compuerta compara con `fnmatch`, y `**/*.cs` exige una subcarpeta, así que no cubría `ClienteDeTickets.cs` ni `Modelos.cs`.
 - Changelog: «PAR-PTE-04 · API de tickets con OpenAPI y Scalar, visor Blazor y cliente tipado…» en `cdd/corpus/CHANGELOG.md`.
 - Evidencia (todas las corridas con SDK 10.0.403 en contenedor con turno):
-  - `evidencia/2026-11-27-rojo.txt`: 29 de 37 en rojo sobre el esqueleto (commit `386c214`). Las seis pruebas de REQ-01 a REQ-06 fallan por falta de comportamiento.
+  - `evidencia/2026-11-27-rojo.txt`: 29 de 37 en rojo sobre el esqueleto (commit `5f1eb6e`). Las seis pruebas de REQ-01 a REQ-06 fallan por falta de comportamiento.
   - Tras la auditoría, las pruebas se reforzaron:
     - ProblemDetails en los 400 y en una ruta inexistente, también en Production;
     - el resto de las operaciones del cliente.
