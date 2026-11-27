@@ -1,0 +1,131 @@
+// Genera los bytes que la librería cliente (MotorDsl, origin/main 940fa7f) emite para tickets de prueba,
+// y las matrices QR de referencia de QRCoder 1.8.0 (la misma versión que usa la librería en su vista previa).
+using System.Text;
+using MotorDsl.Core.Contracts;
+using MotorDsl.Core.Layout;
+using MotorDsl.Core.Models;
+using MotorDsl.Maui.Renderers;
+using MotorDsl.Rendering;
+using QRCoder;
+using SkiaSharp;
+
+var salida = args.Length > 0 ? args[0] : "out";
+Directory.CreateDirectory(salida);
+
+// Perfil de la app de campo para la 58HB6 (Especificacion-58HB6 §5: bt_58hb6, 32 columnas, escpos-bitmap, tope 320 px).
+DeviceProfile AppDeCampo()
+{
+    var p = new DeviceProfile("bt_58hb6", 32, "escpos-bitmap");
+    p.SetCapability("bitmap_max_width_px", 320);
+    p.SetCapability("supports_bitmap", true);
+    return p;
+}
+DeviceProfile Escpos(string fin = null, int? lineas = null)
+{
+    var p = new DeviceProfile("thermal_58mm", 32, "escpos");
+    if (fin != null) p.SetCapability("end_of_ticket", fin);
+    if (lineas != null) p.SetCapability("end_feed_lines", lineas.Value);
+    return p;
+}
+
+TextNode T(string texto, string align = null, bool bold = false)
+{
+    var n = new TextNode(texto);
+    if (align != null || bold)
+    {
+        n.Style = new StyleDefinition();
+        if (align != null) n.Style.Attributes["align"] = align;
+        if (bold) n.Style.Attributes["bold"] = true;
+    }
+    return n;
+}
+
+string ImagenPrueba()
+{
+    // 160 x 80: borde, círculo lleno y una banda de grises (prueba el umbral 128 de la librería).
+    using var bmp = new SKBitmap(160, 80);
+    using var c = new SKCanvas(bmp);
+    c.Clear(SKColors.White);
+    using var negro = new SKPaint { Color = SKColors.Black, IsAntialias = false, Style = SKPaintStyle.Stroke, StrokeWidth = 4 };
+    c.DrawRect(2, 2, 156, 76, negro);
+    negro.Style = SKPaintStyle.Fill;
+    c.DrawCircle(40, 40, 24, negro);
+    for (int x = 0; x < 80; x++)
+    {
+        byte g = (byte)(x * 255 / 79);
+        using var p = new SKPaint { Color = new SKColor(g, g, g), IsAntialias = false };
+        c.DrawRect(72 + x, 20, 1, 40, p);
+    }
+    using var img = SKImage.FromBitmap(bmp);
+    using var png = img.Encode(SKEncodedImageFormat.Png, 100);
+    return "data:image/png;base64," + Convert.ToBase64String(png.ToArray());
+}
+
+byte[] Render(IRenderer r, DeviceProfile perfil, params DocumentNode[] nodos)
+{
+    var root = new ContainerNode("vertical", nodos.ToList());
+    var doc = new EvaluatedDocument { Id = "vector", Version = "1.0", Root = root };
+    var lay = new LayoutEngine().ApplyLayout(doc, perfil);
+    var res = r.Render(lay, perfil);
+    if (res.Errors.Count > 0) throw new Exception(string.Join("; ", res.Errors));
+    return (byte[])res.Output;
+}
+
+var bitmap = new BitmapEscPosRenderer(new SkiaSharpRasterizer());
+var escpos = new EscPosRenderer(new SkiaSharpRasterizer());
+var imagen = ImagenPrueba();
+
+var vectores = new Dictionary<string, byte[]>
+{
+    ["01-texto"] = Render(bitmap, AppDeCampo(),
+        T("COMERCIO DE PRUEBA", "center", true),
+        T("Acta Nro 123"),
+        T("Total: $ 4500", "right"),
+        T("Un texto largo que el motor parte por palabras a treinta y dos columnas.")),
+    ["02-acentos"] = Render(bitmap, AppDeCampo(),
+        T("Acta N°", "center", true), T("Infracción"), T("Ñandú"), T("¿Firma? ¡Sí!")),
+    ["03-imagen"] = Render(bitmap, AppDeCampo(),
+        T("Logo:"), new ImageNode(imagen, width: 20, imageType: "bitmap"), T("Fin de imagen")),
+    ["04-qr"] = Render(bitmap, AppDeCampo(),
+        T("Verifique en:", "center"), new ImageNode("https://example.com", imageType: "qrcode"), T("Gracias")),
+    ["05-ean13"] = Render(bitmap, AppDeCampo(),
+        T("Producto"), new ImageNode("779123456789", imageType: "barcode"), T("Fin")),
+    ["06-escpos-feed"] = Render(escpos, Escpos("feed", 4),
+        T("Camino escpos", "center", true), new ImageNode(imagen, width: 20, imageType: "bitmap"), T("Infracción")),
+    ["07-escpos-corte-total"] = Render(escpos, Escpos("cut_full"),
+        T("Corte total"), T("Ñandú", "right")),
+};
+foreach (var (nombre, bytes) in vectores)
+{
+    File.WriteAllBytes(Path.Combine(salida, nombre + ".bin"), bytes);
+    Console.WriteLine($"{nombre}.bin {bytes.Length} bytes: {Convert.ToHexString(bytes.AsSpan(0, Math.Min(48, bytes.Length)))}");
+}
+
+// Matrices QR de referencia (sin zona de silencio). H es la que pide la librería (GS ( k fn 69 = 0x33); L es la de la
+// impresora cuando no llega fn 69; M y Q completan la tabla.
+var qrs = new (string Nombre, string Datos, QRCodeGenerator.ECCLevel Nivel)[]
+{
+    ("qr-1", "A", QRCodeGenerator.ECCLevel.H),
+    ("qr-2", "https://example.com", QRCodeGenerator.ECCLevel.H),
+    ("qr-3", "https://app.example.org/actas/verificar?id=0123456789&clave=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnop", QRCodeGenerator.ECCLevel.H),
+    ("qr-4", "https://example.com", QRCodeGenerator.ECCLevel.L),
+    ("qr-5", "https://app.example.org/actas/verificar?id=0123456789&clave=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnop", QRCodeGenerator.ECCLevel.M),
+    ("qr-6", "https://app.example.org/actas/verificar?id=0123456789&clave=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnop", QRCodeGenerator.ECCLevel.Q),
+};
+using var gen = new QRCodeGenerator();
+foreach (var (nombre, datos, nivel) in qrs)
+{
+    // Modo byte, como el codificador del emulador (la sobrecarga de texto elige alfanumérico o segmentos mixtos).
+    var q = gen.CreateQrCode(Encoding.ASCII.GetBytes(datos), nivel);
+    var filas = q.ModuleMatrix.Count;
+    var sb = new StringBuilder();
+    sb.Append("# datos: ").Append(datos).Append('\n');
+    sb.Append("# QRCoder 1.8.0, CreateQrCode(byte[]) (modo byte), ECCLevel.").Append(nivel).Append(", version ").Append(q.Version).Append('\n');
+    for (int y = 4; y < filas - 4; y++)
+    {
+        for (int x = 4; x < filas - 4; x++) sb.Append(q.ModuleMatrix[y][x] ? '#' : '.');
+        sb.Append('\n');
+    }
+    File.WriteAllText(Path.Combine(salida, nombre + ".txt"), sb.ToString());
+    Console.WriteLine($"{nombre}: {nivel}, version {q.Version}, {filas - 8} modulos");
+}

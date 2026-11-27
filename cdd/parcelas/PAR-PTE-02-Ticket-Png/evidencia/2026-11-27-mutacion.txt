@@ -1,0 +1,109 @@
+# Mutación (2026-11-27): 29 mutantes, cada uno un parche sobre una copia del árbol verde (M18 en una copia sin bin ni obj); misma corrida y turno 266.
+# Se espera rojo en la prueba indicada en el filtro; los 29 quedaron en rojo. Qué toca cada uno: el nombre del mutante.
+== MUTANTE M01-centrado-ignorado: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "01-texto")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "06-escpos-feed")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "04-qr")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "02-acentos")
+Failed!  - Failed:     4, Passed:     3, Skipped:     0, Total:     7, Duration: 1 s - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M02-gs-desconocido-3-bytes: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnComandoDesconocidoSeRegistraYSigue(hex: "1D 99")
+Failed!  - Failed:     1, Passed:     3, Skipped:     0, Total:     4, Duration: 85 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M03-esc-fs-dle-desconocido-3-bytes: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnComandoDesconocidoSeRegistraYSigue(hex: "1C 99")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnComandoDesconocidoSeRegistraYSigue(hex: "1B 7E")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnComandoDesconocidoSeRegistraYSigue(hex: "10 99")
+Failed!  - Failed:     3, Passed:     1, Skipped:     0, Total:     4, Duration: 47 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M04-almacen-no-escucha: src/PrintThermal.Emulator.Core/Almacen/AlmacenDeTickets.cs
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.CadaTicketGuardaBinYPng
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 105 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M05-pierde-incompleto: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 1)
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 7)
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 256)
+Failed!  - Failed:     3, Passed:     1, Skipped:     0, Total:     4, Duration: 207 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M06-id-sin-validar: src/PrintThermal.Emulator.Core/Almacen/AlmacenDeTickets.cs
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnIdInvalidoNoSaleDeLaCarpeta(id: "")
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnIdInvalidoNoSaleDeLaCarpeta(id: "20261127T120000000-0001/../../x")
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnIdInvalidoNoSaleDeLaCarpeta(id: "20261127T120000000-0001\n")
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnIdInvalidoNoSaleDeLaCarpeta(id: "../secreto")
+Failed!  - Failed:     4, Passed:     0, Skipped:     0, Total:     4, Duration: 613 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M07-mascara-qr-fija: src/PrintThermal.Emulator.Core/EscPos/CodigoQr.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-5")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-1")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-6")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-4")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-3")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-2")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrDelTicketSeDibujaComoLaReferencia
+Failed!  - Failed:     7, Passed:     0, Skipped:     0, Total:     7, Duration: 135 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M08-sin-tope-de-carga: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnaCargaDesmesuradaSeDescartaSinRomperNiBloquear(comando: "1D 38", cabecera: "4C 00 00 00 80")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnaCargaDesmesuradaSeDescartaSinRomperNiBloquear(comando: "1C 71", cabecera: "01 00 01 00 08")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnaCargaDesmesuradaSeDescartaSinRomperNiBloquear(comando: "1D 76", cabecera: "30 00 FF FF FF FF")
+Failed!  - Failed:     3, Passed:     0, Skipped:     0, Total:     3, Duration: 30 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M09-sin-alto-maximo: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnTicketQueNoTerminaDeAvanzarSeCortaEnElAltoMaximo
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 121 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M10-pisa-ids: src/PrintThermal.Emulator.Core/Almacen/AlmacenDeTickets.cs
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.DosInstanciasEnElMismoMilisegundoNoSePisan
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 1 s - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M11-esc-t-ignorado: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.EscTCambiaLaTablaDeCaracteres
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 82 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M12-ean-corrido: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElEan13DelTicketSeDibujaConSusModulos
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 89 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M13-fecha-sin-validar: src/PrintThermal.Emulator.Core/Almacen/AlmacenDeTickets.cs
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnArchivoConFormaDeIdPeroFechaImposibleNoRompeElListado
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 365 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M14-error-de-disco-sale: src/PrintThermal.Emulator.Core/Almacen/AlmacenDeTickets.cs
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnErrorDeDiscoNoTumbaAlInterprete
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 93 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M15-avisos-sin-tope: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LosAvisosDeUnTicketTienenTope
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 45 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M16-dibuja-en-el-margen: src/PrintThermal.Emulator.Core/EscPos/Lienzo.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnTicketQueNoTerminaDeAvanzarSeCortaEnElAltoMaximo
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 197 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M17-negrita-ignorada: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LaNegritaUsaOtraFuente
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 101 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M18-licencia-no-viaja: src/PrintThermal.Emulator.Core/PrintThermal.Emulator.Core.csproj
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LaLicenciaDeLaFuenteViajaConLoCompilado
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 49 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M19-nul-fuera-del-tope: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 1)
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 7)
+Failed!  - Failed:     2, Passed:     2, Skipped:     0, Total:     4, Duration: 268 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M20-sin-tope-de-bytes: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnTicketQueSuperaSuTopeDeBytesSeCierraEntreComandos
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 24 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M21-gs8l-con-signo: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnaCargaDesmesuradaSeDescartaSinRomperNiBloquear(comando: "1D 38", cabecera: "4C 00 00 00 80")
+Failed!  - Failed:     1, Passed:     2, Skipped:     0, Total:     3, Duration: 80 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M22-fsq-sin-tope: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnaCargaDesmesuradaSeDescartaSinRomperNiBloquear(comando: "1C 71", cabecera: "01 00 01 00 08")
+Failed!  - Failed:     1, Passed:     2, Skipped:     0, Total:     3, Duration: 84 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M23-gs-r-abre-ticket: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LasConsultasNoAbrenTicketNiQuedanEnEl
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 37 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M24-largos-nuevos-olvidados: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LosComandosConParametroNoSeDibujan
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 45 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M25-barras-sin-aviso: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnasBarrasMasAnchasQue384SeRecortanConAviso
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 25 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M26-raster-al-reves: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LaImagenRasterSeDibujaBitABit(vector: "03-imagen")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LaImagenRasterSeDibujaBitABit(vector: "06-escpos-feed")
+Failed!  - Failed:     2, Passed:     0, Skipped:     0, Total:     2, Duration: 51 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M27-suscriptor-repite: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnSuscriptorQueFallaNoRepiteElComando
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 64 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M28-doble-tamano-ignorado: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElDobleTamanoYElSubrayadoSeDibujan
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 35 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M29-subrayado-ignorado: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElDobleTamanoYElSubrayadoSeDibujan
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 28 ms - PrintThermal.Emulator.Tests.dll (net10.0)

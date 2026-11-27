@@ -1,2 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <!-- Terminus Font 24x12 (SIL OFL 1.1): va embebida y su aviso y licencia viajan junto a lo compilado (OFL §2). -->
+    <EmbeddedResource Include="EscPos/Fuentes/*.psf.gz" LogicalName="Fuentes/%(Filename)%(Extension)" />
+    <None Include="EscPos/Fuentes/OFL.txt" Link="Licencias/TerminusFont-OFL.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>

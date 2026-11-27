@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Generador de vectores dorados de PAR-PTE-02: ejecuta la librería cliente (origin/main 940fa7f). Local, no se publica. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../lib-940fa7f/src/MotorDsl.Core/MotorDsl.Core.csproj" />
+    <ProjectReference Include="../lib-940fa7f/src/MotorDsl.Rendering/MotorDsl.Rendering.csproj" />
+    <Compile Include="../lib-940fa7f/src/MotorDsl.Maui/Renderers/BitmapEscPosRenderer.cs" Link="Lib/BitmapEscPosRenderer.cs" />
+    <Compile Include="../lib-940fa7f/src/MotorDsl.Maui/Renderers/SkiaSharpRasterizer.cs" Link="Lib/SkiaSharpRasterizer.cs" />
+    <PackageReference Include="SkiaSharp" Version="3.119.2" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="3.119.2" />
+    <PackageReference Include="QRCoder" Version="1.8.0" />
+  </ItemGroup>
+</Project>
