@@ -1,7 +1,7 @@
 ---
 id: LAZ-0008
 fecha: 2026-11-27
-origen: review
+origen: parcela
 clase: aclaracion
 estado: abierto
 alcance: corpus

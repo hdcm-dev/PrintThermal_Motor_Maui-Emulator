@@ -114,3 +114,60 @@ Arreglo: anotar en LAZ-0007 el binario con pings y la falta del cifrado como hip
 - **Mutaciones:** de M7 a M11, cada una tiene su prueba en rojo, y M1 se repitió como control.
 - **Rojo antes que el verde:** se mantiene (27867a9 → 2cec4b8). Las cinco pruebas posteriores están declaradas como posteriores y no son `prueba:` de ningún REQ.
 - **Exposición:** los archivos nuevos y cambiados no traen rutas de usuario, nombres de equipo ni IPs fuera de loopback. Las rutas son `/w/` o del contenedor. Las direcciones son sintéticas, la de Android va enmascarada y el puerto gRPC sale como `<puerto gRPC>`.
+
+## Ronda 3
+
+auditor: claude -p, claude-opus-5-5, otro contexto sin la ejecución (mismo modelo: garantía reducida)
+VEREDICTO: no refutado
+
+### Hallazgos de la ronda 2
+
+| # | Estado | Ancla |
+|---|---|---|
+| N1 · Consumo de tokens bajo «NO VERIFICADO» | resuelto | `parcela.md:26` → LAZ-0008 `abierto`. Trata exactamente el umbral de 2,5 M (R:15), y su §2 dice qué pasa si se supera: D1 vuelve a la persona. Ya no figura en «NO VERIFICADO» (`parcela.md:101-105`). El dictamen también lo cita (`dictamen.md:70`). |
+| N2 · La prosa afirma correcciones que no ocurrieron | resuelto en parte | `parcela.md:112-118` ahora detalla cada menor: el 6 «aceptado por la mesa», el 10 con `estado` en `en-curso` y el 11 en «Lo aprendido» (`:109`). Quedan dos «corregido» de más: ver M2. |
+| N3 · Variable confundida en LAZ-0007 | resuelto en parte | El título y el §1 de LAZ-0007 nombran las dos hipótesis. `parcela.md:25` y `:108` las bajan a hipótesis. Pero la evidencia y la fila 62 del dictamen siguen nombrando una sola causa: ver M1. |
+| N4 · El mínimo de SDP está en el camino medido | resuelto | `parcela.md:96` y `prueba-real.txt:15-16` dicen que el mínimo está en el camino de ServiceSearchAttribute, sin efecto con los máximos que mandó Android. Que el Total corregido no estaba en el camino medido también queda dicho. |
+| R1-10 · Orden de los pasos | resuelto | `parcela.md:5` y `SPR-01.md:23` dicen `en-curso`. |
+| R1-11 · Sin keepalive | resuelto | Queda como «Conjetura» en `parcela.md:109`. |
+| R1-8 · SDP ServiceSearch | resuelto en parte | El mínimo ya tiene prueba (`SdpTests.cs:159-161`: error 0x0003 con máximo 6, con bytes escritos a mano). La corrección de TotalServiceRecordCount (`ServidorSdp.cs:68`) sigue sin prueba, y la continuación de ServiceSearch sigue ignorada (`:64`). Con un solo registro no tiene efecto. |
+| R1-9 · Evidencia real poco reproducible | resuelto en parte (igual que en la ronda 2) | El receptor sigue «no versionado» (`prueba-real.txt:5`), y lo dice. |
+
+### Hallazgos nuevos
+
+**M1 · menor · Todavía hay textos que dan una sola causa al vínculo trabado.**
+- `prueba-real.txt:54-55` sigue diciendo «Causa probable: el temporizador de emparejamiento de Android». No menciona el binario con pings, que LAZ-0007 §1 ya pone como hipótesis competidora.
+- El texto propuesto para ADR-0004, que va al lote K2 de la Review, afirma: «si llega tarde, el vínculo queda inservible (LAZ-0007)» (`dictamen.md:62`). El cierre dice que h2 a h5 «van al texto propuesto para ADR-0004» (`parcela.md:99`), pero no advierte que esa restricción quedó en hipótesis.
+- El nombre del archivo de LAZ-0007 (`…-consentimiento-tardio-deja-el-vinculo-trabado.md`) también da esa causa por cierta.
+- No bloquea: LAZ-0007 está abierto y va a la Review con h1. Pero la persona recibiría una restricción como hecho. Arreglo: corregir `prueba-real.txt:54-55` y anotar en `## Cierre` que la fila 62 del dictamen depende de LAZ-0007.
+
+**M2 · menor · La prosa sigue diciendo «corregido» donde la ronda 2 dijo «en parte».**
+- `parcela.md:113` dice «9: corregidos», pero el receptor sigue sin versionar.
+- `parcela.md:115` dice «8: corregido, con prueba del mínimo». Es exacto para el mínimo, pero calla que el Total no tiene prueba y que la continuación de ServiceSearch sigue ignorada.
+- Son el mismo patrón que N2, en menor escala. Arreglo: «8 y 9: en parte», con el resto dicho.
+
+**M3 · menor · LAZ-0008 tiene `origen: review`.**
+- El hallazgo nació en la parcela: h2 de la mesa y N1 de este auditor, como dice su propio §1.
+- LAZ-0005 a LAZ-0007, del mismo cierre, llevan `origen: parcela`.
+- `review` es un valor válido de la plantilla, pero acá no es exacto.
+
+### Lo que revisé y está bien
+
+- **Pendientes frente a la prosa:** las cuatro filas de `pendientes:` tienen cada una su LAZ `abierto`, y cada LAZ trata el problema que su fila nombra. «NO VERIFICADO» ya no esconde nada sin registro:
+  - la 58HB6 real queda para la segunda etapa firmada;
+  - la librería cliente queda en PAR-PTE-05;
+  - el PIN heredado tiene prueba unitaria (`SeguridadTests.cs:78`, evento 0x16 → 0x040D) y no tiene criterio en el medio emulado;
+  - la causa de LAZ-0007 tiene su LAZ.
+- **Deuda de la mesa:** las cuatro deudas del dictamen (`dictamen.md:69-73`) coinciden con LAZ-0005 a LAZ-0008 y con las filas de `pendientes:`.
+- **Pruebas:**
+  - El TRX tiene `Counters total="22" passed="22"`, y su hora (15:55:07 UTC) es anterior al commit ed5c15a (12:55:22 −03). Por lo tanto, la corrida incluye la aserción nueva del mínimo.
+  - El PDU de esa aserción está bien armado: largo 0x000C, cuatro bytes de handle, máximo 0x0006, lista de IDs y continuación 0. La respuesta esperada es la de error 0x0003, con la transacción de la pregunta.
+  - La cuenta 22 = 13 + 5 + 4 no cambia, porque se agregó una aserción a una prueba que ya existía.
+- **Evidencia real:**
+  - El registro del §6 muestra que el binario cambió entre 15:12:06 (dirección :01) y 15:12:37 (dirección :02). Eso coincide con `prueba-real.txt:11-13` y con `parcela.md:96`.
+  - Las 113 líneas sin cortes van de 15:12:37 al final.
+  - El descubrimiento 3 de 3 se repite con el binario de 2cec4b8 (dirección :02, `:40-48`).
+  - Los diez SHA de la serie y los dos de los reinicios coinciden entre lo enviado y lo recibido.
+- **Rojo antes que el verde y mutaciones:** sin cambios desde la ronda 2 (27867a9 → 2cec4b8; M1 a M11 en rojo).
+- **Changelog y sprint:** el changelog dice «LAZ-0005 a LAZ-0008 abiertos», y la fila de SPR-01 dice `en-curso`, coherente con el paso 6, que todavía no se hizo.
+- **Exposición:** el diff de ed5c15a no trae rutas de usuario, nombres de equipo ni IPs fuera de loopback. Las direcciones son las sintéticas, la de Android sigue enmascarada y el puerto sigue como `<puerto gRPC>`.

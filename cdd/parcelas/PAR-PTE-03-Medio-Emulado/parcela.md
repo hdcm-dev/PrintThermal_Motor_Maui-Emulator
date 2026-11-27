@@ -2,7 +2,7 @@
 id: PAR-PTE-03
 titulo: Bluetooth Classic propio en C# contra netsim: descubrimiento, emparejamiento y recepción por RFCOMM
 version: 1.0
-estado: en-curso
+estado: cerrada
 velocidad: completa
 base_commit: 9dec7ce0bdb56b1ee990cc97cba6015cf79c0afb
 sprint: SPR-01
@@ -110,10 +110,16 @@ Sin persona en esta corrida; no hubo huecos que reabrieran la parcela. Lo que el
   - Android guarda la clase 0x1F00 si se vincula una dirección sin descubrirla antes.
 - Auditor: `evidencia/2026-11-27-auditoria.md`, en rondas.
   - Ronda 1, «refutado». Sus tres bloqueantes se resolvieron: la entrega al almacén (LAZ-0006), el vínculo trabado (LAZ-0007) y la mesa, que ya terminó. De los menores:
-    - 4, 5, 7 y 9: corregidos;
+    - 4, 5 y 7: corregidos;
     - 6: aceptado por la mesa (TS-2 = A, clave sin autenticar);
-    - 8: corregido, con prueba del mínimo;
+    - 8: en parte; el mínimo tiene prueba, pero TotalServiceRecordCount no, y la continuación de ServiceSearch sigue sin atenderse (con un solo registro no tiene efecto);
+    - 9: en parte; el commit medido y la transferencia previa están declarados, y el ejecutable receptor sigue sin versionar (lo dice la evidencia);
     - 10: `estado` volvió a `en-curso` hasta la última ronda;
     - 11: es conjetura y quedó en «Lo aprendido».
   - Ronda 2, «refutado». El consumo de tokens pasó a LAZ-0008 (N1). Se corrigió la prosa (N2), LAZ-0007 tiene ahora las dos hipótesis (N3) y se corrigió el alcance de los cambios posteriores (N4).
-  - Las rondas siguientes están en el mismo archivo.
+  - Ronda 3, «no refutado». Se aplicaron sus menores:
+    - M1: la evidencia ya no da una sola causa;
+    - M2: esta prosa;
+    - M3: LAZ-0008 con `origen: parcela`.
+
+    La línea del texto propuesto para ADR-0004 sobre el consentimiento tardío depende de LAZ-0007.
