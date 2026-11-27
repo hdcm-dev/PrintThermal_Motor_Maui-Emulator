@@ -1,0 +1,45 @@
+# Rojo: dotnet test PrintThermal.Emulator.slnx (2026-11-27), pruebas de PAR-PTE-02 contra el API sin implementar (NotImplementedException).
+# Contenedor mcr.microsoft.com/dotnet/sdk:10.0.403, turno 224, 2 CPU / 4 GB. Base 9dec7ce.
+10.0.403
+[xUnit.net 00:00:00.33]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:00.40]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:00.41]       System.NotImplementedException : The method or operation is not implemented.
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnIdInvalidoNoSaleDeLaCarpeta(id: "")
+   System.NotImplementedException : The method or operation is not implemented.
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnIdInvalidoNoSaleDeLaCarpeta(id: "20261127T120000000-0001/../../x")
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnIdInvalidoNoSaleDeLaCarpeta(id: "../secreto")
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.CadaTicketGuardaBinYPng
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.BorrarQuitaLosDosArchivos
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.LosIdsSonUnicosYOrdenadosYSobrevivenAUnaNuevaInstancia
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LasConsultasDeEstadoRespondenSegunElPapel(estado: SinPapel, n1: 26, n2: 50, n4: 114)
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LasConsultasDeEstadoRespondenSegunElPapel(estado: TapaAbierta, n1: 26, n2: 22, n4: 18)
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LasConsultasDeEstadoRespondenSegunElPapel(estado: Normal, n1: 18, n2: 18, n4: 18)
+[xUnit.net 00:00:00.42]       System.NotImplementedException : The method or operation is not implemented.
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "01-texto")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "06-escpos-feed")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "04-qr")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "03-imagen")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "02-acentos")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "05-ean13")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "07-escpos-corte-total")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 1)
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 100000)
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 7)
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 256)
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LaImagenRasterSeDibujaBitABit
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-1")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-3")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-2")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnComandoDesconocidoSeRegistraYSigue
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnEscArrobaConContenidoCierraElTicketAnterior
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.Ean13CalculaElDigitoVerificador
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnaImagenMasAnchaQue384SeRecortaConAviso
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnTicketVacioSeGuardaEnBlancoYUnCorteSueltoNo
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElModeloYLaCapacidadNvRespondenComoSeConfiguro
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral
+Total tests: 34
+     Passed: 4
+     Failed: 30
