@@ -1,0 +1,290 @@
+[
+ {
+  "modo": "antes",
+  "ancho": 540,
+  "vw": 540,
+  "scrollWidth": 540,
+  "papel": [
+   160,
+   380
+  ],
+  "ticket": [
+   179,
+   361
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": true,
+  "textoEnPantalla": true,
+  "desbordeHorizontal": false
+ },
+ {
+  "modo": "antes",
+  "ancho": 480,
+  "vw": 480,
+  "scrollWidth": 480,
+  "papel": [
+   130,
+   350
+  ],
+  "ticket": [
+   149,
+   331
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": true,
+  "textoEnPantalla": true,
+  "desbordeHorizontal": false
+ },
+ {
+  "modo": "antes",
+  "ancho": 412,
+  "vw": 412,
+  "scrollWidth": 412,
+  "papel": [
+   96,
+   316
+  ],
+  "ticket": [
+   115,
+   297
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": true,
+  "textoEnPantalla": true,
+  "desbordeHorizontal": false
+ },
+ {
+  "modo": "antes",
+  "ancho": 360,
+  "vw": 360,
+  "scrollWidth": 360,
+  "papel": [
+   70,
+   290
+  ],
+  "ticket": [
+   89,
+   271
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": true,
+  "textoEnPantalla": true,
+  "desbordeHorizontal": false
+ },
+ {
+  "modo": "antes",
+  "ancho": 320,
+  "vw": 320,
+  "scrollWidth": 320,
+  "papel": [
+   50,
+   270
+  ],
+  "ticket": [
+   69,
+   251
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": true,
+  "textoEnPantalla": true,
+  "desbordeHorizontal": false
+ },
+ {
+  "modo": "antes",
+  "ancho": 280,
+  "vw": 280,
+  "scrollWidth": 280,
+  "papel": [
+   30,
+   250
+  ],
+  "ticket": [
+   49,
+   231
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": true,
+  "textoEnPantalla": true,
+  "desbordeHorizontal": false
+ },
+ {
+  "modo": "antes",
+  "ancho": 240,
+  "vw": 240,
+  "scrollWidth": 240,
+  "papel": [
+   16,
+   235
+  ],
+  "ticket": [
+   35,
+   216
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": true,
+  "textoEnPantalla": true,
+  "desbordeHorizontal": false
+ },
+ {
+  "modo": "antes",
+  "ancho": 205,
+  "vw": 205,
+  "scrollWidth": 235,
+  "papel": [
+   16,
+   235
+  ],
+  "ticket": [
+   35,
+   216
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": false,
+  "textoEnPantalla": false,
+  "desbordeHorizontal": true
+ },
+ {
+  "modo": "despues",
+  "ancho": 540,
+  "vw": 540,
+  "scrollWidth": 540,
+  "papel": [
+   160,
+   380
+  ],
+  "ticket": [
+   179,
+   361
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": true,
+  "textoEnPantalla": true,
+  "desbordeHorizontal": false
+ },
+ {
+  "modo": "despues",
+  "ancho": 480,
+  "vw": 480,
+  "scrollWidth": 480,
+  "papel": [
+   130,
+   350
+  ],
+  "ticket": [
+   149,
+   331
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": true,
+  "textoEnPantalla": true,
+  "desbordeHorizontal": false
+ },
+ {
+  "modo": "despues",
+  "ancho": 412,
+  "vw": 412,
+  "scrollWidth": 412,
+  "papel": [
+   96,
+   316
+  ],
+  "ticket": [
+   115,
+   297
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": true,
+  "textoEnPantalla": true,
+  "desbordeHorizontal": false
+ },
+ {
+  "modo": "despues",
+  "ancho": 360,
+  "vw": 360,
+  "scrollWidth": 360,
+  "papel": [
+   70,
+   290
+  ],
+  "ticket": [
+   89,
+   271
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": true,
+  "textoEnPantalla": true,
+  "desbordeHorizontal": false
+ },
+ {
+  "modo": "despues",
+  "ancho": 320,
+  "vw": 320,
+  "scrollWidth": 320,
+  "papel": [
+   50,
+   270
+  ],
+  "ticket": [
+   69,
+   251
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": true,
+  "textoEnPantalla": true,
+  "desbordeHorizontal": false
+ },
+ {
+  "modo": "despues",
+  "ancho": 280,
+  "vw": 280,
+  "scrollWidth": 280,
+  "papel": [
+   30,
+   250
+  ],
+  "ticket": [
+   49,
+   231
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": true,
+  "textoEnPantalla": true,
+  "desbordeHorizontal": false
+ },
+ {
+  "modo": "despues",
+  "ancho": 240,
+  "vw": 240,
+  "scrollWidth": 240,
+  "papel": [
+   16,
+   224
+  ],
+  "ticket": [
+   29,
+   211
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": true,
+  "textoEnPantalla": true,
+  "desbordeHorizontal": false
+ },
+ {
+  "modo": "despues",
+  "ancho": 205,
+  "vw": 205,
+  "scrollWidth": 205,
+  "papel": [
+   16,
+   189
+  ],
+  "ticket": [
+   16,
+   189
+  ],
+  "ticketEnTarjeta": true,
+  "tarjetaEnPantalla": true,
+  "textoEnPantalla": true,
+  "desbordeHorizontal": false
+ }
+]

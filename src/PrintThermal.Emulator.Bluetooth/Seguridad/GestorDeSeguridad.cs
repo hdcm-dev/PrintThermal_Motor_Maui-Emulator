@@ -37,6 +37,7 @@ internal sealed class GestorDeSeguridad(HostHci host, IAlmacenDeClaves claves, s
                 }
                 else
                 {
+                    registro($"seguridad: sin clave de enlace para {par}; se rechaza");
                     host.Enviar(0x040C, direccion);
                 }
                 break;

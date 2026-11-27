@@ -1,6 +1,6 @@
 ---
 id: REQ-HIS-Visor-Web
-version: 3
+version: 4
 epica: REQ-EPI-Acceso
 gobierno: parcela
 tipo: referencia
@@ -27,7 +27,7 @@ En PAR-PTE-04 el visor es una sola página:
 
 - Cabecera con el estado del medio y la cantidad de tickets.
 - Lista con la hora y el tamaño de cada ticket.
-- El ticket elegido a escala: 384 puntos ocupan 48 mm en un papel de 58 mm (D6, no medido en la 58HB6).
+- El ticket elegido a escala: 384 puntos ocupan 48 mm en un papel de 58 mm (D6, no medido en la 58HB6). Si la pantalla no alcanza para 48 mm más los márgenes, se achica al ancho de su tarjeta (PAR-PTE-07: a 205 px se achicó, a 240 px no).
 - Descarga del PNG y del `.bin`.
 - Limpiar, con confirmación.
 - Cuatro estados: cargando, vacío, datos y error.
@@ -51,3 +51,4 @@ La página se actualiza sola con la espera larga de `/api/tickets/esperar`. Se r
 | v1 | siembra | Alta |
 | v2 | PAR-PTE-04 | Visor de una página con lista, ticket a escala, descargas, limpiar, estado y actualización por espera; rutas de pruebas |
 | v3 | LAZ-0015 | Criterio de pantalla angosta: el ticket no desborda su tarjeta |
+| v4 | PAR-PTE-07 | La tarjeta del ticket se ajusta al ancho disponible (LAZ-0015); recorrido en `cdd/parcelas/PAR-PTE-07-Vinculo-Desde-Ajustes/recorrido/` |

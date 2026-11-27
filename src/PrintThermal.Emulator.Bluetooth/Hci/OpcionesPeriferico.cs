@@ -21,6 +21,15 @@ public sealed class OpcionesPeriferico
 
     /// <summary>Créditos RFCOMM que se le dan al otro lado al abrir el canal y al reponer.</summary>
     public byte CreditosRfcomm { get; init; } = 7;
+
+    /// <summary>
+    /// Tras un emparejamiento que terminó sin cifrar (con netsim, el de Ajustes de Android cuando Android lo atribuye a otro equipo), hace una conexión breve con el
+    /// teléfono y la corta (LAZ-0011, ADR-0009).
+    /// </summary>
+    public bool ReconexionTrasVinculoSinCifrar { get; init; } = true;
+
+    /// <summary>Registra los comandos y eventos HCI (sin los datos ACL ni el control de flujo, con las claves tapadas), para diagnosticar.</summary>
+    public bool TrazaHci { get; init; }
 }
 
 /// <summary>Estado observable del periférico.</summary>

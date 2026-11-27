@@ -20,7 +20,7 @@ traces: [FIC-01, REQ-HIS-Documentacion-De-Uso, REQ-HIS-Visor-Web]
 
 ## 1. Visor
 
-En `$BASE/` (la raíz, puerto 5080 de la red del emulador). Muestra el estado del medio y la cantidad de tickets, la lista de tickets recibidos y el elegido a escala del papel de 58 mm, con botones para descargar el PNG y los bytes recibidos, y «Limpiar» (pide confirmación y borra todos). Se actualiza solo cuando llega un ticket: no hace falta recargar.
+En `$BASE/` (la raíz, puerto 5080 de la red del emulador). Muestra el estado del medio y la cantidad de tickets, la lista de tickets recibidos y el elegido a escala del papel de 58 mm (si la pantalla no alcanza para 48 mm más los márgenes, el ticket se achica al ancho de su tarjeta: en la medición, a 205 px se achicó y a 240 px no), con botones para descargar el PNG y los bytes recibidos, y «Limpiar» (pide confirmación y borra todos). Se actualiza solo cuando llega un ticket: no hace falta recargar.
 
 - El visor lee todo por la misma API; no tiene datos propios.
 - Para mirarlo hace falta un navegador que llegue a la red del contenedor ([Montaje](montaje.md) §4). En PAR-PTE-05 se abrió con Chrome dentro del emulador de Android.

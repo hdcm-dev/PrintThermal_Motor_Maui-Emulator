@@ -2,7 +2,7 @@
 doc_id: USO-04
 doc_type: guia-practica
 title: Emparejar la app con la impresora emulada e imprimir
-description: Cómo encuentra Android a «58HB6», cómo se vincula sin dejar la conexión sin cifrado y cómo llega cada ticket.
+description: Cómo encuentra Android a «58HB6», las dos formas de vincularla (conectando o desde Ajustes) con la conexión cifrada y cómo llega cada ticket.
 status: borrador
 origin: ia-generated
 confidence: media
@@ -17,7 +17,7 @@ traces: [FIC-01, REQ-HIS-Documentacion-De-Uso, REQ-HIS-Descubrimiento-Y-Empareja
 
 1. [Encontrar «58HB6»](#1-encontrar-58hb6)
 2. [Vincular conectando](#2-vincular-conectando)
-3. [Lo que no funcionó: vincular y después conectar](#3-lo-que-no-funcionó-vincular-y-después-conectar)
+3. [Vincular desde Ajustes y después conectar](#3-vincular-desde-ajustes-y-después-conectar)
 4. [Imprimir](#4-imprimir)
 5. [Leer el ticket](#5-leer-el-ticket)
 
@@ -27,10 +27,11 @@ Con el contenedor arriba ([Montaje](montaje.md)), la impresora emulada aparece e
 
 ## 2. Vincular conectando
 
-Es el camino medido: la app abre una conexión RFCOMM al perfil SPP de «58HB6» **sin vincular antes** (en Android, `createRfcommSocketToServiceRecord` con el UUID de SPP y `connect()`). Android pide la vinculación dentro de esa conexión y muestra su diálogo de confirmación; la impresora emulada acepta sola (no tiene teclado ni pantalla).
+Es uno de los dos caminos medidos: la app abre una conexión RFCOMM al perfil SPP de «58HB6» **sin vincular antes** (en Android, `createRfcommSocketToServiceRecord` con el UUID de SPP y `connect()`). Android pide la vinculación dentro de esa conexión y muestra su diálogo de confirmación; la impresora emulada acepta sola (no tiene teclado ni pantalla).
 
-- Hay que confirmar el diálogo de Android enseguida. En la prueba que falló, el toque llegó a los 31 s (LAZ-0011).
+- Hay que confirmar el diálogo de Android antes de que venza la conexión. En PAR-PTE-07, sin confirmar, la app mínima informó `read failed, socket might closed or timeout` a los 35 s (2 de 2); confirmando a los pocos segundos, se vinculó y cifró. En PAR-PTE-03, un intento con el toque a los 31 s quedó trabado; la causa medida en PAR-PTE-07 es otra (§3).
 - En una prueba automática, el diálogo se confirmó tocando el botón con `adb shell input tap` en las coordenadas que da `adb shell uiautomator dump`. El texto del botón depende del idioma del sistema.
+- Si es la primera conexión después de encender el Bluetooth de Android y Android tiene otros equipos vinculados, el primer intento puede vencer aunque se confirme el diálogo (la causa está en §3); la impresora hace entonces la conexión breve de §3 y el intento siguiente cifra (medido 1 de 1 en PAR-PTE-07).
 - La clave queda guardada en `claves-bluetooth.txt` de la carpeta de salida; las conexiones siguientes la usan sin volver a preguntar.
 
 Registros de un emparejamiento correcto (`docker logs`; la dirección del teléfono, enmascarada):
@@ -47,12 +48,24 @@ conexión 1 abierta desde XX:XX:XX:XX:BB:BB (canal 1)
 
 La línea `cifrado …: activo 1` es la que importa: sin ella, el vínculo no sirve.
 
-## 3. Lo que no funcionó: vincular y después conectar
+## 3. Vincular desde Ajustes y después conectar
 
-Vincular primero con `createBond()` y conectar después dejó a Android con la vinculación a medias («AUTHENTICATING»), sin pedir la clave a la impresora y **sin cifrado**: 2 de 2 intentos en PAR-PTE-05, con toques a los 24 s y a los 9 s. La causa no está separada (LAZ-0011, abierto). Hasta que se resuelva:
+Es el camino de Ajustes → Bluetooth → «Vincular dispositivo nuevo» (Ajustes usa `createBond()`), y después la app conecta por RFCOMM a un equipo ya vinculado. Una app que llama `createBond()` y conecta enseguida, antes de que Android corte la conexión del vínculo, no se midió (LAZ-0016). Medido en PAR-PTE-07 contra el emulador de Android API 37: vinculado desde Ajustes (por interfaz, con `uiautomator`) y después la app de ejemplo de la librería cliente conectó con cifrado e imprimió 5 de 5.
 
-- vincular conectando (§2);
-- si una app sólo lista equipos ya vinculados (como la app de ejemplo de la librería cliente), crear el vínculo antes con una app de prueba propia que busque «58HB6» y conecte por RFCOMM sin vincular (§2), y después usar la app. En PAR-PTE-05 se usó una app mínima que no está publicada.
+En este camino Android vincula en una conexión propia (vínculo «dedicado»), cifra esa conexión y la corta. Con netsim, la primera conexión después de encender el Bluetooth de Android lleva el manejador 0, y si Android tiene otros equipos vinculados atribuye el fin de esa vinculación a **otro** de ellos: no cifra y deja este «autenticando» (sin otros equipos vinculados, o con otro manejador, cifra y no pasa nada de esto). Para que eso no trabe la conexión siguiente, la impresora emulada hace una conexión breve con el teléfono y la corta enseguida; así Android cierra el estado del equipo correcto (LAZ-0011, ADR-0009). En el registro:
+
+<!-- ejemplo: registro -->
+```text
+seguridad: XX:XX:XX:XX:BB:BB declara IO 0x01, autenticación 0x03
+seguridad: confirmación pedida por XX:XX:XX:XX:BB:BB; se acepta
+seguridad: vínculo guardado con XX:XX:XX:XX:BB:BB (tipo de clave 4)
+vínculo con XX:XX:XX:XX:BB:BB sin cifrar; reconexión breve
+reconexión breve 0x001 con XX:XX:XX:XX:BB:BB; se corta
+seguridad: clave de enlace guardada para XX:XX:XX:XX:BB:BB
+cifrado en 0x002: estado 0x00, activo 1
+```
+
+Las dos últimas líneas son de la conexión de la app: la impresora entrega la clave guardada y el enlace queda cifrado.
 
 ## 4. Imprimir
 

@@ -1,6 +1,6 @@
 ---
 id: REQ-HIS-Documentacion-De-Uso
-version: 2
+version: 3
 epica: REQ-EPI-Montaje-Y-Uso
 gobierno: parcela
 tipo: referencia
@@ -37,3 +37,4 @@ Documentación de uso (montaje, API, visor) versionada con el código en el repo
 |---|---|---|
 | v1 | siembra | Alta |
 | v2 | PAR-PTE-06 | `docs/` con montaje, emparejamiento, API, visor, diagnóstico y recetas; ejemplos que corren en la CI; criterio de deriva; `rutas:` suma las pruebas |
+| v3 | PAR-PTE-07 | Emparejar desde Ajustes (§3 de `docs/emparejar-e-imprimir.md`), diagnóstico del vínculo sin cifrar y variables nuevas de `Emulador:Bluetooth` |
