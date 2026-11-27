@@ -32,7 +32,7 @@ Un corte con un manejador que Android atribuye bien devuelve el equipo a reposo:
 
 ## 3. Decisión
 
-A. Aprobada en rol por el responsable de las decisiones técnicas del emulador, por mandato del Product Owner del 2026-11-27 (testimonio F1, registro privado del producto), en PAR-PTE-07. Medida: camino de Ajustes 2 de 2 con cifrado (una serie de 5 impresiones de 5 con la misma huella del PNG), camino de vincular conectando 5 de 5 sin conexión propia.
+A. Aprobada en rol por el responsable de las decisiones técnicas del emulador, por mandato del Product Owner del 2026-11-27 (testimonio F1, registro privado del producto), en PAR-PTE-07. Medida en PAR-PTE-07: camino de Ajustes con la condición presente, 3 de 3 con cifrado al primer intento de la app (series de 5 impresiones de 5 con la misma huella del PNG); controles sin la condición (manejador distinto de 0, o sin otros equipos vinculados): Android cifra en la conexión del vínculo y la reconexión breve no se dispara; vincular conectando, 5 de 5 sin conexión propia, dos veces.
 
 ## 4. Consecuencias
 

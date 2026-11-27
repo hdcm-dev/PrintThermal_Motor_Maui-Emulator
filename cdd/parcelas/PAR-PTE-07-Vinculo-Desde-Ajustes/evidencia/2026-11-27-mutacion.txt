@@ -1,4 +1,4 @@
-# Mutación sobre 17d85dd (2026-11-27): 4 mutantes, 4 en rojo. Cada uno corre sólo la prueba que debe matarlo.
+# Mutación sobre 17bedd6 (2026-11-27): 10 mutantes, 10 en rojo. Cada uno corre sólo la prueba que debe matarlo. M5 difiere la reacción 500 ms (las pruebas negativas esperan un punto de sincronía y 1,5 s).
 === M1 sin reconexión breve por omisión · prueba TrasUnVinculoSinCifrarLaImpresoraReconectaYCorta
 <     public bool ReconexionTrasVinculoSinCifrar { get; init; } = true;
 >     public bool ReconexionTrasVinculoSinCifrar { get; init; }
@@ -6,12 +6,37 @@ Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration:
 === M2 no registra el cifrado de la conexión · prueba UnVinculoCifradoNoProvocaReconexion
 <                     _cifradas.Add((ushort)(BinaryPrimitives.ReadUInt16LittleEndian(p.AsSpan(1)) & 0x0FFF));
 >                     _ = ((ushort)(BinaryPrimitives.ReadUInt16LittleEndian(p.AsSpan(1)) & 0x0FFF));
-Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 1 s - PrintThermal.Emulator.Tests.dll (net10.0)
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 2 s - PrintThermal.Emulator.Tests.dll (net10.0)
 === M3 la conexión breve no se corta · prueba TrasUnVinculoSinCifrarLaImpresoraReconectaYCorta
 <                     _host.Enviar(0x0406, (byte)breve, (byte)(breve >> 8), 0x13);
 >                     _ = breve;
 Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 5 s - PrintThermal.Emulator.Tests.dll (net10.0)
 === M4 reconecta tras cualquier cierre · prueba SinVinculoNuevoNoHayReconexion
-<                 var sinCifrar = _vinculadas.Remove(h) & !_cifradas.Remove(h);
+<                 var sinCifrar = _vinculadas.Remove(h) & !_cifradas.Remove(h) & p[0] == 0;
 >                 var sinCifrar = true;
-Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 353 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 1 s - PrintThermal.Emulator.Tests.dll (net10.0)
+=== M5 reconecta tras cualquier cierre, 500 ms después · prueba SinVinculoNuevoNoHayReconexion
+<                 var sinCifrar = _vinculadas.Remove(h) & !_cifradas.Remove(h) & p[0] == 0;
+>                 var sinCifrar = true;
+<                         _host.Enviar(0x0405, [.. c.Par.ComoHci(), 0x18, 0xCC, 0x01, 0x00, 0x00, 0x00, 0x00]);
+>                         var dir = c.Par; _ = Task.Delay(500).ContinueWith(_ => _host.Enviar(0x0405, [.. dir.ComoHci(), 0x18, 0xCC, 0x01, 0x00, 0x00, 0x00, 0x00]));
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 1 s - PrintThermal.Emulator.Tests.dll (net10.0)
+=== M6 un pedido de conexión de Android no cancela la reconexión pendiente · prueba SiAndroidSeAdelantaLaConexionNoSeCorta
+<                     _reconexionPendiente.Remove(DireccionBluetooth.DesdeHci(p)); // el teléfono se adelantó: no hace falta
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 1 s - PrintThermal.Emulator.Tests.dll (net10.0)
+=== M7 un error de Create Connection no cancela la reconexión pendiente · prueba SiLaReconexionNoArrancaLaConexionSiguienteNoSeCorta
+<                     _reconexionPendiente.Clear(); // la reconexión breve no arrancó
+>                     ;
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 1 s - PrintThermal.Emulator.Tests.dll (net10.0)
+=== M8 un corte fallido dispara la reconexión · prueba UnCorteFallidoNoProvocaReconexion
+<                 var sinCifrar = _vinculadas.Remove(h) & !_cifradas.Remove(h) & p[0] == 0;
+>                 var sinCifrar = _vinculadas.Remove(h) & !_cifradas.Remove(h);
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 1 s - PrintThermal.Emulator.Tests.dll (net10.0)
+=== M9 la traza muestra la clave · prueba LaTrazaHciNoMuestraLaClaveDeEnlace
+<         if (desde < 0)
+>         if (desde < 100)
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 375 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+=== M10 el medio no pasa la opción al periférico · prueba SinConfigurarLaReconexionBreveEstaPrendidaYLaTrazaApagada
+<         return new OpcionesPeriferico { TrazaHci = opciones.TrazaHci, ReconexionTrasVinculoSinCifrar = opciones.ReconexionTrasVinculoSinCifrar };
+>         return new OpcionesPeriferico { TrazaHci = opciones.TrazaHci, ReconexionTrasVinculoSinCifrar = false };
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 90 ms - PrintThermal.Emulator.Tests.dll (net10.0)
