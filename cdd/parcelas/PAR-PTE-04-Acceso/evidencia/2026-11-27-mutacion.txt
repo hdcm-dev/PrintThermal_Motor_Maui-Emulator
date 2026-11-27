@@ -1,0 +1,73 @@
+# Mutación (2026-11-27), código final: seis mutantes, uno por REQ-01 a REQ-06, cada uno con su diff completo y la salida de su prueba filtrada (extracto: líneas de resultado y mensaje); los seis en rojo (salida 1)
+# Contenedor mcr.microsoft.com/dotnet/sdk:10.0.403 con turno en el equipo de cómputo, 2 CPU / 4 GB.
+=== M1 el PNG sale como application/octet-stream · prueba ElPngLlegaConLaMismaHuella
+--- a/w0/src/PrintThermal.Emulator.Api/Api/EndpointsDeTickets.cs
++++ b/m/src/PrintThermal.Emulator.Api/Api/EndpointsDeTickets.cs
+-    private const string TipoPng = "image/png";
++    private const string TipoPng = "application/octet-stream";
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.ElPngLlegaConLaMismaHuella [793 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+--
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 807 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+salida: 1
+=== M2 la espera vencida responde 404 en vez de 204 · prueba LaEsperaVenceSinColgarse
+--- a/w0/src/PrintThermal.Emulator.Api/Api/EndpointsDeTickets.cs
++++ b/m/src/PrintThermal.Emulator.Api/Api/EndpointsDeTickets.cs
+-            return Results.NoContent();
++            return Results.NotFound();
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaVenceSinColgarse [1 s]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: NoContent
+--
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 1 s - PrintThermal.Emulator.Tests.dll (net10.0)
+salida: 1
+=== M3 sin la página Scalar · prueba OpenApiYScalarResponden
+--- a/w0/src/PrintThermal.Emulator.Api/Program.cs
++++ b/m/src/PrintThermal.Emulator.Api/Program.cs
+-app.MapScalarApiReference();
+  Failed PrintThermal.Emulator.Tests.Api.OpenApiTests.OpenApiYScalarResponden [1 s]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: OK
+--
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 1 s - PrintThermal.Emulator.Tests.dll (net10.0)
+salida: 1
+=== M4 el visor no pide la lista a la API · prueba ElVisorMuestraElUltimoTicket
+--- a/w0/src/PrintThermal.Emulator.Api/Visor/Inicio.razor
++++ b/m/src/PrintThermal.Emulator.Api/Visor/Inicio.razor
+-            Tickets = [.. await Cliente.ListarAsync(ct: _vida.Token)];
++            Tickets = [];
+  Failed PrintThermal.Emulator.Tests.Visor.VisorTests.ElVisorMuestraElUltimoTicket [1 s]
+  Error Message:
+   Assert.Contains() Failure: Sub-string not found
+String:    "<!DOCTYPE html>\n<html lang="es"><head><me"···
+--
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 1 s - PrintThermal.Emulator.Tests.dll (net10.0)
+salida: 1
+=== M5 el cliente pide el JSON del último en vez del PNG · prueba ElClienteDevuelveElMismoPngQueLaApi
+--- a/w0/src/PrintThermal.Emulator.Client/ClienteDeTickets.cs
++++ b/m/src/PrintThermal.Emulator.Client/ClienteDeTickets.cs
+-        LeerBytesAsync("api/tickets/ultimo.png", ct);
++        LeerBytesAsync("api/tickets/ultimo", ct);
+  Failed PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteDevuelveElMismoPngQueLaApi [806 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+           ↓ (pos 0)
+--
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 824 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+salida: 1
+=== M6 escucha por omisión en todas las interfaces · prueba SinConfiguracionEscuchaSoloEnLocal
+--- a/w0/src/PrintThermal.Emulator.Api/Api/Direcciones.cs
++++ b/m/src/PrintThermal.Emulator.Api/Api/Direcciones.cs
+-    public const string EscuchaPorOmision = "http://127.0.0.1:5080";
++    public const string EscuchaPorOmision = "http://0.0.0.0:5080";
+  Failed PrintThermal.Emulator.Tests.Api.EscuchaTests.SinConfiguracionEscuchaSoloEnLocal [62 ms]
+  Error Message:
+   «http://0.0.0.0:5080» no es local
+  Stack Trace:
+--
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 79 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+salida: 1

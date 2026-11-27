@@ -1,0 +1,1264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="63a6ba45-ae63-43b7-9648-7b498fb22149" name="@ef75494f4ee5 2026-11-27 15:40:52" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-27T15:40:52.4845178+00:00" queuing="2026-11-27T15:40:52.4845178+00:00" start="2026-11-27T15:40:50.7032176+00:00" finish="2026-11-27T15:40:57.7883662+00:00" />
+  <TestSettings name="default" id="0f1841b7-e3d2-4a18-9d17-6a59d325f15b">
+    <Deployment runDeploymentRoot="_ef75494f4ee5_2026-11-27_15_40_52" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="71d0485e-06e7-4e34-bc5a-5031ec3d9a1b" testId="436f2e63-9137-5980-a1d4-26a39be4c0be" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: &quot;/api/tickets/no-existe&quot;)" computerName="ef75494f4ee5" duration="00:00:00.1255569" startTime="2026-11-27T15:40:54.2991821+00:00" endTime="2026-11-27T15:40:54.4247788+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="71d0485e-06e7-4e34-bc5a-5031ec3d9a1b" />
+    <UnitTestResult executionId="555aebf9-f64b-4136-90b0-4386eb58b176" testId="b3dffc0d-d75d-38f7-04ef-3bd512ecf42c" testName="PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteDevuelveElMismoPngQueLaApi" computerName="ef75494f4ee5" duration="00:00:00.0995278" startTime="2026-11-27T15:40:55.0635473+00:00" endTime="2026-11-27T15:40:55.1635960+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="555aebf9-f64b-4136-90b0-4386eb58b176" />
+    <UnitTestResult executionId="c1406743-2d32-429f-a065-22672841c72c" testId="3a55ee5c-e886-3681-8641-8f6be6fda0f2" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(consulta: &quot;segundos=61&quot;)" computerName="ef75494f4ee5" duration="00:00:01.0797334" startTime="2026-11-27T15:40:52.8096216+00:00" endTime="2026-11-27T15:40:53.8895142+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c1406743-2d32-429f-a065-22672841c72c" />
+    <UnitTestResult executionId="f55365e7-cf39-438c-984b-ec73000a44fd" testId="81b97aa9-e697-3509-9c32-12e97c72a046" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: &quot;/api/tickets/no-existe.bin&quot;)" computerName="ef75494f4ee5" duration="00:00:00.0947496" startTime="2026-11-27T15:40:54.0900886+00:00" endTime="2026-11-27T15:40:54.1848240+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f55365e7-cf39-438c-984b-ec73000a44fd" />
+    <UnitTestResult executionId="4e97e76e-3d53-4a8b-bdae-c34954de23d3" testId="41418a0b-982d-255e-6acf-aff77cacbc86" testName="PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: &quot;https_ports&quot;, valor: &quot;8443&quot;)" computerName="ef75494f4ee5" duration="00:00:00.0000023" startTime="2026-11-27T15:40:52.3970957+00:00" endTime="2026-11-27T15:40:52.3971603+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4e97e76e-3d53-4a8b-bdae-c34954de23d3" />
+    <UnitTestResult executionId="453e6ac8-2620-4eed-8361-c34cc64cef23" testId="07f15ea6-4411-3a39-22cf-b1cf88771c64" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaVenceSinColgarse" computerName="ef75494f4ee5" duration="00:00:01.1219169" startTime="2026-11-27T15:40:54.6752575+00:00" endTime="2026-11-27T15:40:55.7972942+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="453e6ac8-2620-4eed-8361-c34cc64cef23" />
+    <UnitTestResult executionId="6d08abe3-4e28-4a0e-996a-8031d6f88335" testId="a08a76cf-72b1-c20b-9cef-6b647dbf9ea3" testName="PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma" computerName="ef75494f4ee5" duration="00:00:00.0010534" startTime="2026-11-27T15:40:55.4804465+00:00" endTime="2026-11-27T15:40:55.4814728+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6d08abe3-4e28-4a0e-996a-8031d6f88335" />
+    <UnitTestResult executionId="ae2c8d36-6458-4218-88c8-e7f8720f2285" testId="5678bed2-4761-8c5c-23a5-d7184023bbb9" testName="PrintThermal.Emulator.Tests.Visor.VisorTests.ElVisorMuestraElUltimoTicket" computerName="ef75494f4ee5" duration="00:00:00.0875620" startTime="2026-11-27T15:40:55.3868744+00:00" endTime="2026-11-27T15:40:55.4747096+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ae2c8d36-6458-4218-88c8-e7f8720f2285" />
+    <UnitTestResult executionId="4934bf69-aa1c-48ec-a7d9-729c8ef81c56" testId="8935f542-0a10-4651-c86b-3a6e6558ceb8" testName="PrintThermal.Emulator.Tests.Api.FuenteSimuladaTests.ImprimeUnTicketDe384PuntosEnElAlmacen" computerName="ef75494f4ee5" duration="00:00:00.0036739" startTime="2026-11-27T15:40:55.1640716+00:00" endTime="2026-11-27T15:40:55.1678063+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4934bf69-aa1c-48ec-a7d9-729c8ef81c56" />
+    <UnitTestResult executionId="d77b082b-ecdc-4b99-8750-3519e37406aa" testId="76486f78-8d92-1f47-1cb4-552d800366db" testName="PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral" computerName="ef75494f4ee5" duration="00:00:00.0018788" startTime="2026-11-27T15:40:55.4821982+00:00" endTime="2026-11-27T15:40:55.4834136+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d77b082b-ecdc-4b99-8750-3519e37406aa" />
+    <UnitTestResult executionId="2db6b37b-3d0c-4b69-b82e-b1ba560c9b0b" testId="2e9a18d1-794d-8971-7dc2-cb2552a6f83f" testName="PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10" computerName="ef75494f4ee5" duration="00:00:00.0035633" startTime="2026-11-27T15:40:55.4749092+00:00" endTime="2026-11-27T15:40:55.4785437+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2db6b37b-3d0c-4b69-b82e-b1ba560c9b0b" />
+    <UnitTestResult executionId="89a1b9e2-9b53-4863-98c1-cd90b662b85c" testId="704fed13-7011-f35a-4acb-580909b3f44f" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(consulta: &quot;segundos=abc&quot;)" computerName="ef75494f4ee5" duration="00:00:00.2140827" startTime="2026-11-27T15:40:52.6100179+00:00" endTime="2026-11-27T15:40:52.8093828+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="89a1b9e2-9b53-4863-98c1-cd90b662b85c" />
+    <UnitTestResult executionId="56131cf7-9358-4fb9-8b8c-039b9397a009" testId="554b4946-7446-45dc-b467-1065a22f5aa0" testName="PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: &quot;urls&quot;, valor: &quot;http://0.0.0.0:8080&quot;)" computerName="ef75494f4ee5" duration="00:00:00.0000071" startTime="2026-11-27T15:40:52.3890852+00:00" endTime="2026-11-27T15:40:52.3891232+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="56131cf7-9358-4fb9-8b8c-039b9397a009" />
+    <UnitTestResult executionId="1a44f3eb-caf0-4b4a-86ab-3e94e0cc16a9" testId="c12e9207-caef-c049-492a-ee5f6d963051" testName="PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: &quot;Kestrel:Endpoints:Http:Url&quot;, valor: &quot;http://0.0.0.0:8080&quot;)" computerName="ef75494f4ee5" duration="00:00:00.0010759" startTime="2026-11-27T15:40:52.3888654+00:00" endTime="2026-11-27T15:40:52.3889072+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1a44f3eb-caf0-4b4a-86ab-3e94e0cc16a9" />
+    <UnitTestResult executionId="d2a01bd2-25d9-481e-b9b5-bf6df737c96e" testId="85d350f2-f465-8091-80ba-a44e5877ffe0" testName="PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: &quot;http_ports&quot;, valor: &quot;8080&quot;)" computerName="ef75494f4ee5" duration="00:00:00.0001769" startTime="2026-11-27T15:40:52.3889854+00:00" endTime="2026-11-27T15:40:52.3890237+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d2a01bd2-25d9-481e-b9b5-bf6df737c96e" />
+    <UnitTestResult executionId="f753da04-45a5-45a7-9e20-371fdc856ba1" testId="8bf84966-42ae-f359-aee0-71566d11ebca" testName="PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: &quot;http://[::]:8080&quot;, esperada: &quot;http://localhost:8080/&quot;)" computerName="ef75494f4ee5" duration="00:00:00.0041628" startTime="2026-11-27T15:40:52.3735901+00:00" endTime="2026-11-27T15:40:52.3788185+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f753da04-45a5-45a7-9e20-371fdc856ba1" />
+    <UnitTestResult executionId="2da1d140-93c5-403c-bf14-d97529726365" testId="0c24fb9f-7610-dc44-d347-23362e0163c2" testName="PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado" computerName="ef75494f4ee5" duration="00:00:00.0017704" startTime="2026-11-27T15:40:55.4786940+00:00" endTime="2026-11-27T15:40:55.4803518+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2da1d140-93c5-403c-bf14-d97529726365" />
+    <UnitTestResult executionId="abb23f54-6f2d-4261-b458-c368e3b2c864" testId="3f52eaf4-fa82-daf3-6ac3-b11e85100508" testName="PrintThermal.Emulator.Tests.Api.EscuchaTests.SinConfiguracionEscuchaSoloEnLocal" computerName="ef75494f4ee5" duration="00:00:00.0003949" startTime="2026-11-27T15:40:52.3974591+00:00" endTime="2026-11-27T15:40:52.3975005+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="abb23f54-6f2d-4261-b458-c368e3b2c864" />
+    <UnitTestResult executionId="05198451-62ff-4643-bd76-4d8a615a2914" testId="a93640d3-c3a0-5e69-aca9-c34bc453cf05" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaConDespuesDeDevuelveElSiguienteSinEsperar" computerName="ef75494f4ee5" duration="00:00:00.0981625" startTime="2026-11-27T15:40:55.7975004+00:00" endTime="2026-11-27T15:40:55.8957484+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="05198451-62ff-4643-bd76-4d8a615a2914" />
+    <UnitTestResult executionId="fa528015-a42b-4e18-838c-dadd1fe9e5fc" testId="6bd80ce8-a9d8-98c8-4fd9-181b04ffb3a2" testName="PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: &quot;http://+:8080&quot;, esperada: &quot;http://localhost:8080/&quot;)" computerName="ef75494f4ee5" duration="00:00:00.0000140" startTime="2026-11-27T15:40:52.3880088+00:00" endTime="2026-11-27T15:40:52.3880433+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fa528015-a42b-4e18-838c-dadd1fe9e5fc" />
+    <UnitTestResult executionId="5d28ad04-32db-4de9-8c07-a48c5ca86a6f" testId="e9271318-37bb-1a80-a59b-a3cbabbdbbee" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaListaYElBinRespondenConLosDatosDelTicket" computerName="ef75494f4ee5" duration="00:00:00.1020570" startTime="2026-11-27T15:40:55.8959728+00:00" endTime="2026-11-27T15:40:55.9981393+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5d28ad04-32db-4de9-8c07-a48c5ca86a6f" />
+    <UnitTestResult executionId="c4bc972f-052e-4153-8bba-d99ab15c6a96" testId="042b486a-67be-dc78-6c1b-7054e91f9273" testName="PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: &quot;http://0.0.0.0:8080&quot;, esperada: &quot;http://localhost:8080/&quot;)" computerName="ef75494f4ee5" duration="00:00:00.0004139" startTime="2026-11-27T15:40:52.3872069+00:00" endTime="2026-11-27T15:40:52.3873218+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c4bc972f-052e-4153-8bba-d99ab15c6a96" />
+    <UnitTestResult executionId="6c8eeb2f-77cd-4e8e-b2b9-d3e1ff90464c" testId="15145a40-dd83-1f25-cb54-46caef04d5de" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LosIdsSonOrdenablesYSinPuntos" computerName="ef75494f4ee5" duration="00:00:00.0914745" startTime="2026-11-27T15:40:55.9982852+00:00" endTime="2026-11-27T15:40:56.0897470+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6c8eeb2f-77cd-4e8e-b2b9-d3e1ff90464c" />
+    <UnitTestResult executionId="790bf767-ce8d-4ca0-9059-dd9c4f05cbd2" testId="ef16463d-1b60-8800-4289-e1056b501e60" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: &quot;/api/tickets/con.punto&quot;)" computerName="ef75494f4ee5" duration="00:00:00.1136581" startTime="2026-11-27T15:40:54.1851269+00:00" endTime="2026-11-27T15:40:54.2989201+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="790bf767-ce8d-4ca0-9059-dd9c4f05cbd2" />
+    <UnitTestResult executionId="7cf1f325-c0e6-4bcd-9a4e-3c578765f9c8" testId="5919f312-dcb4-247f-2972-ae226a17388a" testName="PrintThermal.Emulator.Tests.Api.FuenteSimuladaTests.ElAlmacenDescartaElMasViejoAlLlenarse" computerName="ef75494f4ee5" duration="00:00:00.0003613" startTime="2026-11-27T15:40:55.1680004+00:00" endTime="2026-11-27T15:40:55.1681951+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7cf1f325-c0e6-4bcd-9a4e-3c578765f9c8" />
+    <UnitTestResult executionId="ed7bcc3f-26e1-4f4a-bddc-cbe4c757319c" testId="00045a6f-9156-81ea-16a3-1756bdae63cf" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(consulta: &quot;segundos=0&quot;)" computerName="ef75494f4ee5" duration="00:00:00.1103373" startTime="2026-11-27T15:40:53.8898417+00:00" endTime="2026-11-27T15:40:54.0005281+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ed7bcc3f-26e1-4f4a-bddc-cbe4c757319c" />
+    <UnitTestResult executionId="c74a4ff6-86c8-4776-9925-19af97f6ad62" testId="cf3aae9a-89c3-c90e-7531-062ff502f246" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.ElPngLlegaConLaMismaHuella" computerName="ef75494f4ee5" duration="00:00:00.0889360" startTime="2026-11-27T15:40:54.0010542+00:00" endTime="2026-11-27T15:40:54.0897392+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c74a4ff6-86c8-4776-9925-19af97f6ad62" />
+    <UnitTestResult executionId="3f247cd8-87ba-41f8-b36b-ae8202fddf11" testId="f1714c54-ca48-b981-6670-1b5d1763af8e" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.SinTicketsLaListaEstaVaciaYElUltimoDa404" computerName="ef75494f4ee5" duration="00:00:00.9090038" startTime="2026-11-27T15:40:51.6789587+00:00" endTime="2026-11-27T15:40:52.5933585+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3f247cd8-87ba-41f8-b36b-ae8202fddf11" />
+    <UnitTestResult executionId="d41f4627-830b-4aae-b19d-fe7ea05c91f2" testId="a7f4f881-017c-126f-bab3-ab24ec0b93f9" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaSinDespuesDeNoDevuelveUnTicketViejo" computerName="ef75494f4ee5" duration="00:00:01.0776419" startTime="2026-11-27T15:40:56.0899383+00:00" endTime="2026-11-27T15:40:57.1677135+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d41f4627-830b-4aae-b19d-fe7ea05c91f2" />
+    <UnitTestResult executionId="db230b08-93e0-4ed9-9e11-a261082da1c4" testId="1b22b444-428c-6bac-ba97-af16efce7bb7" testName="PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: &quot;http://emulador:9000&quot;, direccion: &quot;http://[::]:8080&quot;, esperada: &quot;http://emulador:9000/&quot;)" computerName="ef75494f4ee5" duration="00:00:00.0000017" startTime="2026-11-27T15:40:52.3881698+00:00" endTime="2026-11-27T15:40:52.3881928+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="db230b08-93e0-4ed9-9e11-a261082da1c4" />
+    <UnitTestResult executionId="d70f149b-481b-46a8-9695-e7dbc0d4210c" testId="3c502784-2f49-3cf6-f552-d49733682038" testName="PrintThermal.Emulator.Tests.Api.OpenApiTests.OpenApiYScalarResponden" computerName="ef75494f4ee5" duration="00:00:00.7064190" startTime="2026-11-27T15:40:52.3983469+00:00" endTime="2026-11-27T15:40:53.0889156+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d70f149b-481b-46a8-9695-e7dbc0d4210c" />
+    <UnitTestResult executionId="bdb12cf0-78c0-4dea-b818-6a07c7a95dd7" testId="3d3f1a1d-aeb4-3ec0-2f87-34b96a57b476" testName="PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: &quot;http://127.0.0.1:5080&quot;, esperada: &quot;http://127.0.0.1:5080/&quot;)" computerName="ef75494f4ee5" duration="00:00:00.0000067" startTime="2026-11-27T15:40:52.3881021+00:00" endTime="2026-11-27T15:40:52.3881260+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bdb12cf0-78c0-4dea-b818-6a07c7a95dd7" />
+    <UnitTestResult executionId="1ff01437-ee9b-46ce-8afb-f62f2879e727" testId="946fef6a-41cc-c5b3-c5bf-84ee0d9e42c5" testName="PrintThermal.Emulator.Tests.Cliente.ClienteTests.SinTicketsElClienteDevuelveNull" computerName="ef75494f4ee5" duration="00:00:01.8408053" startTime="2026-11-27T15:40:53.0900362+00:00" endTime="2026-11-27T15:40:54.9309941+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1ff01437-ee9b-46ce-8afb-f62f2879e727" />
+    <UnitTestResult executionId="a4e70156-ff4a-4e81-a6ba-29179ac80e5b" testId="6d117d2f-b76c-fe6a-9e0b-953e6efe2765" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.BorrarUnoYBorrarTodos" computerName="ef75494f4ee5" duration="00:00:00.1317164" startTime="2026-11-27T15:40:54.5432851+00:00" endTime="2026-11-27T15:40:54.6751178+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a4e70156-ff4a-4e81-a6ba-29179ac80e5b" />
+    <UnitTestResult executionId="c62c41d5-e8ca-4feb-a878-1e4cd4a2efff" testId="f8a31589-fa55-26a0-2421-2db2711463f6" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: &quot;/api/tickets/no-existe.png&quot;)" computerName="ef75494f4ee5" duration="00:00:00.1180419" startTime="2026-11-27T15:40:54.4249016+00:00" endTime="2026-11-27T15:40:54.5431352+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c62c41d5-e8ca-4feb-a878-1e4cd4a2efff" />
+    <UnitTestResult executionId="bffa2f62-bf03-43b0-b4c8-ae40baaa9d22" testId="25cb8747-7547-fb25-851e-4785ae5eec8b" testName="PrintThermal.Emulator.Tests.Visor.VisorTests.SinTicketsElVisorMuestraElEstadoVacio" computerName="ef75494f4ee5" duration="00:00:00.2181151" startTime="2026-11-27T15:40:55.1683593+00:00" endTime="2026-11-27T15:40:55.3867449+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bffa2f62-bf03-43b0-b4c8-ae40baaa9d22" />
+    <UnitTestResult executionId="37d430e7-b3cc-43b8-923f-8f7e629ffedb" testId="43a98008-4bf9-e739-2daa-6ca475f96f73" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.EnProduccionLosErroresDeEnlaceYDeRutaSonProblemDetails" computerName="ef75494f4ee5" duration="00:00:00.1046736" startTime="2026-11-27T15:40:57.6212671+00:00" endTime="2026-11-27T15:40:57.7258727+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="37d430e7-b3cc-43b8-923f-8f7e629ffedb" />
+    <UnitTestResult executionId="ae3a8178-2b6e-4bbc-9f0f-bf5dc0ae95b7" testId="6210e197-3850-d3bc-fde1-bbf497691f11" testName="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaDevuelveElTicketQueLlega" computerName="ef75494f4ee5" duration="00:00:00.4527121" startTime="2026-11-27T15:40:57.1684268+00:00" endTime="2026-11-27T15:40:57.6208944+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ae3a8178-2b6e-4bbc-9f0f-bf5dc0ae95b7" />
+    <UnitTestResult executionId="ac4fccc2-82eb-400b-9727-3808183c99ad" testId="67670765-13aa-eb7e-422d-c98ee0acda12" testName="PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteEsperaYBorra" computerName="ef75494f4ee5" duration="00:00:00.1320031" startTime="2026-11-27T15:40:54.9317516+00:00" endTime="2026-11-27T15:40:55.0633893+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ac4fccc2-82eb-400b-9727-3808183c99ad" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteDevuelveElMismoPngQueLaApi" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="b3dffc0d-d75d-38f7-04ef-3bd512ecf42c">
+      <Execution id="555aebf9-f64b-4136-90b0-4386eb58b176" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Cliente.ClienteTests" name="ElClienteDevuelveElMismoPngQueLaApi" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(consulta: &quot;segundos=61&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="3a55ee5c-e886-3681-8641-8f6be6fda0f2">
+      <Execution id="c1406743-2d32-429f-a065-22672841c72c" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="LaEsperaFueraDeRangoDa400" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Visor.VisorTests.ElVisorMuestraElUltimoTicket" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="5678bed2-4761-8c5c-23a5-d7184023bbb9">
+      <Execution id="ae2c8d36-6458-4218-88c8-e7f8720f2285" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Visor.VisorTests" name="ElVisorMuestraElUltimoTicket" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.EscuchaTests.SinConfiguracionEscuchaSoloEnLocal" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="3f52eaf4-fa82-daf3-6ac3-b11e85100508">
+      <Execution id="abb23f54-6f2d-4261-b458-c368e3b2c864" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.EscuchaTests" name="SinConfiguracionEscuchaSoloEnLocal" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: &quot;/api/tickets/no-existe&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="436f2e63-9137-5980-a1d4-26a39be4c0be">
+      <Execution id="71d0485e-06e7-4e34-bc5a-5031ec3d9a1b" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="UnIdInexistenteDa404" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteEsperaYBorra" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="67670765-13aa-eb7e-422d-c98ee0acda12">
+      <Execution id="ac4fccc2-82eb-400b-9727-3808183c99ad" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Cliente.ClienteTests" name="ElClienteEsperaYBorra" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: &quot;http://127.0.0.1:5080&quot;, esperada: &quot;http://127.0.0.1:5080/&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="3d3f1a1d-aeb4-3ec0-2f87-34b96a57b476">
+      <Execution id="bdb12cf0-78c0-4dea-b818-6a07c7a95dd7" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.EscuchaTests" name="ElVisorLlamaALaApiDelMismoServicio" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.EnProduccionLosErroresDeEnlaceYDeRutaSonProblemDetails" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="43a98008-4bf9-e739-2daa-6ca475f96f73">
+      <Execution id="37d430e7-b3cc-43b8-923f-8f7e629ffedb" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="EnProduccionLosErroresDeEnlaceYDeRutaSonProblemDetails" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaSinDespuesDeNoDevuelveUnTicketViejo" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="a7f4f881-017c-126f-bab3-ab24ec0b93f9">
+      <Execution id="d41f4627-830b-4aae-b19d-fe7ea05c91f2" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="LaEsperaSinDespuesDeNoDevuelveUnTicketViejo" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: &quot;/api/tickets/no-existe.png&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="f8a31589-fa55-26a0-2421-2db2711463f6">
+      <Execution id="c62c41d5-e8ca-4feb-a878-1e4cd4a2efff" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="UnIdInexistenteDa404" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.SinTicketsLaListaEstaVaciaYElUltimoDa404" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="f1714c54-ca48-b981-6670-1b5d1763af8e">
+      <Execution id="3f247cd8-87ba-41f8-b36b-ae8202fddf11" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="SinTicketsLaListaEstaVaciaYElUltimoDa404" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: &quot;/api/tickets/no-existe.bin&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="81b97aa9-e697-3509-9c32-12e97c72a046">
+      <Execution id="f55365e7-cf39-438c-984b-ec73000a44fd" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="UnIdInexistenteDa404" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.OpenApiTests.OpenApiYScalarResponden" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="3c502784-2f49-3cf6-f552-d49733682038">
+      <Execution id="d70f149b-481b-46a8-9695-e7dbc0d4210c" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.OpenApiTests" name="OpenApiYScalarResponden" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.FuenteSimuladaTests.ElAlmacenDescartaElMasViejoAlLlenarse" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="5919f312-dcb4-247f-2972-ae226a17388a">
+      <Execution id="7cf1f325-c0e6-4bcd-9a4e-3c578765f9c8" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.FuenteSimuladaTests" name="ElAlmacenDescartaElMasViejoAlLlenarse" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: &quot;Kestrel:Endpoints:Http:Url&quot;, valor: &quot;http://0.0.0.0:8080&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="c12e9207-caef-c049-492a-ee5f6d963051">
+      <Execution id="1a44f3eb-caf0-4b4a-86ab-3e94e0cc16a9" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.EscuchaTests" name="ConDireccionConfiguradaLaRespeta" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="0c24fb9f-7610-dc44-d347-23362e0163c2">
+      <Execution id="2da1d140-93c5-403c-bf14-d97529726365" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.EsqueletoTests" name="ElSdkEstaFijado" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaVenceSinColgarse" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="07f15ea6-4411-3a39-22cf-b1cf88771c64">
+      <Execution id="453e6ac8-2620-4eed-8361-c34cc64cef23" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="LaEsperaVenceSinColgarse" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Cliente.ClienteTests.SinTicketsElClienteDevuelveNull" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="946fef6a-41cc-c5b3-c5bf-84ee0d9e42c5">
+      <Execution id="1ff01437-ee9b-46ce-8afb-f62f2879e727" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Cliente.ClienteTests" name="SinTicketsElClienteDevuelveNull" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.BorrarUnoYBorrarTodos" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="6d117d2f-b76c-fe6a-9e0b-953e6efe2765">
+      <Execution id="a4e70156-ff4a-4e81-a6ba-29179ac80e5b" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="BorrarUnoYBorrarTodos" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaConDespuesDeDevuelveElSiguienteSinEsperar" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="a93640d3-c3a0-5e69-aca9-c34bc453cf05">
+      <Execution id="05198451-62ff-4643-bd76-4d8a615a2914" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="LaEsperaConDespuesDeDevuelveElSiguienteSinEsperar" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="a08a76cf-72b1-c20b-9cef-6b647dbf9ea3">
+      <Execution id="6d08abe3-4e28-4a0e-996a-8031d6f88335" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.EsqueletoTests" name="LaCiCompilaYPruebaSinDescargarLaNorma" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="76486f78-8d92-1f47-1cb4-552d800366db">
+      <Execution id="d77b082b-ecdc-4b99-8750-3519e37406aa" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.EsqueletoTests" name="CadaPaqueteTieneVersionFijaYCentral" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.FuenteSimuladaTests.ImprimeUnTicketDe384PuntosEnElAlmacen" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="8935f542-0a10-4651-c86b-3a6e6558ceb8">
+      <Execution id="4934bf69-aa1c-48ec-a7d9-729c8ef81c56" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.FuenteSimuladaTests" name="ImprimeUnTicketDe384PuntosEnElAlmacen" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="2e9a18d1-794d-8971-7dc2-cb2552a6f83f">
+      <Execution id="2db6b37b-3d0c-4b69-b82e-b1ba560c9b0b" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.EsqueletoTests" name="LaSolucionDeclaraLosCincoProyectosEnNet10" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaDevuelveElTicketQueLlega" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="6210e197-3850-d3bc-fde1-bbf497691f11">
+      <Execution id="ae3a8178-2b6e-4bbc-9f0f-bf5dc0ae95b7" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="LaEsperaDevuelveElTicketQueLlega" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: &quot;http_ports&quot;, valor: &quot;8080&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="85d350f2-f465-8091-80ba-a44e5877ffe0">
+      <Execution id="d2a01bd2-25d9-481e-b9b5-bf6df737c96e" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.EscuchaTests" name="ConDireccionConfiguradaLaRespeta" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LosIdsSonOrdenablesYSinPuntos" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="15145a40-dd83-1f25-cb54-46caef04d5de">
+      <Execution id="6c8eeb2f-77cd-4e8e-b2b9-d3e1ff90464c" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="LosIdsSonOrdenablesYSinPuntos" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(consulta: &quot;segundos=0&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="00045a6f-9156-81ea-16a3-1756bdae63cf">
+      <Execution id="ed7bcc3f-26e1-4f4a-bddc-cbe4c757319c" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="LaEsperaFueraDeRangoDa400" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Visor.VisorTests.SinTicketsElVisorMuestraElEstadoVacio" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="25cb8747-7547-fb25-851e-4785ae5eec8b">
+      <Execution id="bffa2f62-bf03-43b0-b4c8-ae40baaa9d22" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Visor.VisorTests" name="SinTicketsElVisorMuestraElEstadoVacio" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: &quot;http://[::]:8080&quot;, esperada: &quot;http://localhost:8080/&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="8bf84966-42ae-f359-aee0-71566d11ebca">
+      <Execution id="f753da04-45a5-45a7-9e20-371fdc856ba1" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.EscuchaTests" name="ElVisorLlamaALaApiDelMismoServicio" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: &quot;http://0.0.0.0:8080&quot;, esperada: &quot;http://localhost:8080/&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="042b486a-67be-dc78-6c1b-7054e91f9273">
+      <Execution id="c4bc972f-052e-4153-8bba-d99ab15c6a96" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.EscuchaTests" name="ElVisorLlamaALaApiDelMismoServicio" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: &quot;http://+:8080&quot;, esperada: &quot;http://localhost:8080/&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="6bd80ce8-a9d8-98c8-4fd9-181b04ffb3a2">
+      <Execution id="fa528015-a42b-4e18-838c-dadd1fe9e5fc" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.EscuchaTests" name="ElVisorLlamaALaApiDelMismoServicio" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(consulta: &quot;segundos=abc&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="704fed13-7011-f35a-4acb-580909b3f44f">
+      <Execution id="89a1b9e2-9b53-4863-98c1-cd90b662b85c" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="LaEsperaFueraDeRangoDa400" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: &quot;urls&quot;, valor: &quot;http://0.0.0.0:8080&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="554b4946-7446-45dc-b467-1065a22f5aa0">
+      <Execution id="56131cf7-9358-4fb9-8b8c-039b9397a009" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.EscuchaTests" name="ConDireccionConfiguradaLaRespeta" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: &quot;https_ports&quot;, valor: &quot;8443&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="41418a0b-982d-255e-6acf-aff77cacbc86">
+      <Execution id="4e97e76e-3d53-4a8b-bdae-c34954de23d3" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.EscuchaTests" name="ConDireccionConfiguradaLaRespeta" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: &quot;/api/tickets/con.punto&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="ef16463d-1b60-8800-4289-e1056b501e60">
+      <Execution id="790bf767-ce8d-4ca0-9059-dd9c4f05cbd2" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="UnIdInexistenteDa404" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: &quot;http://emulador:9000&quot;, direccion: &quot;http://[::]:8080&quot;, esperada: &quot;http://emulador:9000/&quot;)" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="1b22b444-428c-6bac-ba97-af16efce7bb7">
+      <Execution id="db230b08-93e0-4ed9-9e11-a261082da1c4" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.EscuchaTests" name="ElVisorLlamaALaApiDelMismoServicio" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaListaYElBinRespondenConLosDatosDelTicket" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="e9271318-37bb-1a80-a59b-a3cbabbdbbee">
+      <Execution id="5d28ad04-32db-4de9-8c07-a48c5ca86a6f" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="LaListaYElBinRespondenConLosDatosDelTicket" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Api.TicketsApiTests.ElPngLlegaConLaMismaHuella" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="cf3aae9a-89c3-c90e-7531-062ff502f246">
+      <Execution id="c74a4ff6-86c8-4776-9925-19af97f6ad62" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Api.TicketsApiTests" name="ElPngLlegaConLaMismaHuella" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="436f2e63-9137-5980-a1d4-26a39be4c0be" executionId="71d0485e-06e7-4e34-bc5a-5031ec3d9a1b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b3dffc0d-d75d-38f7-04ef-3bd512ecf42c" executionId="555aebf9-f64b-4136-90b0-4386eb58b176" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3a55ee5c-e886-3681-8641-8f6be6fda0f2" executionId="c1406743-2d32-429f-a065-22672841c72c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="81b97aa9-e697-3509-9c32-12e97c72a046" executionId="f55365e7-cf39-438c-984b-ec73000a44fd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="41418a0b-982d-255e-6acf-aff77cacbc86" executionId="4e97e76e-3d53-4a8b-bdae-c34954de23d3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="07f15ea6-4411-3a39-22cf-b1cf88771c64" executionId="453e6ac8-2620-4eed-8361-c34cc64cef23" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a08a76cf-72b1-c20b-9cef-6b647dbf9ea3" executionId="6d08abe3-4e28-4a0e-996a-8031d6f88335" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5678bed2-4761-8c5c-23a5-d7184023bbb9" executionId="ae2c8d36-6458-4218-88c8-e7f8720f2285" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8935f542-0a10-4651-c86b-3a6e6558ceb8" executionId="4934bf69-aa1c-48ec-a7d9-729c8ef81c56" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="76486f78-8d92-1f47-1cb4-552d800366db" executionId="d77b082b-ecdc-4b99-8750-3519e37406aa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2e9a18d1-794d-8971-7dc2-cb2552a6f83f" executionId="2db6b37b-3d0c-4b69-b82e-b1ba560c9b0b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="704fed13-7011-f35a-4acb-580909b3f44f" executionId="89a1b9e2-9b53-4863-98c1-cd90b662b85c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="554b4946-7446-45dc-b467-1065a22f5aa0" executionId="56131cf7-9358-4fb9-8b8c-039b9397a009" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c12e9207-caef-c049-492a-ee5f6d963051" executionId="1a44f3eb-caf0-4b4a-86ab-3e94e0cc16a9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="85d350f2-f465-8091-80ba-a44e5877ffe0" executionId="d2a01bd2-25d9-481e-b9b5-bf6df737c96e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8bf84966-42ae-f359-aee0-71566d11ebca" executionId="f753da04-45a5-45a7-9e20-371fdc856ba1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0c24fb9f-7610-dc44-d347-23362e0163c2" executionId="2da1d140-93c5-403c-bf14-d97529726365" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3f52eaf4-fa82-daf3-6ac3-b11e85100508" executionId="abb23f54-6f2d-4261-b458-c368e3b2c864" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a93640d3-c3a0-5e69-aca9-c34bc453cf05" executionId="05198451-62ff-4643-bd76-4d8a615a2914" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6bd80ce8-a9d8-98c8-4fd9-181b04ffb3a2" executionId="fa528015-a42b-4e18-838c-dadd1fe9e5fc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e9271318-37bb-1a80-a59b-a3cbabbdbbee" executionId="5d28ad04-32db-4de9-8c07-a48c5ca86a6f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="042b486a-67be-dc78-6c1b-7054e91f9273" executionId="c4bc972f-052e-4153-8bba-d99ab15c6a96" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="15145a40-dd83-1f25-cb54-46caef04d5de" executionId="6c8eeb2f-77cd-4e8e-b2b9-d3e1ff90464c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ef16463d-1b60-8800-4289-e1056b501e60" executionId="790bf767-ce8d-4ca0-9059-dd9c4f05cbd2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5919f312-dcb4-247f-2972-ae226a17388a" executionId="7cf1f325-c0e6-4bcd-9a4e-3c578765f9c8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="00045a6f-9156-81ea-16a3-1756bdae63cf" executionId="ed7bcc3f-26e1-4f4a-bddc-cbe4c757319c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cf3aae9a-89c3-c90e-7531-062ff502f246" executionId="c74a4ff6-86c8-4776-9925-19af97f6ad62" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f1714c54-ca48-b981-6670-1b5d1763af8e" executionId="3f247cd8-87ba-41f8-b36b-ae8202fddf11" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a7f4f881-017c-126f-bab3-ab24ec0b93f9" executionId="d41f4627-830b-4aae-b19d-fe7ea05c91f2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b22b444-428c-6bac-ba97-af16efce7bb7" executionId="db230b08-93e0-4ed9-9e11-a261082da1c4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3c502784-2f49-3cf6-f552-d49733682038" executionId="d70f149b-481b-46a8-9695-e7dbc0d4210c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3d3f1a1d-aeb4-3ec0-2f87-34b96a57b476" executionId="bdb12cf0-78c0-4dea-b818-6a07c7a95dd7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="946fef6a-41cc-c5b3-c5bf-84ee0d9e42c5" executionId="1ff01437-ee9b-46ce-8afb-f62f2879e727" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6d117d2f-b76c-fe6a-9e0b-953e6efe2765" executionId="a4e70156-ff4a-4e81-a6ba-29179ac80e5b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f8a31589-fa55-26a0-2421-2db2711463f6" executionId="c62c41d5-e8ca-4feb-a878-1e4cd4a2efff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="25cb8747-7547-fb25-851e-4785ae5eec8b" executionId="bffa2f62-bf03-43b0-b4c8-ae40baaa9d22" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="43a98008-4bf9-e739-2daa-6ca475f96f73" executionId="37d430e7-b3cc-43b8-923f-8f7e629ffedb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6210e197-3850-d3bc-fde1-bbf497691f11" executionId="ae3a8178-2b6e-4bbc-9f0f-bf5dc0ae95b7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="67670765-13aa-eb7e-422d-c98ee0acda12" executionId="ac4fccc2-82eb-400b-9727-3808183c99ad" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="39" executed="39" passed="39" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 10.0.14)
+[xUnit.net 00:00:00.20]   Discovering: PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.29]   Discovered:  PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.33]   Starting:    PrintThermal.Emulator.Tests
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[58]
+      Creating key {4c17953f-c1e4-45a6-b690-e2588eb5c097} with creation date 2026-11-27 15:40:51Z, activation date 2026-11-27 15:40:51Z, and expiration date 2027-02-25 15:40:51Z.
+warn: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[35]
+      No XML encryptor configured. Key {4c17953f-c1e4-45a6-b690-e2588eb5c097} may be persisted to storage in unencrypted form.
+info: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[39]
+      Writing data to file '/root/.aspnet/DataProtection-Keys/key-4c17953f-c1e4-45a6-b690-e2588eb5c097.xml'.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets - - -
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets - 200 - application/json;+charset=utf-8 97.1134ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo - 404 - application/problem+json 12.0287ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - 404 - application/problem+json 2.1599ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/openapi/v1.json - - -
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /openapi/{documentName}.json'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider[1]
+      No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=abc - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]
+      An unhandled exception has occurred while executing the request.
+      Microsoft.AspNetCore.Http.BadHttpRequestException: Failed to bind parameter "Nullable&lt;int&gt; segundos" from "abc".
+         at lambda_method310(Closure, Object, HttpContext)
+         at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+         at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /openapi/{documentName}.json'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/openapi/v1.json - 200 - application/json;charset=utf-8 213.1616ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=abc - 400 - application/problem+json 29.9975ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/scalar - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /scalar/{documentName?}'
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.Http.Result.RedirectResult[1]
+      Executing RedirectResult, redirecting to scalar/.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /scalar/{documentName?}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/scalar - 302 - - 57.8847ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/scalar/ - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /scalar/{documentName?}'
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Http.Result.ContentResult[2]
+      Write content with HTTP Response ContentType of text/html
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /scalar/{documentName?}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/scalar/ - 200 622 text/html 217.2915ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=61 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 400.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=61 - 400 - application/problem+json 17.4424ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo - - -
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo - 404 - application/problem+json 8.8038ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - 404 - application/problem+json 2.1986ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/no-existe - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/no-existe - 404 - application/problem+json 0.5639ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/no-existe.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/no-existe.png - 404 - application/problem+json 0.2928ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=0 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 400.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=0 - 400 - application/problem+json 10.2144ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T154054073-000001.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T154054073-000001.png - 200 104 image/png 10.8288ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T154054085-000002.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T154054085-000002.png - 200 96 image/png 2.1963ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T154054088-000003.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T154054088-000003.png - 200 115 image/png 0.1547ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T154054088-000004.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T154054088-000004.png - 200 105 image/png 0.0657ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T154054088-000005.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T154054088-000005.png - 200 130 image/png 0.0410ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - 200 130 image/png 0.0541ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/no-existe.bin - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.bin'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.bin'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/no-existe.bin - 404 - application/problem+json 11.0203ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/con.punto - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/con.punto - 404 - application/problem+json 16.9717ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/api/tickets/con.punto, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/no-existe - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/no-existe - 404 - application/problem+json 9.8418ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/no-existe.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/no-existe.png - 404 - application/problem+json 12.3540ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://localhost/api/tickets/20261127T154054627-000001 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Http.Result.NoContentResult[1]
+      Setting HTTP status code 204.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://localhost/api/tickets/20261127T154054627-000001 - 204 - - 42.2744ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://localhost/api/tickets/20261127T154054627-000001 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://localhost/api/tickets/20261127T154054627-000001 - 404 - application/problem+json 2.2908ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: DELETE /api/tickets/'
+info: Microsoft.AspNetCore.Http.Result.NoContentResult[1]
+      Setting HTTP status code 204.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: DELETE /api/tickets/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://localhost/api/tickets - 204 - - 0.2453ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets - 200 - application/json;+charset=utf-8 0.6640ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Http.Result.NoContentResult[1]
+      Setting HTTP status code 204.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - 204 - - 1002.6876ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets - 200 - application/json;+charset=utf-8 0.9922ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/estado - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/estado - 200 - application/json;+charset=utf-8 2.3439ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/estado - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/estado - 200 - application/json;+charset=utf-8 12.7307ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=10&amp;despuesDe=0 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'TicketInfo' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=10&amp;despuesDe=0 - 200 - application/json;+charset=utf-8 3.5212ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=10&amp;despuesDe=20261127T154055048-000001 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'TicketInfo' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=10&amp;despuesDe=20261127T154055048-000001 - 200 - application/json;+charset=utf-8 0.6568ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://localhost/api/tickets/20261127T154055048-000001 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Http.Result.NoContentResult[1]
+      Setting HTTP status code 204.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://localhost/api/tickets/20261127T154055048-000001 - 204 - - 0.1678ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://localhost/api/tickets/20261127T154055048-000001 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://localhost/api/tickets/20261127T154055048-000001 - 404 - application/problem+json 0.5871ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: DELETE /api/tickets/'
+info: Microsoft.AspNetCore.Http.Result.NoContentResult[1]
+      Setting HTTP status code 204.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: DELETE /api/tickets/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://localhost/api/tickets - 204 - - 0.1285ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets - 200 - application/json;+charset=utf-8 0.2542ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - 200 96 image/png 8.4939ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - 200 96 image/png 1.9834ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'TicketInfo' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo - 200 - application/json;+charset=utf-8 0.3715ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T154055136-000002.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T154055136-000002.png - 200 96 image/png 0.0983ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T154055136-000002.bin - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.bin'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name '20261127T154055136-000002.bin'.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.bin'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T154055136-000002.bin - 200 4 application/octet-stream 0.6613ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T154055136-000002 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'TicketInfo' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T154055136-000002 - 200 - application/json;+charset=utf-8 0.1015ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets - 200 - application/json;+charset=utf-8 0.5099ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets?limite=1 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets?limite=1 - 200 - application/json;+charset=utf-8 0.1110ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/estado - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/estado - 200 - application/json;+charset=utf-8 0.1453ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/ - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '/ (/)'
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[100]
+      Start processing HTTP request GET http://localhost:8080/api/estado
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[100]
+      Sending HTTP request GET http://localhost:8080/api/estado
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:8080/api/estado - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:8080/api/estado - 200 - application/json;+charset=utf-8 1.0019ms
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[101]
+      Received HTTP response headers after 49.3736ms - 200
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[101]
+      End processing HTTP request after 55.7358ms - 200
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[100]
+      Start processing HTTP request GET http://localhost:8080/api/tickets
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[100]
+      Sending HTTP request GET http://localhost:8080/api/tickets
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:8080/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:8080/api/tickets - 200 - application/json;+charset=utf-8 1.9397ms
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[101]
+      Received HTTP response headers after 2.0643ms - 200
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[101]
+      End processing HTTP request after 2.1444ms - 200
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '/ (/)'
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/ - 200 - text/html;+charset=utf-8 154.4298ms
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/ - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '/ (/)'
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[100]
+      Start processing HTTP request GET http://localhost:8080/api/estado
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[100]
+      Sending HTTP request GET http://localhost:8080/api/estado
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:8080/api/estado - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:8080/api/estado - 200 - application/json;+charset=utf-8 0.2399ms
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[101]
+      Received HTTP response headers after 1.085ms - 200
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[101]
+      End processing HTTP request after 1.1433ms - 200
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[100]
+      Start processing HTTP request GET http://localhost:8080/api/tickets
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[100]
+      Sending HTTP request GET http://localhost:8080/api/tickets
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:8080/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[101]
+      Received HTTP response headers after 2.2835ms - 200
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:8080/api/tickets - 200 - application/json;+charset=utf-8 2.2043ms
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[101]
+      End processing HTTP request after 2.3346ms - 200
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '/ (/)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/ - 200 - text/html;+charset=utf-8 23.4142ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.AspNetCore.Http.Result.NoContentResult[1]
+      Setting HTTP status code 204.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - 204 - - 1025.9843ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1&amp;despuesDe=20261127T154055885-000001 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'TicketInfo' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1&amp;despuesDe=20261127T154055885-000001 - 200 - application/json;+charset=utf-8 9.2136ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets - 200 - application/json;+charset=utf-8 12.9506ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets?limite=1 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets?limite=1 - 200 - application/json;+charset=utf-8 1.8108ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets?limite=0 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 400.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ =&gt; Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets?limite=0 - 400 - application/problem+json 0.4986ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T154055977-000001.bin - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.bin'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name '20261127T154055977-000001.bin'.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.bin'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T154055977-000001.bin - 200 4 application/octet-stream 0.1566ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/estado - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/estado - 200 - application/json;+charset=utf-8 0.0717ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Http.Result.NoContentResult[1]
+      Setting HTTP status code 204.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - 204 - - 1011.8722ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=10 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'TicketInfo' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=10 - 200 - application/json;+charset=utf-8 300.6694ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=abc - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar =&gt; EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=abc - 400 - application/problem+json 25.6307ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/con.punto - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/con.punto - 404 - application/problem+json 2.1172ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/api/tickets/con.punto, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:06.45]   Finished:    PrintThermal.Emulator.Tests
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

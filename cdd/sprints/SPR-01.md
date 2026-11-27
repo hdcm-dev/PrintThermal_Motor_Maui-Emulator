@@ -21,7 +21,7 @@ Por qué es valioso: cierra el Product Goal (CE-1 a CE-5, PAR-PTE-02 a PAR-PTE-0
 | PAR-PTE-01 | REQ-EPI-Distribucion | REQ-HIS-Compilacion-Verificada | — | cerrada |
 | PAR-PTE-02 | REQ-EPI-Ticket-Png | REQ-HIS-Ticket-A-Png, REQ-HIS-Almacen-De-Tickets | — | cerrada |
 | PAR-PTE-03 | REQ-EPI-Medio-Emulado | REQ-HIS-Descubrimiento-Y-Emparejamiento, REQ-HIS-Recepcion-Integra | — (K2: mesa de TS-2 y TS-3, ADR-0004) | propuesta |
-| PAR-PTE-04 | REQ-EPI-Acceso | REQ-HIS-Api-De-Tickets, REQ-HIS-Visor-Web, REQ-HIS-Cliente-Tipado | — | lista |
+| PAR-PTE-04 | REQ-EPI-Acceso | REQ-HIS-Api-De-Tickets, REQ-HIS-Visor-Web, REQ-HIS-Cliente-Tipado | — (K2 D2 y D3 al lote de la Review) | cerrada |
 | PAR-PTE-05 | REQ-EPI-Distribucion | REQ-HIS-Imagen-Publicada | — | lista |
 | PAR-PTE-06 | REQ-EPI-Montaje-Y-Uso | REQ-HIS-Documentacion-De-Uso | — | lista |
 
