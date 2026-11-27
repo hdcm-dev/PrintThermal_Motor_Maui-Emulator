@@ -1,0 +1,3 @@
+# Verde: dotnet test PrintThermal.Emulator.slnx -c Release sobre 17d85dd, SDK 10.0.403 en contenedor con turno (2026-11-27): 136 de 136.
+salida dotnet test: 0
+Passed!  - Failed:     0, Passed:   136, Skipped:     0, Total:   136, Duration: 9 s - PrintThermal.Emulator.Tests.dll (net10.0)

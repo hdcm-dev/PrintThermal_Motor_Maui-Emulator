@@ -1,0 +1,1 @@
+Consola de Chrome en el visor (mensajes de tipo error y warn), después de las mediciones y las dos capturas: sin mensajes.

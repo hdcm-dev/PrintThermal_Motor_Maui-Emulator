@@ -1,0 +1,17 @@
+# Mutación sobre 17d85dd (2026-11-27): 4 mutantes, 4 en rojo. Cada uno corre sólo la prueba que debe matarlo.
+=== M1 sin reconexión breve por omisión · prueba TrasUnVinculoSinCifrarLaImpresoraReconectaYCorta
+<     public bool ReconexionTrasVinculoSinCifrar { get; init; } = true;
+>     public bool ReconexionTrasVinculoSinCifrar { get; init; }
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 5 s - PrintThermal.Emulator.Tests.dll (net10.0)
+=== M2 no registra el cifrado de la conexión · prueba UnVinculoCifradoNoProvocaReconexion
+<                     _cifradas.Add((ushort)(BinaryPrimitives.ReadUInt16LittleEndian(p.AsSpan(1)) & 0x0FFF));
+>                     _ = ((ushort)(BinaryPrimitives.ReadUInt16LittleEndian(p.AsSpan(1)) & 0x0FFF));
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 1 s - PrintThermal.Emulator.Tests.dll (net10.0)
+=== M3 la conexión breve no se corta · prueba TrasUnVinculoSinCifrarLaImpresoraReconectaYCorta
+<                     _host.Enviar(0x0406, (byte)breve, (byte)(breve >> 8), 0x13);
+>                     _ = breve;
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 5 s - PrintThermal.Emulator.Tests.dll (net10.0)
+=== M4 reconecta tras cualquier cierre · prueba SinVinculoNuevoNoHayReconexion
+<                 var sinCifrar = _vinculadas.Remove(h) & !_cifradas.Remove(h);
+>                 var sinCifrar = true;
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 353 ms - PrintThermal.Emulator.Tests.dll (net10.0)
