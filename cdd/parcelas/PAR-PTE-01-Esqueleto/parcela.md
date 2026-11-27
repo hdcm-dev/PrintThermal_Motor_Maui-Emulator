@@ -74,7 +74,7 @@ Proyectos en `src/` y `tests/`; `Directory.Build.props` con `net10.0`, `Nullable
 
 ## Cierre
 
-- Versiones subidas: REQ-HIS-Compilacion-Verificada v1 → v2 (historia y `modifica`).
+- Versiones subidas: REQ-HIS-Compilacion-Verificada v1 → v2 (historia y `modifica`); REQ-HIS-Cliente-Tipado v1 → v2 (`rutas:` sin el `.csproj`, que es estructura; D5). PAR-PTE-04 lee y modifica REQ-HIS-Cliente-Tipado@v1: al empezar, su `ready --contra main` pide actualizar la huella a v2 (I-3).
 - Changelog: «PAR-PTE-01 · Esqueleto de la solución …» en `cdd/corpus/CHANGELOG.md`.
 - Evidencia: `evidencia/2026-11-27-rojo.txt` (3 de 4 en rojo; REQ-02 ya pasaba porque `Directory.Packages.props` es condición para compilar el proyecto de pruebas), `evidencia/2026-11-27-pruebas.txt` y `.trx` (4 de 4 en verde, SDK 10.0.403 en contenedor con turno). La corrida de la CI pública del PR es la segunda medida de REQ-04.
 - Decisiones: D1 a D4, todas K1, sin K3 pendiente.
