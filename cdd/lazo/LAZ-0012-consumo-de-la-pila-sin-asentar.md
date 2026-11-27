@@ -1,5 +1,5 @@
 ---
-id: LAZ-0008
+id: LAZ-0012
 fecha: 2026-11-27
 origen: parcela
 clase: aclaracion
@@ -10,7 +10,7 @@ deuda:
 normalizado:
 parcela:
 ---
-# LAZ-0008 · El consumo de tokens de la pila propia no se asienta frente al umbral firmado
+# LAZ-0012 · El consumo de tokens de la pila propia no se asienta frente al umbral firmado
 
 ## Índice
 

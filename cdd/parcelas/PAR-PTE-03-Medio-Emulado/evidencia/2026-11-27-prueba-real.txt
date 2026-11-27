@@ -52,7 +52,7 @@ intento 3 rc=0
 Primer intento (04:00:00:00:00:01): el toque en «Pair» llegó 31 s después del pedido de confirmación; Android quedó con el
 vínculo (state=12) pero su seguridad quedó «AUTHENTICATING» y no pidió la clave en la conexión siguiente
 (`btm_sec_connected: Connection complete during pairing process`; el RFCOMM venció por tiempo). Causa sin separar
-(LAZ-0007): el temporizador de emparejamiento de Android o el binario de entonces, que mandaba pings de HTTP/2 (NO
+(LAZ-0011): el temporizador de emparejamiento de Android o el binario de entonces, que mandaba pings de HTTP/2 (NO
 VERIFICADO). Se repitió con otra dirección y el toque a tiempo:
 11-27 15:12:45.274 I/SPIKE   ( 4329): CREATEBOND true
 11-27 15:12:45.718 I/SPIKE   ( 4329): BOND 04:00:00:00:00:02 state=11

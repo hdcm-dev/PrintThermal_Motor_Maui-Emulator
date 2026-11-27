@@ -6,7 +6,8 @@
 2. [Ronda 2](#ronda-2)
 3. [Ronda 3](#ronda-3)
 
-Informes verbatim del auditor refutador (04 §2 paso 5). La primera ronda auditó la cabeza 05789b1; la segunda, ade3907 más sus correcciones; la tercera, ed5c15a.
+Informes verbatim del auditor refutador (04 §2 paso 5). La primera ronda auditó la cabeza 05789b1; la segunda, ade3907 más sus correcciones; la tercera, ed5c15a. Después de la ronda 3, los registros LAZ-0006, LAZ-0007 y LAZ-0008 que citan los informes pasaron a
+LAZ-0010, LAZ-0011 y LAZ-0012, porque PAR-PTE-04 tomó de 0006 a 0009 en paralelo; el contenido no cambió.
 
 ## Ronda 1
 

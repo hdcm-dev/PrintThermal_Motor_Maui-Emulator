@@ -1,5 +1,5 @@
 ---
-id: LAZ-0007
+id: LAZ-0011
 fecha: 2026-11-27
 origen: parcela
 clase: aclaracion
@@ -10,7 +10,7 @@ deuda:
 normalizado:
 parcela:
 ---
-# LAZ-0007 · Un vínculo quedó inservible en la prueba real: consentimiento tardío o binario con pings
+# LAZ-0011 · Un vínculo quedó inservible en la prueba real: consentimiento tardío o binario con pings
 
 ## Índice
 

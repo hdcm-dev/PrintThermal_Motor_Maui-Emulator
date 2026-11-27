@@ -1,5 +1,5 @@
 ---
-id: LAZ-0006
+id: LAZ-0010
 fecha: 2026-11-27
 origen: parcela
 clase: aclaracion
@@ -10,7 +10,7 @@ deuda:
 normalizado:
 parcela:
 ---
-# LAZ-0006 · La entrega de RFCOMM al almacén de tickets no tiene parcela que la conecte
+# LAZ-0010 · La entrega de RFCOMM al almacén de tickets no tiene parcela que la conecte
 
 ## Índice
 
@@ -24,7 +24,8 @@ parcela:
 PAR-PTE-03, 2026-11-27, auditor de cierre (hallazgo 1). REQ-HIS-Recepcion-Integra pide que los bytes de RFCOMM «se
 entregan al almacén de tickets». PAR-PTE-03 entrega por `IReceptorDeBytes` (`src/PrintThermal.Emulator.Bluetooth/Rfcomm/`)
 porque el almacén del Core no estaba fusionado (D6). La conexión del receptor con el almacén va en el host del servicio
-(PAR-PTE-04), pero PAR-PTE-04 no lee ni modifica REQ-HIS-Recepcion-Integra: hoy ninguna parcela planificada la hace.
+(PAR-PTE-04), pero PAR-PTE-04 no lee ni modifica REQ-HIS-Recepcion-Integra: hoy ninguna parcela planificada la hace. Relacionado: el registro de PAR-PTE-04 sobre conectar el almacén y el medio
+reales al host (su LAZ-0006, PR #4), que mira el mismo trabajo desde la API.
 
 ## 2. Clasificación
 
