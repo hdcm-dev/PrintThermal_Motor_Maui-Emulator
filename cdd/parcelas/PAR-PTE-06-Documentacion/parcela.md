@@ -2,7 +2,7 @@
 id: PAR-PTE-06
 titulo: Documentación de uso como código para agentes
 version: 1.1
-estado: lista
+estado: en-curso
 velocidad: rapida
 base_commit: 7192bcee59cb8703548799b2f27562a9eceb98b4
 sprint: SPR-01
