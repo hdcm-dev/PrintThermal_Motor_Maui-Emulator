@@ -60,8 +60,8 @@ Comandos del bloque de §3.1 del conocimiento, corridos en el árbol de la rama 
 | D-05 | Dónde vive cada pieza | `docs/` del repositorio principal, versionada con el código | ADR-0007 | P |
 | D-06 | Ancla | El commit; la página dice la versión de la imagen que documenta (`1.0.0`) | `docs/README.md` | P |
 | D-08 | Frontmatter | El mínimo de §5.2 del conocimiento | cada página | P |
-| D-09 | Cómo corre la compuerta | Una prueba xUnit de la solución, en la CI pública existente (`cdd.yml`); no se adopta la compuerta de origen (`dg.py`) | `tests/…/Documentacion/DocumentacionTests.cs` | H: §4 |
-| D-10 | Qué bloquea | La prueba bloquea como cualquier otra de la solución | — | H: §4 |
+| D-09 | Cómo corre la compuerta | Una prueba xUnit de la solución, en la CI pública existente (`cdd.yml`); no se adopta la compuerta de origen (`dg.py`) | `tests/…/Documentacion/DocumentacionTests.cs` | H: decidida (§4) |
+| D-10 | Qué bloquea | La prueba bloquea como cualquier otra de la solución | — | H: decidida (§4) |
 | D-12 | Canales para agentes | Los mismos Markdown, desde `AGENTS.md` y `README.md`; sin índice para agentes ni IA Layer | ADR-0007 | H: decidida por la persona, «sin integración con ia layer» |
 | D-14 | Qué es privado | Nada privado en `docs/`: el repositorio es público; hosts, rutas y nombres internos quedan fuera | barrido de §1 | P |
 | D-16 | Idioma | Español, como el resto del producto | — | P |
@@ -83,7 +83,7 @@ Comandos del bloque de §3.1 del conocimiento, corridos en el árbol de la rama 
 
 | Id | Estado | Opciones | Default propuesto | Quién decide |
 |---|---|---|---|---|
-| D-09 / D-10 | abierta | Prueba xUnit en la CI existente / compuerta de origen con sus controles | Prueba xUnit (en uso) | La persona dueña del producto |
+| D-09 / D-10 | decidida por el responsable de las decisiones técnicas del producto, por delegación de la persona (2026-11-27) | Prueba xUnit en la CI existente / compuerta de origen con sus controles | Prueba xUnit | — |
 | API `/openapi/v1.json` | decidida por la persona (exponer la API con OpenAPI y Scalar, ADR-0001) | — | — | — |
 | D-12 | decidida por la persona: sin integración con IA Layer (ADR-0007 §1) | — | — | — |
 
@@ -93,7 +93,7 @@ Perfil mínimo. Las tres audiencias (agente, desarrollo, QA) leen las mismas pá
 
 ## 6. Artefactos A-02 a A-13
 
-No se producen en esta parcela: dependen de adoptar la compuerta de origen y su registro (D-09, abierta). La prueba de la documentación cumple la parte verificable (enlaces, rutas, configuración, ejemplos que corren).
+No se producen: dependen de adoptar la compuerta de origen y su registro, que D-09 no adoptó. La prueba de la documentación cumple la parte verificable (enlaces, rutas, configuración, ejemplos que corren).
 
 ## 7. Lo que el conocimiento no resolvió
 
@@ -106,6 +106,6 @@ No se producen en esta parcela: dependen de adoptar la compuerta de origen y su 
 
 | Comprobación | Resultado |
 |---|---|
-| Prueba de la documentación (rojo y verde) | Evidencia de PAR-PTE-06 en `cdd/parcelas/PAR-PTE-06-Documentacion/evidencia/` |
+| Prueba de la documentación (rojo, verde y mutantes de `docs/`) | Evidencia de PAR-PTE-06 en `cdd/parcelas/PAR-PTE-06-Documentacion/evidencia/` |
 | Barrido de lo privado | §1, comando 12b |
 | Par rojo/verde de la compuerta de origen | No aplica: no se adoptó (D-09) |

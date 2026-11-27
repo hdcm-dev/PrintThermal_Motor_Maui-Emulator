@@ -1,0 +1,15 @@
+# Rojo de PAR-PTE-06 (2026-11-27)
+
+Commit e37a483 (sólo las pruebas, sin docs/); mcr.microsoft.com/dotnet/sdk:10.0.403 en el equipo de cómputo, con turno (perfil liviano, 2 CPU / 4 GB).
+Las dos pruebas nuevas fallan por la causa esperada: falta docs/.
+
+```text
+  Failed PrintThermal.Emulator.Tests.Documentacion.DocumentacionTests.LaDocumentacionSigueAlCodigo [2 ms]
+  Error Message:
+   System.IO.DirectoryNotFoundException : Could not find a part of the path '/w/docs'.
+--
+  Failed PrintThermal.Emulator.Tests.Documentacion.DocumentacionTests.LosEjemplosDeLaDocumentacionCorren [3 ms]
+  Error Message:
+   falta docs/
+Failed!  - Failed:     2, Passed:   131, Skipped:     0, Total:   133, Duration: 12 s - PrintThermal.Emulator.Tests.dll (net10.0)
+```
