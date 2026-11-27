@@ -2,6 +2,13 @@
 
 auditor: agente refutador Claude (mismo modelo que la ejecución) en otro contexto, sin la conversación de la ejecución, sólo lectura — garantía reducida
 
+## Índice
+
+1. [Ronda 1 (sobre 1740a58 más lo sin commitear)](#ronda-1-sobre-1740a58-más-lo-sin-commitear)
+2. [Respuesta a la ronda 1](#respuesta-a-la-ronda-1)
+3. [Ronda 2 (sobre fde0679, mismo auditor en un contexto nuevo)](#ronda-2-sobre-fde0679-mismo-auditor-en-un-contexto-nuevo)
+4. [Respuesta a la ronda 2](#respuesta-a-la-ronda-2)
+
 ## Ronda 1 (sobre 1740a58 más lo sin commitear)
 
 
