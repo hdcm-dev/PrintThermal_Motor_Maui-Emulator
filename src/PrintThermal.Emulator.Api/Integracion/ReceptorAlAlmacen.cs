@@ -24,15 +24,28 @@ public sealed class ReceptorAlAlmacen(AlmacenEnDisco almacen, PerfilDeImpresora?
     public void Abierta(InfoConexionRfcomm conexion)
     {
         ArgumentNullException.ThrowIfNull(conexion);
-        var c = _conexiones.GetOrAdd(conexion.Id, _ => Nueva(conexion));
-        _registro($"conexión {conexion.Id} abierta desde {conexion.Par} (canal {conexion.Canal}){(c.Cerrada ? " (ya cerrada)" : "")}");
+        var nueva = Nueva(conexion);
+        Conexion? vieja = null;
+        _conexiones.AddOrUpdate(conexion.Id, nueva, (_, anterior) => { vieja = anterior; return nueva; });
+        if (vieja is not null)
+        {
+            // Los ids de conexión vuelven a empezar con cada periférico nuevo: una entrada vieja con el mismo id es de
+            // una conexión que no avisó su cierre. Se termina su ticket y no se mezcla con la nueva.
+            Terminar(vieja);
+            _registro($"conexión {conexion.Id}: había una anterior sin cerrar; se terminó");
+        }
+        _registro($"conexión {conexion.Id} abierta desde {conexion.Par} (canal {conexion.Canal})");
     }
 
     /// <inheritdoc />
     public void Recibidos(InfoConexionRfcomm conexion, ReadOnlySpan<byte> datos)
     {
         ArgumentNullException.ThrowIfNull(conexion);
-        var c = _conexiones.GetOrAdd(conexion.Id, _ => Nueva(conexion));
+        if (!_conexiones.TryGetValue(conexion.Id, out var c))
+        {
+            _registro($"conexión {conexion.Id}: {datos.Length} bytes sin conexión abierta, descartados");
+            return;
+        }
         lock (c.Cerrojo)
         {
             if (c.Cerrada)
@@ -50,12 +63,20 @@ public sealed class ReceptorAlAlmacen(AlmacenEnDisco almacen, PerfilDeImpresora?
         ArgumentNullException.ThrowIfNull(conexion);
         if (_conexiones.TryRemove(conexion.Id, out var c))
         {
-            lock (c.Cerrojo)
+            Terminar(c);
+            _registro($"conexión {conexion.Id} cerrada");
+        }
+    }
+
+    private static void Terminar(Conexion c)
+    {
+        lock (c.Cerrojo)
+        {
+            if (!c.Cerrada)
             {
                 c.Cerrada = true;
                 c.Interprete.Finalizar();
             }
-            _registro($"conexión {conexion.Id} cerrada");
         }
     }
 

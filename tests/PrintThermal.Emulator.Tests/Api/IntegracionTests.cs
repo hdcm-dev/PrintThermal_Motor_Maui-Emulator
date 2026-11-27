@@ -208,9 +208,37 @@ public sealed class IntegracionTests : IDisposable
         await using var fabrica = new FabricaConSalida(_salida);
         using var http = fabrica.CreateClient();
         var receptor = fabrica.Services.GetRequiredService<ReceptorAlAlmacen>();
+        var info = new InfoConexionRfcomm(9, DireccionBluetooth.Parse("02:00:00:00:00:01"), 1);
         Transmitir(receptor, 9, Dorados.Leer("01-texto.bin"), trozo: 50);
 
+        // Bytes tardíos de una conexión ya cerrada: no abren otra conexión ni otro ticket.
+        receptor.Recibidos(info, [0x1B, 0x40, .. "tarde\n"u8]);
         Assert.Equal(0, receptor.Abiertas);
+        receptor.Cerrada(info);
         Assert.Single((await http.GetFromJsonAsync<List<TicketInfo>>("/api/tickets"))!);
+    }
+
+    [Fact]
+    public async Task UnaConexionNuevaConElMismoIdTerminaLaAnterior()
+    {
+        await using var fabrica = new FabricaConSalida(_salida);
+        using var http = fabrica.CreateClient();
+        var receptor = fabrica.Services.GetRequiredService<ReceptorAlAlmacen>();
+        var info = new InfoConexionRfcomm(1, DireccionBluetooth.Parse("02:00:00:00:00:01"), 1);
+        byte[] viejo = [0x1B, 0x40, .. "sin cierre\n"u8];
+        byte[] nuevo = [0x1B, 0x40, .. "otra vez\n"u8];
+
+        // Un periférico nuevo vuelve a numerar desde 1 sin que la conexión anterior haya avisado el cierre.
+        receptor.Abierta(info);
+        receptor.Recibidos(info, viejo);
+        receptor.Abierta(info);
+        receptor.Recibidos(info, nuevo);
+        receptor.Cerrada(info);
+
+        var lista = await http.GetFromJsonAsync<List<TicketInfo>>("/api/tickets");
+        Assert.Equal(2, lista!.Count);
+        Assert.Equal(nuevo, await http.GetByteArrayAsync($"/api/tickets/{lista[0].Id}.bin"));
+        Assert.Equal(viejo, await http.GetByteArrayAsync($"/api/tickets/{lista[1].Id}.bin"));
+        Assert.Equal(0, receptor.Abiertas);
     }
 }
