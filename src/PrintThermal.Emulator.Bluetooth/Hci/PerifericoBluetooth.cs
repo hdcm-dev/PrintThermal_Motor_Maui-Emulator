@@ -194,7 +194,7 @@ public sealed class PerifericoBluetooth
             var vinculado = DireccionBluetooth.DesdeHci(p);
             foreach (var (handle, c) in _conexiones)
             {
-                if (c.Par == vinculado)
+                if (c.Par.Equals(vinculado))
                 {
                     _vinculadas.Add(handle);
                 }
