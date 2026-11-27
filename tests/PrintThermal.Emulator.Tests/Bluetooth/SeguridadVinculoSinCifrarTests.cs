@@ -13,10 +13,11 @@ public sealed class SeguridadVinculoSinCifrarTests
 {
     private const ushort HandleBreve = 0x000C;
 
-    private static async Task<(ControladorFalso C, Task Corrida)> EmparejarAsync()
+    private static async Task<(ControladorFalso C, Task Corrida)> EmparejarAsync(bool reconexion = true)
     {
         var c = new ControladorFalso();
-        var p = new PerifericoBluetooth(c, new OpcionesPeriferico(), new ReceptorEnMemoria(), new AlmacenDeClavesEnMemoria());
+        var p = new PerifericoBluetooth(c, new OpcionesPeriferico { ReconexionTrasVinculoSinCifrar = reconexion },
+            new ReceptorEnMemoria(), new AlmacenDeClavesEnMemoria());
         var corrida = p.EjecutarAsync();
         await p.Anunciando.WaitAsync(TimeSpan.FromSeconds(5));
         await new AndroidSimulado(c).ConectarAclAsync();
@@ -32,6 +33,19 @@ public sealed class SeguridadVinculoSinCifrarTests
     }
 
     private static byte[] Cierre(ushort handle) => [0x00, (byte)handle, (byte)(handle >> 8), 0x16];
+
+    /// <summary>
+    /// Punto de sincronía: un evento que el host contesta. Los eventos se procesan en orden, así que cuando llega la
+    /// respuesta ya se atendió todo lo anterior; después se espera además 1,5 s por si una implementación difiere su
+    /// reacción.
+    /// </summary>
+    private static async Task SincronizarAsync(ControladorFalso c)
+    {
+        var n = c.Comandos.Count;
+        c.Evento(0x31, AndroidSimulado.Direccion.ComoHci());
+        await c.EsperarComandoAsync(0x042B, n);
+        await Task.Delay(1500);
+    }
 
     [Fact]
     public async Task TrasUnVinculoSinCifrarLaImpresoraReconectaYCorta()
@@ -51,7 +65,7 @@ public sealed class SeguridadVinculoSinCifrarTests
         // La conexión breve no se repite al cerrarse.
         n = c.Comandos.Count;
         c.Evento(0x05, Cierre(HandleBreve));
-        await Task.Delay(300);
+        await SincronizarAsync(c);
         Assert.DoesNotContain(c.Comandos.Skip(n), k => ControladorFalso.Opcode(k) == 0x0405);
         c.Cortar();
         await corrida.WaitAsync(TimeSpan.FromSeconds(5));
@@ -64,7 +78,7 @@ public sealed class SeguridadVinculoSinCifrarTests
         c.Evento(0x08, [0x00, (byte)c.Handle, (byte)(c.Handle >> 8), 0x01]); // Encryption Change: activo
         var n = c.Comandos.Count;
         c.Evento(0x05, Cierre(c.Handle));
-        await Task.Delay(300);
+        await SincronizarAsync(c);
         Assert.DoesNotContain(c.Comandos.Skip(n), k => ControladorFalso.Opcode(k) == 0x0405);
         c.Cortar();
         await corrida.WaitAsync(TimeSpan.FromSeconds(5));
@@ -80,7 +94,89 @@ public sealed class SeguridadVinculoSinCifrarTests
         await new AndroidSimulado(c).ConectarAclAsync();
         var n = c.Comandos.Count;
         c.Evento(0x05, Cierre(c.Handle)); // una conexión sin emparejar (p. ej. sólo SDP) que se cierra
+        await SincronizarAsync(c);
+        Assert.DoesNotContain(c.Comandos.Skip(n), k => ControladorFalso.Opcode(k) == 0x0405);
+        c.Cortar();
+        await corrida.WaitAsync(TimeSpan.FromSeconds(5));
+    }
+
+    [Fact]
+    public async Task SiAndroidSeAdelantaLaConexionNoSeCorta()
+    {
+        var (c, corrida) = await EmparejarAsync();
+        var n = c.Comandos.Count;
+        c.Evento(0x05, Cierre(c.Handle));
+        await c.EsperarComandoAsync(0x0405, n);
+
+        // Android conecta antes de que la conexión propia se complete: es la conexión de la app y no se corta.
+        n = c.Comandos.Count;
+        await new AndroidSimulado(c).ConectarAclAsync();
+        await SincronizarAsync(c);
+        Assert.DoesNotContain(c.Comandos.Skip(n), k => ControladorFalso.Opcode(k) == 0x0406);
+        c.Cortar();
+        await corrida.WaitAsync(TimeSpan.FromSeconds(5));
+    }
+
+    [Fact]
+    public async Task SiLaReconexionNoArrancaLaConexionSiguienteNoSeCorta()
+    {
+        var (c, corrida) = await EmparejarAsync();
+        var n = c.Comandos.Count;
+        c.Evento(0x05, Cierre(c.Handle));
+        await c.EsperarComandoAsync(0x0405, n);
+        c.Evento(0x0F, 0x0C, 0x01, 0x05, 0x04); // Command Status de Create Connection con error
+
+        n = c.Comandos.Count;
+        c.Evento(0x03, [0x00, (byte)HandleBreve, 0x00, .. AndroidSimulado.Direccion.ComoHci(), 0x01, 0x00]);
+        await SincronizarAsync(c);
+        Assert.DoesNotContain(c.Comandos.Skip(n), k => ControladorFalso.Opcode(k) == 0x0406);
+        c.Cortar();
+        await corrida.WaitAsync(TimeSpan.FromSeconds(5));
+    }
+
+    [Fact]
+    public async Task UnCorteFallidoNoProvocaReconexion()
+    {
+        var (c, corrida) = await EmparejarAsync();
+        var n = c.Comandos.Count;
+        c.Evento(0x05, [0x0C, (byte)c.Handle, (byte)(c.Handle >> 8), 0x16]); // Disconnection Complete con error: el ACL sigue
+        await SincronizarAsync(c);
+        Assert.DoesNotContain(c.Comandos.Skip(n), k => ControladorFalso.Opcode(k) == 0x0405);
+        c.Cortar();
+        await corrida.WaitAsync(TimeSpan.FromSeconds(5));
+    }
+
+    [Fact]
+    public async Task LaTrazaHciNoMuestraLaClaveDeEnlace()
+    {
+        var registro = new System.Collections.Concurrent.ConcurrentQueue<string>();
+        var c = new ControladorFalso();
+        var p = new PerifericoBluetooth(c, new OpcionesPeriferico { TrazaHci = true }, new ReceptorEnMemoria(),
+            new AlmacenDeClavesEnMemoria(), registro.Enqueue);
+        var corrida = p.EjecutarAsync();
+        await p.Anunciando.WaitAsync(TimeSpan.FromSeconds(5));
+        await new AndroidSimulado(c).ConectarAclAsync();
+        var par = AndroidSimulado.Direccion.ComoHci();
+        var clave = Convert.FromHexString("00112233445566778899AABBCCDDEEFF");
+        c.Evento(0x18, [.. par, .. clave, 0x04]);
+        var n = c.Comandos.Count;
+        c.Evento(0x17, par); // Link Key Request: el host contesta con la clave guardada
+        await c.EsperarComandoAsync(0x040B, n);
         await Task.Delay(300);
+        Assert.Contains(registro, l => l.StartsWith("HCI < 18", StringComparison.Ordinal) && l.Contains("<clave>", StringComparison.Ordinal));
+        Assert.Contains(registro, l => l.StartsWith("HCI > 0B04", StringComparison.Ordinal) && l.Contains("<clave>", StringComparison.Ordinal));
+        Assert.DoesNotContain(registro, l => l.Contains("00112233445566778899AABBCCDDEEFF", StringComparison.Ordinal));
+        c.Cortar();
+        await corrida.WaitAsync(TimeSpan.FromSeconds(5));
+    }
+
+    [Fact]
+    public async Task ConLaOpcionApagadaNoHayReconexion()
+    {
+        var (c, corrida) = await EmparejarAsync(reconexion: false);
+        var n = c.Comandos.Count;
+        c.Evento(0x05, Cierre(c.Handle));
+        await SincronizarAsync(c);
         Assert.DoesNotContain(c.Comandos.Skip(n), k => ControladorFalso.Opcode(k) == 0x0405);
         c.Cortar();
         await corrida.WaitAsync(TimeSpan.FromSeconds(5));

@@ -74,7 +74,7 @@ public sealed class PerifericoBluetooth
             {
                 if (_opciones.TrazaHci && p.Tipo == TipoPaqueteHci.Comando)
                 {
-                    _registro($"HCI > {Convert.ToHexString(p.Datos)}");
+                    _registro($"HCI > {TrazaSinClaves(p)}");
                 }
                 await _transporte.EnviarAsync(p, cts.Token);
             }
@@ -85,7 +85,7 @@ public sealed class PerifericoBluetooth
             {
                 if (_opciones.TrazaHci && p.Tipo == TipoPaqueteHci.Evento && p.Datos.Length > 0 && p.Datos[0] != 0x13)
                 {
-                    _registro($"HCI < {Convert.ToHexString(p.Datos)}");
+                    _registro($"HCI < {TrazaSinClaves(p)}");
                 }
                 try
                 {
@@ -143,6 +143,26 @@ public sealed class PerifericoBluetooth
                 c.L2cap.Cerrar();
             }
         }
+    }
+
+    /// <summary>
+    /// El paquete en hexadecimal, con las claves de enlace tapadas: Link Key Notification (evento 0x18) y Link Key
+    /// Request Reply (comando 0x040B) llevan la clave después de la dirección.
+    /// </summary>
+    internal static string TrazaSinClaves(PaqueteHci p)
+    {
+        var d = (byte[])p.Datos.Clone();
+        var desde = p.Tipo switch
+        {
+            TipoPaqueteHci.Evento when d.Length >= 24 && d[0] == 0x18 => 8,
+            TipoPaqueteHci.Comando when d.Length >= 25 && d[0] == 0x0B && d[1] == 0x04 => 9,
+            _ => -1,
+        };
+        if (desde < 0)
+        {
+            return Convert.ToHexString(d);
+        }
+        return Convert.ToHexString(d, 0, desde) + "<clave>" + Convert.ToHexString(d, desde + 16, d.Length - desde - 16);
     }
 
     private async Task InicializarAsync()
@@ -219,7 +239,7 @@ public sealed class PerifericoBluetooth
                     _host.Enviar(0x040A, [.. p[..6], 0x0D]); // SCO/eSCO: recursos limitados
                 }
                 break;
-            case 0x03 when p.Length >= 11 && _reconexionPendiente.Remove(DireccionBluetooth.DesdeHci(p.AsSpan(3))):
+            case 0x03 when p.Length >= 11 && p[9] == 0x01 && _reconexionPendiente.Remove(DireccionBluetooth.DesdeHci(p.AsSpan(3))):
                 // Conexión breve propia (LAZ-0011): se corta apenas se completa.
                 if (p[0] == 0)
                 {
@@ -248,7 +268,7 @@ public sealed class PerifericoBluetooth
                 break;
             case 0x05 when p.Length >= 4: // Disconnection Complete
                 var h = (ushort)(BinaryPrimitives.ReadUInt16LittleEndian(p.AsSpan(1)) & 0x0FFF);
-                var sinCifrar = _vinculadas.Remove(h) & !_cifradas.Remove(h);
+                var sinCifrar = _vinculadas.Remove(h) & !_cifradas.Remove(h) & p[0] == 0;
                 if (_conexiones.Remove(h, out var c))
                 {
                     _registro($"desconexión ACL 0x{h:X3} de {c.Par}, motivo 0x{p[3]:X2}");

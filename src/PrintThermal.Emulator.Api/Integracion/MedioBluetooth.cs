@@ -41,13 +41,20 @@ public sealed class MedioBluetooth : BackgroundService, IEstadoDelMedio
         ArgumentException.ThrowIfNullOrWhiteSpace(opciones.Netsim);
         var url = new Uri(opciones.Netsim);
         var direccion = DireccionBluetooth.Parse(opciones.Direccion);
-        var periferico = new OpcionesPeriferico { TrazaHci = opciones.TrazaHci, ReconexionTrasVinculoSinCifrar = opciones.ReconexionTrasVinculoSinCifrar };
+        var periferico = OpcionesDelPeriferico(opciones);
         var claves = new AlmacenDeClavesEnArchivo(opciones.ArchivoDeClaves ?? Path.Combine(carpetaDeSalida, "claves-bluetooth.txt"));
         _receptor = receptor;
         _servicio = new ServicioPeriferico(
             _ => Task.FromResult<ITransporteHci>(TransporteNetsim.Conectar(url, direccion, periferico.Nombre)),
             periferico, receptor, claves, TimeSpan.FromSeconds(2), m => log.LogInformation("{Mensaje}", m));
         log.LogInformation("Medio Bluetooth: «{Nombre}» en {Direccion}, netsim {Netsim}", periferico.Nombre, direccion, url);
+    }
+
+    /// <summary>Lo que la configuración del medio decide del periférico.</summary>
+    public static OpcionesPeriferico OpcionesDelPeriferico(OpcionesDelMedio opciones)
+    {
+        ArgumentNullException.ThrowIfNull(opciones);
+        return new OpcionesPeriferico { TrazaHci = opciones.TrazaHci, ReconexionTrasVinculoSinCifrar = opciones.ReconexionTrasVinculoSinCifrar };
     }
 
     /// <inheritdoc />
