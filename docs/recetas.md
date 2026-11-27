@@ -40,7 +40,7 @@ done
 
 Para probar un consumidor de la API (un visor, un paso de CI, un cliente) sin emulador de Android: sin `Emulador__Bluetooth__Netsim` y con `Emulador__Simulacion__IntervaloSegundos` mayor que 0, el host genera un ticket sintético de 384 puntos cada tantos segundos; `medio` es «simulado». Los ejemplos de esta documentación corren así en la CI (con el host en proceso, no con la imagen).
 
-Con la imagen, fuera del montaje con el emulador de Android y para uso local:
+Con la imagen sola, **fuera del uso previsto** del montaje ([Montaje](montaje.md) §3: en la red del emulador de Android, dentro de su turno, y se baja con él). Sirve sólo en un equipo propio o un runner de CI efímero que no tengan esa regla; donde rige el uso previsto, se usa el montaje:
 
 ```bash
 docker run -d --rm --name impresora-simulada --cpus 1 --memory 512m -p 127.0.0.1:5080:5080 \
@@ -81,7 +81,7 @@ public async Task LaAppImprimeElTicket()
 
 ## 5. Workflow de CI
 
-En un runner sin KVM no hay emulador de Android: el workflow prueba contra la fuente simulada (§2). Pasos:
+En un runner de CI efímero y sin KVM no hay emulador de Android: el workflow prueba contra la fuente simulada con la imagen sola (§2, fuera del uso previsto del montaje). Pasos:
 
 1. Si la imagen es privada, `docker login ghcr.io` con un token de lectura de paquetes, o construirla desde la etiqueta ([Diagnóstico](diagnostico.md) §5).
 2. Levantar la imagen con la simulación y el puerto en el loopback (§2).

@@ -47,7 +47,7 @@ El contrato completo de la API (rutas, parámetros, esquemas y códigos) no se r
 La prueba `tests/PrintThermal.Emulator.Tests/Documentacion/DocumentacionTests.cs` corre en la CI de cada pull request:
 
 - los bloques precedidos por `<!-- ejemplo: ejecutable -->` corren con bash y curl contra el host real, con la fuente simulada;
-- cada ruta y cada parámetro citados tienen que estar en `/openapi/v1.json`, cada variable `Emulador__…` tiene que ser una clave de configuración del host, la imagen tiene que ser la que publica el release y el puerto el de la imagen;
+- cada ruta y cada parámetro citados tienen que estar en `/openapi/v1.json`, cada variable `Emulador__…` o `Visor__…` tiene que ser una clave de configuración del host, la imagen tiene que ser la que publica el release y el puerto el de la imagen;
 - los mensajes de registro citados (`<!-- ejemplo: registro -->`) tienen que salir de una plantilla del código;
 - el ejemplo del cliente tipado es una región de `tests/PrintThermal.Emulator.Tests/Documentacion/EjemplosDelCliente.cs`: compila con la solución y la prueba lo corre.
 

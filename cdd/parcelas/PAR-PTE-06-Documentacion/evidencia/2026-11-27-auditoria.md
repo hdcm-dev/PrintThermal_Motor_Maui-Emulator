@@ -121,4 +121,60 @@ Veredicto: refuta
 | 14 Anclas y páginas | La prueba valida anclas contra los títulos y exige las páginas de la estructura enlazadas desde el índice (mutantes M9 y M12) |
 | 15 Workflow y vínculo | Esqueleto YAML ilustrativo y NO VERIFICADO (LAZ-0013); el paso para crear el vínculo dice qué hace la app de prueba y que la usada no está publicada |
 
-No se corrió una segunda ronda.
+## Ronda 2 (sobre fde0679, mismo auditor en un contexto nuevo)
+
+### 1. Hallazgos de la ronda 1
+
+| # | ¿Resuelto? | Dónde se ve |
+|---|---|---|
+| 1 Verde ausente | No cuenta (excluido por consigna). `parcela.md:81` cita `pruebas.txt`/`.trx`, que todavía no están en `evidencia/` | — |
+| 2 Claves de la prosa | **Sí.** `DocumentacionTests.cs:369-381` lee las claves `X__Y` entre comillas invertidas. `Emulador:Salida` y `Visor:UrlApi` se toman de `Program.cs:21,76` y `ArchivoDeClaves` por reflexión (`:346-353`). Renombrar cualquiera en el código hace fallar la prueba | — |
+| 3 Estado | **No en la cabeza.** `parcela.md:5` sigue en `estado: en-curso`, mientras `SPR-01.md` ya la da por cerrada. La respuesta lo deja para el commit de cierre | menor |
+| 4 Ejemplos | **Sí.** El 404 se comprueba (`api.md:90-91`). Con `ultimoId` vacío, la comparación de `api.md:64` siempre da verdadero, pero el nombre del campo queda controlado por `CamposJson` (`DocumentacionTests.cs:414-467`, contra `api.md:47`) | — |
+| 5 Valores | **Sí.** Dirección (`:391-395`), rangos y plazo (`:397-407`) y puerto de `-p` (`:514-520`). Que la versión quede atada a `docs/README.md:16` y no a una etiqueta de git está declarado en `parcela.md:87` | — |
+| 6 Mensajes y estados | **Sí.** `diagnostico.md:48-51` y `:73-76` están en bloques de registro y coinciden con `ServicioPeriferico.cs:84` e `Interprete.cs:761`. La tabla `:37-44` coincide con `EstadoPeriferico` y `MedioBluetooth.cs:48`. Sin prueba ni el «2 s» ni la tabla, como se declaró | — |
+| 7 Acceso desde Android | **Sí** (`montaje.md:87`) | — |
+| 8 Ruta absoluta | **Sí** (`montaje.md:31,65`, `diagnostico.md:29`, `docs/README.md:42`) | — |
+| 9 Escape de «» | **Sí** (`api.md:49`) | — |
+| 10 LAZ-0013 | **Sí** (`montaje.md:41`) | — |
+| 11 Abiertos | **Sí**, con LAZ-0014 y el alcance declarado en `parcela.md:87`. Queda sin citar LAZ-0002 (fidelidad), aunque el cierre lo da como heredado | — |
+| 12 D-12 | **Sí** (`diseno-documental.md:65`) | — |
+| 13 D-09 / D3 | **Sí**, en lo posible: `diseno-documental.md:86` declara que el testimonio está fuera del repositorio | — |
+| 14 Anclas y páginas | **Sí** para las anclas (`:652-656`, `:684-702`) y las páginas (`:665-681`). Las referencias «§N» siguen sin prueba; las revisé a mano y todas apuntan bien | menor |
+| 15 Workflow y vínculo | **Sí** (`recetas.md:92-113`, `emparejar-e-imprimir.md:55`) | — |
+
+### 2. Hallazgos nuevos
+
+**1. `docs/recetas.md:43-51` y `:84-113` contradicen el uso aprobado de la imagen.** — **bloquea**
+- Qué dice docs/: proponen correr la imagen sola, sin el emulador de Android, con `-p 127.0.0.1:5080:5080`, tanto en el equipo como en un runner de GitHub.
+- Qué dice el repositorio:
+  - El `Dockerfile:3-4` y el `README.md:36` dicen «Uso previsto (aprobado por INFRA) … dentro del mismo turno y puesto de emulador … nunca queda viva sola».
+  - Ese uso es la decisión D4 de PAR-PTE-05, de clase K0 (`PAR-PTE-05-Distribucion/parcela.md:34`).
+  - La propia `docs/montaje.md:114` dice «no queda vivo solo».
+- Por qué bloquea: no hay decisión ni LAZ que amplíe el uso previsto. Un agente que siga §2 en el equipo del equipo de trabajo sale de lo aprobado.
+- Corrección: elegir una de dos.
+  - Acotar §2 y §5 a equipos y runners ajenos a ese uso, diciendo explícitamente que quedan fuera del uso aprobado.
+  - Abrir un LAZ o una decisión para la persona y sumarlo a `pendientes:`.
+
+**2. El changelog no registra LAZ-0014.** — **menor**
+- `cdd/corpus/CHANGELOG.md:14` dice «LAZ-0013 abierto», pero LAZ-0014 también se abre en esta parcela.
+
+**3. El índice de docs/ describe de menos lo que se controla.** — **menor**
+- `docs/README.md:50` dice «cada variable `Emulador__…`», pero la prueba también controla `Visor__UrlApi`.
+
+Datos privados: en lo nuevo (docs/, LAZ-0013, LAZ-0014, la parcela, la evidencia y las pruebas) no aparecen hosts, IP internas, rutas del equipo, nombres de sesiones ni credenciales. `GHCR_TOKEN` es el nombre de un secreto, no un valor, y la dirección del teléfono va enmascarada. El resto de lo que afirma docs/ coincide con src/, el `Dockerfile` y `release.yml`: claves, valores por omisión, `uid 1654`, `/data`, el puerto 5080, los estados y las plantillas de registro.
+
+Veredicto: refuta
+
+## Respuesta a la ronda 2
+
+| Hallazgo | Respuesta |
+|---|---|
+| R1-3 Estado | `estado: cerrada` |
+| R1-11 LAZ-0002 | No se cita: LAZ-0002 trata respuestas, demoras y longitudes de protocolo, no la fidelidad del dibujo; la fidelidad se nombra en el cierre como heredada |
+| R1-14 «§N» | Sin prueba, revisadas a mano por el auditor; queda así |
+| Nuevo 1 Imagen sola en las recetas | `docs/recetas.md` §2 y §5 la acotan como uso fuera del previsto, sólo para equipos propios o runners de CI efímeros, y remiten al montaje donde rige el uso previsto; decisión D4 de la parcela (K1); el uso previsto (D4 de PAR-PTE-05) no cambia |
+| Nuevo 2 Changelog | Nombra LAZ-0013 y LAZ-0014 |
+| Nuevo 3 Índice | Dice `Emulador__…` o `Visor__…` |
+
+No se corrió una tercera ronda.
