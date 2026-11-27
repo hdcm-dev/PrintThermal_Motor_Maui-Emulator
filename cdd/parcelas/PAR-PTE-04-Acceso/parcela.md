@@ -28,7 +28,7 @@ pendientes:
   - {que: "conectar el almacén en disco (PAR-PTE-02) y el medio Bluetooth (PAR-PTE-03) al host detrás de IAlmacenDeTickets e IEstadoDelMedio: ninguna parcela de SPR-01 lo nombra", registro: LAZ-0006}
   - {que: "escala del visor con 8 puntos por mm, sin medir en la 58HB6 (D6)", registro: LAZ-0007}
   - {que: "las imágenes oficiales de .NET traen ASPNETCORE_HTTP_PORTS=8080 y anulan la escucha local por omisión (D7) dentro de un contenedor", registro: LAZ-0008}
-  - {que: "orden de fusión: la re-planificación (744a026) antes que esta parcela, y PAR-PTE-02 antes que PAR-PTE-04 según SPR-01", registro: LAZ-0009}
+  - {que: "orden de fusión: PAR-PTE-02 antes que PAR-PTE-04 según SPR-01, o decidir que PAR-PTE-04 puede entrar antes", registro: LAZ-0009}
 decisiones:
   - {id: D1, tema: "versiones fijas de Microsoft.AspNetCore.OpenApi 10.0.14, Scalar.AspNetCore 3.3.0 y Microsoft.AspNetCore.Mvc.Testing 10.0.14 (nuget.org, 2026-11-27; 10.0.14 es el runtime ASP.NET Core del SDK 10.0.403)", clase: K1}
   - {id: D2, tema: "cliente HTTP tipado propio en PrintThermal.Emulator.Client, que usan el visor y las pruebas (opción A de ADR-0003)", clase: K2, adr: ADR-0003}
@@ -118,7 +118,7 @@ Esta corrida es un paso de un flujo de trabajo sin persona disponible para pregu
   Cada historia suma a sus `rutas:` la carpeta de sus pruebas. En REQ-HIS-Cliente-Tipado, `src/PrintThermal.Emulator.Client/**/*.cs` pasa a `*.cs`: la compuerta compara con `fnmatch`, y `**/*.cs` exige una subcarpeta, así que no cubría `ClienteDeTickets.cs` ni `Modelos.cs`.
 - Changelog: «PAR-PTE-04 · API de tickets con OpenAPI y Scalar, visor Blazor y cliente tipado…» en `cdd/corpus/CHANGELOG.md`.
 - Evidencia (todas las corridas con SDK 10.0.403 en contenedor con turno):
-  - `evidencia/2026-11-27-rojo.txt`: 29 de 37 en rojo sobre el esqueleto (commit `5f1eb6e`). Las seis pruebas de REQ-01 a REQ-06 fallan por falta de comportamiento.
+  - `evidencia/2026-11-27-rojo.txt`: 29 de 37 en rojo sobre el esqueleto (commit `03cf03c`). Las seis pruebas de REQ-01 a REQ-06 fallan por falta de comportamiento.
   - Tras la auditoría, las pruebas se reforzaron:
     - ProblemDetails en los 400 y en una ruta inexistente, también en Production;
     - el resto de las operaciones del cliente.
