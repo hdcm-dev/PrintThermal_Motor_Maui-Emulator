@@ -1,0 +1,1001 @@
+# Verde: dotnet test PrintThermal.Emulator.slnx (2026-11-27) con la API, el visor y el cliente de PAR-PTE-04: 37 de 37
+# Contenedor mcr.microsoft.com/dotnet/sdk:10.0.403 con turno en el equipo de cómputo, 2 CPU / 4 GB.
+10.0.403
+  Determining projects to restore...
+  Restored /w/src/PrintThermal.Emulator.Core/PrintThermal.Emulator.Core.csproj (in 69 ms).
+  Restored /w/src/PrintThermal.Emulator.Client/PrintThermal.Emulator.Client.csproj (in 69 ms).
+  Restored /w/src/PrintThermal.Emulator.Bluetooth/PrintThermal.Emulator.Bluetooth.csproj (in 2 ms).
+  Restored /w/src/PrintThermal.Emulator.Api/PrintThermal.Emulator.Api.csproj (in 2.41 sec).
+  Restored /w/tests/PrintThermal.Emulator.Tests/PrintThermal.Emulator.Tests.csproj (in 3.85 sec).
+  PrintThermal.Emulator.Core -> /w/src/PrintThermal.Emulator.Core/bin/Debug/net10.0/PrintThermal.Emulator.Core.dll
+  PrintThermal.Emulator.Bluetooth -> /w/src/PrintThermal.Emulator.Bluetooth/bin/Debug/net10.0/PrintThermal.Emulator.Bluetooth.dll
+  PrintThermal.Emulator.Client -> /w/src/PrintThermal.Emulator.Client/bin/Debug/net10.0/PrintThermal.Emulator.Client.dll
+  PrintThermal.Emulator.Api -> /w/src/PrintThermal.Emulator.Api/bin/Debug/net10.0/PrintThermal.Emulator.Api.dll
+  PrintThermal.Emulator.Tests -> /w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll
+Test run for /w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 10.0.14)
+[xUnit.net 00:00:00.11]   Discovering: PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.29]   Discovered:  PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.32]   Starting:    PrintThermal.Emulator.Tests
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[58]
+      Creating key {bdc59e0b-ea90-43ff-9ede-850f6fcfb738} with creation date 2026-11-27 14:49:24Z, activation date 2026-11-27 14:49:24Z, and expiration date 2027-02-25 14:49:24Z.
+warn: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[35]
+      No XML encryptor configured. Key {bdc59e0b-ea90-43ff-9ede-850f6fcfb738} may be persisted to storage in unencrypted form.
+info: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[39]
+      Writing data to file '/root/.aspnet/DataProtection-Keys/key-bdc59e0b-ea90-43ff-9ede-850f6fcfb738.xml'.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/openapi/v1.json - - -
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /openapi/{documentName}.json'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider[1]
+      No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+  Passed PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: "http://[::]:8080", esperada: "http://localhost:8080/") [3 ms]
+  Passed PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: "http://0.0.0.0:8080", esperada: "http://localhost:8080/") [< 1 ms]
+  Passed PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: "http://+:8080", esperada: "http://localhost:8080/") [< 1 ms]
+  Passed PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: "http://127.0.0.1:5080", esperada: "http://127.0.0.1:5080/") [< 1 ms]
+  Passed PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: "http://emulador:9000", direccion: "http://[::]:8080", esperada: "http://emulador:9000/") [< 1 ms]
+  Passed PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: "Kestrel:Endpoints:Http:Url", valor: "http://0.0.0.0:8080") [1 ms]
+  Passed PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: "http_ports", valor: "8080") [< 1 ms]
+  Passed PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: "urls", valor: "http://0.0.0.0:8080") [< 1 ms]
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /openapi/{documentName}.json'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/openapi/v1.json - 200 - application/json;charset=utf-8 403.9803ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/scalar - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /scalar/{documentName?}'
+info: Microsoft.AspNetCore.Http.Result.RedirectResult[1]
+      Executing RedirectResult, redirecting to scalar/.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /scalar/{documentName?}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/scalar - 302 - - 6.5154ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/scalar/ - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /scalar/{documentName?}'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[3]
+      Writing value of type 'ProblemDetails' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo - 404 - application/problem+json 22.2828ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[3]
+      Writing value of type 'ProblemDetails' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - 404 - application/problem+json 2.8936ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/no-existe - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[3]
+      Writing value of type 'ProblemDetails' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/no-existe - 404 - application/problem+json 0.5498ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/no-existe.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[3]
+      Writing value of type 'ProblemDetails' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/no-existe.png - 404 - application/problem+json 0.3101ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Http.Result.ContentResult[2]
+      Write content with HTTP Response ContentType of text/html
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /scalar/{documentName?}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/scalar/ - 200 622 text/html 226.0879ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+  Passed PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: "https_ports", valor: "8443") [< 1 ms]
+  Passed PrintThermal.Emulator.Tests.Api.EscuchaTests.SinConfiguracionEscuchaSoloEnLocal [< 1 ms]
+  Passed PrintThermal.Emulator.Tests.Api.FuenteSimuladaTests.ImprimeUnTicketDe384PuntosEnElAlmacen [11 ms]
+  Passed PrintThermal.Emulator.Tests.Api.FuenteSimuladaTests.ElAlmacenDescartaElMasViejoAlLlenarse [1 ms]
+  Passed PrintThermal.Emulator.Tests.Api.OpenApiTests.OpenApiYScalarResponden [1 s]
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10 [4 ms]
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado [2 ms]
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma [43 ms]
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/ - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '/ (/)'
+info: Microsoft.AspNetCore.Http.Result.NoContentResult[1]
+      Setting HTTP status code 204.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - 204 - - 1006.1003ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets - 200 - application/json;+charset=utf-8 2.3559ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/estado - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/estado - 200 - application/json;+charset=utf-8 1.3931ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[100]
+      Start processing HTTP request GET http://localhost:8080/api/estado
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[100]
+      Sending HTTP request GET http://localhost:8080/api/estado
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:8080/api/estado - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:8080/api/estado - 200 - application/json;+charset=utf-8 3.8630ms
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[101]
+      Received HTTP response headers after 9.4947ms - 200
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[101]
+      End processing HTTP request after 15.627ms - 200
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[100]
+      Start processing HTTP request GET http://localhost:8080/api/tickets
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[100]
+      Sending HTTP request GET http://localhost:8080/api/tickets
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:8080/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[101]
+      Received HTTP response headers after 2.2896ms - 200
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:8080/api/tickets - 200 - application/json;+charset=utf-8 2.1343ms
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[101]
+      End processing HTTP request after 2.3955ms - 200
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/estado - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '/ (/)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/ - 200 - text/html;+charset=utf-8 205.1879ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/estado - 200 - application/json;+charset=utf-8 9.9274ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=10&despuesDe=0 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'TicketInfo' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=10&despuesDe=0 - 200 - application/json;+charset=utf-8 3.0982ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=10&despuesDe=20261127T144927146-000001 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'TicketInfo' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=10&despuesDe=20261127T144927146-000001 - 200 - application/json;+charset=utf-8 0.9369ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://localhost/api/tickets/20261127T144927146-000001 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Http.Result.NoContentResult[1]
+      Setting HTTP status code 204.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://localhost/api/tickets/20261127T144927146-000001 - 204 - - 0.9448ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://localhost/api/tickets/20261127T144927146-000001 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[3]
+      Writing value of type 'ProblemDetails' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://localhost/api/tickets/20261127T144927146-000001 - 404 - application/problem+json 1.8434ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: DELETE /api/tickets/'
+info: Microsoft.AspNetCore.Http.Result.NoContentResult[1]
+      Setting HTTP status code 204.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: DELETE /api/tickets/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://localhost/api/tickets - 204 - - 0.2948ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets - 200 - application/json;+charset=utf-8 0.2930ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/ - - -
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '/ (/)'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - 200 96 image/png 19.0411ms
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[100]
+      Start processing HTTP request GET http://localhost:8080/api/estado
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[100]
+      Sending HTTP request GET http://localhost:8080/api/estado
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:8080/api/estado - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/estado'
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[101]
+      Received HTTP response headers after 0.5393ms - 200
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[101]
+      End processing HTTP request after 0.6279ms - 200
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:8080/api/estado - 200 - application/json;+charset=utf-8 0.3807ms
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[100]
+      Start processing HTTP request GET http://localhost:8080/api/tickets
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[100]
+      Sending HTTP request GET http://localhost:8080/api/tickets
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:8080/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - 200 96 image/png 1.5260ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'TicketInfo' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo - 200 - application/json;+charset=utf-8 0.5146ms
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T144927348-000002.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: System.Net.Http.HttpClient.ClienteDeTickets.ClientHandler[101]
+      Received HTTP response headers after 2.9632ms - 200
+info: System.Net.Http.HttpClient.ClienteDeTickets.LogicalHandler[101]
+      End processing HTTP request after 3.0115ms - 200
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:8080/api/tickets - 200 - application/json;+charset=utf-8 2.8951ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T144927348-000002.png - 200 96 image/png 0.1104ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T144927348-000002.bin - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.bin'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name '20261127T144927348-000002.bin'.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.bin'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T144927348-000002.bin - 200 4 application/octet-stream 0.6159ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '/ (/)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/ - 200 - text/html;+charset=utf-8 31.2560ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets - 200 - application/json;+charset=utf-8 13.1768ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[3]
+      Writing value of type 'ProblemDetails' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo - 404 - application/problem+json 2.7829ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[3]
+      Writing value of type 'ProblemDetails' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - 404 - application/problem+json 0.6302ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=abc - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+fail: Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware[1]
+      An unhandled exception has occurred while executing the request.
+      Microsoft.AspNetCore.Http.BadHttpRequestException: Failed to bind parameter "Nullable<int> segundos" from "abc".
+         at lambda_method849(Closure, Object, HttpContext)
+         at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=abc - 400 - text/plain;+charset=utf-8 16.5010ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral [2 ms]
+  Passed PrintThermal.Emulator.Tests.Cliente.ClienteTests.SinTicketsElClienteDevuelveNull [1 s]
+  Passed PrintThermal.Emulator.Tests.Visor.VisorTests.SinTicketsElVisorMuestraElEstadoVacio [912 ms]
+  Passed PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteEsperaYBorra [182 ms]
+  Passed PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteDevuelveElMismoPngQueLaApi [212 ms]
+  Passed PrintThermal.Emulator.Tests.Visor.VisorTests.ElVisorMuestraElUltimoTicket [235 ms]
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.SinTicketsLaListaEstaVaciaYElUltimoDa404 [123 ms]
+info: Microsoft.Hosting.Lifetime[0]
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(consulta: "segundos=abc") [118 ms]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=61 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 400.
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[3]
+      Writing value of type 'ProblemDetails' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=61 - 400 - application/problem+json 8.3770ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=0 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 400.
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[3]
+      Writing value of type 'ProblemDetails' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=0 - 400 - application/problem+json 9.6621ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T144927946-000001.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T144927946-000001.png - 200 104 image/png 8.2654ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T144927955-000002.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T144927955-000002.png - 200 96 image/png 1.4197ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T144927957-000003.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T144927957-000003.png - 200 115 image/png 0.1071ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T144927957-000004.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T144927957-000004.png - 200 105 image/png 0.0853ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T144927958-000005.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T144927958-000005.png - 200 130 image/png 0.0581ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name ''.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ultimo.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/ultimo.png - 200 130 image/png 0.0617ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/no-existe.bin - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.bin'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[3]
+      Writing value of type 'ProblemDetails' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.bin'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/no-existe.bin - 404 - application/problem+json 13.9919ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/no-existe - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[3]
+      Writing value of type 'ProblemDetails' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/no-existe - 404 - application/problem+json 19.0054ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/no-existe.png - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[3]
+      Writing value of type 'ProblemDetails' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.png'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/no-existe.png - 404 - application/problem+json 85.0656ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://localhost/api/tickets/20261127T144928517-000001 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Http.Result.NoContentResult[1]
+      Setting HTTP status code 204.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://localhost/api/tickets/20261127T144928517-000001 - 204 - - 31.0279ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://localhost/api/tickets/20261127T144928517-000001 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 404.
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[3]
+      Writing value of type 'ProblemDetails' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: DELETE /api/tickets/{id:idticket}'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://localhost/api/tickets/20261127T144928517-000001 - 404 - application/problem+json 2.5550ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: DELETE /api/tickets/'
+info: Microsoft.AspNetCore.Http.Result.NoContentResult[1]
+      Setting HTTP status code 204.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: DELETE /api/tickets/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://localhost/api/tickets - 204 - - 0.0928ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets - 200 - application/json;+charset=utf-8 0.5188ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(consulta: "segundos=61") [97 ms]
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(consulta: "segundos=0") [103 ms]
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.ElPngLlegaConLaMismaHuella [111 ms]
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: "/api/tickets/no-existe.bin") [101 ms]
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: "/api/tickets/no-existe") [100 ms]
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: "/api/tickets/no-existe.png") [203 ms]
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.BorrarUnoYBorrarTodos [187 ms]
+info: Microsoft.AspNetCore.Http.Result.NoContentResult[1]
+      Setting HTTP status code 204.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - 204 - - 1023.4895ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1&despuesDe=20261127T144929784-000001 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'TicketInfo' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1&despuesDe=20261127T144929784-000001 - 200 - application/json;+charset=utf-8 27.7025ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets - 200 - application/json;+charset=utf-8 26.9993ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets?limite=1 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'List`1' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets?limite=1 - 200 - application/json;+charset=utf-8 1.5681ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets?limite=0 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[1]
+      Setting HTTP status code 400.
+info: Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult[3]
+      Writing value of type 'ProblemDetails' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/ => Listar'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets?limite=0 - 400 - application/problem+json 1.0250ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T144929885-000001.bin - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/{id:idticket}.bin'
+info: Microsoft.AspNetCore.Http.Result.FileContentResult[5]
+      Sending file with download name '20261127T144929885-000001.bin'.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/{id:idticket}.bin'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T144929885-000001.bin - 200 4 application/octet-stream 0.2601ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/estado - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/estado'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/estado - 200 - application/json;+charset=utf-8 0.3343ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaVenceSinColgarse [1 s]
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaConDespuesDeDevuelveElSiguienteSinEsperar [114 ms]
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaListaYElBinRespondenConLosDatosDelTicket [108 ms]
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LosIdsSonOrdenablesYSinPuntos [111 ms]
+info: Microsoft.AspNetCore.Http.Result.NoContentResult[1]
+      Setting HTTP status code 204.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - 204 - - 1028.7152ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=10 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[1]
+      Setting HTTP status code 200.
+info: Microsoft.AspNetCore.Http.Result.OkObjectResult[3]
+      Writing value of type 'TicketInfo' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'HTTP: GET /api/tickets/esperar => EsperarAsync'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=10 - 200 - application/json;+charset=utf-8 302.9619ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:07.19]   Finished:    PrintThermal.Emulator.Tests
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaSinDespuesDeNoDevuelveUnTicketViejo [1 s]
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaDevuelveElTicketQueLlega [382 ms]
+Test Run Successful.
+Total tests: 37
+     Passed: 37
+ Total time: 7.8307 Seconds
+Results File: /w/r/pruebas.trx
+salida dotnet test: 0

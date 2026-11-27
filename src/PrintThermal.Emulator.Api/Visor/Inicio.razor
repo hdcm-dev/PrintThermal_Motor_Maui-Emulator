@@ -1,8 +1,229 @@
 @page "/"
+@implements IAsyncDisposable
+@inject ClienteDeTickets Cliente
 
-@* Visor de tickets: esqueleto (rojo de PAR-PTE-04). *@
+@* Visor de tickets (REQ-HIS-Visor-Web): lista, ticket a escala, descargas, limpiar y estado; todo por la API. *@
 <PageTitle>Visor de tickets · impresora 58 mm</PageTitle>
 
-<main class="visor" data-vista="visor-tickets" data-estado="cargando">
-    <h1>Tickets de la impresora</h1>
+<main class="visor" data-vista="visor-tickets" data-estados="cargando vacio datos error" data-estado="@EstadoDeLaVista">
+    <header class="cabecera">
+        <div>
+            <h1>Tickets de la impresora</h1>
+            <p class="bajada">Cada ticket que imprime la app aparece acá solo, a escala del papel de 58 mm.</p>
+        </div>
+        <p class="medio" role="status" aria-live="polite">
+            <span class="medio__punto @(_estado?.MedioConectado == true ? "medio__punto--si" : "")" aria-hidden="true"></span>
+            @if (_estado is null)
+            {
+                <span>Consultando el estado…</span>
+            }
+            else
+            {
+                <span>Medio @_estado.Medio, @(_estado.MedioConectado ? "conectado" : "sin conexión") · @Cantidad(_estado.Tickets)</span>
+            }
+        </p>
+    </header>
+
+    @if (_error is not null)
+    {
+        <section class="alerta alerta--error" role="alert" aria-label="Error">
+            <p><strong>No se pudo leer la API del emulador.</strong> @_error</p>
+            <p>El visor vuelve a intentarlo solo; también podés reintentar ahora.</p>
+            <button type="button" class="btn" @onclick="ReintentarAsync">Reintentar</button>
+        </section>
+    }
+
+    @if (_tickets is null)
+    {
+        @if (_error is null)
+        {
+            <section class="cargando" aria-busy="true" aria-label="Cargando">
+                <div class="skel skel--lista"></div>
+                <div class="skel skel--papel"></div>
+            </section>
+        }
+    }
+    else if (_tickets.Count == 0)
+    {
+        <section class="vacio" aria-label="Sin tickets">
+            <svg class="vacio__icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z" /><path d="M9 8h6M9 12h6" /></svg>
+            <h2>Todavía no llegó ningún ticket</h2>
+            <p>Imprimí desde la app conectada a la impresora; el ticket aparece acá sin recargar la página.</p>
+        </section>
+    }
+    else
+    {
+        <div class="datos">
+            <section class="lista" aria-label="Tickets recibidos">
+                <div class="lista__cabecera">
+                    <h2>Recibidos</h2>
+                    @if (_confirmarLimpieza)
+                    {
+                        <div class="confirmar" role="group" aria-label="Confirmar limpieza">
+                            <span>¿Borrar @Cantidad(_tickets.Count)?</span>
+                            <button type="button" class="btn btn--peligro" @onclick="LimpiarAsync">Borrar todo</button>
+                            <button type="button" class="btn" @onclick="() => _confirmarLimpieza = false">Cancelar</button>
+                        </div>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn" @onclick="() => _confirmarLimpieza = true">Limpiar</button>
+                    }
+                </div>
+                <ul>
+                    @foreach (var t in _tickets)
+                    {
+                        var elegido = t.Id == _elegido?.Id;
+                        <li>
+                            <button type="button" class="ticket @(elegido ? "ticket--elegido" : "")" aria-current="@(elegido ? "true" : null)"
+                                    data-ticket="@t.Id" @onclick="() => Elegir(t)">
+                                <span class="ticket__hora">@Hora(t)</span>
+                                <span class="ticket__tamano">@Tamano(t)</span>
+                            </button>
+                        </li>
+                    }
+                </ul>
+            </section>
+
+            @if (_elegido is { } e)
+            {
+                <section class="detalle" aria-label="Ticket elegido">
+                    <figure class="papel">
+                        <img class="papel__impresion" src="@ClienteDeTickets.RutaPng(e.Id)" style="width: @Milimetros(e.AnchoPx)mm"
+                             alt="Ticket recibido a las @Hora(e)" />
+                    </figure>
+                    <p class="detalle__datos">
+                        Recibido el @e.Recibido.ToLocalTime().ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)
+                        · @e.AnchoPx × @e.AltoPx puntos · @Milimetros(e.AltoPx) mm de largo
+                    </p>
+                    <div class="acciones">
+                        <a class="btn btn--primario" href="@ClienteDeTickets.RutaPng(e.Id)" download="ticket-@(e.Id).png">Descargar PNG</a>
+                        <a class="btn" href="@ClienteDeTickets.RutaBin(e.Id)" download="ticket-@(e.Id).bin">Descargar bytes recibidos</a>
+                    </div>
+                </section>
+            }
+        </div>
+    }
 </main>
+
+@code {
+    // D6: 384 puntos ocupan 48 mm (8 puntos por mm); NO VERIFICADO en la 58HB6.
+    private const double PuntosPorMilimetro = 8.0;
+    private static readonly TimeSpan PlazoDeEspera = TimeSpan.FromSeconds(25);
+    private static readonly TimeSpan PausaTrasError = TimeSpan.FromSeconds(3);
+
+    private readonly CancellationTokenSource _vida = new();
+    private IReadOnlyList<TicketInfo>? _tickets;
+    private EstadoDelEmulador? _estado;
+    private TicketInfo? _elegido;
+    private string? _error;
+    private bool _confirmarLimpieza;
+
+    private string EstadoDeLaVista =>
+        _error is not null ? "error" : _tickets is null ? "cargando" : _tickets.Count == 0 ? "vacio" : "datos";
+
+    protected override Task OnInitializedAsync() => CargarAsync();
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _ = EscucharAsync(_vida.Token);
+        }
+    }
+
+    private async Task CargarAsync()
+    {
+        try
+        {
+            var seguiaAlUltimo = _elegido is null || _elegido.Id == _tickets?.FirstOrDefault()?.Id;
+            _estado = await Cliente.ObtenerEstadoAsync(_vida.Token);
+            _tickets = await Cliente.ListarAsync(ct: _vida.Token);
+            _elegido = seguiaAlUltimo
+                ? _tickets.FirstOrDefault()
+                : _tickets.FirstOrDefault(t => t.Id == _elegido!.Id) ?? _tickets.FirstOrDefault();
+            _error = null;
+        }
+        catch (Exception ex) when (!_vida.IsCancellationRequested)
+        {
+            _error = ex.Message;
+        }
+    }
+
+    // Actualización: espera larga contra /api/tickets/esperar mientras el circuito vive.
+    private async Task EscucharAsync(CancellationToken ct)
+    {
+        while (!ct.IsCancellationRequested)
+        {
+            try
+            {
+                // Con la lista cargada, desde su ticket más nuevo (o desde el principio si estaba vacía).
+                var despuesDe = _tickets is null ? null : _tickets.FirstOrDefault()?.Id ?? ClienteDeTickets.DesdeElPrincipio;
+                await Cliente.EsperarAsync(despuesDe, PlazoDeEspera, ct);
+                await InvokeAsync(async () =>
+                {
+                    await CargarAsync();
+                    StateHasChanged();
+                });
+            }
+            catch (OperationCanceledException) when (ct.IsCancellationRequested)
+            {
+                return;
+            }
+            catch (Exception ex)
+            {
+                await InvokeAsync(() =>
+                {
+                    _error = ex.Message;
+                    StateHasChanged();
+                });
+                try
+                {
+                    await Task.Delay(PausaTrasError, ct);
+                }
+                catch (OperationCanceledException)
+                {
+                    return;
+                }
+            }
+        }
+    }
+
+    private Task ReintentarAsync() => CargarAsync();
+
+    private void Elegir(TicketInfo t) => _elegido = t;
+
+    private async Task LimpiarAsync()
+    {
+        _confirmarLimpieza = false;
+        try
+        {
+            await Cliente.BorrarTodosAsync(_vida.Token);
+        }
+        catch (Exception ex) when (!_vida.IsCancellationRequested)
+        {
+            _error = ex.Message;
+            return;
+        }
+
+        _elegido = null;
+        await CargarAsync();
+    }
+
+    private static string Hora(TicketInfo t) =>
+        t.Recibido.ToLocalTime().ToString("HH:mm:ss", CultureInfo.InvariantCulture);
+
+    private static string Tamano(TicketInfo t) =>
+        string.Create(CultureInfo.InvariantCulture, $"{t.BytesBin} bytes · {Milimetros(t.AltoPx)} mm");
+
+    private static string Milimetros(int puntos) =>
+        (puntos / PuntosPorMilimetro).ToString("0.#", CultureInfo.InvariantCulture);
+
+    private static string Cantidad(int n) => n == 1 ? "1 ticket" : $"{n} tickets";
+
+    public async ValueTask DisposeAsync()
+    {
+        await _vida.CancelAsync();
+        _vida.Dispose();
+    }
+}

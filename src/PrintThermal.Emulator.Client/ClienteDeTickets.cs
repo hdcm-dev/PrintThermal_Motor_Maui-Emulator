@@ -1,3 +1,7 @@
+using System.Globalization;
+using System.Net;
+using System.Net.Http.Json;
+
 namespace PrintThermal.Emulator.Client;
 
 /// <summary>
@@ -25,38 +29,115 @@ public sealed class ClienteDeTickets
     }
 
     /// <summary>Ruta relativa del PNG de un ticket, para enlaces e imágenes.</summary>
-    public static string RutaPng(string id) => throw new NotImplementedException();
+    public static string RutaPng(string id) => $"api/tickets/{Uri.EscapeDataString(id)}.png";
 
     /// <summary>Ruta relativa de los bytes recibidos de un ticket.</summary>
-    public static string RutaBin(string id) => throw new NotImplementedException();
+    public static string RutaBin(string id) => $"api/tickets/{Uri.EscapeDataString(id)}.bin";
 
     /// <summary>Estado del emulador.</summary>
-    public Task<EstadoDelEmulador> ObtenerEstadoAsync(CancellationToken ct = default) => throw new NotImplementedException();
+    public async Task<EstadoDelEmulador> ObtenerEstadoAsync(CancellationToken ct = default) =>
+        await _http.GetFromJsonAsync<EstadoDelEmulador>("api/estado", ct).ConfigureAwait(false)
+        ?? throw new InvalidOperationException("La API devolvió un estado vacío.");
 
-    /// <summary>Tickets guardados.</summary>
-    public Task<IReadOnlyList<TicketInfo>> ListarAsync(int? limite = null, CancellationToken ct = default) => throw new NotImplementedException();
+    /// <summary>Tickets guardados, el más nuevo primero; a lo sumo <paramref name="limite"/> si se indica.</summary>
+    public async Task<IReadOnlyList<TicketInfo>> ListarAsync(int? limite = null, CancellationToken ct = default)
+    {
+        var ruta = limite is { } n ? "api/tickets?limite=" + n.ToString(CultureInfo.InvariantCulture) : "api/tickets";
+        return await _http.GetFromJsonAsync<List<TicketInfo>>(ruta, ct).ConfigureAwait(false) ?? [];
+    }
 
-    /// <summary>El ticket más nuevo.</summary>
-    public Task<TicketInfo?> ObtenerUltimoAsync(CancellationToken ct = default) => throw new NotImplementedException();
+    /// <summary>El ticket más nuevo, o <c>null</c> si no hay.</summary>
+    public Task<TicketInfo?> ObtenerUltimoAsync(CancellationToken ct = default) =>
+        LeerOpcionalAsync<TicketInfo>("api/tickets/ultimo", ct);
 
-    /// <summary>Un ticket por id.</summary>
-    public Task<TicketInfo?> ObtenerAsync(string id, CancellationToken ct = default) => throw new NotImplementedException();
+    /// <summary>Un ticket por id, o <c>null</c> si no existe.</summary>
+    public Task<TicketInfo?> ObtenerAsync(string id, CancellationToken ct = default) =>
+        LeerOpcionalAsync<TicketInfo>($"api/tickets/{Uri.EscapeDataString(id)}", ct);
 
-    /// <summary>PNG del más nuevo.</summary>
-    public Task<byte[]?> ObtenerPngDelUltimoAsync(CancellationToken ct = default) => throw new NotImplementedException();
+    /// <summary>PNG del ticket más nuevo, o <c>null</c> si no hay.</summary>
+    public Task<byte[]?> ObtenerPngDelUltimoAsync(CancellationToken ct = default) =>
+        LeerBytesAsync("api/tickets/ultimo.png", ct);
 
-    /// <summary>PNG de un ticket.</summary>
-    public Task<byte[]?> ObtenerPngAsync(string id, CancellationToken ct = default) => throw new NotImplementedException();
+    /// <summary>PNG de un ticket, o <c>null</c> si no existe.</summary>
+    public Task<byte[]?> ObtenerPngAsync(string id, CancellationToken ct = default) =>
+        LeerBytesAsync(RutaPng(id), ct);
 
-    /// <summary>Bytes recibidos de un ticket.</summary>
-    public Task<byte[]?> ObtenerBinAsync(string id, CancellationToken ct = default) => throw new NotImplementedException();
+    /// <summary>Bytes recibidos de un ticket, o <c>null</c> si no existe.</summary>
+    public Task<byte[]?> ObtenerBinAsync(string id, CancellationToken ct = default) =>
+        LeerBytesAsync(RutaBin(id), ct);
 
-    /// <summary>Espera un ticket.</summary>
-    public Task<TicketInfo?> EsperarAsync(string? despuesDe, TimeSpan tiempoMaximo, CancellationToken ct = default) => throw new NotImplementedException();
+    /// <summary>
+    /// Espera el primer ticket con id mayor que <paramref name="despuesDe"/> hasta <paramref name="tiempoMaximo"/>
+    /// (entre 1 y 60 segundos); sin <paramref name="despuesDe"/>, uno posterior a los presentes. Devuelve <c>null</c>
+    /// si el plazo vence sin ticket. Para no perder un ticket: leer <see cref="EstadoDelEmulador.UltimoId"/>, imprimir
+    /// y esperar con ese id, o con <see cref="DesdeElPrincipio"/> si no había. El <see cref="HttpClient.Timeout"/> debe
+    /// superar el plazo.
+    /// </summary>
+    public async Task<TicketInfo?> EsperarAsync(string? despuesDe, TimeSpan tiempoMaximo, CancellationToken ct = default)
+    {
+        var segundos = (int)Math.Ceiling(tiempoMaximo.TotalSeconds);
+        if (segundos < 1 || segundos > EsperaMaxima.TotalSeconds)
+        {
+            throw new ArgumentOutOfRangeException(nameof(tiempoMaximo), tiempoMaximo, "Entre 1 y 60 segundos.");
+        }
 
-    /// <summary>Borra todos.</summary>
-    public Task BorrarTodosAsync(CancellationToken ct = default) => throw new NotImplementedException();
+        var ruta = "api/tickets/esperar?segundos=" + segundos.ToString(CultureInfo.InvariantCulture);
+        if (!string.IsNullOrEmpty(despuesDe))
+        {
+            ruta += "&despuesDe=" + Uri.EscapeDataString(despuesDe);
+        }
 
-    /// <summary>Borra uno.</summary>
-    public Task<bool> BorrarAsync(string id, CancellationToken ct = default) => throw new NotImplementedException();
+        using var respuesta = await _http.GetAsync(ruta, ct).ConfigureAwait(false);
+        if (respuesta.StatusCode == HttpStatusCode.NoContent)
+        {
+            return null;
+        }
+
+        respuesta.EnsureSuccessStatusCode();
+        return await respuesta.Content.ReadFromJsonAsync<TicketInfo>(ct).ConfigureAwait(false);
+    }
+
+    /// <summary>Borra todos los tickets.</summary>
+    public async Task BorrarTodosAsync(CancellationToken ct = default)
+    {
+        using var respuesta = await _http.DeleteAsync("api/tickets", ct).ConfigureAwait(false);
+        respuesta.EnsureSuccessStatusCode();
+    }
+
+    /// <summary>Borra un ticket; <c>false</c> si no existía.</summary>
+    public async Task<bool> BorrarAsync(string id, CancellationToken ct = default)
+    {
+        using var respuesta = await _http.DeleteAsync($"api/tickets/{Uri.EscapeDataString(id)}", ct).ConfigureAwait(false);
+        if (respuesta.StatusCode == HttpStatusCode.NotFound)
+        {
+            return false;
+        }
+
+        respuesta.EnsureSuccessStatusCode();
+        return true;
+    }
+
+    private async Task<T?> LeerOpcionalAsync<T>(string ruta, CancellationToken ct) where T : class
+    {
+        using var respuesta = await _http.GetAsync(ruta, ct).ConfigureAwait(false);
+        if (respuesta.StatusCode == HttpStatusCode.NotFound)
+        {
+            return null;
+        }
+
+        respuesta.EnsureSuccessStatusCode();
+        return await respuesta.Content.ReadFromJsonAsync<T>(ct).ConfigureAwait(false);
+    }
+
+    private async Task<byte[]?> LeerBytesAsync(string ruta, CancellationToken ct)
+    {
+        using var respuesta = await _http.GetAsync(ruta, ct).ConfigureAwait(false);
+        if (respuesta.StatusCode == HttpStatusCode.NotFound)
+        {
+            return null;
+        }
+
+        respuesta.EnsureSuccessStatusCode();
+        return await respuesta.Content.ReadAsByteArrayAsync(ct).ConfigureAwait(false);
+    }
 }
