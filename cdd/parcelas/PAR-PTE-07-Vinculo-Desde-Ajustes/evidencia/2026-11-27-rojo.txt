@@ -1,4 +1,4 @@
-# Rojo: dotnet test --filter SeguridadVinculoSinCifrar sobre 6f79bd3 (pruebas nuevas, sin la corrección), SDK 10.0.403 en contenedor con turno (2026-11-27).
+# Rojo: dotnet test --filter SeguridadVinculoSinCifrar sobre 3d1aa17 (pruebas nuevas, sin la corrección; corrido antes del rebase sobre main como 6f79bd3, mismo src/ y mismas pruebas de Bluetooth), SDK 10.0.403 en contenedor con turno (2026-11-27).
   Failed PrintThermal.Emulator.Tests.Bluetooth.SeguridadVinculoSinCifrarTests.TrasUnVinculoSinCifrarLaImpresoraReconectaYCorta [5 s]
   Error Message:
    System.TimeoutException : el host no envió el comando 0x0405

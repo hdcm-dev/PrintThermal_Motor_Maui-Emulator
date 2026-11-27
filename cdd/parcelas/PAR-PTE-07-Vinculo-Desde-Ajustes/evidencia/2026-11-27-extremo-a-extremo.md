@@ -10,7 +10,7 @@
 ## 1. Montaje
 
 - Emulador de Android 17 (API 37, google_apis x86_64) en su contenedor, con turno y puesto de emulador: 1 CPU / 5,5 GB.
-- Imagen construida con el `Dockerfile` de la rama en el equipo de cómputo (con turno) desde `c50f02b`, el commit previo al rebase sobre `main` con el mismo `src/` y `Dockerfile` que `86b7de9` (después cambiaron `MedioBluetooth.cs`, que suma la opción, `docs/` y `cdd/`). Contenedor con `--network container:<emulador>`, 1 CPU / 512 MB, `--rm`, en el mismo turno; netsim no se expuso.
+- Imagen construida con el `Dockerfile` de la rama en el equipo de cómputo (con turno) desde `c50f02b`, el commit previo al rebase sobre `main`, con el mismo `src/` y `Dockerfile` que `028d4aa` de la rama (después cambiaron `MedioBluetooth.cs`, que suma la opción, `docs/` y `cdd/`). Contenedor con `--network container:<emulador>`, 1 CPU / 512 MB, `--rm`, en el mismo turno; netsim no se expuso.
 - App: `MotorDsl.SampleApp` de la librería cliente, el mismo APK de PAR-PTE-05 (sha256 `134227ba…37f0`).
 - Android con otros equipos «58HB6» vinculados de corridas anteriores, y el Bluetooth de Android recién reiniciado antes de cada vínculo desde Ajustes: la condición que hacía fallar el camino (a) (diagnóstico §4).
 - Por cada impresión: «Imprimir Ticket» en la app, `GET /api/tickets/esperar?segundos=60&despuesDe=<anterior>`, después `{id}.png` y `{id}.bin` por la API, comparados por SHA-256 con los archivos de la carpeta montada.
@@ -107,5 +107,5 @@ impresion 5 id=20261127T192856403-0009 bytes=341 espera=4.616437516s png_api=2ad
 ## 4. Desvíos y límites
 
 - Camino (b) medido en una conexión que no fue la primera después de encender el Bluetooth de Android (como en PAR-PTE-05). Como primera conexión con otros equipos vinculados: sin medir (LAZ-0016).
-- La imagen de la corrida tiene el `src/` de `86b7de9`; la cabeza agrega la opción `ReconexionTrasVinculoSinCifrar` en `MedioBluetooth.cs` (por omisión `true`, el mismo comportamiento), cubierta por las pruebas.
+- La imagen de esta corrida tiene el `src/` de `028d4aa`, sin la opción `ReconexionTrasVinculoSinCifrar` en `MedioBluetooth.cs` (entró después, por omisión `true`) ni los cambios de la auditoría.
 - No se midió con la 58HB6 física ni con un teléfono real.
