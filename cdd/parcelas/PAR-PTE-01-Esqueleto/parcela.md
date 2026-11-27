@@ -4,7 +4,7 @@ titulo: Esqueleto de la solución PrintThermal.Emulator: cinco proyectos que com
 version: 1.0
 estado: lista
 velocidad: rapida
-base_commit: 07d938ce85db406f4d06fd0fe1b2706a6ed07854
+base_commit: d00f82960aeefc5259c9a4b3ddaf8580faf098b4
 sprint: SPR-01
 epica: REQ-EPI-Distribucion@v1
 historias:
@@ -15,6 +15,7 @@ lee:
   - ADR-0006@v1
 modifica:
   - REQ-HIS-Compilacion-Verificada@v1
+  - REQ-HIS-Cliente-Tipado@v1
 appetite: medio día
 pendientes:
 decisiones:
@@ -22,6 +23,7 @@ decisiones:
   - {id: D2, tema: "xUnit 2.9.3 con xunit.runner.visualstudio 3.1.5 y Microsoft.NET.Test.Sdk 18.12.0, versiones de nuget.org del 2026-11-27", clase: K1}
   - {id: D3, tema: "el proyecto Api usa el SDK web como biblioteca hasta PAR-PTE-04, que le da su Program.cs", clase: K1}
   - {id: D4, tema: "acciones de GitHub fijadas por SHA de commit de su etiqueta", clase: K1}
+  - {id: D5, tema: "re-planificación: REQ-HIS-Cliente-Tipado entra en modifica para que su rutas cubra sólo el código y el .csproj quede como estructura; ENTREGA.md entra en estructura del lock", clase: K1}
 sin_impacto_de_diseno: false
 motivo_sin_impacto:
 ---

@@ -37,7 +37,7 @@ Ola 4: PAR-PTE-05
 Ola 5: PAR-PTE-06
   PAR-PTE-01 antes que PAR-PTE-02 por REQ-HIS-Compilacion-Verificada
   PAR-PTE-01 antes que PAR-PTE-03 por REQ-HIS-Compilacion-Verificada
-  PAR-PTE-01 antes que PAR-PTE-04 por REQ-HIS-Compilacion-Verificada
+  PAR-PTE-01 antes que PAR-PTE-04 por REQ-HIS-Cliente-Tipado, REQ-HIS-Compilacion-Verificada
   PAR-PTE-02 antes que PAR-PTE-04 por REQ-HIS-Almacen-De-Tickets
   PAR-PTE-03 antes que PAR-PTE-05 por REQ-HIS-Descubrimiento-Y-Emparejamiento
   PAR-PTE-04 antes que PAR-PTE-05 por REQ-HIS-Api-De-Tickets

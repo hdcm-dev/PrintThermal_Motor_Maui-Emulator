@@ -16,6 +16,7 @@ ajustes: []
 estructura:
   - cdd/cdd.lock.md
   - AGENTS.md
+  - ENTREGA.md
   - '*.sln'
   - '*.slnx'
   - '**/*.csproj'
