@@ -28,7 +28,7 @@ Un corte con un manejador que Android atribuye bien devuelve el equipo a reposo:
 
 - A. La impresora, al ver que un vínculo nuevo terminó sin cifrar, hace una conexión breve con el teléfono (que tiene el escaneo de página activo) y la corta enseguida: Android la recibe con un manejador nuevo, atribuido al equipo correcto, y su corte lo deja en reposo (reversible: opción `ReconexionTrasVinculoSinCifrar`).
 - B. Documentar el límite y pedir al usuario que vincule conectando o que reintente la conexión (no cumple LAZ-0011: el camino de Ajustes tiene que funcionar como con la impresora real).
-- C. Que la impresora inicie autenticación o cifrado en la conexión de la app: Android cierra el estado al recibir el cifrado ajeno, pero no reanuda la conexión L2CAP que espera (`btm_sec_encrypt_change` vuelve sin reenviar el pedido), y el RFCOMM vence igual.
+- C. Que la impresora inicie autenticación o cifrado en la conexión de la app. Según el código fuente de `main` (no medido en la imagen API 37), Android cierra el estado al recibir el cifrado ajeno pero no reanuda la conexión L2CAP que espera (`btm_sec_encrypt_change` vuelve sin reenviar el pedido), y el RFCOMM vencería igual.
 
 ## 3. Decisión
 

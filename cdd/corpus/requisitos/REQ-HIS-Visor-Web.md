@@ -27,7 +27,7 @@ En PAR-PTE-04 el visor es una sola página:
 
 - Cabecera con el estado del medio y la cantidad de tickets.
 - Lista con la hora y el tamaño de cada ticket.
-- El ticket elegido a escala: 384 puntos ocupan 48 mm en un papel de 58 mm (D6, no medido en la 58HB6).
+- El ticket elegido a escala: 384 puntos ocupan 48 mm en un papel de 58 mm (D6, no medido en la 58HB6). Si la pantalla no alcanza (menos de unos 213 px de ancho), se achica al ancho de su tarjeta (PAR-PTE-07).
 - Descarga del PNG y del `.bin`.
 - Limpiar, con confirmación.
 - Cuatro estados: cargando, vacío, datos y error.

@@ -30,7 +30,7 @@ La impresora emulada se anuncia por Bluetooth Classic con el nombre «58HB6», p
 
 - Dado el emulador de Android con el contenedor del emulador de impresora en su espacio de red, cuando Android busca dispositivos cercanos, entonces «58HB6» aparece en 30 s o menos, 3 de 3 (CE-1).
 - Dado «58HB6» visible, cuando Android la empareja, entonces figura vinculada y lo sigue estando tras reiniciar el emulador de impresora (CE-2).
-- Dado «58HB6» vinculada desde Ajustes de Android (vínculo dedicado, `createBond`), cuando una app conecta después por RFCOMM, entonces la conexión se cifra con la clave guardada, sin reemparejar, y el ticket llega íntegro, 5 de 5 (CE-2, LAZ-0011).
+- Dado «58HB6» vinculada desde Ajustes de Android (vínculo dedicado, `createBond`), cuando una app conecta después por RFCOMM, entonces la conexión se cifra con la clave guardada, sin reemparejar, y cinco tickets seguidos por esa conexión llegan íntegros, 5 de 5 (CE-2, LAZ-0011).
 
 ## 3. Trazas
 
