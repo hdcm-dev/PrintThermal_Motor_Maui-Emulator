@@ -68,6 +68,8 @@ body { margin: 0; }
 .skel { border-radius: var(--radio); background: linear-gradient(90deg, #e5e7eb, #f3f4f6, #e5e7eb); min-height: 240px; }
 
 .datos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 16px; align-items: start; }
+/* Los hijos de la grilla no se ensanchan por su contenido (min-width: auto los empujaba fuera de la pantalla). */
+.datos > * { min-width: 0; }
 
 .lista { background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio); padding: 12px; }
 .lista__cabecera { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
@@ -85,14 +87,14 @@ body { margin: 0; }
 .ticket__hora { font-variant-numeric: tabular-nums; font-weight: 600; }
 .ticket__tamano { color: var(--texto-suave); font-size: 0.9rem; }
 
-.detalle { display: grid; justify-items: center; gap: 12px; }
+.detalle { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 12px; }
 .papel {
-  width: var(--papel-ancho); max-width: 100%; margin: 0; padding: 4mm 0;
+  width: min(var(--papel-ancho), 100%); margin: 0; padding: 4mm 0;
   display: flex; justify-content: center; background: #ffffff;
   box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
 }
 .papel__impresion { display: block; max-width: 100%; height: auto; image-rendering: pixelated; }
-.detalle__datos { margin: 0; color: var(--texto-suave); text-align: center; }
+.detalle__datos { margin: 0; color: var(--texto-suave); text-align: center; overflow-wrap: anywhere; }
 .acciones { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 
 @media (max-width: 720px) {
