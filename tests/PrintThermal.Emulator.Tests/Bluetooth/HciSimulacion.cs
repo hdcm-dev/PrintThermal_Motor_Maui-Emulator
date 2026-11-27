@@ -171,6 +171,11 @@ internal sealed class ControladorFalso : ITransporteHci
             0x042B or 0x042C or 0x040B or 0x040C or 0x040D or 0x040E => [0, .. prm[..6]],
             _ => [0],
         };
+        if (op is 0x0405 or 0x0406)
+        {
+            Evento(0x0F, 0, 1, (byte)op, (byte)(op >> 8)); // Create Connection y Disconnect contestan con Command Status
+            return;
+        }
         if (op == 0x0409)
         {
             Evento(0x0F, 0, 1, (byte)op, (byte)(op >> 8));
