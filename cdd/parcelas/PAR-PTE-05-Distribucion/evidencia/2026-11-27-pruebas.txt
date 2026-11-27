@@ -1,0 +1,7 @@
+# Verde de PAR-PTE-05 (2026-11-27)
+
+Commit 23bf24b; mcr.microsoft.com/dotnet/sdk:10.0.403 en el equipo de cómputo, con turno (perfil liviano, 2 CPU / 4 GB). Detalle por prueba en el .trx.
+
+```text
+Passed!  - Failed:     0, Passed:   131, Skipped:     0, Total:   131, Duration: 10 s - PrintThermal.Emulator.Tests.dll (net10.0)
+```

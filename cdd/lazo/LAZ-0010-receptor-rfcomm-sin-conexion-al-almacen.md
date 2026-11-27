@@ -42,3 +42,7 @@ una prueba de extremo a extremo que reciba bytes por RFCOMM y los encuentre como
 ## 4. Decisión
 
 Pendiente: la re-planificación la decide el orquestador 02/08.
+
+**Avance en PAR-PTE-05 (2026-11-27).**
+
+PAR-PTE-05 (D2) conecta la recepción RFCOMM con el almacén por `ReceptorAlAlmacen`: un intérprete por conexión y cada ticket terminado se guarda; prueba `ElTicketRecibidoPorRfcommLlegaALaApi`. Queda para el 08 especificarlo o cerrarlo.

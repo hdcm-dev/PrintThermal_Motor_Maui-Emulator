@@ -2,7 +2,7 @@
 id: PAR-PTE-05
 titulo: Contenedor, release en ghcr.io y prueba de extremo a extremo en el emulador de Android API 37
 version: 1.1
-estado: lista
+estado: cerrada
 velocidad: completa
 base_commit: 0b8c5b04dcf6a6ff9c4987b97edbd6f708ae34d4
 sprint: SPR-01
@@ -23,6 +23,10 @@ modifica:
   - REQ-HIS-Api-De-Tickets@v2
 appetite: dos días
 pendientes:
+  - {que: "conectar el almacén en disco y el medio Bluetooth al host (avance en esta parcela, D2)", registro: LAZ-0006}
+  - {que: "escucha de la imagen dentro del contenedor (avance en esta parcela, D3)", registro: LAZ-0008}
+  - {que: "recepción RFCOMM conectada al almacén (avance en esta parcela, D2)", registro: LAZ-0010}
+  - {que: "fin de un ticket sin corte con la conexión abierta: el cierre de la conexión lo termina; el plazo sigue sin decidir", registro: LAZ-0001}
 decisiones:
   - {id: D1, tema: "imagen base mcr.microsoft.com/dotnet/aspnet:10.0.14-noble-chiseled por digest (runtime del SDK 10.0.403 de global.json) y etiqueta semántica v1.0.0 del release", clase: K1}
   - {id: D2, tema: "conexión del medio Bluetooth (PAR-PTE-03) y del almacén en disco (PAR-PTE-02) al host, detrás de IAlmacenDeTickets e IEstadoDelMedio, en src/PrintThermal.Emulator.Api/Integracion/ (LAZ-0006, LAZ-0010; el fin de conexión cierra el ticket, LAZ-0001)", clase: K1}
@@ -76,4 +80,22 @@ Ver `tasks.md`.
 
 ## Cierre
 
-Pendiente.
+- Versiones subidas: REQ-HIS-Imagen-Publicada v1 → v2 (historia y `modifica`; `rutas:` suma `tests/…/Distribucion/**`) y REQ-HIS-Api-De-Tickets v2 → v3 (`modifica`; `rutas:` suma `src/PrintThermal.Emulator.Api/Integracion/**`).
+- Changelog: «PAR-PTE-05 · Imagen del emulador…» en `cdd/corpus/CHANGELOG.md`.
+- Evidencia (corridas con SDK 10.0.403 en contenedor con turno en el equipo de cómputo):
+  - `evidencia/2026-11-27-rojo.txt`: 9 de 123 en rojo sobre el esqueleto (las nuevas, por la causa esperada). Las cinco pruebas que sumó la auditoría se escribieron con el código ya hecho: no tienen rojo propio y su poder lo mide la mutación.
+  - `evidencia/2026-11-27-pruebas.txt` y `.trx`: 131 de 131 en verde.
+  - `evidencia/2026-11-27-mutacion.txt`: 10 mutantes, 9 en rojo y al menos uno por REQ; sobrevive el de la guarda de una carrera que las pruebas de un hilo no reproducen.
+  - `evidencia/2026-11-27-extremo-a-extremo.md` y `capturas/`: emulador de Android API 37 (1 CPU / 5,5 GB) y la imagen construida con este `Dockerfile` desde `5066fa3` en su red (1 CPU / 512 MB), en un solo turno. `MotorDsl.SampleApp` de la librería cliente imprimió cinco veces por RFCOMM; la API entregó cada PNG con la misma huella SHA-256 que el guardado en la carpeta montada, 5 de 5, y los 341 bytes que informó la app. El visor se capturó con Chrome del emulador de Android.
+- Decisiones: D1 a D3 son K1; D4 es K0 (modo de uso aprobado por INFRA, documentado en `README.md` y en el `Dockerfile`).
+- Divergencia corpus/código: ninguna que contradiga un ADR. ADR-0006 pide imagen en `ghcr.io` y runners de GitHub: el release corre en `ubuntu-latest`.
+- Auditoría (`evidencia/2026-11-27-auditoria.md`): las rondas 1 y 2 refutaron el cierre; cada hallazgo tiene respuesta en código, pruebas, texto o NO VERIFICADO. No hubo tercera ronda.
+- NO VERIFICADO:
+  - el release real y la imagen publicada: corren al empujar la etiqueta, después de fusionar; su resultado va a la bitácora del repositorio de documentación;
+  - el extremo a extremo con la imagen publicada y con el receptor final: se usó la imagen construida en local desde `5066fa3`; el receptor cambió después por la auditoría y lo cubren las pruebas;
+  - vincular con `createBond` y después conectar dejó a Android sin cifrado dos veces (LAZ-0011 reproducido); vincular conectando funcionó;
+  - las respuestas a consultas (DLE EOT, GS I) no vuelven a la app: la frontera `IReceptorDeBytes` no tiene canal de vuelta;
+  - el dueño de `/data` con un volumen con nombre;
+  - la guarda de `ReceptorAlAlmacen` para bytes que llegan mientras se cierra la conexión (mutante 8);
+  - la fidelidad contra la 58HB6 física (heredado de PAR-PTE-02 a PAR-PTE-04).
+- Hallazgo fuera de alcance: a 540 px de pantalla el ticket desborda su tarjeta en el visor (REQ-HIS-Visor-Web).

@@ -36,3 +36,7 @@ Aclaración (L1): no cambia el alcance de CE-4; falta decidir el plazo y quién 
 ## 4. Decisión
 
 Pendiente.
+
+**Avance en PAR-PTE-05 (2026-11-27).**
+
+Con PAR-PTE-05 (D2) el host termina el ticket en curso cuando se cierra la conexión RFCOMM (`ReceptorAlAlmacen.Cerrada` → `Interprete.Finalizar`); prueba `UnTicketSinCorteTerminaAlCerrarLaConexion`. Con la conexión abierta y sin corte, el ticket sigue abierto: el plazo sigue sin decidir.

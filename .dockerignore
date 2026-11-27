@@ -1,0 +1,8 @@
+# Sólo entra lo que compila la imagen (Dockerfile): global.json, Directory.*.props y src/.
+**/bin/
+**/obj/
+.git/
+.github/
+cdd/
+tests/
+resultados/

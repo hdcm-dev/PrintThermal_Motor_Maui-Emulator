@@ -1,0 +1,23 @@
+# Rojo de PAR-PTE-05 (2026-11-27)
+
+Árbol: esqueleto 3387abf con la visibilidad de los ayudantes corregida (2623402, sólo pruebas). Contenedor mcr.microsoft.com/dotnet/sdk:10.0.403 en el equipo de cómputo, con turno (perfil liviano, 2 CPU / 4 GB).
+
+```text
+Failed PrintThermal.Emulator.Tests.Distribucion.ReleaseTests.ElWorkflowDeReleasePublicaEnGhcr [49 ms]
+Failed PrintThermal.Emulator.Tests.Distribucion.ReleaseTests.LaImagenFijaEscuchaYSalida [< 1 ms]
+Failed PrintThermal.Emulator.Tests.Api.IntegracionTests.UnTicketSinCorteTerminaAlCerrarLaConexion [989 ms]
+Failed PrintThermal.Emulator.Tests.Api.IntegracionTests.BorrarQuitaLosArchivosDeLaCarpeta [174 ms]
+Failed PrintThermal.Emulator.Tests.Api.IntegracionTests.OtroHostSobreLaMismaCarpetaVeLosTickets [176 ms]
+Failed PrintThermal.Emulator.Tests.Api.IntegracionTests.ElTicketRecibidoPorRfcommLlegaALaApi [131 ms]
+Failed PrintThermal.Emulator.Tests.Api.IntegracionTests.LaEsperaDevuelveElTicketQueLlegaPorRfcomm [103 ms]
+Failed PrintThermal.Emulator.Tests.Distribucion.ExtremoAExtremoTests.LaCorridaRealDejoCincoTickets [2 ms]
+Failed PrintThermal.Emulator.Tests.Distribucion.ExtremoAExtremoTests.LaAppDeEjemploImprimeYLaApiEntregaElPng [1 ms]
+Failed!  - Failed:     9, Passed:   114, Skipped:     0, Total:   123, Duration: 7 s - PrintThermal.Emulator.Tests.dll (net10.0)
+      1 Assert.Equal() Failure: Values differ
+      1 System.InvalidOperationException : No data found for PrintThermal.Emulator.Tests.Distribucion.ExtremoAExtremoTests.LaAppDeEjemploImprimeYLaApiEntregaElPng
+      5 System.InvalidOperationException : No service for type 'PrintThermal.Emulator.Api.Integracion.ReceptorAlAlmacen' has been registered.
+      1 System.IO.FileNotFoundException : Could not find file '/w/Dockerfile'.
+      1 System.IO.FileNotFoundException : Could not find file '/w/.github/workflows/release.yml'.
+```
+
+Las 9 que fallan son las nuevas (REQ-01 a REQ-04), por la causa esperada: falta el workflow, falta el Dockerfile, el host no registra el receptor ni el almacén en disco, y todavía no hay captura de la corrida real. Las 114 anteriores pasan. Una primera corrida no compiló por xUnit1013 (ayudantes públicos en la clase de prueba); se corrigió antes de esta.
