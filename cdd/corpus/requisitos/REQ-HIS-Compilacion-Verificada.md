@@ -1,6 +1,6 @@
 ---
 id: REQ-HIS-Compilacion-Verificada
-version: 1
+version: 2
 epica: REQ-EPI-Distribucion
 gobierno: parcela
 tipo: referencia
@@ -30,10 +30,11 @@ La solución `PrintThermal.Emulator` (proyectos Core, Bluetooth, Api, Client y T
 ## 3. Trazas
 
 - Sube de: REQ-EPI-Distribucion
-- Implementado en: todavía no hay código (siembra del 2026-11-27).
+- Implementado en: `PrintThermal.Emulator.slnx`, `Directory.Build.props`, `Directory.Packages.props`, `global.json`, `.github/workflows/cdd.yml` (trabajo `dotnet`); pruebas en `tests/PrintThermal.Emulator.Tests/EsqueletoTests.cs`.
 
 ## 4. Historial
 
 | Versión | Parcela | Cambio |
 |---|---|---|
 | v1 | siembra | Alta |
+| v2 | PAR-PTE-01 | Solución con los cinco proyectos en `net10.0`, SDK 10.0.403 fijado sin avance, versiones de paquetes centrales y exactas, CI .NET en `ubuntu-latest` sin la norma |

@@ -1,13 +1,31 @@
-# CI pública del emulador (runners de GitHub, ADR-0006).
+# CI pública del emulador (runners de GitHub, ADR-0006): compila y prueba la solución .NET.
 # Las compuertas de CDD se corren en local, con la norma CDD (repositorio privado) en el commit del lock:
 # esta CI no descarga la norma ni guarda credenciales (decisión P5 B de la visión, DEC-006).
-# Hasta que exista la solución (PAR-PTE-01) queda sólo manual; PAR-PTE-01 la convierte en compilación y pruebas .NET.
+# Acciones fijadas por el SHA de commit de su etiqueta (PAR-PTE-01, D4); el SDK, por global.json.
 name: cdd
 on:
+  pull_request:
+  push:
+    branches: [main]
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
-  compuertas-locales:
+  dotnet:
     runs-on: ubuntu-latest
     steps:
-      - name: Dónde corren las compuertas
-        run: echo "Las compuertas de CDD se corren en local (AGENTS.md, DEC-006); todavía no hay solución .NET que compilar."
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
+        with:
+          global-json-file: global.json
+      - name: Compilar
+        run: dotnet build PrintThermal.Emulator.slnx --configuration Release
+      - name: Probar
+        run: dotnet test PrintThermal.Emulator.slnx --configuration Release --no-build --logger "trx;LogFileName=pruebas.trx" --results-directory resultados
+      - name: Resultados como artefacto
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: pruebas
+          path: resultados/*.trx
+          if-no-files-found: ignore

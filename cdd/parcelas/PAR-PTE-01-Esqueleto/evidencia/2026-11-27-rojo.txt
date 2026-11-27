@@ -1,0 +1,85 @@
+# Rojo: dotnet test con sólo el proyecto de pruebas, sin global.json y con la CI manual (2026-11-27)
+# Contenedor mcr.microsoft.com/dotnet/sdk:10.0.403, turno 217, 2 CPU / 4 GB. REQ-02 pasa en rojo: Directory.Packages.props es condición para compilar el proyecto de pruebas.
+10.0.403
+  Determining projects to restore...
+  Restored /w/tests/PrintThermal.Emulator.Tests/PrintThermal.Emulator.Tests.csproj (in 3.31 sec).
+  PrintThermal.Emulator.Tests -> /w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll
+Test run for /w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 10.0.14)
+[xUnit.net 00:00:00.07]   Discovering: PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.10]   Discovered:  PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.12]   Starting:    PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.16]     PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10 [FAIL]
+[xUnit.net 00:00:00.16]       Assert.Equal() Failure: Collections differ
+[xUnit.net 00:00:00.16]                  ↓ (pos 0)
+[xUnit.net 00:00:00.16]       Expected: ["PrintThermal.Emulator.Api", "PrintThermal.Emulator.Bluetooth", "PrintThermal.Emulator.Client", "PrintThermal.Emulator.Core", "PrintThermal.Emulator.Tests"]
+[xUnit.net 00:00:00.16]       Actual:   ["PrintThermal.Emulator.Tests"]
+[xUnit.net 00:00:00.16]                  ↑ (pos 0)
+[xUnit.net 00:00:00.16]       Stack Trace:
+[xUnit.net 00:00:00.16]         /w/tests/PrintThermal.Emulator.Tests/EsqueletoTests.cs(47,0): at PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10()
+[xUnit.net 00:00:00.16]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+[xUnit.net 00:00:00.16]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.17]     PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado [FAIL]
+[xUnit.net 00:00:00.17]       System.IO.FileNotFoundException : Could not find file '/w/global.json'.
+[xUnit.net 00:00:00.17]       Stack Trace:
+[xUnit.net 00:00:00.17]            at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+[xUnit.net 00:00:00.17]            at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+[xUnit.net 00:00:00.17]            at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+[xUnit.net 00:00:00.17]            at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+[xUnit.net 00:00:00.17]            at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+[xUnit.net 00:00:00.17]            at System.IO.File.ReadAllText(String path, Encoding encoding)
+[xUnit.net 00:00:00.17]         /w/tests/PrintThermal.Emulator.Tests/EsqueletoTests.cs(96,0): at PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado()
+[xUnit.net 00:00:00.17]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+[xUnit.net 00:00:00.17]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.17]     PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma [FAIL]
+[xUnit.net 00:00:00.17]       Assert.Contains() Failure: Item not found in collection
+[xUnit.net 00:00:00.17]       Collection: ["name: cdd", "on:", "workflow_dispatch:", "jobs:", "compuertas-locales:", ···]
+[xUnit.net 00:00:00.17]       Not found:  "pull_request:"
+[xUnit.net 00:00:00.17]       Stack Trace:
+[xUnit.net 00:00:00.17]         /w/tests/PrintThermal.Emulator.Tests/EsqueletoTests.cs(112,0): at PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma()
+[xUnit.net 00:00:00.17]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+[xUnit.net 00:00:00.17]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.17]   Finished:    PrintThermal.Emulator.Tests
+  Failed PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10 [10 ms]
+  Error Message:
+   Assert.Equal() Failure: Collections differ
+           ↓ (pos 0)
+Expected: ["PrintThermal.Emulator.Api", "PrintThermal.Emulator.Bluetooth", "PrintThermal.Emulator.Client", "PrintThermal.Emulator.Core", "PrintThermal.Emulator.Tests"]
+Actual:   ["PrintThermal.Emulator.Tests"]
+           ↑ (pos 0)
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10() in /w/tests/PrintThermal.Emulator.Tests/EsqueletoTests.cs:line 47
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Failed PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado [< 1 ms]
+  Error Message:
+   System.IO.FileNotFoundException : Could not find file '/w/global.json'.
+  Stack Trace:
+     at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.StreamReader.ValidateArgsAndOpenPath(String path, Int32 bufferSize)
+   at System.IO.File.ReadAllText(String path, Encoding encoding)
+   at PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado() in /w/tests/PrintThermal.Emulator.Tests/EsqueletoTests.cs:line 96
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Failed PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma [1 ms]
+  Error Message:
+   Assert.Contains() Failure: Item not found in collection
+Collection: ["name: cdd", "on:", "workflow_dispatch:", "jobs:", "compuertas-locales:", ···]
+Not found:  "pull_request:"
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma() in /w/tests/PrintThermal.Emulator.Tests/EsqueletoTests.cs:line 112
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral [2 ms]
+Results File: /w/out/pruebas.trx
+
+Test Run Failed.
+Total tests: 4
+     Passed: 1
+     Failed: 3
+ Total time: 0.5387 Seconds
+@@RC 1

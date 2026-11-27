@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <!-- Biblioteca hasta PAR-PTE-04, que agrega Program.cs y lo vuelve ejecutable (PAR-PTE-01, D3). -->
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+</Project>

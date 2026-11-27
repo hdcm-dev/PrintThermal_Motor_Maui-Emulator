@@ -1,9 +1,30 @@
 # PrintThermal_Motor_Maui-Emulator
 
-Emulador de una impresora térmica Bluetooth ESC/POS de 58 mm (58HB6) para pruebas locales, en contenedor y de extremo a extremo con el emulador de Android. La salida prevista es una imagen del ticket. Tecnología prevista: .NET 10; solución `PrintThermal.Emulator`.
+Emulador de una impresora térmica Bluetooth ESC/POS de 58 mm (58HB6) para pruebas locales, en contenedor y de extremo a extremo con el emulador de Android. Su meta es entregar cada ticket como imagen PNG por una API HTTP (OpenAPI y Scalar) y un visor web. Tecnología: .NET 10; solución `PrintThermal.Emulator`.
 
-**Estado:** visión firmada (`cdd/corpus/vision.md`); sprint 1 planificado (`cdd/sprints/SPR-01.md`). Todavía no hay código.
+**Estado:** visión firmada (`cdd/corpus/vision.md`); sprint 1 en curso (`cdd/sprints/SPR-01.md`). Hoy hay sólo el esqueleto: los proyectos compilan y están vacíos. Todavía no hay release.
 
-El producto se gobierna con la norma CDD (repositorio privado). Sus compuertas se corren en local; la CI pública (`.github/workflows/cdd.yml`) no descarga la norma. Ver `AGENTS.md`.
+## Proyectos
+
+| Proyecto | Qué va a hacer |
+|---|---|
+| `PrintThermal.Emulator.Core` | Almacén de tickets e intérprete ESC/POS de 58 mm (384 puntos) a PNG |
+| `PrintThermal.Emulator.Bluetooth` | Pila Bluetooth Classic propia en C# contra el controlador virtual del emulador de Android (netsim) |
+| `PrintThermal.Emulator.Api` | Host ASP.NET Core: API de tickets, OpenAPI, Scalar y visor Blazor (hoy, biblioteca vacía) |
+| `PrintThermal.Emulator.Client` | Cliente HTTP tipado de la API |
+| `PrintThermal.Emulator.Tests` | Pruebas (xUnit) |
+
+## Compilar y probar
+
+```bash
+dotnet build PrintThermal.Emulator.slnx
+dotnet test PrintThermal.Emulator.slnx
+```
+
+El SDK está fijado en `global.json` y las versiones de los paquetes en `Directory.Packages.props`.
+
+## Gobierno
+
+El producto se gobierna con la norma CDD (repositorio privado). Sus compuertas se corren en local; la CI pública (`.github/workflows/cdd.yml`) compila y prueba la solución sin descargar la norma. Ver `AGENTS.md`.
 
 Documentación: [PrintThermal_Motor_Maui-Emulator.Documentacion](https://github.com/hdcm-dev/PrintThermal_Motor_Maui-Emulator.Documentacion).

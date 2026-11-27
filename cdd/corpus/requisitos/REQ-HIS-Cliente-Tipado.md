@@ -1,11 +1,11 @@
 ---
 id: REQ-HIS-Cliente-Tipado
-version: 1
+version: 2
 epica: REQ-EPI-Acceso
 gobierno: parcela
 tipo: referencia
 rutas:
-  - src/PrintThermal.Emulator.Client/**
+  - src/PrintThermal.Emulator.Client/**/*.cs
 ---
 # REQ-HIS-Cliente-Tipado
 
@@ -34,3 +34,4 @@ Un cliente HTTP tipado y reutilizable de la API de tickets, que usan el visor y 
 | Versión | Parcela | Cambio |
 |---|---|---|
 | v1 | siembra | Alta |
+| v2 | PAR-PTE-01 | `rutas:` cubre sólo el código (`**/*.cs`); el `.csproj` es estructura del lock, como el de los demás proyectos |
