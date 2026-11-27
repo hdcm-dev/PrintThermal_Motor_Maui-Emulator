@@ -93,7 +93,8 @@ public sealed class IntegracionTests : IDisposable
         Assert.Equal(HttpStatusCode.NotFound, (await http.GetAsync("/api/tickets/ultimo")).StatusCode);
 
         receptor.Cerrada(new InfoConexionRfcomm(2, DireccionBluetooth.Parse("02:00:00:00:00:01"), 1));
-        Assert.Equal(datos, await http.GetByteArrayAsync("/api/tickets/ultimo.bin"));
+        var info = await http.GetFromJsonAsync<TicketInfo>("/api/tickets/ultimo");
+        Assert.Equal(datos, await http.GetByteArrayAsync($"/api/tickets/{info!.Id}.bin"));
     }
 
     [Fact]
@@ -126,8 +127,8 @@ public sealed class IntegracionTests : IDisposable
         await using var segunda = new FabricaConSalida(_salida);
         using var http = segunda.CreateClient();
         var lista = await http.GetFromJsonAsync<List<TicketInfo>>("/api/tickets");
-        Assert.Single(lista!);
-        Assert.Equal(Dorados.Leer("05-ean13.bin"), await http.GetByteArrayAsync("/api/tickets/ultimo.bin"));
+        var unico = Assert.Single(lista!);
+        Assert.Equal(Dorados.Leer("05-ean13.bin"), await http.GetByteArrayAsync($"/api/tickets/{unico.Id}.bin"));
     }
 
     [Fact]
