@@ -101,27 +101,31 @@ foreach (var (nombre, bytes) in vectores)
     Console.WriteLine($"{nombre}.bin {bytes.Length} bytes: {Convert.ToHexString(bytes.AsSpan(0, Math.Min(48, bytes.Length)))}");
 }
 
-// Matrices QR de referencia (sin zona de silencio), corrección H como la que pide la librería (GS ( k fn 69 = 0x33).
-var qrs = new Dictionary<string, string>
+// Matrices QR de referencia (sin zona de silencio). H es la que pide la librería (GS ( k fn 69 = 0x33); L es la de la
+// impresora cuando no llega fn 69; M y Q completan la tabla.
+var qrs = new (string Nombre, string Datos, QRCodeGenerator.ECCLevel Nivel)[]
 {
-    ["qr-1"] = "A",
-    ["qr-2"] = "https://example.com",
-    ["qr-3"] = "https://app.example.org/actas/verificar?id=0123456789&clave=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnop",
+    ("qr-1", "A", QRCodeGenerator.ECCLevel.H),
+    ("qr-2", "https://example.com", QRCodeGenerator.ECCLevel.H),
+    ("qr-3", "https://app.example.org/actas/verificar?id=0123456789&clave=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnop", QRCodeGenerator.ECCLevel.H),
+    ("qr-4", "https://example.com", QRCodeGenerator.ECCLevel.L),
+    ("qr-5", "https://app.example.org/actas/verificar?id=0123456789&clave=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnop", QRCodeGenerator.ECCLevel.M),
+    ("qr-6", "https://app.example.org/actas/verificar?id=0123456789&clave=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnop", QRCodeGenerator.ECCLevel.Q),
 };
 using var gen = new QRCodeGenerator();
-foreach (var (nombre, datos) in qrs)
+foreach (var (nombre, datos, nivel) in qrs)
 {
     // Modo byte, como el codificador del emulador (la sobrecarga de texto elige alfanumérico o segmentos mixtos).
-    var q = gen.CreateQrCode(Encoding.ASCII.GetBytes(datos), QRCodeGenerator.ECCLevel.H);
+    var q = gen.CreateQrCode(Encoding.ASCII.GetBytes(datos), nivel);
     var filas = q.ModuleMatrix.Count;
     var sb = new StringBuilder();
     sb.Append("# datos: ").Append(datos).Append('\n');
-    sb.Append("# QRCoder 1.8.0, CreateQrCode(byte[]) (modo byte), ECCLevel.H, version ").Append(q.Version).Append('\n');
+    sb.Append("# QRCoder 1.8.0, CreateQrCode(byte[]) (modo byte), ECCLevel.").Append(nivel).Append(", version ").Append(q.Version).Append('\n');
     for (int y = 4; y < filas - 4; y++)
     {
         for (int x = 4; x < filas - 4; x++) sb.Append(q.ModuleMatrix[y][x] ? '#' : '.');
         sb.Append('\n');
     }
     File.WriteAllText(Path.Combine(salida, nombre + ".txt"), sb.ToString());
-    Console.WriteLine($"{nombre}: version {q.Version}, {filas - 8} modulos");
+    Console.WriteLine($"{nombre}: {nivel}, version {q.Version}, {filas - 8} modulos");
 }

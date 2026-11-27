@@ -1,0 +1,42 @@
+# Mutación (2026-11-27): cada mutante en una copia limpia; se espera rojo en la prueba indicada.
+# M1 a M7: misma corrida que la verde (turno 251). M8: turno 254 (la primera versión de M8, «if (false)», no compilaba por CS0162).
+# M1 centrado ignorado → REQ-01 · M2 desconocido consume 3 bytes → REQ-02 · M3 el almacén no escucha → REQ-03 · M4 pierde el comando incompleto → REQ-04
+# M5 id sin validar → REQ-05 · M6 máscara QR fija → QR contra QRCoder · M7 sin tope de carga → carga desmesurada · M8 sin alto máximo → alto máximo
+== MUTANTE M1-centrado-ignorado: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "01-texto")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "06-escpos-feed")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "04-qr")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "02-acentos")
+Failed!  - Failed:     4, Passed:     3, Skipped:     0, Total:     7, Duration: 109 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M2-desconocido-3-bytes: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnComandoDesconocidoSeRegistraYSigue(hex: "1D 99")
+Failed!  - Failed:     1, Passed:     3, Skipped:     0, Total:     4, Duration: 102 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M3-almacen-no-escucha: src/PrintThermal.Emulator.Core/Almacen/AlmacenDeTickets.cs
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.CadaTicketGuardaBinYPng
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 93 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M4-pierde-incompleto: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 1)
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 7)
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 256)
+Failed!  - Failed:     3, Passed:     1, Skipped:     0, Total:     4, Duration: 176 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M5-id-sin-validar: src/PrintThermal.Emulator.Core/Almacen/AlmacenDeTickets.cs
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnIdInvalidoNoSaleDeLaCarpeta(id: "")
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnIdInvalidoNoSaleDeLaCarpeta(id: "20261127T120000000-0001/../../x")
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnIdInvalidoNoSaleDeLaCarpeta(id: "20261127T120000000-0001\n")
+  Failed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnIdInvalidoNoSaleDeLaCarpeta(id: "../secreto")
+Failed!  - Failed:     4, Passed:     0, Skipped:     0, Total:     4, Duration: 101 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M6-mascara-qr-fija: src/PrintThermal.Emulator.Core/EscPos/CodigoQr.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-5")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-1")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-6")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-4")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-3")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-2")
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrDelTicketSeDibujaComoLaReferencia
+Failed!  - Failed:     7, Passed:     0, Skipped:     0, Total:     7, Duration: 100 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M7-sin-tope-de-carga: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnaCargaDesmesuradaSeDescartaSinRomperNiBloquear
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 13 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+== MUTANTE M8-sin-alto-maximo: src/PrintThermal.Emulator.Core/EscPos/Interprete.cs
+  Failed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnTicketQueNoTerminaDeAvanzarSeCortaEnElAltoMaximo
+Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 135 ms - PrintThermal.Emulator.Tests.dll (net10.0)

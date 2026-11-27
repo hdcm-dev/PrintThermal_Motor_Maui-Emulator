@@ -19,8 +19,12 @@ public sealed class Interprete
 
     private readonly record struct Celda(int Codigo, bool Negrita, int EscalaX, int EscalaY, int Subrayado);
 
+    /// <summary>Tope de la carga de un comando (GS v 0 de 384 x 65535 puntos ocupa 3 MiB): más que esto se descarta.</summary>
+    private const long CargaMaxima = 4L << 20;
+
     private readonly PerfilDeImpresora _perfil;
     private byte[] _pendiente = new byte[1024];
+    private int _inicio;
     private int _largoPendiente;
 
     // Ticket en curso.
@@ -29,6 +33,7 @@ public sealed class Interprete
     private Lienzo _lienzo;
     private int _y;
     private bool _contenido;
+    private bool _altoAgotado;
 
     // Estado de la impresora.
     private Alineacion _alineacion;
@@ -47,7 +52,7 @@ public sealed class Interprete
     public Interprete(PerfilDeImpresora? perfil = null)
     {
         _perfil = perfil ?? new PerfilDeImpresora();
-        _lienzo = new Lienzo(_perfil.AnchoPuntos);
+        _lienzo = new Lienzo(_perfil.AnchoPuntos, _perfil.AltoMaximo);
         Reiniciar();
     }
 
@@ -63,20 +68,25 @@ public sealed class Interprete
     /// <summary>Agrega un trozo recibido e interpreta todos los comandos que ya están completos.</summary>
     public void Alimentar(ReadOnlySpan<byte> trozo)
     {
-        if (_largoPendiente + trozo.Length > _pendiente.Length)
-            Array.Resize(ref _pendiente, Math.Max(_pendiente.Length * 2, _largoPendiente + trozo.Length));
-        trozo.CopyTo(_pendiente.AsSpan(_largoPendiente));
+        if (_inicio + _largoPendiente + trozo.Length > _pendiente.Length)
+        {
+            // Compacta sólo cuando hace falta lugar: con trozos de 1 byte sobre una carga grande no copia en cada llamada.
+            if (_largoPendiente + trozo.Length > _pendiente.Length)
+                Array.Resize(ref _pendiente, Math.Max(_pendiente.Length * 2, _largoPendiente + trozo.Length));
+            Array.Copy(_pendiente, _inicio, _pendiente, 0, _largoPendiente);
+            _inicio = 0;
+        }
+        trozo.CopyTo(_pendiente.AsSpan(_inicio + _largoPendiente));
         _largoPendiente += trozo.Length;
 
-        int p = 0;
-        while (p < _largoPendiente)
+        while (_largoPendiente > 0)
         {
-            int consumidos = Paso(_pendiente.AsSpan(p, _largoPendiente - p));
+            int consumidos = Paso(_pendiente.AsSpan(_inicio, _largoPendiente));
             if (consumidos == 0) break;
-            p += consumidos;
+            _inicio += consumidos;
+            _largoPendiente -= consumidos;
         }
-        Array.Copy(_pendiente, p, _pendiente, 0, _largoPendiente - p);
-        _largoPendiente -= p;
+        if (_largoPendiente == 0) _inicio = 0;
     }
 
     /// <summary>Fin de la conexión: cierra el ticket en curso si imprimió algo.</summary>
@@ -84,9 +94,9 @@ public sealed class Interprete
     {
         if (_largoPendiente > 0)
         {
-            if (_bytes is not null) _bytes.Write(_pendiente, 0, _largoPendiente);
-            Avisar($"comando incompleto al terminar: {_largoPendiente} bytes desde {Hex(_pendiente.AsSpan(0, Math.Min(4, _largoPendiente)))}");
-            _largoPendiente = 0;
+            if (_bytes is not null) _bytes.Write(_pendiente, _inicio, _largoPendiente);
+            Avisar($"comando incompleto al terminar: {_largoPendiente} bytes desde {Hex(_pendiente.AsSpan(_inicio, Math.Min(4, _largoPendiente)))}");
+            _inicio = _largoPendiente = 0;
         }
         if (_bytes is null) return;
         if (_contenido || _linea.Count > 0)
@@ -230,7 +240,12 @@ public sealed class Interprete
                 break;
             case 0x76:
                 if (b.Length < 8) return 0;
-                largo = b[2] == 0x30 ? 8 + (b[4] | b[5] << 8) * (b[6] | b[7] << 8) : 3;
+                if (b[2] != 0x30)
+                {
+                    largo = 3;
+                    break;
+                }
+                if (!Medida(b, 8 + (long)(b[4] | b[5] << 8) * (b[6] | b[7] << 8), out largo)) return largo;
                 break;
             case 0x28:
                 if (b.Length < 5) return 0;
@@ -238,7 +253,7 @@ public sealed class Interprete
                 break;
             case 0x38:
                 if (b.Length < 7) return 0;
-                largo = 7 + (b[3] | b[4] << 8 | b[5] << 16 | b[6] << 24);
+                if (!Medida(b, 7 + (long)(uint)(b[3] | b[4] << 8 | b[5] << 16 | b[6] << 24), out largo)) return largo;
                 break;
             case 0x6B:
                 if (b.Length < 3) return 0;
@@ -297,7 +312,11 @@ public sealed class Interprete
                 if (cmd[2] == 67) Responder(_perfil.RespuestaModelo);
                 else Avisar($"GS I {cmd[2]}: consulta sin respuesta configurada");
                 break;
-            case 0x38 or 0x2A or 0x66 or 0x42 or 0x61 or 0x72 or 0x2F or 0x4C or 0x57 or 0x50:
+            case 0x61 or 0x72:
+                Consulta(cmd);
+                Avisar($"comando ignorado {Hex(cmd[..2])}: estado automático o consulta sin respuesta configurada");
+                break;
+            case 0x38 or 0x2A or 0x66 or 0x42 or 0x2F or 0x4C or 0x57 or 0x50:
                 Configura(cmd);
                 Avisar($"comando ignorado {Hex(cmd[..2])} en el byte {Posicion(largo)}");
                 break;
@@ -320,6 +339,11 @@ public sealed class Interprete
             0x71 => LargoFsq(b),
             _ => 2,
         };
+        if (largo < 0)
+        {
+            Medida(b, CargaMaxima + 1, out largo);
+            return largo;
+        }
         if (largo == 0 || b.Length < largo) return 0;
         var cmd = b[..largo];
         if (f == 0x71)
@@ -380,16 +404,36 @@ public sealed class Interprete
         return b.Length - desde >= tope ? desde + tope : 0;
     }
 
+    /// <summary>Largo de FS q; -1 si la carga supera <see cref="CargaMaxima"/>.</summary>
     private static int LargoFsq(ReadOnlySpan<byte> b)
     {
         if (b.Length < 3) return 0;
-        int p = 3;
+        long p = 3;
         for (int i = 0; i < b[2]; i++)
         {
             if (b.Length < p + 4) return 0;
-            p += 4 + (b[p] | b[p + 1] << 8) * (b[p + 2] | b[p + 3] << 8) * 8;
+            int q = (int)p;
+            p += 4 + (long)(b[q] | b[q + 1] << 8) * (b[q + 2] | b[q + 3] << 8) * 8;
+            if (p > CargaMaxima) return -1;
         }
-        return p;
+        return (int)p;
+    }
+
+    /// <summary>
+    /// Valida el largo de un comando con carga. Si supera <see cref="CargaMaxima"/> (bytes corruptos o un comando que no es
+    /// lo que parece), no espera esa carga: registra el comando, avisa y consume sólo sus dos primeros bytes.
+    /// </summary>
+    private bool Medida(ReadOnlySpan<byte> b, long largo, out int resultado)
+    {
+        if (largo <= CargaMaxima)
+        {
+            resultado = (int)largo;
+            return true;
+        }
+        Configura(b[..2]);
+        Avisar($"comando {Hex(b[..2])} con carga de {largo} bytes en el byte {Posicion(2)}: se descarta por desmesurada");
+        resultado = 2;
+        return false;
     }
 
     // ───────────────────────── ticket ─────────────────────────
@@ -398,10 +442,11 @@ public sealed class Interprete
     {
         _bytes = new MemoryStream();
         _avisos = [];
-        _lienzo = new Lienzo(_perfil.AnchoPuntos);
+        _lienzo = new Lienzo(_perfil.AnchoPuntos, _perfil.AltoMaximo);
         _y = _perfil.Margen;
         _lienzo.Asegurar(_y);
         _contenido = false;
+        _altoAgotado = false;
     }
 
     private void CerrarTicket()
@@ -466,6 +511,13 @@ public sealed class Interprete
     private void Avanzar(int puntos)
     {
         _contenido = true;
+        int tope = _perfil.AltoMaximo - _perfil.Margen;
+        if (_y + puntos > tope)
+        {
+            if (!_altoAgotado) Avisar($"el ticket llegó al alto máximo de {_perfil.AltoMaximo} puntos: lo que sigue no se dibuja");
+            _altoAgotado = true;
+            puntos = Math.Max(0, tope - _y);
+        }
         _y += puntos;
         _lienzo.Asegurar(_y);
     }

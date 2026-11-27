@@ -25,23 +25,53 @@ public sealed partial class AlmacenDeTickets
 
     public string Carpeta { get; }
 
-    [GeneratedRegex(@"^\d{8}T\d{9}-\d{4}$")]
+    [GeneratedRegex(@"^[0-9]{8}T[0-9]{9}-[0-9]{4}\z")]
     private static partial Regex FormaDeId();
 
-    /// <summary>Escribe el .bin y después el .png (cada uno por archivo temporal y renombre): un .png visible está completo.</summary>
+    /// <summary>
+    /// Escribe el .bin y después el .png (cada uno por archivo temporal y renombre sin pisar): un .png visible está completo.
+    /// Si otra instancia sobre la misma carpeta ya tomó el id, prueba con la secuencia siguiente.
+    /// </summary>
     public TicketGuardado Guardar(TicketInterpretado ticket)
     {
         lock (_cerrojo)
         {
             if (_secuencia < 0)
                 _secuencia = Ids().Select(i => int.Parse(i[^4..], CultureInfo.InvariantCulture)).DefaultIfEmpty(0).Max();
-            _secuencia = _secuencia % 9999 + 1;
-            var fecha = _reloj.GetUtcNow();
-            var id = fecha.ToString("yyyyMMdd'T'HHmmssfff", CultureInfo.InvariantCulture) + "-" + _secuencia.ToString("D4", CultureInfo.InvariantCulture);
-            Escribir(id + ".bin", ticket.Bytes);
-            Escribir(id + ".png", ticket.Png);
-            return new TicketGuardado(id, Fecha(id), ticket.Bytes.LongLength, ticket.Ancho, ticket.Alto);
+            var marca = _reloj.GetUtcNow().ToString("yyyyMMdd'T'HHmmssfff", CultureInfo.InvariantCulture);
+            for (int intento = 0; ; intento++)
+            {
+                _secuencia = _secuencia % 9999 + 1;
+                var id = marca + "-" + _secuencia.ToString("D4", CultureInfo.InvariantCulture);
+                if (!Escribir(id + ".bin", ticket.Bytes))
+                {
+                    if (intento >= 9999) throw new IOException("no hay id libre en " + Carpeta);
+                    continue;
+                }
+                if (!Escribir(id + ".png", ticket.Png))
+                {
+                    File.Delete(Path.Combine(Carpeta, id + ".bin"));
+                    if (intento >= 9999) throw new IOException("no hay id libre en " + Carpeta);
+                    continue;
+                }
+                return new TicketGuardado(id, Fecha(id), ticket.Bytes.LongLength, ticket.Ancho, ticket.Alto);
+            }
         }
+    }
+
+    /// <summary>Guarda cada ticket que termine el intérprete (REQ-03: «cuando termina un ticket…»). Dispose deja de escuchar.</summary>
+    public IDisposable Escuchar(Interprete interprete)
+    {
+        void AlTerminar(TicketInterpretado t) => Guardar(t);
+        interprete.TicketTerminado += AlTerminar;
+        return new Suscripcion(() => interprete.TicketTerminado -= AlTerminar);
+    }
+
+    private sealed class Suscripcion(Action quitar) : IDisposable
+    {
+        private Action? _quitar = quitar;
+
+        public void Dispose() => Interlocked.Exchange(ref _quitar, null)?.Invoke();
     }
 
     /// <summary>Tickets completos (con .bin y .png), del más viejo al más nuevo.</summary>
@@ -74,7 +104,9 @@ public sealed partial class AlmacenDeTickets
     /// <summary>Borra todos los tickets completos y devuelve cuántos eran.</summary>
     public int BorrarTodo() => Ids().Count(Borrar);
 
-    private static bool EsId(string? id) => id is not null && FormaDeId().IsMatch(id);
+    private static bool EsId(string? id) =>
+        id is not null && FormaDeId().IsMatch(id)
+        && DateTimeOffset.TryParseExact(id[..18], "yyyyMMdd'T'HHmmssfff", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out _);
 
     private List<string> Ids() =>
         Directory.EnumerateFiles(Carpeta, "*.png")
@@ -90,12 +122,23 @@ public sealed partial class AlmacenDeTickets
         return File.ReadAllBytes(Path.Combine(Carpeta, id + extension));
     }
 
-    private void Escribir(string nombre, byte[] contenido)
+    /// <summary>Escribe por temporal y renombre; false si el destino ya existe (no lo pisa).</summary>
+    private bool Escribir(string nombre, byte[] contenido)
     {
         var destino = Path.Combine(Carpeta, nombre);
-        var temporal = destino + ".tmp";
+        if (File.Exists(destino)) return false;
+        var temporal = destino + "." + Guid.NewGuid().ToString("N") + ".tmp";
         File.WriteAllBytes(temporal, contenido);
-        File.Move(temporal, destino, overwrite: true);
+        try
+        {
+            File.Move(temporal, destino, overwrite: false);
+            return true;
+        }
+        catch (IOException) when (File.Exists(destino))
+        {
+            File.Delete(temporal);
+            return false;
+        }
     }
 
     private static DateTimeOffset Fecha(string id) =>

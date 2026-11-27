@@ -1,0 +1,76 @@
+# Verde: dotnet test PrintThermal.Emulator.slnx (2026-11-27), PAR-PTE-02 tras las correcciones de la auditoría.
+# Contenedor mcr.microsoft.com/dotnet/sdk:10.0.403, turno 251, 2 CPU / 4 GB. Rama parcela/PAR-PTE-02 sobre 9dec7ce, árbol de este commit.
+10.0.403
+  Determining projects to restore...
+  Restored /w/src/PrintThermal.Emulator.Bluetooth/PrintThermal.Emulator.Bluetooth.csproj (in 75 ms).
+  Restored /w/src/PrintThermal.Emulator.Api/PrintThermal.Emulator.Api.csproj (in 1 ms).
+  Restored /w/src/PrintThermal.Emulator.Core/PrintThermal.Emulator.Core.csproj (in 0.7 ms).
+  Restored /w/src/PrintThermal.Emulator.Client/PrintThermal.Emulator.Client.csproj (in 1 ms).
+  Restored /w/tests/PrintThermal.Emulator.Tests/PrintThermal.Emulator.Tests.csproj (in 4.18 sec).
+  PrintThermal.Emulator.Bluetooth -> /w/src/PrintThermal.Emulator.Bluetooth/bin/Debug/net10.0/PrintThermal.Emulator.Bluetooth.dll
+  PrintThermal.Emulator.Client -> /w/src/PrintThermal.Emulator.Client/bin/Debug/net10.0/PrintThermal.Emulator.Client.dll
+  PrintThermal.Emulator.Core -> /w/src/PrintThermal.Emulator.Core/bin/Debug/net10.0/PrintThermal.Emulator.Core.dll
+  PrintThermal.Emulator.Api -> /w/src/PrintThermal.Emulator.Api/bin/Debug/net10.0/PrintThermal.Emulator.Api.dll
+  PrintThermal.Emulator.Tests -> /w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll
+Test run for /w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 10.0.14)
+[xUnit.net 00:00:00.18]   Discovering: PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.28]   Discovered:  PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.37]   Starting:    PrintThermal.Emulator.Tests
+  Passed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnIdInvalidoNoSaleDeLaCarpeta(id: "")
+  Passed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnIdInvalidoNoSaleDeLaCarpeta(id: "20261127T120000000-0001/../../x")
+  Passed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnIdInvalidoNoSaleDeLaCarpeta(id: "20261127T120000000-0001\n")
+  Passed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnIdInvalidoNoSaleDeLaCarpeta(id: "../secreto")
+  Passed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.UnArchivoConFormaDeIdPeroFechaImposibleNoRompeElListado
+  Passed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.CadaTicketGuardaBinYPng
+  Passed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.BorrarQuitaLosDosArchivos
+  Passed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.DosInstanciasEnElMismoMilisegundoNoSePisan
+  Passed PrintThermal.Emulator.Tests.Almacen.AlmacenTests.LosIdsSonUnicosYOrdenadosYSobrevivenAUnaNuevaInstancia
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LasConsultasDeEstadoRespondenSegunElPapel(estado: SinPapel, n1: 26, n2: 50, n4: 114)
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LasConsultasDeEstadoRespondenSegunElPapel(estado: TapaAbierta, n1: 26, n2: 22, n4: 18)
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LasConsultasDeEstadoRespondenSegunElPapel(estado: Normal, n1: 18, n2: 18, n4: 18)
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "01-texto")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "06-escpos-feed")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "04-qr")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "03-imagen")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "02-acentos")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "05-ean13")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTicketDeLaLibreriaCoincideConSuVectorDorado(vector: "07-escpos-corte-total")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 1)
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 100000)
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 7)
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElTroceoNoCambiaElResultado(trozo: 256)
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnComandoDesconocidoSeRegistraYSigue(hex: "1D 99")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnComandoDesconocidoSeRegistraYSigue(hex: "1C 99")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnComandoDesconocidoSeRegistraYSigue(hex: "1B 7E")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnComandoDesconocidoSeRegistraYSigue(hex: "10 99")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LaImagenRasterSeDibujaBitABit(vector: "03-imagen")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.LaImagenRasterSeDibujaBitABit(vector: "06-escpos-feed")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-5")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-1")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-6")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-4")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-3")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrCoincideConLaReferencia(vector: "qr-2")
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnEscArrobaConContenidoCierraElTicketAnterior
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.Ean13CalculaElDigitoVerificador
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.EscTCambiaLaTablaDeCaracteres
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnaCargaDesmesuradaSeDescartaSinRomperNiBloquear
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElQrDelTicketSeDibujaComoLaReferencia
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElEan13DelTicketSeDibujaConSusModulos
+[xUnit.net 00:00:01.18]   Finished:    PrintThermal.Emulator.Tests
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnaImagenMasAnchaQue384SeRecortaConAviso
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnTicketVacioSeGuardaEnBlancoYUnCorteSueltoNo
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.ElModeloYLaCapacidadNvRespondenComoSeConfiguro
+  Passed PrintThermal.Emulator.Tests.EscPos.InterpreteTests.UnTicketQueNoTerminaDeAvanzarSeCortaEnElAltoMaximo
+Test Run Successful.
+Total tests: 49
+     Passed: 49
+ Total time: 1.9798 Seconds
+Results File: /w/out/pruebas.trx
+rc_verde=0

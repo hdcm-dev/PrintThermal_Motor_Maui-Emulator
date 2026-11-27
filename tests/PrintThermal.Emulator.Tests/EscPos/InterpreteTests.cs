@@ -72,10 +72,14 @@ public class InterpreteTests
         }
     }
 
-    [Fact]
-    public void UnComandoDesconocidoSeRegistraYSigue()
+    [Theory]
+    [InlineData("1D 99")]
+    [InlineData("1B 7E")]
+    [InlineData("1C 99")]
+    [InlineData("10 99")]
+    public void UnComandoDesconocidoSeRegistraYSigue(string hex)
     {
-        byte[] desconocido = [0x1D, 0x99];
+        var desconocido = Convert.FromHexString(hex.Replace(" ", ""));
         var con = B(0x1B, 0x40, "Antes", 0x0A, desconocido, "Despues", 0x0A, 0x1D, 0x56, 0x01);
         var sin = B(0x1B, 0x40, "Antes", 0x0A, "Despues", 0x0A, 0x1D, 0x56, 0x01);
 
@@ -84,17 +88,20 @@ public class InterpreteTests
 
         var aviso = Assert.Single(ticket.Avisos);
         Assert.Contains("desconocido", aviso);
-        Assert.Contains("1D 99", aviso);
+        Assert.Contains(hex, aviso);
         Assert.True(Imagen.DePng(referencia.Png).Negro.SequenceEqual(Imagen.DePng(ticket.Png).Negro),
             "el resto del ticket no se interpretó igual");
         Assert.True(Imagen.DePng(ticket.Png).PuntosNegros > 0);
     }
 
-    [Fact]
-    public void LaImagenRasterSeDibujaBitABit()
+    [Theory]
+    [InlineData("03-imagen")]
+    [InlineData("06-escpos-feed")]
+    public void LaImagenRasterSeDibujaBitABit(string vector)
     {
-        // Oráculo independiente del dorado: los bits de GS v 0 que emitió la librería aparecen tal cual en el PNG.
-        var bytes = Dorados.Leer("03-imagen.bin");
+        // Oráculo independiente del dorado: los bits de GS v 0 que emitió la librería aparecen tal cual en el PNG,
+        // desde la columna 0 (03 hereda ESC a 0; 06 centra una imagen de 384, que también empieza en 0).
+        var bytes = Dorados.Leer(vector + ".bin");
         int i = Enumerable.Range(0, bytes.Length - 4).First(k => bytes[k] == 0x1D && bytes[k + 1] == 0x76 && bytes[k + 2] == 0x30);
         int x = bytes[i + 4] | (bytes[i + 5] << 8), y = bytes[i + 6] | (bytes[i + 7] << 8);
         var bits = bytes.AsSpan(i + 8, x * y).ToArray();
@@ -111,21 +118,80 @@ public class InterpreteTests
         Assert.Contains(Enumerable.Range(0, png.Alto - y + 1), Coincide);
     }
 
+    private static (string Datos, CodigoQr.Correccion Nivel, string[] Filas) Referencia(string vector)
+    {
+        var lineas = File.ReadAllLines(Path.Combine(Dorados.Carpeta, vector + ".txt"));
+        var datos = lineas[0]["# datos: ".Length..];
+        var nivel = Enum.Parse<CodigoQr.Correccion>(lineas[1].Split("ECCLevel.")[1][..1]);
+        return (datos, nivel, lineas.Where(l => !l.StartsWith("# ")).ToArray());
+    }
+
     [Theory]
     [InlineData("qr-1")]
     [InlineData("qr-2")]
     [InlineData("qr-3")]
+    [InlineData("qr-4")]
+    [InlineData("qr-5")]
+    [InlineData("qr-6")]
     public void ElQrCoincideConLaReferencia(string vector)
     {
-        var lineas = File.ReadAllLines(Path.Combine(Dorados.Carpeta, vector + ".txt"));
-        var datos = lineas[0]["# datos: ".Length..];
-        var filas = lineas.Where(l => !l.StartsWith("# ")).ToArray();
+        var (datos, nivel, filas) = Referencia(vector);
 
-        var matriz = CodigoQr.Generar(System.Text.Encoding.ASCII.GetBytes(datos), CodigoQr.Correccion.H);
+        var matriz = CodigoQr.Generar(System.Text.Encoding.ASCII.GetBytes(datos), nivel);
 
         Assert.Equal(filas.Length, matriz.GetLength(0));
         for (int f = 0; f < filas.Length; f++)
             Assert.Equal(filas[f], new string(Enumerable.Range(0, filas.Length).Select(c => matriz[f, c] ? '#' : '.').ToArray()));
+    }
+
+    [Fact]
+    public void ElQrDelTicketSeDibujaComoLaReferencia()
+    {
+        // 04-qr: GS ( k con módulo 3 y corrección H, datos https://example.com, centrado (hereda ESC a 1).
+        var (datos, nivel, filas) = Referencia("qr-2");
+        Assert.Equal(("https://example.com", CodigoQr.Correccion.H), (datos, nivel));
+        var png = Imagen.DePng(Assert.Single(Interpretar(Dorados.Leer("04-qr.bin"))).Png);
+        int n = filas.Length, lado = n * 3, x0 = (384 - lado) / 2;
+        int y0 = Enumerable.Range(0, png.Alto).First(y => Enumerable.Range(x0, 21).All(x => png[x, y]));
+        for (int f = 0; f < n; f++)
+            for (int c = 0; c < n; c++)
+                Assert.True(png[x0 + c * 3 + 1, y0 + f * 3 + 1] == (filas[f][c] == '#'), $"módulo ({f}, {c})");
+    }
+
+    [Fact]
+    public void ElEan13DelTicketSeDibujaConSusModulos()
+    {
+        // 05-ean13: GS k 2 «779123456789», a la izquierda, módulo de 2 puntos (PerfilDeImpresora.AnchoDeModulo).
+        var png = Imagen.DePng(Assert.Single(Interpretar(Dorados.Leer("05-ean13.bin"))).Png);
+        var esperado = CodigoEan13.Modulos("7791234567898").SelectMany(m => new[] { m, m }).ToArray();
+        var filas = Enumerable.Range(0, png.Alto)
+            .Where(y => Enumerable.Range(0, esperado.Length).All(x => png[x, y] == esperado[x])
+                        && Enumerable.Range(esperado.Length, 384 - esperado.Length).All(x => !png[x, y]))
+            .Count();
+        Assert.Equal(new PerfilDeImpresora().AltoDeBarras, filas);
+    }
+
+    [Fact]
+    public void EscTCambiaLaTablaDeCaracteres()
+    {
+        // 0x9B es «¢» en PC437 y «ø» en PC850; «ø» es 0xF8 en Windows-1252 (ESC t 16). Tablas de System.Text.Encoding.CodePages.
+        byte[] Ticket(int n, int b) => B(0x1B, 0x40, 0x1B, 0x74, n, b, 0x0A, 0x1D, 0x56, 0x01);
+        bool[] Png(byte[] t) => Imagen.DePng(Assert.Single(Interpretar(t)).Png).Negro;
+
+        Assert.Equal(Png(Ticket(16, 0xF8)), Png(Ticket(2, 0x9B)));
+        Assert.NotEqual(Png(Ticket(0, 0x9B)), Png(Ticket(2, 0x9B)));
+    }
+
+    [Fact]
+    public void UnTicketQueNoTerminaDeAvanzarSeCortaEnElAltoMaximo()
+    {
+        var avance = Enumerable.Repeat(new byte[] { 0x1B, 0x64, 0xFF }, 200).SelectMany(x => x).ToArray();
+        var bytes = B(0x1B, 0x40, 0x1B, 0x33, 0xFF, avance, "Fin", 0x0A, 0x1D, 0x56, 0x01);
+
+        var ticket = Assert.Single(Interpretar(bytes));
+
+        Assert.Equal(new PerfilDeImpresora().AltoMaximo, ticket.Alto);
+        Assert.Single(ticket.Avisos, a => a.Contains("alto máximo"));
     }
 
     [Fact]
@@ -214,6 +280,18 @@ public class InterpreteTests
         var png = Imagen.DePng(ticket.Png);
         int fila = Enumerable.Range(0, png.Alto).First(f => png[0, f]);
         Assert.All(Enumerable.Range(0, 384), c => Assert.True(png[c, fila] && png[c, fila + 1]));
+    }
+
+    [Fact]
+    public void UnaCargaDesmesuradaSeDescartaSinRomperNiBloquear()
+    {
+        // GS v 0 de 65535 x 65535 bytes: no se espera esa carga; el resto del ticket se interpreta.
+        var bytes = B(0x1B, 0x40, 0x1D, 0x76, 0x30, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, "Texto", 0x0A, 0x1D, 0x56, 0x01);
+
+        var ticket = Assert.Single(Interpretar(bytes));
+
+        Assert.Contains(ticket.Avisos, a => a.Contains("desmesurada"));
+        Assert.True(Imagen.DePng(ticket.Png).PuntosNegros > 0);
     }
 
     [Fact]

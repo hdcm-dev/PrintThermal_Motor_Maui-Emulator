@@ -24,6 +24,9 @@ public sealed record PerfilDeImpresora
     /// <summary>Margen en blanco arriba y abajo del PNG, en puntos.</summary>
     public int Margen { get; init; } = 8;
 
+    /// <summary>Alto máximo de un ticket en puntos (unos 2,5 m de papel a 8 puntos por mm): lo que sigue no se dibuja.</summary>
+    public int AltoMaximo { get; init; } = 20_000;
+
     /// <summary>Respuesta a DLE EOT 1, 2 y 4 (tabla de Especificacion-58HB6 §4.3).</summary>
     public EstadoDelPapel Estado { get; init; } = EstadoDelPapel.Normal;
 

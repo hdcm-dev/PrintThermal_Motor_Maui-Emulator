@@ -2,7 +2,7 @@
 id: PAR-PTE-02
 titulo: Core: intérprete ESC/POS de 58 mm a PNG y almacén de tickets
 version: 1.0
-estado: en-curso
+estado: cerrada
 velocidad: completa
 base_commit: 9dec7ce0bdb56b1ee990cc97cba6015cf79c0afb
 sprint: SPR-01
@@ -20,6 +20,8 @@ modifica:
   - REQ-HIS-Almacen-De-Tickets@v1
 appetite: un día
 pendientes:
+  - {que: "fin de un ticket sin corte (cola feed o none) con la conexión abierta: plazo de inactividad y quién llama Finalizar y conecta el almacén", registro: LAZ-0001}
+  - {que: "respuesta a GS I 67, bytes de DLE EOT y largo de FS q sin medir en la 58HB6", registro: LAZ-0002}
 decisiones:
   - {id: D1, tema: "vectores dorados generados ejecutando la librería cliente en contenedor con turno, o derivados de sus pruebas: se ejecutaron sus renderers (origin/main 940fa7f) con el generador de Vectores/Generador.cs.txt", clase: K1}
   - {id: D2, tema: "fuente A de 12 x 24: Terminus Font 24x12 normal y negrita (SIL OFL 1.1), los PSF de console-setup de Debian 12 sin cambios, con su aviso y licencia en EscPos/Fuentes/OFL.txt", clase: K1}
@@ -48,10 +50,15 @@ Convertir los bytes de un ticket en un PNG de 384 puntos de ancho y guardarlo co
   prueba: tests/PrintThermal.Emulator.Tests/EscPos/InterpreteTests.cs · UnComandoDesconocidoSeRegistraYSigue
 - REQ-03 · Cuando termina un ticket, el sistema deberá guardar su `.bin` y su `.png` con un id en la carpeta de salida.
   prueba: tests/PrintThermal.Emulator.Tests/Almacen/AlmacenTests.cs · CadaTicketGuardaBinYPng
+- REQ-04 · Cuando los bytes de un ticket llegan en trozos de cualquier tamaño, el sistema deberá producir el mismo PNG que con los bytes enteros.
+  prueba: tests/PrintThermal.Emulator.Tests/EscPos/InterpreteTests.cs · ElTroceoNoCambiaElResultado
+- REQ-05 · Si se pide, lee o borra un id sin la forma de un id, entonces el sistema deberá responder que no existe sin tocar archivos.
+  prueba: tests/PrintThermal.Emulator.Tests/Almacen/AlmacenTests.cs · UnIdInvalidoNoSaleDeLaCarpeta
 
 ## Casos borde
 
 - Ticket vacío; corte de papel sin contenido; imagen raster más ancha que 384 puntos.
+- Carga declarada desmesurada (GS v 0, GS 8 L, FS q de más de 4 MiB) y un ticket que avanza más que el alto máximo (20 000 puntos): se avisa y se sigue.
 
 ## Fuera de alcance
 
@@ -60,9 +67,11 @@ Convertir los bytes de un ticket en un PNG de 384 puntos de ancho y guardarlo co
 
 ## Criterio ↔ prueba
 
-- Criterio REQ-01 → tests/PrintThermal.Emulator.Tests/EscPos/InterpreteTests.cs · ElTicketDeLaLibreriaCoincideConSuVectorDorado
-- Criterio REQ-02 → tests/PrintThermal.Emulator.Tests/EscPos/InterpreteTests.cs · UnComandoDesconocidoSeRegistraYSigue
-- Criterio REQ-03 → tests/PrintThermal.Emulator.Tests/Almacen/AlmacenTests.cs · CadaTicketGuardaBinYPng
+- Criterio REQ-01 → tests/PrintThermal.Emulator.Tests/EscPos/InterpreteTests.cs · ElTicketDeLaLibreriaCoincideConSuVectorDorado → [EV-2026-11-27-pruebas]
+- Criterio REQ-02 → tests/PrintThermal.Emulator.Tests/EscPos/InterpreteTests.cs · UnComandoDesconocidoSeRegistraYSigue → [EV-2026-11-27-pruebas]
+- Criterio REQ-03 → tests/PrintThermal.Emulator.Tests/Almacen/AlmacenTests.cs · CadaTicketGuardaBinYPng → [EV-2026-11-27-pruebas]
+- Criterio REQ-04 → tests/PrintThermal.Emulator.Tests/EscPos/InterpreteTests.cs · ElTroceoNoCambiaElResultado → [EV-2026-11-27-pruebas]
+- Criterio REQ-05 → tests/PrintThermal.Emulator.Tests/Almacen/AlmacenTests.cs · UnIdInvalidoNoSaleDeLaCarpeta → [EV-2026-11-27-pruebas]
 
 ## Clarify
 
@@ -82,4 +91,14 @@ Plan y tareas en `plan.md` y `tasks.md` (velocidad completa).
 
 ## Cierre
 
-Pendiente.
+- Versiones subidas: REQ-HIS-Ticket-A-Png v1 → v2 y REQ-HIS-Almacen-De-Tickets v1 → v2 (enunciado, criterios, trazas y `rutas:` con sus pruebas, D7). `lee` pasó a REQ-HIS-Compilacion-Verificada@v2 y `base_commit` a `9dec7ce` por re-planificación en `main` (`af03a45`), por el «I-3 anticipado» de `ready --contra main`.
+- PAR-PTE-04 lee REQ-HIS-Almacen-De-Tickets@v1: al empezar, su `ready --contra main` pedirá subir la huella a v2 (I-3).
+- Changelog: «PAR-PTE-02 · …» en `cdd/corpus/CHANGELOG.md`.
+- Evidencia: `evidencia/2026-11-27-rojo.txt` (30 de 30 pruebas nuevas en rojo contra el API sin implementar; las 4 del esqueleto en verde), `evidencia/2026-11-27-pruebas.txt` y `.trx` (49 de 49 en verde tras la auditoría, SDK 10.0.403 en contenedor con turno), `evidencia/2026-11-27-mutacion.txt` (ocho mutantes; cada uno pone en rojo la prueba de su REQ o de su guarda, incluidas las agregadas tras la auditoría).
+- Decisiones: D1 a D7, todas K1, sin K3 pendiente.
+- Auditor: `evidencia/2026-11-27-auditoria.md` («refutado» sobre `8d7ce53`; los quince hallazgos se atendieron como dice su §2).
+- Pendientes: LAZ-0001 (fin de un ticket sin corte con la conexión abierta) y LAZ-0002 (respuestas y longitudes de protocolo sin medir).
+- Supuestos de fidelidad visual, fuera de alcance hasta la segunda etapa (intake §6), en `PerfilDeImpresora` o en el intérprete y NO VERIFICADO contra la 58HB6: fuente, interlineado de 30 puntos, márgenes de 8, alto de barras 80 y módulo 2, alto máximo de 20 000 puntos, QR sin zona de silencio, alineación aplicada a raster, QR y barras, avance de ESC d después de imprimir la línea, modo y máscara del QR, texto legible del EAN-13 sin dibujar.
+- NO VERIFICADO además: que un lector de QR o de EAN-13 lea los PNG (se comparó con QRCoder y con la tabla de EAN-13, no con un lector).
+- Para PAR-PTE-03: el transporte conecta `AlmacenDeTickets.Escuchar`, llama `Finalizar` al cerrarse la conexión y manda por el canal lo que emite `Respuesta` (LAZ-0001).
+- Lo aprendido: la sobrecarga de texto de QRCoder elige modo alfanumérico o segmentos mixtos, así que la referencia del codificador propio se genera con `CreateQrCode(byte[])`; un `exit` dentro del comando del contenedor cortaba la devolución de resultados (el lanzador local lo corre en un subshell); y `cierre` lee `lee` de la parcela en la base, así que un «I-3 anticipado» se resuelve re-planificando en `main`, no en el PR.
