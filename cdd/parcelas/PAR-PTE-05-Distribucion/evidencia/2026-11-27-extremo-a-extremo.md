@@ -56,7 +56,7 @@ impresion 5 http=200 id=20261127T170032186-0006 bytes=341 espera=7.128264889s pn
 
 ## 4. Visor
 
-Capturas en `capturas/`: el visor en Chrome del propio emulador de Android (`http://10.0.2.2:5080/`, la red compartida vista desde el invitado), con el medio «Anunciando, con conexión RFCOMM», 5 tickets y el último a escala; el PNG de un ticket; y la app de ejemplo con la impresora emulada elegida.
+Capturas en `capturas/`: el visor en Chrome del propio emulador de Android (puerto 5080 de la dirección especial con la que el emulador de Android expone su red al invitado), con el medio «Anunciando, con conexión RFCOMM», 5 tickets y el último a escala; el PNG de un ticket; y la app de ejemplo con la impresora emulada elegida.
 
 ## 5. Desvíos y límites
 

@@ -1,5 +1,7 @@
 # Auditoría del cierre de PAR-PTE-05 (2026-11-27)
 
+auditor: subagente Claude Opus (mismo modelo que el ejecutor) en otro contexto que no vio la ejecución, sólo lectura (git diff/log, grep, lectura de archivos). Garantía reducida: mismo modelo.
+
 ## Índice
 
 1. [Ronda 1](#1-ronda-1)

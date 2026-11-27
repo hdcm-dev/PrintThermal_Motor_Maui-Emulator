@@ -43,6 +43,6 @@ Pregunta: ¿lo hace PAR-PTE-05 (la imagen necesita el host completo) o una parce
 
 ## 4. Decisión
 
-## Avance en PAR-PTE-05 (2026-11-27)
+**Avance en PAR-PTE-05 (2026-11-27).**
 
 PAR-PTE-05 (D2) conecta el almacén en disco y el medio Bluetooth al host en `src/PrintThermal.Emulator.Api/Integracion/` (`AlmacenEnDisco`, `ReceptorAlAlmacen`, `MedioBluetooth`), por configuración (`Emulador:Salida`, `Emulador:Bluetooth:Netsim`); pruebas en `tests/…/Api/IntegracionTests.cs` y extremo a extremo en la evidencia de la parcela. Queda para el 08 especificarlo o cerrarlo.
