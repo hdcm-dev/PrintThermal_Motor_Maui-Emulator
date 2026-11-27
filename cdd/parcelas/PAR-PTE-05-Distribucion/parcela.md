@@ -2,7 +2,7 @@
 id: PAR-PTE-05
 titulo: Contenedor, release en ghcr.io y prueba de extremo a extremo en el emulador de Android API 37
 version: 1.1
-estado: lista
+estado: cerrada
 velocidad: completa
 base_commit: 0b8c5b04dcf6a6ff9c4987b97edbd6f708ae34d4
 sprint: SPR-01
@@ -80,4 +80,21 @@ Ver `tasks.md`.
 
 ## Cierre
 
-Pendiente.
+- Versiones subidas: REQ-HIS-Imagen-Publicada v1 → v2 (historia y `modifica`; `rutas:` suma `tests/…/Distribucion/**`) y REQ-HIS-Api-De-Tickets v2 → v3 (`modifica`; `rutas:` suma `src/PrintThermal.Emulator.Api/Integracion/**`).
+- Changelog: «PAR-PTE-05 · Imagen del emulador…» en `cdd/corpus/CHANGELOG.md`.
+- Evidencia (corridas con SDK 10.0.403 en contenedor con turno en el equipo de cómputo):
+  - `evidencia/2026-11-27-rojo.txt`: 9 de 123 en rojo sobre el esqueleto (las nuevas, por la causa esperada).
+  - `evidencia/2026-11-27-pruebas.txt` y `.trx`: 130 de 130 en verde.
+  - `evidencia/2026-11-27-mutacion.txt`: 8 mutantes, los 8 en rojo, al menos uno por REQ.
+  - `evidencia/2026-11-27-extremo-a-extremo.md` y `capturas/`: emulador de Android API 37 (1 CPU / 5,5 GB) y la imagen construida con este `Dockerfile` en su red (1 CPU / 512 MB), en un solo turno. `MotorDsl.SampleApp` de la librería cliente imprimió cinco veces por RFCOMM; la API entregó cada PNG con la misma huella SHA-256 que el guardado en la carpeta montada, 5 de 5, y los 341 bytes que informó la app. El visor se capturó con Chrome del emulador de Android.
+- Decisiones: D1 a D3 son K1; D4 es K0 (modo de uso aprobado por INFRA, documentado en `README.md` y en el `Dockerfile`).
+- Divergencia corpus/código: ninguna que contradiga un ADR. ADR-0006 pide imagen en `ghcr.io` y runners de GitHub: el release corre en `ubuntu-latest`.
+- Auditoría (`evidencia/2026-11-27-auditoria.md`): la ronda 1 refutó el cierre; cada hallazgo tiene respuesta en código, pruebas, texto o NO VERIFICADO.
+- NO VERIFICADO:
+  - el release real y la imagen publicada: corren al empujar la etiqueta, después de fusionar; su resultado va a la bitácora del repositorio de documentación;
+  - el extremo a extremo con la imagen publicada (se usó la construida en local con el mismo `Dockerfile` y el mismo código);
+  - vincular con `createBond` y después conectar dejó a Android sin cifrado dos veces (LAZ-0011 reproducido); vincular conectando funcionó;
+  - las respuestas a consultas (DLE EOT, GS I) no vuelven a la app: la frontera `IReceptorDeBytes` no tiene canal de vuelta;
+  - el dueño de `/data` con un volumen con nombre;
+  - la fidelidad contra la 58HB6 física (heredado de PAR-PTE-02 a PAR-PTE-04).
+- Hallazgo fuera de alcance: a 540 px de pantalla el ticket desborda su tarjeta en el visor (REQ-HIS-Visor-Web).
