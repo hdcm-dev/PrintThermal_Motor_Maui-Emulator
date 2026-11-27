@@ -47,7 +47,7 @@ Revisé `git diff origin/main...HEAD`, lo que está sin commitear (incluida la s
 **7. Acceso desde Android sin respaldo completo.**
 - Dónde: `docs/montaje.md:86`.
 - Qué pasa: dice «así se capturó el visor en PAR-PTE-05», pero esa evidencia (`extremo-a-extremo.md:65`) cuenta que se abrió un reenvío TCP temporal en la puerta de enlace del puente de Docker. Además, la página no da la dirección: un agente sin contexto no la sabe.
-- Corrección: nombrar `10.0.2.2:5080`, que es pública en la documentación de Android, y marcar NO VERIFICADO sin el reenvío, o describir el reenvío.
+- Corrección: nombrar la dirección especial del emulador de Android con el puerto 5080, que es pública en la documentación de Android, y marcar NO VERIFICADO sin el reenvío, o describir el reenvío.
 
 **8. `-v <carpeta de salida>:/data` sin aclarar que va con ruta absoluta.**
 - Dónde: `docs/montaje.md:57` y `recetas.md:47`.
