@@ -3,9 +3,9 @@ id: LAZ-0011
 fecha: 2026-11-27
 origen: parcela
 clase: aclaracion
-estado: abierto
+estado: especificado
 alcance: corpus
-ids:
+ids: [REQ-HIS-Descubrimiento-Y-Emparejamiento@v3]
 deuda:
 normalizado:
 parcela:
@@ -31,6 +31,10 @@ competidoras: el temporizador de emparejamiento de Android, o el binario con pin
 cómo se recupera un vínculo trabado (olvidar el equipo en Android, otra
 dirección, borrar el archivo de claves) y quién confirma el diálogo en una prueba automática de extremo a extremo.
 
+PAR-PTE-05, 2026-11-27: vincular con `createBond` (como Ajustes → Bluetooth) y conectar después dejó la conexión sin
+cifrar 2 de 2; vincular conectando funcionó. PO, 2026-11-27: emparejar desde Ajustes y después conectar por RFCOMM
+tiene que funcionar con cifrado, igual que con la impresora real.
+
 ## 2. Clasificación
 
 Aclaración: afecta al montaje y a la documentación de uso (PAR-PTE-06) y a CE-2, que hoy se cumple con «figura
@@ -40,9 +44,11 @@ vinculada» aunque el vínculo no sirva.
 
 | Documento | Antes | Después |
 |---|---|---|
-| — | — | — |
+| REQ-HIS-Descubrimiento-Y-Emparejamiento | v2: CE-2 «figura vinculada» | v3: además, vinculada desde Ajustes, la conexión RFCOMM siguiente se cifra e imprime |
 
 ## 4. Decisión
 
-Pendiente: reproducir (confirmar después de 30 s), medir la recuperación y decidir si CE-2 se mide como «vinculada y
-primer RFCOMM íntegro sin reemparejar» (lo propone la mesa de TS-2 y TS-3).
+Especificado el 2026-11-27: CE-2 se mide también por el camino de Ajustes («vinculada desde Ajustes y primer RFCOMM
+cifrado e íntegro, sin reemparejar»), criterio nuevo de REQ-HIS-Descubrimiento-Y-Emparejamiento v3. Lo ejecuta
+PAR-PTE-07: diagnóstico con la traza HCI de los dos lados, corrección en la pila C# con prueba automática y prueba real
+en el emulador de Android API 37 por los dos caminos (Ajustes y vincular conectando).

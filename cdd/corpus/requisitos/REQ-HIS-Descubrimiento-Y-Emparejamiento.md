@@ -1,6 +1,6 @@
 ---
 id: REQ-HIS-Descubrimiento-Y-Emparejamiento
-version: 2
+version: 3
 epica: REQ-EPI-Medio-Emulado
 gobierno: parcela
 tipo: referencia
@@ -30,6 +30,7 @@ La impresora emulada se anuncia por Bluetooth Classic con el nombre «58HB6», p
 
 - Dado el emulador de Android con el contenedor del emulador de impresora en su espacio de red, cuando Android busca dispositivos cercanos, entonces «58HB6» aparece en 30 s o menos, 3 de 3 (CE-1).
 - Dado «58HB6» visible, cuando Android la empareja, entonces figura vinculada y lo sigue estando tras reiniciar el emulador de impresora (CE-2).
+- Dado «58HB6» vinculada desde Ajustes de Android (vínculo dedicado, `createBond`), cuando una app conecta después por RFCOMM, entonces la conexión se cifra con la clave guardada, sin reemparejar, y el ticket llega íntegro, 5 de 5 (CE-2, LAZ-0011).
 
 ## 3. Trazas
 
@@ -42,3 +43,4 @@ La impresora emulada se anuncia por Bluetooth Classic con el nombre «58HB6», p
 |---|---|---|
 | v1 | siembra | Alta |
 | v2 | PAR-PTE-03 | `rutas:` suma las pruebas de la historia (`tests/…/Bluetooth/Hci*.cs`, `Sdp*.cs`, `Seguridad*.cs`); código en `Hci`, `L2cap`, `Sdp` y `Seguridad` |
+| v3 | LAZ-0011 | Criterio del camino de Ajustes: vínculo dedicado y conexión RFCOMM posterior cifrada |

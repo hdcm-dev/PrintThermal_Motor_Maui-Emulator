@@ -1,6 +1,6 @@
 ---
 id: REQ-HIS-Visor-Web
-version: 2
+version: 3
 epica: REQ-EPI-Acceso
 gobierno: parcela
 tipo: referencia
@@ -37,6 +37,7 @@ La página se actualiza sola con la espera larga de `/api/tickets/esperar`. Se r
 ## 2. Criterios
 
 - Dado un ticket impreso, cuando se abre el visor en un navegador real, entonces se ve su imagen, con capturas y consola sin errores (CE-5).
+- Dado un ticket elegido, cuando la pantalla tiene 540 px de ancho o menos, entonces el ticket no desborda su tarjeta ni la página (LAZ-0015).
 
 ## 3. Trazas
 
@@ -49,3 +50,4 @@ La página se actualiza sola con la espera larga de `/api/tickets/esperar`. Se r
 |---|---|---|
 | v1 | siembra | Alta |
 | v2 | PAR-PTE-04 | Visor de una página con lista, ticket a escala, descargas, limpiar, estado y actualización por espera; rutas de pruebas |
+| v3 | LAZ-0015 | Criterio de pantalla angosta: el ticket no desborda su tarjeta |
