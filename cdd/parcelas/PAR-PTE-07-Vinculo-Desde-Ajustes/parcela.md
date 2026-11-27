@@ -21,12 +21,14 @@ modifica:
   - REQ-HIS-Visor-Web@v3
   - REQ-HIS-Api-De-Tickets@v3
   - REQ-HIS-Documentacion-De-Uso@v2
+  - ADR-0009@nuevo
 appetite: un día
 pendientes:
   - {que: "vincular conectando como primera conexión después de encender el Bluetooth de Android, con otros equipos vinculados: sin medir", registro: LAZ-0016}
   - {que: "la reconexión breve y el vínculo desde Ajustes no se midieron con la 58HB6 física ni con un teléfono real", registro: LAZ-0002}
 decisiones:
   - {id: D1, tema: "tras un vínculo nuevo que terminó sin cifrar, la impresora hace una conexión ACL breve con el teléfono y la corta (opción Emulador:Bluetooth:ReconexionTrasVinculoSinCifrar, por omisión true)", clase: K2, adr: ADR-0009}
+  - {id: D5, tema: "aprobar ADR-0009 (opción A, reconexión breve), gobierno humano", clase: K3, sobre: ADR-0009, decide: "responsable técnico del emulador, en rol por delegación del Product Owner (testimonio F1, registro privado) 2026-11-27 opción A"}
   - {id: D2, tema: "traza HCI opcional del periférico (Emulador:Bluetooth:TrazaHci, por omisión false): cada comando y evento salvo datos ACL y Number Of Completed Packets", clase: K1}
   - {id: D3, tema: "tarjeta del ticket del visor: ancho min(58 mm, 100 %), hijos de la grilla con min-width 0 y una sola columna mínima 0 en el detalle; el ticket conserva 48 mm mientras entra", clase: K1}
   - {id: D4, tema: "REQ-03 se verifica con recorrido en Chrome con emulación de ancho (antes con las reglas de main repuestas, después con la hoja de la rama), no con una prueba de la CI: la CI pública no tiene navegador", clase: K1}
