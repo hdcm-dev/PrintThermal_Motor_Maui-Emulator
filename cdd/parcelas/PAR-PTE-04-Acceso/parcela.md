@@ -107,7 +107,7 @@ Esta corrida es un paso de un flujo de trabajo sin persona disponible para pregu
 
 ## Cierre
 
-- Versiones subidas: REQ-HIS-Api-De-Tickets v1 → v2, REQ-HIS-Visor-Web v1 → v2 y REQ-HIS-Cliente-Tipado v2 → v3 (historias y `modifica`), y REQ-HIS-Compilacion-Verificada v2 → v3 (`modifica`, por `Directory.Packages.props`). Cada historia suma a sus `rutas:` la carpeta de sus pruebas.
+- Versiones subidas: REQ-HIS-Api-De-Tickets v1 → v2, REQ-HIS-Visor-Web v1 → v2 y REQ-HIS-Cliente-Tipado v2 → v3 (historias y `modifica`), y REQ-HIS-Compilacion-Verificada v2 → v3 (`modifica`, por `Directory.Packages.props`). Cada historia suma a sus `rutas:` la carpeta de sus pruebas. En REQ-HIS-Cliente-Tipado, `src/PrintThermal.Emulator.Client/**/*.cs` pasa a `*.cs`: la compuerta compara con `fnmatch`, y `**/*.cs` exige una subcarpeta, así que no cubría `ClienteDeTickets.cs` ni `Modelos.cs`.
 - Changelog: «PAR-PTE-04 · API de tickets con OpenAPI y Scalar, visor Blazor y cliente tipado…» en `cdd/corpus/CHANGELOG.md`.
 - Evidencia:
   - `evidencia/2026-11-27-rojo.txt`: 29 de 37 en rojo sobre el esqueleto, con las seis pruebas de REQ-01 a REQ-06 en rojo por falta de comportamiento.

@@ -5,7 +5,7 @@ epica: REQ-EPI-Acceso
 gobierno: parcela
 tipo: referencia
 rutas:
-  - src/PrintThermal.Emulator.Client/**/*.cs
+  - src/PrintThermal.Emulator.Client/*.cs
   - tests/PrintThermal.Emulator.Tests/Cliente/**
 ---
 # REQ-HIS-Cliente-Tipado
@@ -38,4 +38,4 @@ Un cliente HTTP tipado y reutilizable de la API de tickets, que usan el visor y 
 |---|---|---|
 | v1 | siembra | Alta |
 | v2 | PAR-PTE-01 | `rutas:` cubre sólo el código (`**/*.cs`); el `.csproj` es estructura del lock, como el de los demás proyectos |
-| v3 | PAR-PTE-04 | Cliente `ClienteDeTickets` con todas las rutas del contrato y `DesdeElPrincipio`; rutas de pruebas |
+| v3 | PAR-PTE-04 | Cliente `ClienteDeTickets` con todas las rutas del contrato y `DesdeElPrincipio`; rutas de pruebas; `rutas:` pasa de `**/*.cs` a `*.cs` porque la compuerta compara con `fnmatch` y `**/*.cs` no cubre los archivos de la raíz del proyecto |
