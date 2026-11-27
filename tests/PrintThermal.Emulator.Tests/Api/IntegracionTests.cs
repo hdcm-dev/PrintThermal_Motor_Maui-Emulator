@@ -164,6 +164,10 @@ public sealed class IntegracionTests : IDisposable
         Assert.NotEqual(t1.Id, t2!.Id);
         Assert.Equal(segundo, await http.GetByteArrayAsync($"/api/tickets/{t2.Id}.bin"));
         Assert.Equal(1, receptor.Abiertas);
+
+        // La lista va del más nuevo al más viejo, como con el almacén en memoria (contrato D3 de PAR-PTE-04).
+        var lista = await http.GetFromJsonAsync<List<TicketInfo>>("/api/tickets");
+        Assert.Equal([t2.Id, t1.Id], lista!.Select(t => t.Id));
     }
 
     [Fact]
