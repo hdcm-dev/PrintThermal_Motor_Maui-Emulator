@@ -23,6 +23,10 @@ modifica:
   - REQ-HIS-Api-De-Tickets@v2
 appetite: dos días
 pendientes:
+  - {que: "conectar el almacén en disco y el medio Bluetooth al host (avance en esta parcela, D2)", registro: LAZ-0006}
+  - {que: "escucha de la imagen dentro del contenedor (avance en esta parcela, D3)", registro: LAZ-0008}
+  - {que: "recepción RFCOMM conectada al almacén (avance en esta parcela, D2)", registro: LAZ-0010}
+  - {que: "fin de un ticket sin corte con la conexión abierta: el cierre de la conexión lo termina; el plazo sigue sin decidir", registro: LAZ-0001}
 decisiones:
   - {id: D1, tema: "imagen base mcr.microsoft.com/dotnet/aspnet:10.0.14-noble-chiseled por digest (runtime del SDK 10.0.403 de global.json) y etiqueta semántica v1.0.0 del release", clase: K1}
   - {id: D2, tema: "conexión del medio Bluetooth (PAR-PTE-03) y del almacén en disco (PAR-PTE-02) al host, detrás de IAlmacenDeTickets e IEstadoDelMedio, en src/PrintThermal.Emulator.Api/Integracion/ (LAZ-0006, LAZ-0010; el fin de conexión cierra el ticket, LAZ-0001)", clase: K1}

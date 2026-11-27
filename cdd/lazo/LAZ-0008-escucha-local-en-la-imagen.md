@@ -38,3 +38,7 @@ Pregunta para PAR-PTE-05 (imagen): ¿la imagen fija la escucha de forma explíci
 | | | |
 
 ## 4. Decisión
+
+## Avance en PAR-PTE-05 (2026-11-27)
+
+PAR-PTE-05 (D3) toma la primera opción: la imagen vacía `ASPNETCORE_HTTP_PORTS` y fija `ASPNETCORE_URLS=http://0.0.0.0:5080` dentro de su red de contenedor, sin publicar puertos; prueba `LaImagenFijaEscuchaYSalida`. Fuera del contenedor sigue la escucha local por omisión. Queda para el 08 especificarlo o cerrarlo.
