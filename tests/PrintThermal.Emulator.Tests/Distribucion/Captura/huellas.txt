@@ -1,1 +1,8 @@
-# archivo.bin huella-sha256-del-png trozo — se completa con la corrida real (PAR-PTE-05 T4)
+# Corrida real 2026-11-27 (PAR-PTE-05 T4): MotorDsl.SampleApp (librería cliente 940fa7f) en Android 17 / API 37 imprimió 5 veces
+# por RFCOMM a la imagen del emulador; bytes tal como los entregó la API ({id}.bin) y huella SHA-256 del PNG que entregó la API.
+# archivo.bin huella-sha256-del-png trozo
+app-ejemplo-1.bin aa0e480f60e9fa3fb7ad404fb71da913ea135af86d405734a50a47a2edb4aa17 990
+app-ejemplo-2.bin aa0e480f60e9fa3fb7ad404fb71da913ea135af86d405734a50a47a2edb4aa17 990
+app-ejemplo-3.bin aa0e480f60e9fa3fb7ad404fb71da913ea135af86d405734a50a47a2edb4aa17 990
+app-ejemplo-4.bin f212c860a331d3b73147e62db4c321fa5fc1090d386c4b3af22146f7654e587b 990
+app-ejemplo-5.bin f212c860a331d3b73147e62db4c321fa5fc1090d386c4b3af22146f7654e587b 990
