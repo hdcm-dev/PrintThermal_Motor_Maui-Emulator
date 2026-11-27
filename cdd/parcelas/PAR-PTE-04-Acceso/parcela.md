@@ -143,7 +143,7 @@ Esta corrida es un paso de un flujo de trabajo sin persona disponible para pregu
 - Auditoría (`evidencia/2026-11-27-auditoria.md`). La primera ronda refutó el cierre. Cada hallazgo se corrigió en código o en pruebas, o se registró:
   - pendientes sin registro → LAZ-0003 y LAZ-0004;
   - ProblemDetails incompleto → `AddProblemDetails` y `UseStatusCodePages`, con pruebas;
-  - REQ-06 sólo en el ayudante → `escucha.txt`;
+  - la escucha local medida sólo en el ayudante (REQ-06) → `escucha.txt`;
   - cobertura del cliente → pruebas de cada operación;
   - mutación sin diff → se rehízo;
   - parpadeo a «cargando» y estados sin captura → estado persistido, renderizado en flujo y recorrido nuevo;
