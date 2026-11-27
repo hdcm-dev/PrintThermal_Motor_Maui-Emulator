@@ -30,6 +30,14 @@ public class EsqueletoTests
         return dir!.FullName;
     }
 
+    private static IEnumerable<string> ArchivosAnidados(string raiz, params string[] nombres) =>
+        new[] { "src", "tests" }
+            .Select(d => Path.Combine(raiz, d))
+            .Where(Directory.Exists)
+            .SelectMany(d => Directory.EnumerateFiles(d, "*", SearchOption.AllDirectories))
+            .Where(f => nombres.Contains(Path.GetFileName(f)))
+            .Where(f => !f.Split(Path.DirectorySeparatorChar).Any(p => p is "bin" or "obj"));
+
     private static IEnumerable<string> RutasDeProyectos(string raiz) =>
         XDocument.Load(Path.Combine(raiz, Solucion))
             .Descendants("Project")
@@ -50,6 +58,8 @@ public class EsqueletoTests
             Assert.True(File.Exists(ruta), $"falta {ruta}");
         }
 
+        // Un Directory.Build.props/.targets anidado podría cambiar el destino sin que la solución lo muestre.
+        Assert.Empty(ArchivosAnidados(raiz, "Directory.Build.props", "Directory.Build.targets"));
         var props = XDocument.Load(Path.Combine(raiz, "Directory.Build.props"));
         Assert.Equal("net10.0", props.Descendants("TargetFramework").Single().Value);
         foreach (var ruta in rutas)
@@ -76,6 +86,8 @@ public class EsqueletoTests
             Assert.True(exacta.IsMatch(version), $"{v.Attribute("Include")?.Value}: «{version}» no es una versión fija");
         }
 
+        Assert.Empty(ArchivosAnidados(raiz, "Directory.Packages.props", "Directory.Build.props", "Directory.Build.targets"));
+        Assert.Empty(XDocument.Load(Path.Combine(raiz, "Directory.Build.props")).Descendants("PackageReference"));
         var declaradas = versiones.Select(v => (string)v.Attribute("Include")!).ToHashSet();
         foreach (var ruta in RutasDeProyectos(raiz))
         {
@@ -110,7 +122,11 @@ public class EsqueletoTests
         var texto = string.Join('\n', lineas);
 
         Assert.Contains("pull_request:", lineas);
+        Assert.Contains("push:", lineas);
         Assert.Contains("branches: [main]", lineas);
+        Assert.True(lineas.IndexOf("push:") == lineas.IndexOf("branches: [main]") - 1, "branches: [main] va debajo de push:");
+        Assert.DoesNotContain(lineas, l => Regex.IsMatch(l, @"^continue-on-error:\s*true"));
+        Assert.DoesNotContain(lineas, l => Regex.IsMatch(l, @"^(- )?if:\s*(false|\$\{\{\s*false\s*\}\})"));
         Assert.Contains("runs-on: ubuntu-latest", lineas);
         Assert.Contains(lineas, l => Regex.IsMatch(l, @"^(- )?run: dotnet build PrintThermal\.Emulator\.slnx\b"));
         Assert.Contains(lineas, l => Regex.IsMatch(l, @"^(- )?run: dotnet test PrintThermal\.Emulator\.slnx\b"));

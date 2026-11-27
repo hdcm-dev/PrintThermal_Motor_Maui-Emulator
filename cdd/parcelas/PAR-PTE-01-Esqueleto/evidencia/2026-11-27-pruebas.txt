@@ -1,12 +1,12 @@
-# Verde: dotnet test PrintThermal.Emulator.slnx (2026-11-27)
-# Contenedor mcr.microsoft.com/dotnet/sdk:10.0.403, turno 218, 2 CPU / 4 GB.
+# Verde: dotnet test PrintThermal.Emulator.slnx (2026-11-27), con las pruebas reforzadas tras la auditoría
+# Contenedor mcr.microsoft.com/dotnet/sdk:10.0.403, turno 219, 2 CPU / 4 GB.
 10.0.403
   Determining projects to restore...
-  Restored /w/src/PrintThermal.Emulator.Core/PrintThermal.Emulator.Core.csproj (in 72 ms).
-  Restored /w/src/PrintThermal.Emulator.Client/PrintThermal.Emulator.Client.csproj (in 2 ms).
-  Restored /w/src/PrintThermal.Emulator.Bluetooth/PrintThermal.Emulator.Bluetooth.csproj (in 2 ms).
+  Restored /w/src/PrintThermal.Emulator.Core/PrintThermal.Emulator.Core.csproj (in 62 ms).
+  Restored /w/src/PrintThermal.Emulator.Client/PrintThermal.Emulator.Client.csproj (in 62 ms).
+  Restored /w/src/PrintThermal.Emulator.Bluetooth/PrintThermal.Emulator.Bluetooth.csproj (in 1 ms).
   Restored /w/src/PrintThermal.Emulator.Api/PrintThermal.Emulator.Api.csproj (in 1 ms).
-  Restored /w/tests/PrintThermal.Emulator.Tests/PrintThermal.Emulator.Tests.csproj (in 3.74 sec).
+  Restored /w/tests/PrintThermal.Emulator.Tests/PrintThermal.Emulator.Tests.csproj (in 4.27 sec).
   PrintThermal.Emulator.Core -> /w/src/PrintThermal.Emulator.Core/bin/Debug/net10.0/PrintThermal.Emulator.Core.dll
   PrintThermal.Emulator.Bluetooth -> /w/src/PrintThermal.Emulator.Bluetooth/bin/Debug/net10.0/PrintThermal.Emulator.Bluetooth.dll
   PrintThermal.Emulator.Client -> /w/src/PrintThermal.Emulator.Client/bin/Debug/net10.0/PrintThermal.Emulator.Client.dll
@@ -15,18 +15,18 @@
 Test run for /w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll (.NETCoreApp,Version=v10.0)
 A total of 1 test files matched the specified pattern.
 [xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 10.0.14)
-[xUnit.net 00:00:00.27]   Discovering: PrintThermal.Emulator.Tests
-[xUnit.net 00:00:00.38]   Discovered:  PrintThermal.Emulator.Tests
-[xUnit.net 00:00:00.40]   Starting:    PrintThermal.Emulator.Tests
-[xUnit.net 00:00:00.52]   Finished:    PrintThermal.Emulator.Tests
-  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10 [15 ms]
+[xUnit.net 00:00:00.09]   Discovering: PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.13]   Discovered:  PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.15]   Starting:    PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.19]   Finished:    PrintThermal.Emulator.Tests
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10 [18 ms]
   Passed PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado [1 ms]
-  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma [12 ms]
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma [1 ms]
   Passed PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral [1 ms]
 Results File: /w/out/pruebas.trx
 
 Test Run Successful.
 Total tests: 4
      Passed: 4
- Total time: 2.0822 Seconds
+ Total time: 0.6466 Seconds
 @@RC 0
