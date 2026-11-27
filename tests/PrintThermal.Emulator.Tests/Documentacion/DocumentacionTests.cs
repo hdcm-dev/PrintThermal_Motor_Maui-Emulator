@@ -662,13 +662,14 @@ public sealed partial class DocumentacionTests
             errores.Add("README.md no enlaza docs/README.md");
         }
 
-        // Las páginas de la estructura decidida (D1 de PAR-PTE-06), enlazadas desde el índice.
+        // Las páginas de la estructura decidida (D1 de PAR-PTE-06), cada una en la tabla de tareas del índice.
         var indice = File.ReadAllText(Path.Combine(Docs, "README.md"));
         foreach (var pagina in Paginas)
         {
-            if (!File.Exists(Path.Combine(Docs, pagina)) || !indice.Contains("](" + pagina + ")", StringComparison.Ordinal))
+            if (!File.Exists(Path.Combine(Docs, pagina))
+                || !Regex.IsMatch(indice, @"(?m)^\|[^|\n]+\| \[[^\]]+\]\(" + Regex.Escape(pagina) + @"\) \|$"))
             {
-                errores.Add($"falta docs/{pagina} o su enlace desde docs/README.md");
+                errores.Add($"falta docs/{pagina} o su fila en la tabla de tareas de docs/README.md");
             }
         }
     }
