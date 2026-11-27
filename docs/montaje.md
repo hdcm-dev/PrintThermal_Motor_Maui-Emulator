@@ -28,7 +28,7 @@ traces: [FIC-01, REQ-HIS-Documentacion-De-Uso, REQ-HIS-Imagen-Publicada]
 - Docker en el mismo equipo que el emulador de Android.
 - El emulador de Android corriendo **en un contenedor**, con netsim (el controlador Bluetooth virtual del emulador). El emulador de impresora se une a la red de ese contenedor; netsim escucha sólo en su loopback y no hace falta exponerlo.
 - El puerto gRPC de netsim, que se lee dentro del contenedor del emulador de Android (§3).
-- Una carpeta del equipo para los tickets, con escritura para el usuario de la imagen (§6).
+- Una carpeta del equipo para los tickets, con ruta absoluta y escritura para el usuario de la imagen (§6).
 
 ## 2. Imagen
 
@@ -38,7 +38,7 @@ Cada etiqueta `v*` del repositorio publica `ghcr.io/hdcm-dev/printthermal_motor_
 docker pull ghcr.io/hdcm-dev/printthermal_motor_maui-emulator:1.0.0
 ```
 
-Al 2026-11-27 la imagen es privada: el pull sin credenciales responde «unauthorized». Qué hacer en ese caso: [Diagnóstico](diagnostico.md) §5.
+Al 2026-11-27 la imagen es privada: el pull sin credenciales responde «unauthorized». Qué hacer en ese caso: [Diagnóstico](diagnostico.md) §5. Esta página no se midió con la imagen publicada `1.0.0`: PAR-PTE-05 usó una imagen construida en local con el mismo `Dockerfile` (NO VERIFICADO con la publicada; LAZ-0013).
 
 ## 3. Levantar el contenedor
 
@@ -61,7 +61,8 @@ docker run -d --rm --name impresora-58hb6 --network container:"$EMU" \
 ```
 
 - `--network container:` comparte la red del emulador de Android: el emulador de impresora llega a netsim por `127.0.0.1` y la API queda en el puerto 5080 de esa red.
-- `--cpus 1 --memory 512m` alcanzó en la prueba de extremo a extremo de PAR-PTE-05 (con el emulador de Android en 1 CPU / 5,5 GB).
+- `--cpus 1 --memory 512m` alcanzó en la prueba de extremo a extremo de PAR-PTE-05, con la imagen local (el emulador de Android en 1 CPU / 5,5 GB).
+- `<carpeta de salida>` va con ruta absoluta: con un nombre suelto, Docker crea un volumen con nombre y los tickets no quedan en la carpeta del equipo.
 - `--rm`: el contenedor no queda detenido; los tickets y las claves sobreviven en la carpeta montada.
 
 Comprobar que arrancó: en los registros (`docker logs impresora-58hb6`) aparece una línea como
@@ -83,7 +84,7 @@ docker run --rm --network container:"$EMU" <imagen con curl> curl -fsS http://12
 ```
 
 - Desde el equipo, sin publicar puertos: por la dirección del contenedor del emulador de Android en su red de Docker (`docker inspect "$EMU"`), si es una red puente. NO VERIFICADO.
-- Desde Android (Chrome del emulador), por la dirección especial con la que el emulador de Android llega al loopback de su equipo, puerto 5080: así se capturó el visor en PAR-PTE-05. La dirección está en la documentación oficial de redes del emulador de Android.
+- Desde Android (Chrome del emulador): en PAR-PTE-05 el visor se abrió desde Chrome del emulador de Android, pero hizo falta un reenvío TCP temporal fuera del contenedor. El camino directo, NO VERIFICADO.
 
 ## 5. Configuración
 

@@ -46,6 +46,8 @@ curl -fsS "$BASE/api/estado"
 
 Devuelve `version`, `medio` (por ejemplo «Bluetooth «58HB6» (Anunciando)», «simulado» o «sin medio»), `medioConectado`, `tickets` (cantidad), `ultimoId` (`null` si no hay) y `hora`. Con el medio Bluetooth, `medioConectado` es `true` cuando la impresora se está anunciando.
 
+En la salida cruda, los caracteres fuera de ASCII de `medio` (las comillas «») pueden llegar escapados como `\u00AB` y `\u00BB` (NO VERIFICADO con el medio Bluetooth): para buscar, usar `58HB6` sin comillas o leer el JSON con `jq`.
+
 ## 3. Esperar un ticket sin perderlo
 
 `GET /api/tickets/esperar` responde con el primer ticket cuyo id es mayor que `despuesDe`, o `204` si vence el plazo (`segundos`, de 1 a 60; 30 si falta). El patrón: leer `ultimoId` **antes** de imprimir, imprimir y esperar con ese id (con `0` si no había tickets: todo id es mayor que `0`). Quien llama tiene que esperar la respuesta más que `segundos`.
@@ -59,6 +61,7 @@ ULTIMO=$(curl -fsS "$BASE/api/estado" | sed -n 's/.*"ultimoId":"\([^"]*\)".*/\1/
 TICKET=$(curl -fsS --max-time 75 "$BASE/api/tickets/esperar?segundos=60&despuesDe=${ULTIMO:-0}")
 ID=$(printf '%s' "$TICKET" | sed -n 's/.*"id":"\([^"]*\)".*/\1/p')
 [ -n "$ID" ] || { echo "no llegó ningún ticket en 60 s" >&2; exit 1; }
+[[ "$ID" > "${ULTIMO:-0}" ]] || { echo "el ticket $ID no es posterior a ${ULTIMO:-0}" >&2; exit 1; }
 
 curl -fsS -o "ticket-$ID.png" "$BASE/api/tickets/$ID.png"
 curl -fsS -o "ticket-$ID.bin" "$BASE/api/tickets/$ID.bin"
@@ -84,10 +87,9 @@ Borrar todos (también los que esperan otros consumidores del mismo emulador) y 
 ```bash
 curl -fsS -X DELETE "$BASE/api/tickets"
 ID=no-existe
-curl -sS -o /dev/null -w '%{http_code}\n' -X DELETE "$BASE/api/tickets/$ID"
+CODIGO=$(curl -sS -o /dev/null -w '%{http_code}' -X DELETE "$BASE/api/tickets/$ID")
+[ "$CODIGO" = 404 ] || { echo "se esperaba 404 y llegó $CODIGO" >&2; exit 1; }
 ```
-
-El segundo imprime `404`.
 
 ## 5. Cliente tipado de .NET
 

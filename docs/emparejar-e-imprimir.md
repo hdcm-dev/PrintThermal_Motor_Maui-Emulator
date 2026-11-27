@@ -52,7 +52,7 @@ La línea `cifrado …: activo 1` es la que importa: sin ella, el vínculo no si
 Vincular primero con `createBond()` y conectar después dejó a Android con la vinculación a medias («AUTHENTICATING»), sin pedir la clave a la impresora y **sin cifrado**: 2 de 2 intentos en PAR-PTE-05, con toques a los 24 s y a los 9 s. La causa no está separada (LAZ-0011, abierto). Hasta que se resuelva:
 
 - vincular conectando (§2);
-- si una app sólo lista equipos ya vinculados (como la app de ejemplo de la librería cliente), crear el vínculo antes con una app o un paso que conecte por RFCOMM a «58HB6» sin vincular, y después usar la app.
+- si una app sólo lista equipos ya vinculados (como la app de ejemplo de la librería cliente), crear el vínculo antes con una app de prueba propia que busque «58HB6» y conecte por RFCOMM sin vincular (§2), y después usar la app. En PAR-PTE-05 se usó una app mínima que no está publicada.
 
 ## 4. Imprimir
 

@@ -30,9 +30,11 @@ el emulador de Android, y esta parcela no lo midió con la imagen `1.0.0` (priva
   `netsimd.ini` en otra carpeta;
 - la fuente simulada con la imagen (`-p 127.0.0.1:5080:5080`), la llegada a la API desde el equipo por la dirección
   del contenedor del emulador y el `docker build` desde la etiqueta como reemplazo de la imagen privada;
-- que el vínculo con Android siga sirviendo al reiniciar el contenedor con la misma carpeta y dirección.
+- que el vínculo con Android siga sirviendo al reiniciar el contenedor con la misma carpeta y dirección;
+- el acceso directo al visor desde Chrome del emulador de Android (en PAR-PTE-05 hizo falta un reenvío TCP temporal);
+- el esqueleto de workflow de GitHub Actions de `docs/recetas.md` §5, que no se corrió en un runner.
 
-`docs/` marca cada uno «NO VERIFICADO».
+`docs/` marca cada uno «NO VERIFICADO» (el montaje con la imagen publicada, en `docs/montaje.md` §2).
 
 ## 2. Clasificación
 

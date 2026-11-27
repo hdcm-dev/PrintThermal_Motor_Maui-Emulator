@@ -23,7 +23,7 @@ Por qué es valioso: cierra el Product Goal (CE-1 a CE-5, PAR-PTE-02 a PAR-PTE-0
 | PAR-PTE-03 | REQ-EPI-Medio-Emulado | REQ-HIS-Descubrimiento-Y-Emparejamiento, REQ-HIS-Recepcion-Integra | — (K2: mesa de TS-2 y TS-3, ADR-0004, al lote de la Review) | cerrada |
 | PAR-PTE-04 | REQ-EPI-Acceso | REQ-HIS-Api-De-Tickets, REQ-HIS-Visor-Web, REQ-HIS-Cliente-Tipado | — (K2 D2 y D3 al lote de la Review) | cerrada |
 | PAR-PTE-05 | REQ-EPI-Distribucion | REQ-HIS-Imagen-Publicada | — | cerrada |
-| PAR-PTE-06 | REQ-EPI-Montaje-Y-Uso | REQ-HIS-Documentacion-De-Uso | — | lista |
+| PAR-PTE-06 | REQ-EPI-Montaje-Y-Uso | REQ-HIS-Documentacion-De-Uso | — | cerrada |
 
 La etapa T6 (recorrido del visor en navegador real) va dentro de PAR-PTE-04, por `interfaz: n2` de REQ-HIS-Visor-Web. Fuera del sprint: REQ-HIS-Conocimiento-De-Montaje (ADR-0008).
 

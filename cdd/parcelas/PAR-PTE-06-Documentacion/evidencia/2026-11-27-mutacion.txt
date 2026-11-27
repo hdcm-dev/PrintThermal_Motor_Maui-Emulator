@@ -1,0 +1,43 @@
+# Mutantes de docs/ en PAR-PTE-06 (2026-11-27)
+
+Commit 1740a58; mcr.microsoft.com/dotnet/sdk:10.0.403 en el equipo de cómputo, con turno (perfil liviano, 2 CPU / 4 GB). Se compila una vez y se corre DocumentacionTests con cada mutante aplicado a docs/ (se leen en ejecución) y restaurado después. 8 de 8 en rojo.
+
+- M1 ruta: esperar → aguardar en docs/api.md
+- M2 variable: Emulador__Bluetooth__Direccion → Emulador__Bluetooth__Dir en docs/montaje.md
+- M3 cliente: el ejemplo de docs/api.md difiere de la región compilada (75 → 90 s)
+- M4 registro: «se acepta» → «se aprueba» en un mensaje citado
+- M5 ejecutable: /api/estado → /api/estadox en un ejemplo que corre
+- M6 parámetro: limite → cantidad
+- M7 imagen: versión fija → latest
+- M8 enlace: enlace roto en docs/README.md
+
+```text
+== base
+Passed!  - Failed:     0, Passed:     2, Skipped:     0, Total:     2, Duration: 4 s - PrintThermal.Emulator.Tests.dll (net10.0)
+== M1-ruta
+  Failed PrintThermal.Emulator.Tests.Documentacion.DocumentacionTests.LaDocumentacionSigueAlCodigo [1 s]
+  Failed PrintThermal.Emulator.Tests.Documentacion.DocumentacionTests.LosEjemplosDeLaDocumentacionCorren [738 ms]
+Failed!  - Failed:     2, Passed:     0, Skipped:     0, Total:     2, Duration: 2 s - PrintThermal.Emulator.Tests.dll (net10.0)
+== M2-variable
+  Failed PrintThermal.Emulator.Tests.Documentacion.DocumentacionTests.LaDocumentacionSigueAlCodigo [1 s]
+Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 3 s - PrintThermal.Emulator.Tests.dll (net10.0)
+== M3-cliente
+  Failed PrintThermal.Emulator.Tests.Documentacion.DocumentacionTests.LaDocumentacionSigueAlCodigo [1 s]
+Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 3 s - PrintThermal.Emulator.Tests.dll (net10.0)
+== M4-registro
+  Failed PrintThermal.Emulator.Tests.Documentacion.DocumentacionTests.LaDocumentacionSigueAlCodigo [1 s]
+Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 3 s - PrintThermal.Emulator.Tests.dll (net10.0)
+== M5-ejecutable
+  Failed PrintThermal.Emulator.Tests.Documentacion.DocumentacionTests.LaDocumentacionSigueAlCodigo [1 s]
+  Failed PrintThermal.Emulator.Tests.Documentacion.DocumentacionTests.LosEjemplosDeLaDocumentacionCorren [427 ms]
+Failed!  - Failed:     2, Passed:     0, Skipped:     0, Total:     2, Duration: 1 s - PrintThermal.Emulator.Tests.dll (net10.0)
+== M6-parametro
+  Failed PrintThermal.Emulator.Tests.Documentacion.DocumentacionTests.LaDocumentacionSigueAlCodigo [1 s]
+Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 3 s - PrintThermal.Emulator.Tests.dll (net10.0)
+== M7-imagen
+  Failed PrintThermal.Emulator.Tests.Documentacion.DocumentacionTests.LaDocumentacionSigueAlCodigo [1 s]
+Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 3 s - PrintThermal.Emulator.Tests.dll (net10.0)
+== M8-enlace
+  Failed PrintThermal.Emulator.Tests.Documentacion.DocumentacionTests.LaDocumentacionSigueAlCodigo [1 s]
+Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 3 s - PrintThermal.Emulator.Tests.dll (net10.0)
+```

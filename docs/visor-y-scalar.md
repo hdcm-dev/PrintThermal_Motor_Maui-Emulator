@@ -24,7 +24,6 @@ En `$BASE/` (la raíz, puerto 5080 de la red del emulador). Muestra el estado de
 
 - El visor lee todo por la misma API; no tiene datos propios.
 - Para mirarlo hace falta un navegador que llegue a la red del contenedor ([Montaje](montaje.md) §4). En PAR-PTE-05 se abrió con Chrome dentro del emulador de Android.
-- A 540 px de ancho de pantalla el ticket desborda su tarjeta (hallazgo abierto del visor).
 
 ## 2. Scalar y OpenAPI
 

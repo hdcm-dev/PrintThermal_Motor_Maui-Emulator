@@ -212,7 +212,7 @@ public sealed partial class DocumentacionTests
     [GeneratedRegex(@"\$""(?<texto>(?:[^""\\]|\\.)*)""")]
     private static partial Regex CadenaInterpolada();
 
-    [GeneratedRegex(@"\]\((?<destino>[^)\s#]+)(?:#[^)]*)?\)")]
+    [GeneratedRegex(@"\]\((?<destino>[^)\s#]*)(?:#(?<ancla>[^)\s]*))?\)")]
     private static partial Regex Enlace();
 
     [Fact]
@@ -238,6 +238,7 @@ public sealed partial class DocumentacionTests
         using var http = fabrica.CreateClient();
         using var openApi = JsonDocument.Parse(await http.GetStringAsync("/openapi/v1.json"));
         var rutas = openApi.RootElement.GetProperty("paths");
+        CamposJson(openApi.RootElement, errores);
         var fueraDeLaApi = new HashSet<string>(StringComparer.Ordinal) { "/", "/scalar", "/openapi/v1.json" };
 
         var citas = new List<(string Donde, string Metodo, string Url)>();
@@ -365,9 +366,104 @@ public sealed partial class DocumentacionTests
             }
         }
 
+        // También las que se nombran en la prosa y las tablas, entre comillas invertidas.
+        foreach (var archivo in ArchivosDeDocs())
+        {
+            foreach (Match m in Regex.Matches(File.ReadAllText(archivo), @"`(?<clave>[A-Za-z][A-Za-z0-9]*(?:__[A-Za-z][A-Za-z0-9]*)+)`"))
+            {
+                vistas++;
+                var clave = m.Groups["clave"].Value.Replace("__", ":", StringComparison.Ordinal);
+                if (!conocidas.Contains(clave))
+                {
+                    errores.Add($"{Relativa(archivo)}: la variable {m.Groups["clave"].Value} no corresponde a ninguna clave de configuración del host");
+                }
+            }
+        }
+
         if (vistas == 0)
         {
             errores.Add("docs/ no muestra ninguna variable de configuración");
+        }
+
+        // Valores por omisión y rangos citados: salen del código.
+        var montaje = File.ReadAllText(Path.Combine(Docs, "montaje.md"));
+        var api = File.ReadAllText(Path.Combine(Docs, "api.md"));
+        var porOmision = new OpcionesDelMedio().Direccion;
+        if (!montaje.Contains($"| `{porOmision}` |", StringComparison.Ordinal))
+        {
+            errores.Add($"docs/montaje.md no da la dirección Bluetooth por omisión del código ({porOmision})");
+        }
+
+        foreach (var texto in new[]
+        {
+            $"de 1 a {EndpointsDeTickets.EsperaMaxima}; {EndpointsDeTickets.EsperaPorOmision} si falta",
+            $"`limite` va de 1 a {EndpointsDeTickets.LimiteMaximo}",
+        })
+        {
+            if (!api.Contains(texto, StringComparison.Ordinal))
+            {
+                errores.Add($"docs/api.md no dice «{texto}», que es lo que hace el código");
+            }
+        }
+    }
+
+    /// <summary>
+    /// Los campos JSON que <c>docs/api.md</c> nombra entre comillas invertidas existen en los esquemas o en los
+    /// parámetros de <c>/openapi/v1.json</c>.
+    /// </summary>
+    private static void CamposJson(JsonElement openApi, List<string> errores)
+    {
+        var nombres = new HashSet<string>(StringComparer.Ordinal) { "null", "true", "false", "jq", "detail" };
+        if (openApi.TryGetProperty("components", out var componentes) && componentes.TryGetProperty("schemas", out var esquemas))
+        {
+            foreach (var e in esquemas.EnumerateObject())
+            {
+                if (e.Value.TryGetProperty("properties", out var props))
+                {
+                    foreach (var p in props.EnumerateObject())
+                    {
+                        nombres.Add(p.Name);
+                    }
+                }
+            }
+        }
+
+        foreach (var ruta in openApi.GetProperty("paths").EnumerateObject())
+        {
+            foreach (var op in ruta.Value.EnumerateObject())
+            {
+                if (op.Value.ValueKind == JsonValueKind.Object && op.Value.TryGetProperty("parameters", out var ps))
+                {
+                    foreach (var x in ps.EnumerateArray())
+                    {
+                        nombres.Add(x.GetProperty("name").GetString() ?? "");
+                    }
+                }
+            }
+        }
+
+        var lineas = File.ReadAllLines(Path.Combine(Docs, "api.md"));
+        bool enBloque = false;
+        for (int i = 0; i < lineas.Length; i++)
+        {
+            if (lineas[i].StartsWith("```", StringComparison.Ordinal))
+            {
+                enBloque = !enBloque;
+                continue;
+            }
+
+            if (enBloque)
+            {
+                continue;
+            }
+
+            foreach (Match m in Regex.Matches(lineas[i], @"`(?<campo>[a-z][a-zA-Z]*)`"))
+            {
+                if (!nombres.Contains(m.Groups["campo"].Value))
+                {
+                    errores.Add($"docs/api.md:{i + 1}: «{m.Groups["campo"].Value}» no es un campo ni un parámetro de /openapi/v1.json");
+                }
+            }
         }
     }
 
@@ -381,6 +477,9 @@ public sealed partial class DocumentacionTests
         var puerto = Regex.Match(dockerfile, @"(?m)^ENV ASPNETCORE_URLS=http://0\.0\.0\.0:(?<p>\d+)").Groups["p"].Value;
         Assert.False(string.IsNullOrEmpty(puerto), "el Dockerfile no fija el puerto");
         var volumen = Regex.Match(dockerfile, @"(?m)^VOLUME \[""(?<v>[^""]+)""\]").Groups["v"].Value;
+        // La versión que documenta docs/ se declara una vez, en su índice; toda etiqueta citada es ésa.
+        var versionDocumentada = Regex.Match(File.ReadAllText(Path.Combine(Docs, "README.md")), @"versión `(?<v>\d+\.\d+\.\d+)` de la imagen").Groups["v"].Value;
+        Assert.False(string.IsNullOrEmpty(versionDocumentada), "docs/README.md no dice qué versión de la imagen documenta");
 
         bool montaVolumen = false;
         foreach (var b in bloques)
@@ -398,6 +497,10 @@ public sealed partial class DocumentacionTests
                 {
                     errores.Add($"{b}: la imagen va con versión fija, no «{etiqueta}»");
                 }
+                else if (Regex.IsMatch(etiqueta, @"^\d") && etiqueta != versionDocumentada)
+                {
+                    errores.Add($"{b}: la imagen va con {etiqueta} y docs/README.md documenta la {versionDocumentada}");
+                }
             }
 
             foreach (Match m in UrlEnBloque().Matches(b.Texto))
@@ -405,6 +508,14 @@ public sealed partial class DocumentacionTests
                 if (m.Groups["puerto"].Success && m.Groups["puerto"].Value != puerto)
                 {
                     errores.Add($"{b}: el puerto {m.Groups["puerto"].Value} no es el de la imagen ({puerto})");
+                }
+            }
+
+            foreach (Match m in Regex.Matches(b.Texto, @"-p\s+(?:[\d.]+:)?\d+:(?<interno>\d+)"))
+            {
+                if (m.Groups["interno"].Value != puerto)
+                {
+                    errores.Add($"{b}: «{m.Value}» publica el puerto {m.Groups["interno"].Value}, y la imagen escucha en {puerto}");
                 }
             }
 
@@ -529,10 +640,19 @@ public sealed partial class DocumentacionTests
                     continue;
                 }
 
-                var completo = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(archivo)!, destino));
+                var completo = destino.Length == 0
+                    ? archivo
+                    : Path.GetFullPath(Path.Combine(Path.GetDirectoryName(archivo)!, destino));
                 if (!File.Exists(completo) && !Directory.Exists(completo))
                 {
                     errores.Add($"{Relativa(archivo)}: enlace roto a {destino}");
+                    continue;
+                }
+
+                var ancla = m.Groups["ancla"].Value;
+                if (ancla.Length > 0 && File.Exists(completo) && !Anclas(completo).Contains(ancla))
+                {
+                    errores.Add($"{Relativa(archivo)}: el ancla #{ancla} no es un título de {Relativa(completo)}");
                 }
             }
         }
@@ -541,5 +661,42 @@ public sealed partial class DocumentacionTests
         {
             errores.Add("README.md no enlaza docs/README.md");
         }
+
+        // Las páginas de la estructura decidida (D1 de PAR-PTE-06), enlazadas desde el índice.
+        var indice = File.ReadAllText(Path.Combine(Docs, "README.md"));
+        foreach (var pagina in Paginas)
+        {
+            if (!File.Exists(Path.Combine(Docs, pagina)) || !indice.Contains("](" + pagina + ")", StringComparison.Ordinal))
+            {
+                errores.Add($"falta docs/{pagina} o su enlace desde docs/README.md");
+            }
+        }
+    }
+
+    private static readonly string[] Paginas =
+    [
+        "que-es-y-limites.md", "montaje.md", "emparejar-e-imprimir.md", "api.md", "visor-y-scalar.md",
+        "diagnostico.md", "recetas.md", "diseno-documental.md",
+    ];
+
+    /// <summary>Anclas de los títulos de un Markdown, como las arma GitHub (minúsculas, sin puntuación, guiones).</summary>
+    private static HashSet<string> Anclas(string archivo)
+    {
+        var anclas = new HashSet<string>(StringComparer.Ordinal);
+        bool enBloque = false;
+        foreach (var l in File.ReadLines(archivo))
+        {
+            if (l.StartsWith("```", StringComparison.Ordinal))
+            {
+                enBloque = !enBloque;
+            }
+            else if (!enBloque && Regex.Match(l, @"^#{1,6}\s+(?<t>.+?)\s*$") is { Success: true } m)
+            {
+                var t = m.Groups["t"].Value.ToLowerInvariant();
+                anclas.Add(new string(t.Where(c => char.IsLetterOrDigit(c) || c is ' ' or '-' or '_').ToArray()).Replace(' ', '-'));
+            }
+        }
+
+        return anclas;
     }
 }

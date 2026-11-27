@@ -39,7 +39,7 @@ El contrato completo de la API (rutas, parámetros, esquemas y códigos) no se r
 ## 2. Convenciones
 
 - `$BASE` es la dirección de la API del emulador, sin barra final; en el montaje previsto, `http://127.0.0.1:5080` dentro de la red del contenedor del emulador de Android ([Montaje](montaje.md) §4).
-- `<entre ángulos>` es un valor que pone quien usa la página (nombre de un contenedor, una carpeta).
+- `<entre ángulos>` es un valor que pone quien usa la página (nombre de un contenedor, una carpeta con ruta absoluta).
 - «NO VERIFICADO» marca lo que no se midió; el resto sale del código de este repositorio o de la prueba de extremo a extremo de PAR-PTE-05 (`cdd/parcelas/PAR-PTE-05-Distribucion/evidencia/`).
 
 ## 3. Cómo se verifica esta documentación

@@ -26,6 +26,7 @@ Las dos fuentes: `GET /api/estado` ([API](api.md) §2) y los registros del conte
 ## 1. No arranca o no responde la API
 
 - **El contenedor se cae al empezar:** `docker logs` del intento. Con `--rm` el contenedor desaparece; para leer el error, repetir sin `-d`.
+- **Los tickets no aparecen en la carpeta del equipo:** `-v` necesita una ruta absoluta; con un nombre suelto, Docker crea un volumen con nombre.
 - **No hay escritura en la carpeta de salida:** el usuario de la imagen (uid 1654) no puede escribir en la carpeta montada en `/data` ([Montaje](montaje.md) §6).
 - **`curl` no conecta:** la API escucha en el puerto 5080 de la red del contenedor del emulador de Android, no en la del equipo: el pedido tiene que salir de esa red ([Montaje](montaje.md) §4).
 
@@ -37,10 +38,19 @@ Mirar `medio` y `medioConectado` en `GET /api/estado`:
 |---|---|---|
 | `Bluetooth «58HB6» (Anunciando)` | Se anuncia | Buscar de nuevo desde Android |
 | `Bluetooth «58HB6» (Anunciando, con conexión RFCOMM)` | Hay una app conectada | — |
+| `Bluetooth «58HB6» (Iniciando)` | Llegó a netsim y está preparando el controlador | Esperar unos segundos |
+| `Bluetooth «58HB6» (Detenido)` | El servicio todavía no arrancó o se está bajando | Esperar; si sigue, ver los registros |
 | `Bluetooth «58HB6» (Conectando)` o `(Error)` | No llega a netsim; reintenta cada 2 s | Revisar `Emulador__Bluetooth__Netsim`: `http://127.0.0.1:<puerto gRPC>` y el contenedor unido con `--network container:` al del emulador de Android |
 | `sin medio` o `simulado` | Arrancó sin `Emulador__Bluetooth__Netsim` | Agregar la variable ([Montaje](montaje.md) §5) |
 
-Los reintentos dejan en el registro una línea `periférico: <motivo>; reintento en 2 s`. Si el emulador de Android se reinició, netsim pudo cambiar de puerto: releerlo ([Montaje](montaje.md) §3) y volver a levantar el contenedor.
+Cada reintento deja en el registro una línea con el motivo:
+
+<!-- ejemplo: registro -->
+```text
+periférico: <motivo del error>; reintento en 2 s
+```
+
+Si el emulador de Android se reinició, netsim pudo cambiar de puerto: releerlo ([Montaje](montaje.md) §3) y volver a levantar el contenedor.
 
 ## 3. No empareja o el vínculo no sirve
 
@@ -58,7 +68,12 @@ En orden:
 4. **¿Se esperó bien?** Con `esperar` sin `despuesDe`, o con un `despuesDe` leído después de imprimir, el ticket ya estaba y no cuenta: leer `ultimoId` antes de imprimir ([API](api.md) §3). Un `204` es plazo vencido, no error.
 5. **¿Lo borró otro?** `DELETE /api/tickets` y «Limpiar» del visor borran para todos los que usan el mismo emulador.
 
-Los avisos del intérprete (comandos desconocidos, recortes) salen como `conexión N: <aviso>` en el registro.
+Los avisos del intérprete (comandos desconocidos, recortes, cortes sueltos) salen en el registro con el número de conexión, por ejemplo:
+
+<!-- ejemplo: registro -->
+```text
+conexión 1: corte 1D 56 00 sin ticket abierto: se ignora
+```
 
 ## 5. La imagen es privada
 

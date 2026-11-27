@@ -89,4 +89,27 @@ En un runner sin KVM no hay emulador de Android: el workflow prueba contra la fu
 4. Correr las pruebas del consumidor; guardar los PNG como artefacto.
 5. `docker stop` al final, también si las pruebas fallan (`if: always()` en GitHub Actions).
 
+Esqueleto para GitHub Actions (ilustrativo, NO VERIFICADO: no se corrió en un runner; `GHCR_TOKEN` es un secreto del repositorio que lo use):
+
+```yaml
+jobs:
+  consumidor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Emulador de impresora con fuente simulada
+        run: |
+          echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          mkdir -p "$RUNNER_TEMP/tickets" && chmod 0777 "$RUNNER_TEMP/tickets"
+          docker run -d --rm --name impresora-simulada -p 127.0.0.1:5080:5080 \
+            -v "$RUNNER_TEMP/tickets":/data -e Emulador__Simulacion__IntervaloSegundos=5 \
+            ghcr.io/hdcm-dev/printthermal_motor_maui-emulator:1.0.0
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:5080/api/estado && break; sleep 1; done
+      - name: Pruebas del consumidor
+        run: <comando de las pruebas>
+      - name: Bajar el emulador
+        if: always()
+        run: docker stop impresora-simulada
+```
+
 Un workflow que use el emulador de Android necesita un runner con KVM y Docker, y sigue §3. NO VERIFICADO en runners de GitHub.
