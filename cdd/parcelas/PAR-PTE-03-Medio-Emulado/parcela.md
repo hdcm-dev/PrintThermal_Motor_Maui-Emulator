@@ -11,7 +11,7 @@ historias:
   - REQ-HIS-Descubrimiento-Y-Emparejamiento@v1
   - REQ-HIS-Recepcion-Integra@v1
 lee:
-  - REQ-HIS-Compilacion-Verificada@v2
+  - REQ-HIS-Compilacion-Verificada@v3
   - VIS@v1
   - REQ-EPI-Medio-Emulado@v1
   - ADR-0004@v1
