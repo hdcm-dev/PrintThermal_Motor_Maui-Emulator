@@ -1,6 +1,6 @@
 ---
 id: REQ-HIS-Descubrimiento-Y-Emparejamiento
-version: 3
+version: 4
 epica: REQ-EPI-Medio-Emulado
 gobierno: parcela
 tipo: referencia
@@ -44,3 +44,4 @@ La impresora emulada se anuncia por Bluetooth Classic con el nombre «58HB6», p
 | v1 | siembra | Alta |
 | v2 | PAR-PTE-03 | `rutas:` suma las pruebas de la historia (`tests/…/Bluetooth/Hci*.cs`, `Sdp*.cs`, `Seguridad*.cs`); código en `Hci`, `L2cap`, `Sdp` y `Seguridad` |
 | v3 | LAZ-0011 | Criterio del camino de Ajustes: vínculo dedicado y conexión RFCOMM posterior cifrada |
+| v4 | PAR-PTE-07 | Reconexión breve tras un vínculo sin cifrar (ADR-0009, LAZ-0011) y traza HCI opcional; pruebas en `tests/…/Bluetooth/SeguridadVinculoSinCifrarTests.cs` |

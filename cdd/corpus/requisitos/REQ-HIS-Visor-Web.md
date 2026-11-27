@@ -1,6 +1,6 @@
 ---
 id: REQ-HIS-Visor-Web
-version: 3
+version: 4
 epica: REQ-EPI-Acceso
 gobierno: parcela
 tipo: referencia
@@ -51,3 +51,4 @@ La página se actualiza sola con la espera larga de `/api/tickets/esperar`. Se r
 | v1 | siembra | Alta |
 | v2 | PAR-PTE-04 | Visor de una página con lista, ticket a escala, descargas, limpiar, estado y actualización por espera; rutas de pruebas |
 | v3 | LAZ-0015 | Criterio de pantalla angosta: el ticket no desborda su tarjeta |
+| v4 | PAR-PTE-07 | La tarjeta del ticket se ajusta al ancho disponible (LAZ-0015); recorrido en `cdd/parcelas/PAR-PTE-07-Vinculo-Desde-Ajustes/recorrido/` |
