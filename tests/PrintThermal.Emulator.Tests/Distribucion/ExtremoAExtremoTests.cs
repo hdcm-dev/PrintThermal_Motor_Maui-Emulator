@@ -29,7 +29,9 @@ public sealed class ExtremoAExtremoTests : IDisposable
     private static string Captura => Path.Combine(Dorados.Raiz(), "tests", "PrintThermal.Emulator.Tests", "Distribucion", "Captura");
 
     /// <summary>Líneas «archivo.bin huella-del-png trozo» de la corrida real.</summary>
-    public static TheoryData<string, string, int> Capturas()
+    public static TheoryData<string, string, int> Capturas => LeerCapturas();
+
+    private static TheoryData<string, string, int> LeerCapturas()
     {
         var datos = new TheoryData<string, string, int>();
         foreach (var linea in File.ReadAllLines(Path.Combine(Captura, "huellas.txt")))
@@ -63,6 +65,6 @@ public sealed class ExtremoAExtremoTests : IDisposable
     [Fact]
     public void LaCorridaRealDejoCincoTickets()
     {
-        Assert.Equal(5, Capturas().Count());
+        Assert.Equal(5, Capturas.Count());
     }
 }

@@ -36,7 +36,7 @@ public sealed class IntegracionTests : IDisposable
     }
 
     /// <summary>Entrega <paramref name="datos"/> por el receptor en trozos de <paramref name="trozo"/> bytes y cierra.</summary>
-    public static void Transmitir(IReceptorDeBytes receptor, long conexion, byte[] datos, int trozo, bool cerrar = true)
+    internal static void Transmitir(IReceptorDeBytes receptor, long conexion, byte[] datos, int trozo, bool cerrar = true)
     {
         var info = new InfoConexionRfcomm(conexion, DireccionBluetooth.Parse("02:00:00:00:00:01"), 1);
         receptor.Abierta(info);
@@ -51,7 +51,7 @@ public sealed class IntegracionTests : IDisposable
     }
 
     /// <summary>El PNG que da el intérprete para esos bytes, de una vez y cerrando al final.</summary>
-    public static byte[] PngEsperado(byte[] datos)
+    internal static byte[] PngEsperado(byte[] datos)
     {
         var interprete = new Interprete();
         var pngs = new List<byte[]>();
