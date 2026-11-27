@@ -1,6 +1,6 @@
 ---
 id: REQ-HIS-Imagen-Publicada
-version: 1
+version: 2
 epica: REQ-EPI-Distribucion
 gobierno: parcela
 tipo: referencia
@@ -8,6 +8,7 @@ rutas:
   - Dockerfile
   - .dockerignore
   - .github/workflows/release.yml
+  - tests/PrintThermal.Emulator.Tests/Distribucion/**
 ---
 # REQ-HIS-Imagen-Publicada
 
@@ -30,10 +31,11 @@ Un release etiquetado construye la imagen del contenedor del emulador y la publi
 ## 3. Trazas
 
 - Sube de: REQ-EPI-Distribucion
-- Implementado en: todavía no hay código (siembra del 2026-11-27).
+- Implementado en: `Dockerfile`, `.dockerignore` y `.github/workflows/release.yml` (PAR-PTE-05); pruebas en `tests/PrintThermal.Emulator.Tests/Distribucion/`.
 
 ## 4. Historial
 
 | Versión | Parcela | Cambio |
 |---|---|---|
 | v1 | siembra | Alta |
+| v2 | PAR-PTE-05 | `rutas:` suma las pruebas de la historia (`tests/…/Distribucion/**`); imagen, release y prueba de extremo a extremo |

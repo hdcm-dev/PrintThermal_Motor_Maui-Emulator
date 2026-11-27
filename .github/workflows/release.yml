@@ -1,0 +1,54 @@
+# Release del emulador (PAR-PTE-05; ADR-0006). Al empujar una etiqueta v<mayor>.<menor>.<parche>: compila, prueba,
+# publica la imagen en ghcr.io con la versión de la etiqueta y crea el release con el binario adjunto.
+# Sólo el token del workflow; acciones fijadas por el SHA de commit de su etiqueta (como cdd.yml).
+name: release
+on:
+  push:
+    tags:
+      - 'v*'
+permissions:
+  contents: write
+  packages: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
+        with:
+          global-json-file: global.json
+      - name: Versión de la etiqueta
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "etiqueta no semántica: $GITHUB_REF_NAME"; exit 1; fi
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+      - name: La etiqueta no tiene release todavía
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then echo "el release $GITHUB_REF_NAME ya existe"; exit 1; fi
+      - name: Compilar
+        run: dotnet build PrintThermal.Emulator.slnx --configuration Release -p:Version=${VERSION}
+      - name: Probar
+        run: dotnet test PrintThermal.Emulator.slnx --configuration Release --no-build
+      - name: Binario
+        run: |
+          dotnet publish src/PrintThermal.Emulator.Api/PrintThermal.Emulator.Api.csproj -c Release -o publicado -p:UseAppHost=false -p:Version=${VERSION}
+          tar -czf "printthermal-emulator-${VERSION}-net10.0.tar.gz" -C publicado .
+      - name: Imagen
+        run: |
+          docker build --build-arg VERSION=${VERSION} --label org.opencontainers.image.revision=${GITHUB_SHA} \
+            -t ghcr.io/hdcm-dev/printthermal_motor_maui-emulator:${VERSION} .
+      - name: Publicar la imagen
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "$TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          docker push ghcr.io/hdcm-dev/printthermal_motor_maui-emulator:${VERSION}
+      - name: Release con el binario
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" "printthermal-emulator-${VERSION}-net10.0.tar.gz" --verify-tag \
+            --title "$GITHUB_REF_NAME" \
+            --notes "Imagen: \`ghcr.io/hdcm-dev/printthermal_motor_maui-emulator:${VERSION}\`. Uso previsto y montaje: Dockerfile y README."

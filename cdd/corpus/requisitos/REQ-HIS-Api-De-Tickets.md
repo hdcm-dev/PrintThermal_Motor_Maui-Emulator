@@ -1,12 +1,13 @@
 ---
 id: REQ-HIS-Api-De-Tickets
-version: 2
+version: 3
 epica: REQ-EPI-Acceso
 gobierno: parcela
 tipo: referencia
 rutas:
   - src/PrintThermal.Emulator.Api/Api/**
   - src/PrintThermal.Emulator.Api/Program.cs
+  - src/PrintThermal.Emulator.Api/Integracion/**
   - tests/PrintThermal.Emulator.Tests/Api/**
 ---
 # REQ-HIS-Api-De-Tickets
@@ -48,7 +49,7 @@ El contrato (PAR-PTE-04, D3 con los cambios de la mesa ciega; detalle en `cdd/pa
 ## 3. Trazas
 
 - Sube de: REQ-EPI-Acceso
-- Implementado en: `src/PrintThermal.Emulator.Api/Program.cs` y `src/PrintThermal.Emulator.Api/Api/` (`EndpointsDeTickets`, `AlmacenDeTickets`, `AlmacenEnMemoria`, `FuenteSimulada`, `Direcciones`, `Png`); pruebas en `tests/PrintThermal.Emulator.Tests/Api/`.
+- Implementado en: `src/PrintThermal.Emulator.Api/Program.cs` y `src/PrintThermal.Emulator.Api/Api/` (`EndpointsDeTickets`, `AlmacenDeTickets`, `AlmacenEnMemoria`, `FuenteSimulada`, `Direcciones`, `Png`) y `src/PrintThermal.Emulator.Api/Integracion/` (`AlmacenEnDisco`, `ReceptorAlAlmacen`, `MedioBluetooth`, PAR-PTE-05); pruebas en `tests/PrintThermal.Emulator.Tests/Api/`.
 
 ## 4. Historial
 
@@ -56,3 +57,4 @@ El contrato (PAR-PTE-04, D3 con los cambios de la mesa ciega; detalle en `cdd/pa
 |---|---|---|
 | v1 | siembra | Alta |
 | v2 | PAR-PTE-04 | Contrato de rutas, esquema y códigos (D3, con los cambios de la mesa); OpenAPI y Scalar; escucha local por omisión; almacén en memoria y fuente simulada detrás de interfaces; rutas de pruebas |
+| v3 | PAR-PTE-05 | `rutas:` suma `Integracion/**`: almacén en disco y medio Bluetooth conectados al host por configuración (`Emulador:Salida`, `Emulador:Bluetooth:Netsim`); el cierre de la conexión termina el ticket |

@@ -1,7 +1,9 @@
-// Host del emulador: API de tickets, OpenAPI, Scalar y visor Blazor (PAR-PTE-04; ADR-0001, ADR-0002, ADR-0003).
+// Host del emulador: API de tickets, OpenAPI, Scalar y visor Blazor (PAR-PTE-04; ADR-0001, ADR-0002, ADR-0003),
+// con el almacén en disco y el medio Bluetooth conectados por configuración (PAR-PTE-05).
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using PrintThermal.Emulator.Api.Api;
+using PrintThermal.Emulator.Api.Integracion;
 using PrintThermal.Emulator.Api.Visor;
 using PrintThermal.Emulator.Client;
 using Scalar.AspNetCore;
@@ -15,11 +17,42 @@ if (Direcciones.EscuchaSinConfigurar(builder.Configuration) is { } escucha)
 }
 
 builder.Services.AddSingleton(TimeProvider.System);
-builder.Services.AddSingleton<IAlmacenDeTickets, AlmacenEnMemoria>();
+// Almacén: en disco si hay carpeta de salida (PAR-PTE-02, conectado en PAR-PTE-05 D2); si no, en memoria (PAR-PTE-04 D4).
+var salida = builder.Configuration["Emulador:Salida"];
+if (!string.IsNullOrWhiteSpace(salida))
+{
+    string carpeta = salida;
+    builder.Services.AddSingleton(sp => new AlmacenEnDisco(carpeta, sp.GetRequiredService<TimeProvider>()));
+    builder.Services.AddSingleton<IAlmacenDeTickets>(sp => sp.GetRequiredService<AlmacenEnDisco>());
+    builder.Services.AddSingleton(sp =>
+    {
+        var log = sp.GetRequiredService<ILoggerFactory>().CreateLogger("PrintThermal.Emulator.Recepcion");
+        return new ReceptorAlAlmacen(sp.GetRequiredService<AlmacenEnDisco>(), registro: m => log.LogInformation("{Mensaje}", m));
+    });
+}
+else
+{
+    builder.Services.AddSingleton<IAlmacenDeTickets, AlmacenEnMemoria>();
+}
 
-// Fuente simulada (D4): sin Bluetooth, un ticket cada tantos segundos si Emulador:Simulacion:IntervaloSegundos > 0.
+// Medio: Bluetooth sobre netsim si Emulador:Bluetooth:Netsim está (PAR-PTE-03, conectado en PAR-PTE-05 D2);
+// si no, la fuente simulada (D4 de PAR-PTE-04): un ticket cada tantos segundos si Emulador:Simulacion:IntervaloSegundos > 0.
+var bluetooth = builder.Configuration.GetSection("Emulador:Bluetooth").Get<OpcionesDelMedio>();
 var simulacion = builder.Configuration.GetSection("Emulador:Simulacion").Get<OpcionesDeSimulacion>() ?? new();
-if (simulacion.IntervaloSegundos > 0)
+if (!string.IsNullOrWhiteSpace(bluetooth?.Netsim))
+{
+    if (string.IsNullOrWhiteSpace(salida))
+    {
+        throw new InvalidOperationException("Emulador:Bluetooth:Netsim necesita Emulador:Salida (carpeta de los tickets).");
+    }
+    OpcionesDelMedio medio = bluetooth!;
+    string carpeta = salida;
+    builder.Services.AddSingleton(sp => new MedioBluetooth(
+        medio, carpeta, sp.GetRequiredService<ReceptorAlAlmacen>(), sp.GetRequiredService<ILogger<MedioBluetooth>>()));
+    builder.Services.AddSingleton<IEstadoDelMedio>(sp => sp.GetRequiredService<MedioBluetooth>());
+    builder.Services.AddHostedService(sp => sp.GetRequiredService<MedioBluetooth>());
+}
+else if (simulacion.IntervaloSegundos > 0)
 {
     builder.Services.AddSingleton(sp => new FuenteSimulada(
         sp.GetRequiredService<IAlmacenDeTickets>(), sp.GetRequiredService<TimeProvider>(), simulacion.IntervaloSegundos));
