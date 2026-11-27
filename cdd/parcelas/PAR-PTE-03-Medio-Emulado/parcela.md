@@ -2,7 +2,7 @@
 id: PAR-PTE-03
 titulo: Bluetooth Classic propio en C# contra netsim: descubrimiento, emparejamiento y recepción por RFCOMM
 version: 1.0
-estado: propuesta
+estado: en-curso
 velocidad: completa
 base_commit: 9dec7ce0bdb56b1ee990cc97cba6015cf79c0afb
 sprint: SPR-01
@@ -22,6 +22,11 @@ appetite: tres días
 pendientes:
 decisiones:
   - {id: D1, tema: "TS-2 y TS-3: pila propia frente a puente y emparejamiento emulado frente al real (mesa sobre el resultado juzgado de la prueba corta)", clase: K2, adr: ADR-0004}
+  - {id: D2, tema: "gRPC de netsim sin paquetes: HTTP/2 sin TLS de HttpClient y protobuf escrito a mano para los cinco mensajes que se usan; no suma dependencias ni toca Directory.Packages.props", clase: K1}
+  - {id: D3, tema: "SSP sin entrada ni salida (IO 0x03) y bonding general sin MITM (0x04): Android pide consentimiento y el emulador confirma; PIN 0000 sólo si Android usa emparejamiento heredado", clase: K1}
+  - {id: D4, tema: "registro SDP: el de la prueba corta (handle, clase 0x1101, L2CAP + RFCOMM canal 1, navegación pública) más perfil SPP 1.2, base de idioma y nombre de servicio «58HB6»; el registro real de la 58HB6 sigue sin medir", clase: K1}
+  - {id: D5, tema: "re-planificación: lee REQ-HIS-Compilacion-Verificada@v2 (I-3); ADR-0004 sale de modifica porque tiene gobierno humano y la parcela no lo toca; las historias suben a v2 para cubrir sus pruebas en rutas", clase: K1}
+  - {id: D6, tema: "la frontera con el almacén de tickets es IReceptorDeBytes en Rfcomm (Core no está fusionado); el host del servicio la conecta en PAR-PTE-04", clase: K1}
 sin_impacto_de_diseno: false
 motivo_sin_impacto:
 ---
@@ -60,7 +65,7 @@ Que el emulador de Android descubra, empareje e imprima en «58HB6» (CE-1, CE-2
 
 ## Plan
 
-Espera la mesa de TS-2 y TS-3 (DEC-001): queda en `propuesta` hasta que ADR-0004 pase a `aceptado`.
+`plan.md` y `tasks.md`. Opción A de ADR-0004 (la del intake firmado); D1 la decide una mesa de otro contexto con el resultado de la prueba real, y el PO la aprueba en lote en la Review (K2).
 
 ## Tareas
 

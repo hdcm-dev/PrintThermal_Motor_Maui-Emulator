@@ -1,11 +1,12 @@
 ---
 id: REQ-HIS-Recepcion-Integra
-version: 1
+version: 2
 epica: REQ-EPI-Medio-Emulado
 gobierno: parcela
 tipo: referencia
 rutas:
   - src/PrintThermal.Emulator.Bluetooth/Rfcomm/**
+  - tests/PrintThermal.Emulator.Tests/Bluetooth/Rfcomm*.cs
 ---
 # REQ-HIS-Recepcion-Integra
 
@@ -27,10 +28,11 @@ Los bytes que la app envía por RFCOMM llegan al emulador sin cambios y se entre
 ## 3. Trazas
 
 - Sube de: REQ-EPI-Medio-Emulado
-- Implementado en: todavía no hay código (siembra del 2026-11-27).
+- Implementado en: `src/PrintThermal.Emulator.Bluetooth/Rfcomm/` (PAR-PTE-03): la entrega va por `IReceptorDeBytes`, que el host del servicio conecta con el almacén de tickets.
 
 ## 4. Historial
 
 | Versión | Parcela | Cambio |
 |---|---|---|
 | v1 | siembra | Alta |
+| v2 | PAR-PTE-03 | `rutas:` suma `tests/…/Bluetooth/Rfcomm*.cs`; la frontera con el almacén es `IReceptorDeBytes` |

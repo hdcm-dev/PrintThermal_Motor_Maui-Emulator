@@ -1,0 +1,21 @@
+# Mutación (2026-11-27): una mutación por vez sobre una copia, y la prueba del REQ que la tiene que atrapar.
+# Contenedor mcr.microsoft.com/dotnet/sdk:10.0.403, turnos 248 y 250, 2 CPU / 4 GB. Las seis quedan en rojo.
+# M4 se repitió (turno 250): con «if (false)» no compilaba (CS0162 como error), así que se cambió por una condición que nunca se cumple.
+## M1 REQ-01: SDP publica 0x1102 en vez de 0x1101 (src/PrintThermal.Emulator.Bluetooth/Sdp/ServidorSdp.cs: s/public const ushort PerfilPuertoSerie = 0x1101;/public const ushort PerfilPuertoSerie = 0x1102;/)
+     Failed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElRegistroSdpPublicaSppConNombre58HB6 [20 ms]
+   Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 85 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+## M2 REQ-02: la confirmación SSP no se contesta (src/PrintThermal.Emulator.Bluetooth/Seguridad/GestorDeSeguridad.cs: s/host.Enviar(0x042C, direccion);/{ }/)
+     Failed PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElEmparejamientoPorConfirmacionSeCompleta [5 s]
+   Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 5 s - PrintThermal.Emulator.Tests.dll (net10.0)
+## M3 REQ-02: la clave no se devuelve al reconectar (src/PrintThermal.Emulator.Bluetooth/Seguridad/GestorDeSeguridad.cs: s/if (claves.Buscar(par) is { } clave)/if (claves.Buscar(par) is { } clave \&\& false)/)
+     Failed PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElEmparejamientoPorConfirmacionSeCompleta [5 s]
+   Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 5 s - PrintThermal.Emulator.Tests.dll (net10.0)
+## M5 REQ-03: se pierde el último byte de cada trama (src/PrintThermal.Emulator.Bluetooth/Rfcomm/SesionRfcomm.cs: s/receptor.Recibidos(d.Conexion, cuerpo);/receptor.Recibidos(d.Conexion, cuerpo[..^1]);/)
+     Failed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LosBytesLleganIntegros [199 ms]
+   Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 273 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+## M6 REQ-03: reensamblado ACL ignora continuaciones (src/PrintThermal.Emulator.Bluetooth/Hci/HostHci.cs: s/buf.AddRange(datos.ToArray());/{ }/)
+     Failed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LosBytesLleganIntegros [189 ms]
+   Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 203 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+## M4 REQ-03: no se reponen créditos RFCOMM (src/PrintThermal.Emulator.Bluetooth/Rfcomm/SesionRfcomm.cs: s/if (d.CreditosDados <= creditosIniciales \/ 2)/if (d.CreditosDados <= -1000)/)
+     Failed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LosBytesLleganIntegros [5 s]
+   Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 5 s - PrintThermal.Emulator.Tests.dll (net10.0)
