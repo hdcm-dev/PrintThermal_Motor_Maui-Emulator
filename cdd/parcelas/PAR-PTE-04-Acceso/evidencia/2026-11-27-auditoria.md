@@ -2,7 +2,7 @@
 
 auditor: claude -p Claude Opus (mismo modelo que el ejecutor) en otro contexto que no vio la ejecución, sólo lectura (git log/diff/show, grep, lectura de archivos y capturas). Garantía reducida: mismo modelo.
 
-Nota de SHAs: la rama se rebasó sobre la re-planificación `e18e4a1` después de las dos rondas, con árbol idéntico. Equivalencias: `386c214` → `5f1eb6e` (rojo), `8bb17cb` → su contenido quedó en `e18e4a1` y `9755ab8`, `5ce52a4` → `be104f4`, `3ed4103` → `8429432`. Los informes citan los SHA anteriores al rebase.
+Nota de SHAs: la rama se rebasó sobre la re-planificación `e18e4a1` después de las dos rondas, con árbol idéntico. Equivalencias: `386c214` → `5f1eb6e` (rojo), `8bb17cb` → su contenido quedó en `e18e4a1` y `9755ab8`, `5ce52a4` → `be104f4`, `3ed4103` → `8429432`. Los informes citan los SHA anteriores al rebase. Los registros se renumeraron para no chocar con los de PAR-PTE-02 (LAZ-0001 y LAZ-0002) y PAR-PTE-03 (LAZ-0005): LAZ-0001 → LAZ-0006, LAZ-0002 → LAZ-0007, LAZ-0003 → LAZ-0008, LAZ-0004 → LAZ-0009. Los informes literales usan los números viejos.
 
 ## Ronda 1 (2026-11-27, sobre 8bb17cb)
 
@@ -105,4 +105,4 @@ VEREDICTO: refutado
 
 ### Respuesta a la ronda 2
 
-Ver «## Cierre» de la parcela, punto «Auditoría»: lo corregido (estado, mutación con diff completo, ProblemDetails en Production, comandos de la escucha, consola declarada, trabajo de PAR-PTE-06 nombrado) y las observaciones aceptadas sin cambio. Lo que queda abierto está en `pendientes:` (LAZ-0001 a LAZ-0004).
+Ver «## Cierre» de la parcela, punto «Auditoría»: lo corregido (estado, mutación con diff completo, ProblemDetails en Production, comandos de la escucha, consola declarada, trabajo de PAR-PTE-06 nombrado) y las observaciones aceptadas sin cambio. Lo que queda abierto está en `pendientes:` (LAZ-0006 a LAZ-0009).

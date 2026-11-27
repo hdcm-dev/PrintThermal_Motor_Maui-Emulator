@@ -25,10 +25,10 @@ modifica:
   - REQ-HIS-Compilacion-Verificada@v2
 appetite: dos días
 pendientes:
-  - {que: "conectar el almacén en disco (PAR-PTE-02) y el medio Bluetooth (PAR-PTE-03) al host detrás de IAlmacenDeTickets e IEstadoDelMedio: ninguna parcela de SPR-01 lo nombra", registro: LAZ-0001}
-  - {que: "escala del visor con 8 puntos por mm, sin medir en la 58HB6 (D6)", registro: LAZ-0002}
-  - {que: "las imágenes oficiales de .NET traen ASPNETCORE_HTTP_PORTS=8080 y anulan la escucha local por omisión (D7) dentro de un contenedor", registro: LAZ-0003}
-  - {que: "orden de fusión: la re-planificación (744a026) antes que esta parcela, y PAR-PTE-02 antes que PAR-PTE-04 según SPR-01", registro: LAZ-0004}
+  - {que: "conectar el almacén en disco (PAR-PTE-02) y el medio Bluetooth (PAR-PTE-03) al host detrás de IAlmacenDeTickets e IEstadoDelMedio: ninguna parcela de SPR-01 lo nombra", registro: LAZ-0006}
+  - {que: "escala del visor con 8 puntos por mm, sin medir en la 58HB6 (D6)", registro: LAZ-0007}
+  - {que: "las imágenes oficiales de .NET traen ASPNETCORE_HTTP_PORTS=8080 y anulan la escucha local por omisión (D7) dentro de un contenedor", registro: LAZ-0008}
+  - {que: "orden de fusión: la re-planificación (744a026) antes que esta parcela, y PAR-PTE-02 antes que PAR-PTE-04 según SPR-01", registro: LAZ-0009}
 decisiones:
   - {id: D1, tema: "versiones fijas de Microsoft.AspNetCore.OpenApi 10.0.14, Scalar.AspNetCore 3.3.0 y Microsoft.AspNetCore.Mvc.Testing 10.0.14 (nuget.org, 2026-11-27; 10.0.14 es el runtime ASP.NET Core del SDK 10.0.403)", clase: K1}
   - {id: D2, tema: "cliente HTTP tipado propio en PrintThermal.Emulator.Client, que usan el visor y las pruebas (opción A de ADR-0003)", clase: K2, adr: ADR-0003}
@@ -105,7 +105,7 @@ Esta corrida es un paso de un flujo de trabajo sin persona disponible para pregu
 
 ## Complexity Tracking
 
-- Precondición de 03 §2 («las olas anteriores, cerradas»): esta parcela es de la ola 3 y corrió con PAR-PTE-02 y PAR-PTE-03 (ola 2) abiertas, porque el flujo de trabajo pidió trabajar contra un almacén en memoria y una fuente simulada. La dependencia «PAR-PTE-02 antes que PAR-PTE-04 por REQ-HIS-Almacen-De-Tickets» se resolvió con D4: la parcela no toca `src/PrintThermal.Emulator.Core/Almacen/**` y declara la conexión en LAZ-0001. La fusión queda en orden de olas, a cargo de otra etapa, y el orden está registrado en LAZ-0004.
+- Precondición de 03 §2 («las olas anteriores, cerradas»): esta parcela es de la ola 3 y corrió con PAR-PTE-02 y PAR-PTE-03 (ola 2) abiertas, porque el flujo de trabajo pidió trabajar contra un almacén en memoria y una fuente simulada. La dependencia «PAR-PTE-02 antes que PAR-PTE-04 por REQ-HIS-Almacen-De-Tickets» se resolvió con D4: la parcela no toca `src/PrintThermal.Emulator.Core/Almacen/**` y declara la conexión en LAZ-0006. La fusión queda en orden de olas, a cargo de otra etapa, y el orden está registrado en LAZ-0009.
 
 ## Cierre
 
@@ -126,7 +126,7 @@ Esta corrida es un paso de un flujo de trabajo sin persona disponible para pregu
     Esos refuerzos no tienen un rojo propio. Los seis REQ los cubre la mutación.
   - `evidencia/2026-11-27-pruebas.txt` y `.trx`: 39 de 39 en verde con el código final. El `computerName` del TRX es el id efímero del contenedor.
   - `evidencia/2026-11-27-mutacion.txt`: seis mutantes con su diff completo, uno por REQ; los seis en rojo.
-  - `evidencia/2026-11-27-escucha.txt`: el host publicado, sin `ASPNETCORE_HTTP_PORTS` ni `ASPNETCORE_URLS`, escucha sólo en `127.0.0.1:5080`. Responde 200 por loopback y no responde por la IP del contenedor. Así REQ-06 queda medido en el host, y no sólo en el ayudante que prueba la unidad. El archivo trae los comandos para repetirlo. Ninguna prueba automática lo vigila: si se quita la llamada a `UseUrls` de `Program.cs`, las pruebas siguen en verde. `WebApplicationFactory` no escucha en un puerto, y la imagen de prueba fija `ASPNETCORE_HTTP_PORTS` (LAZ-0003).
+  - `evidencia/2026-11-27-escucha.txt`: el host publicado, sin `ASPNETCORE_HTTP_PORTS` ni `ASPNETCORE_URLS`, escucha sólo en `127.0.0.1:5080`. Responde 200 por loopback y no responde por la IP del contenedor. Así REQ-06 queda medido en el host, y no sólo en el ayudante que prueba la unidad. El archivo trae los comandos para repetirlo. Ninguna prueba automática lo vigila: si se quita la llamada a `UseUrls` de `Program.cs`, las pruebas siguen en verde. `WebApplicationFactory` no escucha en un puerto, y la imagen de prueba fija `ASPNETCORE_HTTP_PORTS` (LAZ-0008).
   - La corrida de la CI pública del PR la mide la guarda del merge y no es evidencia de esta carpeta.
 - Recorrido en navegador real (`recorrido/guion.md`, doce capturas a 1440 y 360 px, `recorrido/consola.txt` sin errores ni avisos):
   - se ven los cuatro estados: vacío (al abrir y tras limpiar), datos (con llegada en vivo por la espera), cargando (API que no responde) y error (por plazo e inmediato);
@@ -141,7 +141,7 @@ Esta corrida es un paso de un flujo de trabajo sin persona disponible para pregu
   - ADR-0001 deja el contrato a la épica de acceso, y el contrato queda escrito en REQ-HIS-Api-De-Tickets v2.
   - `supuesto:` agregado al contrato: `despuesDe=0` («desde el principio»). Surgió al escribir la prueba del cliente: sin él, quien imprime con el almacén vacío pierde el ticket si llega antes de la espera.
 - Auditoría (`evidencia/2026-11-27-auditoria.md`). La primera ronda refutó el cierre. Cada hallazgo se corrigió en código o en pruebas, o se registró:
-  - pendientes sin registro → LAZ-0003 y LAZ-0004;
+  - pendientes sin registro → LAZ-0008 y LAZ-0009;
   - ProblemDetails incompleto → `AddProblemDetails` y `UseStatusCodePages`, con pruebas;
   - la escucha local medida sólo en el ayudante (REQ-06) → `escucha.txt`;
   - cobertura del cliente → pruebas de cada operación;
@@ -165,10 +165,10 @@ Esta corrida es un paso de un flujo de trabajo sin persona disponible para pregu
   - `despuesDe` sin validar, que da 204 si no hay un id mayor;
   - el texto de la excepción en inglés en el error del visor.
 - Lo que queda abierto, en `pendientes:`:
-  - LAZ-0001: conectar el almacén y el medio reales;
-  - LAZ-0002: la escala, sin medir;
-  - LAZ-0003: escucha dentro de la imagen;
-  - LAZ-0004: orden de fusión.
+  - LAZ-0006: conectar el almacén y el medio reales;
+  - LAZ-0007: la escala, sin medir;
+  - LAZ-0008: escucha dentro de la imagen;
+  - LAZ-0009: orden de fusión.
 - Trabajo de una parcela ya planificada: la documentación de uso (PAR-PTE-06) explica el patrón estado → imprimir → esperar y el riesgo de borrar todo con varios consumidores (plan.md §1, pedido de la mesa).
 - NO VERIFICADO:
   - la API y el visor con tickets reales del medio Bluetooth (esta parcela usa la fuente simulada);

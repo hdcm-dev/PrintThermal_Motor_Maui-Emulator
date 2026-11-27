@@ -1,5 +1,5 @@
 ---
-id: LAZ-0004
+id: LAZ-0009
 fecha: 2026-11-27
 origen: review
 clase: aclaracion
@@ -10,7 +10,7 @@ deuda:
 normalizado:
 parcela:
 ---
-# LAZ-0004 · Orden de fusión de PAR-PTE-04 frente a la ola 2
+# LAZ-0009 · Orden de fusión de PAR-PTE-04 frente a la ola 2
 
 ## Índice
 

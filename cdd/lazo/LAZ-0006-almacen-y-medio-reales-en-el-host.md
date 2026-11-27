@@ -1,5 +1,5 @@
 ---
-id: LAZ-0001
+id: LAZ-0006
 fecha: 2026-11-27
 origen: parcela
 clase: aclaracion
@@ -10,7 +10,7 @@ deuda:
 normalizado:
 parcela:
 ---
-# LAZ-0001 · Conectar el almacén en disco y el medio Bluetooth al host de la API
+# LAZ-0006 · Conectar el almacén en disco y el medio Bluetooth al host de la API
 
 ## Índice
 

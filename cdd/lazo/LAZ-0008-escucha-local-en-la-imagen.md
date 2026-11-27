@@ -1,5 +1,5 @@
 ---
-id: LAZ-0003
+id: LAZ-0008
 fecha: 2026-11-27
 origen: review
 clase: aclaracion
@@ -10,7 +10,7 @@ deuda:
 normalizado:
 parcela:
 ---
-# LAZ-0003 · La imagen oficial de .NET fija el puerto y anula la escucha local por omisión
+# LAZ-0008 · La imagen oficial de .NET fija el puerto y anula la escucha local por omisión
 
 ## Índice
 

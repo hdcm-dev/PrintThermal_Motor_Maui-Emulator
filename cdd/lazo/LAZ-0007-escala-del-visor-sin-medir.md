@@ -1,5 +1,5 @@
 ---
-id: LAZ-0002
+id: LAZ-0007
 fecha: 2026-11-27
 origen: parcela
 clase: aclaracion
@@ -10,7 +10,7 @@ deuda:
 normalizado:
 parcela:
 ---
-# LAZ-0002 · Escala del visor: 8 puntos por milímetro sin medir en la 58HB6
+# LAZ-0007 · Escala del visor: 8 puntos por milímetro sin medir en la 58HB6
 
 ## Índice
 
