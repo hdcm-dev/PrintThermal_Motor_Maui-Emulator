@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PrintThermal.Emulator.Core/PrintThermal.Emulator.Core.csproj" />
+    <Project Path="src/PrintThermal.Emulator.Bluetooth/PrintThermal.Emulator.Bluetooth.csproj" />
+    <Project Path="src/PrintThermal.Emulator.Api/PrintThermal.Emulator.Api.csproj" />
+    <Project Path="src/PrintThermal.Emulator.Client/PrintThermal.Emulator.Client.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PrintThermal.Emulator.Tests/PrintThermal.Emulator.Tests.csproj" />
+  </Folder>
+</Solution>

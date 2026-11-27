@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="71c63440-6098-40a6-8d4f-ba551a7eb523" name="@3ac3d9d81881 2026-11-27 14:22:02" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-27T14:22:02.9374590+00:00" queuing="2026-11-27T14:22:02.9374591+00:00" start="2026-11-27T14:22:00.5432842+00:00" finish="2026-11-27T14:22:02.9438231+00:00" />
+  <TestSettings name="default" id="00679705-cc7f-4df6-9dc4-75bf912645e2">
+    <Deployment runDeploymentRoot="_3ac3d9d81881_2026-11-27_14_22_02" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="246c7838-2751-4501-a2d1-6525b3f853f2" testId="76486f78-8d92-1f47-1cb4-552d800366db" testName="PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral" computerName="3ac3d9d81881" duration="00:00:00.0011936" startTime="2026-11-27T14:22:02.7799306+00:00" endTime="2026-11-27T14:22:02.7811208+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="246c7838-2751-4501-a2d1-6525b3f853f2" />
+    <UnitTestResult executionId="20a38021-a00f-4dcd-a10b-0a5c3c6146c5" testId="0c24fb9f-7610-dc44-d347-23362e0163c2" testName="PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado" computerName="3ac3d9d81881" duration="00:00:00.0019754" startTime="2026-11-27T14:22:02.7723067+00:00" endTime="2026-11-27T14:22:02.7723551+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="20a38021-a00f-4dcd-a10b-0a5c3c6146c5" />
+    <UnitTestResult executionId="c79ab4f7-b067-4222-8b77-cdf8352d83df" testId="a08a76cf-72b1-c20b-9cef-6b647dbf9ea3" testName="PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma" computerName="3ac3d9d81881" duration="00:00:00.0123722" startTime="2026-11-27T14:22:02.7727880+00:00" endTime="2026-11-27T14:22:02.7797835+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c79ab4f7-b067-4222-8b77-cdf8352d83df" />
+    <UnitTestResult executionId="191f8a39-5e1b-448a-b545-9999c3ecb27f" testId="2e9a18d1-794d-8971-7dc2-cb2552a6f83f" testName="PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10" computerName="3ac3d9d81881" duration="00:00:00.0154402" startTime="2026-11-27T14:22:02.7460493+00:00" endTime="2026-11-27T14:22:02.7652923+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="191f8a39-5e1b-448a-b545-9999c3ecb27f" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="2e9a18d1-794d-8971-7dc2-cb2552a6f83f">
+      <Execution id="191f8a39-5e1b-448a-b545-9999c3ecb27f" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.EsqueletoTests" name="LaSolucionDeclaraLosCincoProyectosEnNet10" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="0c24fb9f-7610-dc44-d347-23362e0163c2">
+      <Execution id="20a38021-a00f-4dcd-a10b-0a5c3c6146c5" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.EsqueletoTests" name="ElSdkEstaFijado" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="a08a76cf-72b1-c20b-9cef-6b647dbf9ea3">
+      <Execution id="c79ab4f7-b067-4222-8b77-cdf8352d83df" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.EsqueletoTests" name="LaCiCompilaYPruebaSinDescargarLaNorma" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="76486f78-8d92-1f47-1cb4-552d800366db">
+      <Execution id="246c7838-2751-4501-a2d1-6525b3f853f2" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.EsqueletoTests" name="CadaPaqueteTieneVersionFijaYCentral" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="76486f78-8d92-1f47-1cb4-552d800366db" executionId="246c7838-2751-4501-a2d1-6525b3f853f2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0c24fb9f-7610-dc44-d347-23362e0163c2" executionId="20a38021-a00f-4dcd-a10b-0a5c3c6146c5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a08a76cf-72b1-c20b-9cef-6b647dbf9ea3" executionId="c79ab4f7-b067-4222-8b77-cdf8352d83df" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2e9a18d1-794d-8971-7dc2-cb2552a6f83f" executionId="191f8a39-5e1b-448a-b545-9999c3ecb27f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="4" executed="4" passed="4" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 10.0.14)
+[xUnit.net 00:00:00.27]   Discovering: PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.38]   Discovered:  PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.40]   Starting:    PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.52]   Finished:    PrintThermal.Emulator.Tests
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

@@ -2,7 +2,7 @@
 id: PAR-PTE-01
 titulo: Esqueleto de la solución PrintThermal.Emulator: cinco proyectos que compilan, versiones fijas y CI .NET
 version: 1.0
-estado: lista
+estado: en-curso
 velocidad: rapida
 base_commit: d00f82960aeefc5259c9a4b3ddaf8580faf098b4
 sprint: SPR-01
@@ -17,7 +17,7 @@ modifica:
   - REQ-HIS-Compilacion-Verificada@v1
   - REQ-HIS-Cliente-Tipado@v1
 appetite: medio día
-pendientes:
+pendientes: ninguno
 decisiones:
   - {id: D1, tema: "SDK .NET 10.0.403 fijado en global.json (el del host y una etiqueta de mcr.microsoft.com/dotnet/sdk)", clase: K1}
   - {id: D2, tema: "xUnit 2.9.3 con xunit.runner.visualstudio 3.1.5 y Microsoft.NET.Test.Sdk 18.12.0, versiones de nuget.org del 2026-11-27", clase: K1}
@@ -59,10 +59,10 @@ Una solución .NET 10 vacía y verificable, con la que las parcelas siguientes e
 
 ## Criterio ↔ prueba
 
-- Criterio REQ-01 → tests/PrintThermal.Emulator.Tests/EsqueletoTests.cs · LaSolucionDeclaraLosCincoProyectosEnNet10
-- Criterio REQ-02 → tests/PrintThermal.Emulator.Tests/EsqueletoTests.cs · CadaPaqueteTieneVersionFijaYCentral
-- Criterio REQ-03 → tests/PrintThermal.Emulator.Tests/EsqueletoTests.cs · ElSdkEstaFijado
-- Criterio REQ-04 → tests/PrintThermal.Emulator.Tests/EsqueletoTests.cs · LaCiCompilaYPruebaSinDescargarLaNorma
+- Criterio REQ-01 → tests/PrintThermal.Emulator.Tests/EsqueletoTests.cs · LaSolucionDeclaraLosCincoProyectosEnNet10 → [EV-2026-11-27-pruebas]
+- Criterio REQ-02 → tests/PrintThermal.Emulator.Tests/EsqueletoTests.cs · CadaPaqueteTieneVersionFijaYCentral → [EV-2026-11-27-pruebas]
+- Criterio REQ-03 → tests/PrintThermal.Emulator.Tests/EsqueletoTests.cs · ElSdkEstaFijado → [EV-2026-11-27-pruebas]
+- Criterio REQ-04 → tests/PrintThermal.Emulator.Tests/EsqueletoTests.cs · LaCiCompilaYPruebaSinDescargarLaNorma → [EV-2026-11-27-pruebas]
 
 ## Plan
 
@@ -74,4 +74,9 @@ Proyectos en `src/` y `tests/`; `Directory.Build.props` con `net10.0`, `Nullable
 
 ## Cierre
 
-Pendiente.
+- Versiones subidas: REQ-HIS-Compilacion-Verificada v1 → v2 (historia y `modifica`).
+- Changelog: «PAR-PTE-01 · Esqueleto de la solución …» en `cdd/corpus/CHANGELOG.md`.
+- Evidencia: `evidencia/2026-11-27-rojo.txt` (3 de 4 en rojo; REQ-02 ya pasaba porque `Directory.Packages.props` es condición para compilar el proyecto de pruebas), `evidencia/2026-11-27-pruebas.txt` y `.trx` (4 de 4 en verde, SDK 10.0.403 en contenedor con turno). La corrida de la CI pública del PR es la segunda medida de REQ-04.
+- Decisiones: D1 a D4, todas K1, sin K3 pendiente.
+- Auditor: `evidencia/2026-11-27-auditoria.md`.
+- Lo aprendido: `correr-con-turno.sh` consume la entrada estándar al consultar la base; la fuente viaja al contenedor como variable en base64, no por tubería.
