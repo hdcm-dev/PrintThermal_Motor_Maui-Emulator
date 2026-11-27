@@ -17,7 +17,7 @@ lee:
   - ADR-0001@v1
   - ADR-0002@v1
   - ADR-0003@v1
-  - REQ-HIS-Almacen-De-Tickets@v1
+  - REQ-HIS-Almacen-De-Tickets@v2
 modifica:
   - REQ-HIS-Api-De-Tickets@v1
   - REQ-HIS-Visor-Web@v1
