@@ -56,6 +56,7 @@ Si el emulador de Android se reinició, netsim pudo cambiar de puerto: releerlo 
 
 - **Android vincula pero la conexión no cifra** (en el registro no aparece `cifrado …: activo 1`): si se vinculó desde Ajustes, el registro debe mostrar `reconexión breve` después del vínculo ([Emparejar e imprimir](emparejar-e-imprimir.md) §3). Si no la muestra, revisar que `Emulador__Bluetooth__ReconexionTrasVinculoSinCifrar` no esté en `false`. Si nadie confirmó el diálogo de Android, la conexión vence (en PAR-PTE-07, a los 35 s): volver a conectar y confirmar. Para ver cada evento HCI de la impresora, `Emulador__Bluetooth__TrazaHci=true` ([Montaje](montaje.md) §5).
 - **Recuperar un vínculo trabado:** una conexión que Android corta con el manejador correcto lo destraba: en PAR-PTE-07, después de una conexión vencida, la siguiente cifró y abrió el canal RFCOMM (1 de 1, sin la reconexión breve). Olvidar el equipo en Android, usar otra `Emulador__Bluetooth__Direccion` o borrar `claves-bluetooth.txt`: NO VERIFICADO como arreglo.
+- **Android borró otro vínculo:** si una vinculación sin confirmar falla como primera conexión después de encender el Bluetooth de Android, Android puede atribuir la falla a otro equipo vinculado y borrar su vínculo (visto 1 vez en PAR-PTE-07; es de Android con netsim). Volver a vincular ese equipo.
 - **Android no muestra el diálogo:** comprobar que la app conecta por RFCOMM a «58HB6» (§2 de la página de emparejamiento) y que la impresora se anuncia (§2 de esta página).
 
 ## 4. No llega el ticket

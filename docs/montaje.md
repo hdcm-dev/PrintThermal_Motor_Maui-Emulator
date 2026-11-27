@@ -95,7 +95,7 @@ Variables de entorno (el doble guion bajo separa secciones de la configuración 
 | `Emulador__Bluetooth__Netsim` | URL del gRPC de netsim. Con ella corre el medio Bluetooth | sin medio Bluetooth |
 | `Emulador__Bluetooth__Direccion` | Dirección Bluetooth fija de la impresora emulada | `04:00:00:00:00:01` |
 | `Emulador__Bluetooth__ArchivoDeClaves` | Archivo de claves de emparejamiento | `claves-bluetooth.txt` en la carpeta de salida |
-| `Emulador__Bluetooth__ReconexionTrasVinculoSinCifrar` | Tras un vínculo que terminó sin cifrar (Ajustes de Android), una conexión breve con el teléfono ([Emparejar e imprimir](emparejar-e-imprimir.md) §3) | `true` |
+| `Emulador__Bluetooth__ReconexionTrasVinculoSinCifrar` | Tras un vínculo que terminó sin cifrar (con netsim, el de Ajustes cuando Android lo atribuye a otro equipo), una conexión breve con el teléfono ([Emparejar e imprimir](emparejar-e-imprimir.md) §3) | `true` |
 | `Emulador__Bluetooth__TrazaHci` | Registra los comandos y eventos HCI de la impresora (`HCI >` y `HCI <`), sin datos ACL ni Number Of Completed Packets y con las claves de enlace tapadas (`<clave>`), para diagnosticar | `false` |
 | `Emulador__Salida` | Carpeta de los tickets | `/data` en la imagen |
 | `Emulador__Simulacion__IntervaloSegundos` | Sin netsim: un ticket simulado cada tantos segundos; `0` lo apaga | `0` |

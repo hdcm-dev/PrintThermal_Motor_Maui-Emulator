@@ -115,10 +115,21 @@ Imagen construida desde `1c6e700` (mismo `src/` y `Dockerfile` que la cabeza de 
 | S1, `…:42` | Ajustes, conexión que no es la primera (manejador 3), otros equipos vinculados; **corrección apagada** (`Emulador__Bluetooth__ReconexionTrasVinculoSinCifrar=false`) | `btm_sec_auth_complete: … handle: 3 … estado:AUTHENTICATING … bda: xx:xx:xx:xx:00:42`; `Start encryption` | `cifrado en 0x000: … activo 1` en la conexión del vínculo; sin reconexión breve | app: 1 de 1 IGUAL |
 | S2, `…:43` | como S1 (manejador 5), corrección prendida | `btm_sec_auth_complete: … handle: 5 … bda: xx:xx:xx:xx:00:43` | cifró en la conexión del vínculo; sin reconexión breve | app mínima: 4104 bytes, SHA-256 enviado = `.bin` de la carpeta = `.bin` de la API |
 | (b) final, `…:44` | vincular conectando (no es la primera conexión) | — | vínculo y cifrado en la misma conexión; sin reconexión breve | app: 5 de 5 IGUAL |
+| (b) como primera conexión, `…:46` | vincular conectando como primera conexión tras reiniciar el Bluetooth, otros equipos vinculados (configuración restaurada), corrección prendida | `btm_sec_auth_complete: … handle: 0 … bda: xx:xx:xx:xx:00:02`; corte de la breve: `btm_sec_disconnected: device:xx:xx:xx:xx:00:46 … state:IDLE` | primer intento: vínculo guardado, sin cifrar, la app mínima venció (`read failed…`); reconexión breve; segundo intento: `clave de enlace guardada`, `cifrado en 0x003: … activo 1` | segundo intento: 4104 bytes, SHA-256 enviado = `.bin` de la carpeta |
 | S3, `…:45` | Ajustes, primera conexión tras reiniciar el Bluetooth, **sin otros equipos vinculados** (configuración de vínculos de Android borrada antes, con copia en el emulador) | `btm_sec_auth_complete: … handle: 0 … estado:AUTHENTICATING … bda: xx:xx:xx:xx:00:45` | cifró en la conexión del vínculo; sin reconexión breve | app: 1 de 1 IGUAL |
 
+- Vincular conectando como primera conexión con otros equipos vinculados (LAZ-0016) falla en el primer intento por la misma causa del lado de Android; la reconexión breve deja bien el segundo (1 de 1).
+- En un intento previo con `…:46`, sin confirmar el diálogo y como primera conexión, Android atribuyó la falla de la vinculación (estado 5) a `…:01` y **borró ese otro vínculo** (`BOND 04:00:00:00:00:01 state=10` en el registro de la app mínima): es de la pila de Android, no de la impresora.
+- Registros de la impresora de S2 y S3 (sin reconexión breve):
+
+```text
+S2: conexión ACL 0x000 con XX:XX:XX:XX:BB:BB · cifrado en 0x000: estado 0x00, activo 1 · desconexión ACL 0x000 de XX:XX:XX:XX:BB:BB, motivo 0x13
+S3: conexión ACL 0x000 con XX:XX:XX:XX:BB:BB · seguridad: vínculo guardado con XX:XX:XX:XX:BB:BB (tipo de clave 4) · cifrado en 0x000: estado 0x00, activo 1 · desconexión ACL 0x000 de XX:XX:XX:XX:BB:BB, motivo 0x13
+```
+
+- Sin confirmar, registro de la app mínima con `…:32` (primera corrida): `19:12:25 BOND …:32 state=11` → `19:13:00 ERROR java.io.IOException: read failed, socket might closed or timeout, read ret: -1`; y `19:13:58 BOND …:32 state=11` → `19:14:32 ERROR …` (mismo mensaje).
 - Los controles S1 y S3 confirman la causa: cuando Android atribuye el fin de la vinculación al equipo correcto (manejador distinto de 0, o ningún otro equipo cargado de la configuración), cifra en la misma conexión y la impresora no hace nada distinto de antes. La reconexión breve sólo se dispara cuando la vinculación termina sin cifrar.
-- Sin confirmar el diálogo de Android: con `…:32` (primera corrida), la app mínima informó `read failed, socket might closed or timeout` a los 35 s, sin vínculo, 2 de 2; con `…:44`, el primer intento terminó sin vínculo y la impresora registró el corte de esa conexión (el registro de la app de ese intento no se guardó).
+- Sin confirmar el diálogo de Android: con `…:32` (primera corrida), la app mínima informó `read failed, socket might closed or timeout` a los 35 s, sin vínculo, 2 de 2 (registro arriba); con `…:44`, el primer intento terminó sin vínculo y la impresora registró el corte de esa conexión (el registro de la app de ese intento no se guardó).
 
 (a) final, serie de cinco impresiones:
 
@@ -149,6 +160,6 @@ impresion 1 id=20261127T212241409-0001 bytes=341 espera=5.427125868s png_api=fce
 
 ## 5. Desvíos y límites
 
-- Camino (b) medido en una conexión que no fue la primera después de encender el Bluetooth de Android (como en PAR-PTE-05). Como primera conexión con otros equipos vinculados: sin medir (LAZ-0016).
+- Camino (b) como primera conexión con otros equipos vinculados: 1 de 1 con el primer intento vencido y el segundo bien (§4).
 - La imagen de esta corrida tiene el `src/` de `028d4aa`, sin la opción `ReconexionTrasVinculoSinCifrar` en `MedioBluetooth.cs` (entró después, por omisión `true`) ni los cambios de la auditoría.
 - No se midió con la 58HB6 física ni con un teléfono real.

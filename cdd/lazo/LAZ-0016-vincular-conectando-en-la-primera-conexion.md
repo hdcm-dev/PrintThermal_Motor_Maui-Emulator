@@ -21,13 +21,17 @@ parcela:
 
 ## 1. Duda o hallazgo
 
-PAR-PTE-07, 2026-11-27 (`cdd/parcelas/PAR-PTE-07-Vinculo-Desde-Ajustes/evidencia/2026-11-27-diagnostico.md`): Android
-con netsim atribuye los eventos del manejador 0 al primer equipo que cargó de su configuración. El camino de vincular
-conectando se midió en una conexión que no era la primera después de encender el Bluetooth de Android. Si esa conexión
-fuera la primera y Android tuviera otros equipos vinculados, el cifrado de esa misma conexión podría no llegar; la
-reconexión breve de ADR-0009 se dispararía al cortarse y la conexión siguiente debería cifrar. NO VERIFICADO.
-Tampoco se midieron: una app que llama `createBond()` y conecta enseguida, antes de que Android corte la conexión del
-vínculo (unos 5 s), ni un teléfono real en lugar del emulador de Android.
+PAR-PTE-07, 2026-11-27 (`cdd/parcelas/PAR-PTE-07-Vinculo-Desde-Ajustes/evidencia/`): Android con netsim atribuye los
+eventos del manejador 0 al primer equipo que cargó de su configuración. Medido en esa parcela: vincular conectando como
+primera conexión con otros equipos vinculados vence en el primer intento y, tras la reconexión breve (ADR-0009), el
+segundo cifra (1 de 1). Sin medir:
+
+- una app que llama `createBond()` y conecta enseguida, antes de que Android corte la conexión del vínculo (unos 5 s);
+- un teléfono real en lugar del emulador de Android;
+- que Android use la conexión breve para la app (la impresora la corta apenas se completa) o que el corte de la breve
+  falle en el controlador (la conexión quedaría abierta sin tráfico);
+- que Android borre el vínculo de otro equipo cuando una vinculación sin confirmar falla como primera conexión (visto
+  1 vez, del lado de Android).
 
 ## 2. Clasificación
 
@@ -41,5 +45,5 @@ Aclaración: no cambia el alcance; falta medir un caso del camino ya especificad
 
 ## 4. Decisión
 
-Pendiente: medir en el emulador de Android API 37 (Bluetooth recién encendido, otros equipos vinculados, vincular
-conectando; `createBond()` con conexión inmediata) y documentar el resultado en `docs/emparejar-e-imprimir.md`.
+Pendiente: medir los casos de §1 que se puedan provocar (`createBond()` con conexión inmediata, teléfono real) y
+documentar el resultado en `docs/emparejar-e-imprimir.md`.

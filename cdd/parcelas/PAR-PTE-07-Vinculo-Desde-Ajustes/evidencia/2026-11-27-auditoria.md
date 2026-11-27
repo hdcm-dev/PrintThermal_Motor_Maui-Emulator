@@ -6,6 +6,8 @@ auditor: agente refutador Claude (mismo modelo que la ejecución) en otro contex
 
 1. [Ronda 1 (sobre a3e0901)](#ronda-1-sobre-a3e0901)
 2. [Respuesta a la ronda 1](#respuesta-a-la-ronda-1)
+3. [Ronda 2 (sobre 5cdb77b, mismo auditor en un contexto nuevo)](#ronda-2-sobre-5cdb77b-mismo-auditor-en-un-contexto-nuevo)
+4. [Respuesta a la ronda 2](#respuesta-a-la-ronda-2)
 
 ## Ronda 1 (sobre a3e0901)
 
@@ -101,3 +103,89 @@ Veredicto: cierre refutado
 | 13 Traza | La traza tapa las claves (`<clave>`, prueba `LaTrazaHciNoMuestraLaClaveDeEnlace`, mutante M9); `docs/montaje.md` dice qué omite |
 | 14 «A escala» | REQ-HIS-Visor-Web y `docs/visor-y-scalar.md` dicen que por debajo de unos 213 px el ticket se achica; Chrome de escritorio con emulación, declarado en el cierre |
 | 15 Detalles del código | La conexión breve exige enlace ACL (`p[9]`); un Disconnection Complete con error ya no dispara la reconexión (M8). Si el Disconnect de la breve fallara, el ACL quedaría vivo sin tráfico: no se cubre |
+
+## Ronda 2 (sobre 5cdb77b, mismo auditor en un contexto nuevo)
+
+No encontré nada bloqueante. El bloqueante de la ronda 1 quedó resuelto con mediciones: los controles S2 y S3 y la corrida `…:41`, con el registro VERBOSE de Android. Quedan tres importantes, todos de texto o de gobierno, y nueve menores.
+
+Ronda 1, hallazgo por hallazgo:
+- **Resueltos:** 1, 2, 3, 5, 6, 7, 12, 13, 14 y 15.
+  - Para el 2: las pruebas de opciones del medio leen la configuración igual que `Program.cs:40`, y el mutante M10 queda en rojo.
+  - Comprobé que `src/` y `tests/` son idénticos entre `17bedd6` y la cabeza, y `src/` y `Dockerfile` entre `1c6e700` y `17bedd6`.
+  - El `.trx` da 143 de 143 y trae las 10 pruebas nuevas.
+- **Parciales:**
+  - 4: las pruebas están, pero lo no verificado no tiene registro (ítem 3 abajo).
+  - 9: queda un resto (ítem 6).
+- **No resueltos:** 8 (ítem 2), 10 y 11 (ítem 9).
+
+Hallazgos:
+
+1. **Importante.** `docs/emparejar-e-imprimir.md:54` dice «En este camino Android vincula y corta sin cifrar (es un vínculo «dedicado»)». Los controles de la propia parcela lo contradicen (`extremo-a-extremo.md:115-118`): desde Ajustes, Android cifra en la conexión del vínculo cuando atribuye bien el evento. Lo que dispara el problema es esa mala atribución, no el camino de Ajustes. La misma idea aparece en `OpcionesPeriferico.cs:26`, `SeguridadVinculoSinCifrarTests.cs:8` y `docs/montaje.md:98` («(Ajustes de Android)»).
+
+2. **Importante.** ADR-0009 es de gobierno humano y se modificó después de su aprobación K3. D5 se aprobó en `a3e0901` (16:48). Después, `1c6e700` (17:22) y `5cdb77b` (18:24) cambiaron `ADR-0009:31` y `:35`:
+   - La opción C ahora se descarta sobre una premisa declarada «no medida».
+   - El §3 cita mediciones que quien aprobó no pudo ver.
+   - No hay registro de una nueva aprobación. La opción A no cambió, pero D5 (`parcela.md:30`) debería decirlo o renovarse.
+
+3. **Importante.** Hay pendientes sin LAZ y no se declara la reserva de merge.
+   - `parcela.md:98` declara NO VERIFICADO dos cosas que no están en `pendientes:` (`:26-27`) ni en LAZ-0016 (`:24-30`):
+     - que Android reutilice la conexión breve, un efecto del código: la impresora cortaría la conexión de la app;
+     - el visor en el Chrome del emulador de Android.
+   - El Disconnect fallido de la conexión breve (`auditoria.md:103`) no figura en ningún lado.
+   - Hay efectos del cambio sin medir: LAZ-0016:26-28 predice que la reconexión breve se dispara en el camino (b) como primera conexión. Con eso, `ENTREGA.md:18` pide la reserva de merge, y el cierre no la menciona.
+
+4. **Menor.** `diagnostico.md:93` dice que «el toque en «Pair» llegó a los 2 s del diálogo», sin registro. El único intervalo medido es `diagnostico.md:56`: 239.326 → 245.772, unos 6,4 s.
+
+5. **Menor.** `parcela.md:93` y `ADR-0009:35` dicen «3 de 3… (series de 5 impresiones de 5)». La corrida `…:33` tuvo 1 de 1 (`extremo-a-extremo.md:59`).
+
+6. **Menor.** `diagnostico.md:114` todavía remite la 58HB6 física y el teléfono real a LAZ-0002. La respuesta (`auditoria.md:97`) dice que se quitó.
+
+7. **Menor.** En `SeguridadVinculoSinCifrarTests.cs:39-41`, el comentario del punto de sincronía afirma que «ya se atendió todo lo anterior».
+   - En `SiAndroidSeAdelantaLaConexionNoSeCorta` (`:114`) eso no se cumple. `ConectarAclAsync` espera 0x0409 desde el índice 0 (`HciSimulacion.cs:199`) y vuelve con el 0x0409 viejo.
+   - El Connection Complete que genera el controlador falso entra en la cola después del evento de sincronía. La prueba depende de la espera de 1,5 s, no del punto de sincronía.
+   - Hoy no es un hueco (M6 da rojo), pero es frágil y el comentario es falso para este caso.
+
+8. **Menor.** Dos problemas en `docs/emparejar-e-imprimir.md`:
+   - `:30` presenta el camino (b) como «medido» sin la reserva de LAZ-0016. Según la causa que da la parcela, como primera conexión con otros vínculos el primer intento probablemente vencería.
+   - `:32` pone el toque a los 31 s de PAR-PTE-03 junto a «confirmar antes de que venza». Sugiere una causalidad que el diagnóstico descarta, y además 31 s es menos que 35 s.
+
+9. **Menor.** Los hallazgos 10 y 11 de la ronda 1 sólo tienen explicación, no corrección.
+   - LAZ-0011 y LAZ-0015 siguen en `especificado` con `parcela:` vacío (`:6` y `:11` en los dos), aunque hay un precedente: `LAZ-0005:11` llena `parcela:`.
+   - La comparación por referencia en `e3f5b21` (que molesta para un bisect) no tiene respuesta.
+   - Por eso `parcela.md:99` («cada hallazgo tiene respuesta») exagera.
+
+10. **Menor.** Hay afirmaciones sin un extracto del registro que las respalde:
+    - S2 y S3: «sin reconexión breve», sin registro de la impresora (`extremo-a-extremo.md:116`, `:118`).
+    - «2 de 2 a los 35 s», agregado en la respuesta y sin extracto (`:121`).
+    - «Unos 213 px» (`REQ-HIS-Visor-Web.md:30`, `docs/visor-y-scalar.md:23`): es un valor calculado (48 mm + 2×16 px) que no está en la evidencia; `guion.md:83` sólo mide 205 y 240 px.
+
+11. **Menor.** `MedioBluetooth.cs:24` todavía dice «Registra cada comando y evento HCI»; la traza omite datos ACL y Number Of Completed Packets.
+
+12. **Menor.** `parcela.md:100`: se borró la configuración de vínculos de Android del emulador de pruebas y no se dice si se restauró. LAZ-0016:44 necesita «otros equipos vinculados» para medir.
+
+**Repositorio público:** no encontré hosts, IPs privadas, rutas personales, credenciales ni nombres de sesiones.
+- El `.trx` trae el nombre efímero del contenedor (`b919de81939c`) y direcciones de prueba (`localhost`, `127.0.0.1`, `emulador:9000`).
+- Las URLs de la evidencia son las de AOSP, y las capturas sólo muestran el ticket de ejemplo.
+- El testimonio F1 se nombra sin contenido.
+- La máscara del teléfono sigue sin ser coherente (`diagnostico.md:18`), pero no es un dato personal.
+
+Veredicto: cierre sostenido
+
+## Respuesta a la ronda 2
+
+| Hallazgo | Respuesta |
+|---|---|
+| 1 «Ajustes corta sin cifrar» | Corregido en `docs/emparejar-e-imprimir.md` §3, `docs/montaje.md`, `OpcionesPeriferico.cs` y la prueba: sin la mala atribución, Android cifra en la conexión del vínculo |
+| 2 ADR-0009 cambiada después de D5 | D5 se ratificó sobre el texto final (mismo día, opción A) |
+| 3 Pendientes sin LAZ y reserva | Medido el camino (b) como primera conexión con otros equipos vinculados (1 de 1: primer intento vencido, segundo bien tras la reconexión breve) y el visor en el Chrome del emulador de Android. LAZ-0016 recoge lo que queda sin medir (`createBond()` inmediato, teléfono real, conexión breve usada por Android, corte fallido de la breve, vínculo ajeno borrado por Android). Lo que queda no es un efecto esperado del cambio que no se pudo medir: son casos que el emulador no provoca a voluntad; los de protocolo tienen prueba (M6, M7) |
+| 4 «2 s» | Dice «unos 6 s después del pedido (239,326 → 245,772)» |
+| 5 «3 de 3 (series de 5)» | Dice «5 de 5 en `…:31` y `…:41`, 1 de 1 en `…:33`» |
+| 6 LAZ-0002 en el diagnóstico | Corregido |
+| 7 Punto de sincronía frágil | La prueba espera el 0x0409 desde el índice previo; el Connection Complete del controlador falso queda antes del evento de sincronía |
+| 8 docs §2 | La reserva del primer intento como primera conexión, con lo medido; los 31 s de PAR-PTE-03 quedan como dato, con la causa medida en §3 |
+| 9 LAZ-0011/0015 sin `parcela:` y commits | La traza va en `lazo:` de la parcela; la compuerta de cierre no admite tocar esos registros en este PR sin declararlos pendientes. El commit intermedio con la comparación por referencia queda (la rama no se reescribe) |
+| 10 Afirmaciones sin extracto | Extractos de S2, S3 y de los intentos sin confirmar en extremo a extremo §4; «213 px» reemplazado por lo medido (205 px se achica, 240 px no) |
+| 11 Comentario de `MedioBluetooth.cs` | Corregido |
+| 12 Configuración de vínculos borrada | Restaurada desde la copia antes de la ronda 2 de mediciones (15 vínculos); Android borró después uno (`…:01`), visto en el registro |
+
+No se corrió una tercera ronda.

@@ -38,3 +38,4 @@ Con la hoja de la rama, a 205 px el ticket se achica al ancho de la tarjeta (173
 - `205-datos.png`: hoja de la rama; tarjeta, ticket y texto dentro de la pantalla.
 - `medicion.json`: las dieciséis mediciones.
 - `consola.txt`: consola del navegador.
+- `540-android-datos-ticket.png` y `540-android-datos-pie.png`: el mismo visor en el Chrome del emulador de Android (pantalla de 540 px, la del hallazgo de PAR-PTE-05), con un ticket de 384 × 1118 puntos: la tarjeta va de 42 a 498 px de pantalla (`uiautomator`: imagen `[42,243][498,1200]`, texto `[42,726][498,926]`), sin cortes a la derecha.

@@ -90,7 +90,7 @@ El enlace queda sin cifrar por la pila de Android con netsim, no por la pila pro
 3. `btm_sec_auth_complete` sólo vuelve a reposo el equipo que encontró por manejador («`if (p_dev_rec->sec_rec.classic_link == tSECURITY_STATE::AUTHENTICATING) { p_dev_rec->sec_rec.classic_link = tSECURITY_STATE::IDLE;`»), y `btm_sec_execute_procedure` no hace nada mientras el estado no sea reposo («`No immediate action taken in busy state`»). URL: https://android.googlesource.com/platform/packages/modules/Bluetooth/+/refs/heads/main/system/stack/btm/btm_sec.cc
 4. El equipo nuevo queda «AUTHENTICATING»: en la conexión siguiente Android no autentica ni cifra, y el RFCOMM vence (`read failed, socket might closed or timeout`).
 
-En esta parcela, vincular conectando funcionó en una conexión que no fue la primera después de encender el Bluetooth (manejador distinto de 0). Que en PAR-PTE-05 haya sido por lo mismo es coherente con esta causa, pero ese manejador no se registró (LAZ-0016). Las otras hipótesis de LAZ-0011 §1 no hacen falta para reproducir la falla: en estas corridas el toque en «Pair» llegó a los 2 s del diálogo y el binario ya no manda pings de HTTP/2 a netsim. El código de `main` puede no ser idéntico al de la imagen API 37; lo que se afirma de esa imagen sale de sus registros, que coinciden con ese código.
+En esta parcela, vincular conectando funcionó en una conexión que no fue la primera después de encender el Bluetooth (manejador distinto de 0). Que en PAR-PTE-05 haya sido por lo mismo es coherente con esta causa, pero ese manejador no se registró (LAZ-0016). Las otras hipótesis de LAZ-0011 §1 no hacen falta para reproducir la falla: en estas corridas la confirmación llegó unos 6 s después del pedido (User Confirmation Request → Reply: 239,326 → 245,772) y el binario ya no manda pings de HTTP/2 a netsim. El código de `main` puede no ser idéntico al de la imagen API 37; lo que se afirma de esa imagen sale de sus registros, que coinciden con ese código.
 
 ## 5. Comprobaciones aisladas
 
@@ -108,8 +108,10 @@ Controles de la ronda 1 de la auditoría (imagen final, `evidencia/2026-11-27-ex
 | Ajustes como primera conexión (manejador 0) **sin otros equipos vinculados**, corrección prendida | Android atribuyó bien (`handle: 0 … bda: …:45`), cifró en la conexión del vínculo; sin reconexión breve; la app imprimió (1 de 1) |
 | Ajustes como primera conexión con otros equipos vinculados, corrección prendida (`…:41`) | la condición se repitió (`handle: 0 … bda: …:01`); reconexión breve; la app cifró al primer intento (5 de 5) |
 
+Vincular conectando como primera conexión con otros equipos vinculados (`…:46`, extremo a extremo §4): `btm_sec_auth_complete: … handle: 0 … bda: xx:xx:xx:xx:00:02`, el primer intento venció; tras la reconexión breve, el segundo cifró. Sin confirmar el diálogo, como primera conexión, Android atribuyó la falla a `…:01` y borró ese vínculo.
+
 ## 6. Límites
 
 - La versión exacta del código de Bluetooth de la imagen API 37 no se leyó: NO VERIFICADO que sea igual a `main`.
-- No se midió con la 58HB6 física ni con un teléfono real (LAZ-0002).
+- No se midió con un teléfono real (LAZ-0016). La 58HB6 física no hace la reconexión breve (ADR-0009 §4).
 - Vincular conectando como primera conexión después de encender el Bluetooth, con otros equipos vinculados: sin medir (LAZ-0016).

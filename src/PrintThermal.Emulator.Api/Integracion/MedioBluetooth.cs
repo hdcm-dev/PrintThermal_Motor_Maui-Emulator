@@ -21,7 +21,7 @@ public sealed class OpcionesDelMedio
     /// <summary>Tras un vínculo que terminó sin cifrar, una conexión breve con el teléfono (LAZ-0011, ADR-0009).</summary>
     public bool ReconexionTrasVinculoSinCifrar { get; set; } = true;
 
-    /// <summary>Registra cada comando y evento HCI del periférico (diagnóstico).</summary>
+    /// <summary>Registra los comandos y eventos HCI del periférico, con las claves tapadas (diagnóstico).</summary>
     public bool TrazaHci { get; set; }
 }
 

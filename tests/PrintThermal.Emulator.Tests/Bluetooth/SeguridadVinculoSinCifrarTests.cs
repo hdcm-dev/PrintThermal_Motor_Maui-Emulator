@@ -5,7 +5,7 @@ using PrintThermal.Emulator.Bluetooth.Seguridad;
 namespace PrintThermal.Emulator.Tests.Bluetooth;
 
 /// <summary>
-/// LAZ-0011 (PAR-PTE-07): un emparejamiento dedicado (Ajustes de Android, createBond) termina sin cifrar el enlace.
+/// LAZ-0011 (PAR-PTE-07): un emparejamiento dedicado (Ajustes de Android, createBond) puede terminar sin cifrar el enlace.
 /// Android con netsim puede atribuir ese cierre a otro vínculo guardado (manejador 0) y quedar «autenticando»;
 /// la impresora hace entonces una conexión breve y la corta, para que Android cierre el vínculo con el manejador bueno.
 /// </summary>
@@ -111,7 +111,8 @@ public sealed class SeguridadVinculoSinCifrarTests
 
         // Android conecta antes de que la conexión propia se complete: es la conexión de la app y no se corta.
         n = c.Comandos.Count;
-        await new AndroidSimulado(c).ConectarAclAsync();
+        c.Evento(0x04, [.. AndroidSimulado.Direccion.ComoHci(), 0x0C, 0x02, 0x5A, 0x01]);
+        await c.EsperarComandoAsync(0x0409, n); // el controlador falso encola el Connection Complete al recibirlo
         await SincronizarAsync(c);
         Assert.DoesNotContain(c.Comandos.Skip(n), k => ControladorFalso.Opcode(k) == 0x0406);
         c.Cortar();
