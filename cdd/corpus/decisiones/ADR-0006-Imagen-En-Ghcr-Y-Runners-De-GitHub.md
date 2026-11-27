@@ -35,7 +35,7 @@ A. La publicación (K3) la autorizó la persona: Q2:16 y «Vos podes publicar el
 
 ### Conocimientos que no cargan
 
-- `Red-Movil-Problematica` 2.0 (IA.Knowledge.Base `fe51898`): condición «antes de poner una falla de red en un emulador, de diseñar una prueba de resiliencia de red de una app móvil o de escribir una especialización de una falla». Hecho que la incumple: este producto une su contenedor al espacio de red del emulador para llegar a netsim, sin poner fallas de red; la inyección de fallos está fuera de la primera etapa (intake §6). Trata la materia (la red del contenedor de un emulador Android), por eso se nombra. Si una etapa posterior prueba la impresión con red deficiente, la condición se cumple y se declara en `consulta:` con un ADR.
+- `Red-Movil-Problematica` 2.0 (base de conocimientos privada, `fe51898`): condición «antes de poner una falla de red en un emulador, de diseñar una prueba de resiliencia de red de una app móvil o de escribir una especialización de una falla». Hecho que la incumple: este producto une su contenedor al espacio de red del emulador para llegar a netsim, sin poner fallas de red; la inyección de fallos está fuera de la primera etapa (intake §6). Trata la materia (la red del contenedor de un emulador Android), por eso se nombra. Si una etapa posterior prueba la impresión con red deficiente, la condición se cumple y se declara en `consulta:` con un ADR.
 
 ## 4. Consecuencias
 

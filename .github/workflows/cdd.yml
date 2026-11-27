@@ -1,105 +1,13 @@
-# Plantilla de CI para el repo principal (GitHub Actions). Copiar a .github/workflows/cdd.yml.
-# El framework se trae en la versión del lock (cdd/cdd.lock.md: cdd_commit).
-# Si IA.CDD es privado, definir el secreto CDD_READ_TOKEN (token fino, Contents: read sobre IA.CDD).
+# CI pública del emulador (runners de GitHub, ADR-0006).
+# Las compuertas de CDD se corren en local, con la norma CDD (repositorio privado) en el commit del lock:
+# esta CI no descarga la norma ni guarda credenciales (decisión P5 B de la visión, DEC-006).
+# Hasta que exista la solución (PAR-PTE-01) queda sólo manual; PAR-PTE-01 la convierte en compilación y pruebas .NET.
 name: cdd
 on:
-  pull_request:
-  push:
-    branches: [main]
   workflow_dispatch:
-    inputs:
-      parcela: { description: "cdd/parcelas/PAR-…/parcela.md (cierre retroactivo)", required: false }
-      pr_merge: { description: "commit de fusión del PR de la parcela", required: false }
 jobs:
-  lazo-en-la-rama-principal:
-    # Dos ramas pueden tomar el mismo LAZ-NNNN sin conflicto de git: sólo se ve después de fusionar.
-    if: github.event_name == 'push'
+  compuertas-locales:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: IA.CDD en la versión del lock
-        run: |
-          C=$(grep -E '^cdd_commit:' cdd/cdd.lock.md | awk '{print $2}')
-          # Framework privado: secreto CDD_READ_TOKEN (sólo lectura de contenido). Va como cabecera, nunca en la URL.
-          # Git sobre HTTPS en GitHub sólo acepta Basic con x-access-token (Bearer da 401); el base64 se enmascara.
-          if [ -n "$CDD_READ_TOKEN" ]; then
-            B=$(printf 'x-access-token:%s' "$CDD_READ_TOKEN" | base64 -w0); echo "::add-mask::$B"
-            git -c http.extraheader="AUTHORIZATION: basic ${B}" clone -q "$CDD_REPO_URL" .cdd-fw
-          else
-            git clone -q "$CDD_REPO_URL" .cdd-fw
-          fi
-          git -C .cdd-fw checkout -q "$C"
-        env:
-          CDD_REPO_URL: ${{ vars.CDD_REPO_URL }}
-          CDD_READ_TOKEN: ${{ secrets.CDD_READ_TOKEN }}
-      - name: Lazo
-        run: python3 .cdd-fw/CDD/Gates/cdd.py lazo --repo .
-  compuertas:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with: { fetch-depth: 0 }
-      - name: IA.CDD en la versión del lock
-        run: |
-          C=$(grep -E '^cdd_commit:' cdd/cdd.lock.md | awk '{print $2}')
-          # Framework privado: secreto CDD_READ_TOKEN (sólo lectura de contenido). Va como cabecera, nunca en la URL.
-          # Git sobre HTTPS en GitHub sólo acepta Basic con x-access-token (Bearer da 401); el base64 se enmascara.
-          if [ -n "$CDD_READ_TOKEN" ]; then
-            B=$(printf 'x-access-token:%s' "$CDD_READ_TOKEN" | base64 -w0); echo "::add-mask::$B"
-            git -c http.extraheader="AUTHORIZATION: basic ${B}" clone -q "$CDD_REPO_URL" .cdd-fw
-          else
-            git clone -q "$CDD_REPO_URL" .cdd-fw
-          fi
-          git -C .cdd-fw checkout -q "$C"
-        env:
-          CDD_REPO_URL: ${{ vars.CDD_REPO_URL }}
-          CDD_READ_TOKEN: ${{ secrets.CDD_READ_TOKEN }}
-      - name: Ancla
-        run: python3 .cdd-fw/CDD/Gates/cdd.py ancla --repo . --fw .cdd-fw
-      - name: Huella, reintegración y evidencia
-        # 0.15.6: --pr clasifica el PR; no hay paso que busque la parcela con grep (bajo bash -eo pipefail cortaba
-        # el paso cuando el PR no tocaba cdd/parcelas/). Con parcelas tocadas, el cierre de todas (conjunto si son
-        # varias); sin parcela, sólo estructura del lock, lazo, registros, sprints o corpus con un LAZ en el CHANGELOG
-        # o en la siembra. Código sin parcela falla y se lista.
-        run: python3 .cdd-fw/CDD/Gates/cdd.py cierre --repo . --base origin/${{ github.base_ref }} --pr
-      - name: Deuda de control
-        run: python3 .cdd-fw/CDD/Gates/cdd.py deuda --repo . --base origin/${{ github.base_ref }}
-      - name: Documental
-        # 0.15.6: toda la carpeta cdd/ (01 §3 paso 11.4); un PR anterior a la siembra no tiene cdd/corpus.
-        run: python3 .cdd-fw/CDD/Gates/cdd.py documental --exigir-indice cdd
-  cierre-retroactivo:
-    # Opcional (ADR-0028): cierre de una parcela cuyo PR ya se fusionó. Se lanza a mano con la parcela
-    # y el commit de fusión; la huella se mide en <pr_merge>^1..<pr_merge> y la evidencia en la rama.
-    if: github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with: { fetch-depth: 0 }
-      - name: IA.CDD en la versión del lock
-        run: |
-          C=$(grep -E '^cdd_commit:' cdd/cdd.lock.md | awk '{print $2}')
-          # Framework privado: secreto CDD_READ_TOKEN (sólo lectura de contenido). Va como cabecera, nunca en la URL.
-          # Git sobre HTTPS en GitHub sólo acepta Basic con x-access-token (Bearer da 401); el base64 se enmascara.
-          if [ -n "$CDD_READ_TOKEN" ]; then
-            B=$(printf 'x-access-token:%s' "$CDD_READ_TOKEN" | base64 -w0); echo "::add-mask::$B"
-            git -c http.extraheader="AUTHORIZATION: basic ${B}" clone -q "$CDD_REPO_URL" .cdd-fw
-          else
-            git clone -q "$CDD_REPO_URL" .cdd-fw
-          fi
-          git -C .cdd-fw checkout -q "$C"
-        env:
-          CDD_REPO_URL: ${{ vars.CDD_REPO_URL }}
-          CDD_READ_TOKEN: ${{ secrets.CDD_READ_TOKEN }}
-      - name: Cierre retroactivo
-        # --retroactivo sólo en este job manual. Los «AVISO rojo-sin-LAZ» (ADR-0031) van al resumen; el rc no cambia.
-        run: |
-          set -o pipefail
-          python3 .cdd-fw/CDD/Gates/cdd.py cierre --repo . --base origin/main --retroactivo --pr-merge ${{ inputs.pr_merge }} --parcela ${{ inputs.parcela }} | tee cierre.txt
-      - name: Avisos rojo-sin-LAZ al resumen
-        if: always()
-        run: grep "AVISO rojo-sin-LAZ" cierre.txt >> "$GITHUB_STEP_SUMMARY" || true
-      - name: TRX como artefacto (copiarlos a evidencia/ de la parcela para versionarlos)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with: { name: trx, path: "**/*.trx", if-no-files-found: ignore }
+      - name: Dónde corren las compuertas
+        run: echo "Las compuertas de CDD se corren en local (AGENTS.md, DEC-006); todavía no hay solución .NET que compilar."

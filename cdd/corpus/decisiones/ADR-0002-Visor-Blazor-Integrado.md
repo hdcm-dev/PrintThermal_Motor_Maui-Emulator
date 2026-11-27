@@ -28,11 +28,11 @@ Pedidos de la persona (`Idea-Inicial.md` §7): «podes agregarle un visor web en
 
 A. Decidió la persona (K3) en el pedido 7 y al firmar el intake 1.2 (2026-11-27). El visor no tiene usuarios ni autenticación (intake §8, TS-7).
 
-Rige `Estilo-Web` 0.4.0 (catálogo de IA.CDD, `b609a2a`): su condición de carga es «el lock declara `estilo: Estilo-Web` (producto con maqueta o panel web)», y el lock la declara porque el producto tiene interfaz web (`DEC.md` DEC-002). Hereda de `Template-HTML-Panel-De-Control` 2.0, según su cabecera. Rige también la marca `interfaz:` de `Rules-Decisiones.md` §7 para los requisitos cuyas rutas toquen `*.razor` o `wwwroot/**`.
+Rige `Estilo-Web` 0.4.0 (catálogo de la norma CDD, repositorio privado, `b609a2a`): su condición de carga es «el lock declara `estilo: Estilo-Web` (producto con maqueta o panel web)», y el lock la declara porque el producto tiene interfaz web (`DEC.md` DEC-002). Hereda de `Template-HTML-Panel-De-Control` 2.0, según su cabecera. Rige también la marca `interfaz:` de `Rules-Decisiones.md` §7 para los requisitos cuyas rutas toquen `*.razor` o `wwwroot/**`.
 
 ### Conocimientos que no cargan
 
-- `Panel-Estructura` (catálogo de IA.CDD): condición «el producto tiene un panel de administración con ingreso por cuenta (no alcanza con tener maqueta), o el lock declara este conocimiento en conocimientos:». Hecho que la incumple: el visor es «sin usuarios» (A3) y el lock no lo declara.
+- `Panel-Estructura` (catálogo de la norma CDD): condición «el producto tiene un panel de administración con ingreso por cuenta (no alcanza con tener maqueta), o el lock declara este conocimiento en conocimientos:». Hecho que la incumple: el visor es «sin usuarios» (A3) y el lock no lo declara.
 
 ## 4. Consecuencias
 

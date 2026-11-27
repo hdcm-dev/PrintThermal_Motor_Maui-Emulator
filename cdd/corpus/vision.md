@@ -3,7 +3,7 @@ id: VIS
 version: 1
 gobierno: humano
 tipo: explicacion
-aprobado:
+aprobado: "Fernando 2026-11-27 versión: 1 sha256: f5f7f411ec88647d4fcfcb33ddbfdacd3a84b11a1f064331855b000f4acfab1c testimonio: cdd/testimonios/Vision/OUTPUTs/01-respuestas.md"
 procedencia: humano
 rutas: []
 ---

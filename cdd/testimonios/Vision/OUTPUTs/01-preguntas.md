@@ -2,7 +2,7 @@
 
 > `fecha: 2026-11-27` · `persona: fernandofilipuzzi-utn` · `entrevistador: agente [cdd-arranque, subagente de un flujo]` · `ronda: 01` · `clase: K3`
 >
-> La escribe el agente: es una salida. Si la persona deposita su respuesta, va literal y fechada en `../INPUTs/01-respuestas.md`; si un agente la transcribe del chat, en `01-respuestas.md` de esta carpeta, con «transcribe: agente», el canal y el original con su sha256 (plantilla `respuestas.md` de IA.CDD). Sin plazo ni default.
+> La escribe el agente: es una salida. Si la persona deposita su respuesta, va literal y fechada en `../INPUTs/01-respuestas.md`; si un agente la transcribe del chat, en `01-respuestas.md` de esta carpeta, con «transcribe: agente», el canal y el original con su sha256 (plantilla `respuestas.md` de la norma CDD). Sin plazo ni default.
 
 ## Índice
 

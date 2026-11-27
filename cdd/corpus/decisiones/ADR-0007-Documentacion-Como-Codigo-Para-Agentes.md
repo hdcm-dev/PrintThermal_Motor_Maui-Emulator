@@ -18,7 +18,7 @@ rutas: []
 
 Pedido 8 de la persona, junto con la firma del intake (`Idea-Inicial.md` §8, literal): «Si querés incluirle un      docascode para que los agentes consulten su uso. Tenemos conocimientos de docasdoc pero sin integración con ia layer». No está en el intake 1.2 (es posterior a la firma); entra por el arranque.
 
-El conocimiento existente es `DocsAsCode-Designing-Specification` 1.5 (IA.Knowledge.Base `fe51898`, medido el 2026-11-27). Condición de carga, literal: «al arrancar la documentación de un proyecto, al adoptar la documentación como código en un proyecto que ya tiene documentos y al revisar un diseño documental existente; se carga por secciones según el mapa de carga de §0». Se cumple: este arranque abre la documentación del producto. `Hereda-de: —`. Su §0 lo rotula «Borrador ensayado, no probado» y pide usarlo «como guía con criterio, no como procedimiento validado».
+El conocimiento existente es `DocsAsCode-Designing-Specification` 1.5 (base de conocimientos privada, `fe51898`, medido el 2026-11-27). Condición de carga, literal: «al arrancar la documentación de un proyecto, al adoptar la documentación como código en un proyecto que ya tiene documentos y al revisar un diseño documental existente; se carga por secciones según el mapa de carga de §0». Se cumple: este arranque abre la documentación del producto. `Hereda-de: —`. Su §0 lo rotula «Borrador ensayado, no probado» y pide usarlo «como guía con criterio, no como procedimiento validado».
 
 ## 2. Opciones
 
@@ -35,4 +35,4 @@ Alcance de lo adoptado: el mapa de carga de su §0 («Diseñar desde cero…: §
 ## 4. Consecuencias
 
 - Épica de montaje y uso documentado (`vision.md` §4).
-- `cdd/cdd.lock.md`: `consulta: DocsAsCode-Designing-Specification@IA.Knowledge.Base 1.5 fe51898`.
+- `cdd/cdd.lock.md`: `consulta:` declara `DocsAsCode-Designing-Specification` 1.5 `fe51898` con el sufijo literal de la base que exige la compuerta `ancla` (DEC-006).
