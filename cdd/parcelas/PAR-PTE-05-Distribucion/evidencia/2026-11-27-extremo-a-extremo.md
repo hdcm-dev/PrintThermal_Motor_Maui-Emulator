@@ -11,7 +11,7 @@
 ## 1. Montaje
 
 - Emulador de Android 17 (API 37, google_apis x86_64) en su contenedor, con turno y puesto de emulador en el equipo del emulador: **1 CPU / 5,5 GB**.
-- Imagen del emulador de impresora construida con el `Dockerfile` de la rama en el equipo de cómputo (con turno) y cargada en el equipo del emulador: `sha256:aa5cd74678391c05280ab3b81c77ee9828bac403f7f20dcf18703c247dfe443d`, versión 1.0.0. Contenedor con `--network container:<emulador>`, **1 CPU / 512 MB**, `--rm`, dentro del mismo turno (total 2 CPU / 6 GB, D4). netsim no se expuso: la imagen llegó al gRPC por `127.0.0.1` de la red compartida.
+- Imagen del emulador de impresora construida con el `Dockerfile` de la rama en el equipo de cómputo (con turno) y cargada en el equipo del emulador, desde el commit `5066fa3` de la rama (mismo `src/` que `735adef`): `sha256:aa5cd74678391c05280ab3b81c77ee9828bac403f7f20dcf18703c247dfe443d`, versión 1.0.0. Contenedor con `--network container:<emulador>`, **1 CPU / 512 MB**, `--rm`, dentro del mismo turno (total 2 CPU / 6 GB, D4). netsim no se expuso: la imagen llegó al gRPC por `127.0.0.1` de la red compartida.
 - Configuración: `Emulador__Bluetooth__Netsim=http://127.0.0.1:<puerto gRPC>`, `Emulador__Bluetooth__Direccion=04:00:00:00:00:07` (sintética), carpeta de salida montada en `/data`.
 - App: `MotorDsl.SampleApp` de la librería cliente (origin/main 940fa7f), compilada con turno en el equipo de cómputo para android-x64 (APK sha256 `134227baafe2cb4dca6cc516057705049935bdf3a8165203e7036a76778e37f0`). Usa `createRfcommSocketToServiceRecord(00001101-…)` y el motor DSL de la librería para generar el ESC/POS.
 - `GET /api/estado` al arrancar: medio «Bluetooth «58HB6» (Anunciando)», conectado. `/openapi/v1.json` 200, `/scalar` 302 (redirige a la página).
@@ -56,9 +56,11 @@ impresion 5 http=200 id=20261127T170032186-0006 bytes=341 espera=7.128264889s pn
 
 ## 4. Visor
 
-Capturas en `capturas/`: el visor en Chrome del propio emulador de Android (puerto 5080 de la dirección especial con la que el emulador de Android expone su red al invitado), con el medio «Anunciando, con conexión RFCOMM», 5 tickets y el último a escala; el PNG de un ticket; y la app de ejemplo con la impresora emulada elegida.
+Capturas en `capturas/`: el visor en Chrome del propio emulador de Android (puerto 5080 de la dirección especial con la que el emulador de Android expone su red al invitado), con el medio «Anunciando, con conexión RFCOMM», 5 tickets y el último a escala; y el PNG de un ticket.
 
 ## 5. Desvíos y límites
+
+- **Código medido:** la imagen salió de `5066fa3`. Después, por la auditoría, cambió `ReceptorAlAlmacen` (bytes tardíos, conexiones con id repetido, errores al guardar): esa versión final está cubierta por las pruebas y la mutación, no por esta corrida.
 
 - **Navegador:** el navegador del servidor de herramientas del agente no llegó a la red de contenedores (`ERR_CONNECTION_REFUSED` también hacia su propia dirección local; sí salía a Internet). El visor se capturó con Chrome dentro del emulador de Android. Para eso se abrió un reenvío TCP temporal del visor en la puerta de enlace del puente de Docker durante unos minutos y se cortó; no tocó netsim.
 - **LAZ-0011 reproducido:** vincular con la app mínima por `createBond` y después conectar dejó a Android con la seguridad en «AUTHENTICATING», sin pedir la clave al periférico y sin cifrado (dos veces, direcciones 05 y 06, con toques a los 24 s y a los 9 s). Vincular conectando (dirección 07) funcionó al primer intento. Causa sin separar; con el emulador en 1 CPU.

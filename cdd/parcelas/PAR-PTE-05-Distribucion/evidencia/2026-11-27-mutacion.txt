@@ -1,6 +1,6 @@
 # Mutación de PAR-PTE-05 (2026-11-27)
 
-Mismo commit y contenedor que el verde (162dd1f). Cada mutante es un reemplazo de texto sobre una copia del árbol, con el filtro de las pruebas de su requisito. Definición (archivo, texto original → mutado, filtro):
+Mismo commit y contenedor que el verde (23bf24b). Cada mutante es un reemplazo de texto sobre una copia del árbol, corrido con el filtro de las pruebas de su requisito. Definición (archivo, texto original → mutado, filtro):
 
 ```text
 m 1 src/PrintThermal.Emulator.Api/Integracion/ReceptorAlAlmacen.cs "c.Interprete.Finalizar();" "" "FullyQualifiedName~IntegracionTests"
@@ -10,20 +10,28 @@ m 4 Dockerfile "ENV ASPNETCORE_URLS=http://0.0.0.0:5080" "ENV ASPNETCORE_URLS=ht
 m 5 .github/workflows/release.yml "  packages: write" "  packages: read" "FullyQualifiedName~ReleaseTests"
 m 6 .github/workflows/release.yml "if gh release view" "if false && gh release" "FullyQualifiedName~ReleaseTests"
 m 7 src/PrintThermal.Emulator.Api/Integracion/AlmacenEnDisco.cs "_disco.Listar().Reverse()" "_disco.Listar()" "FullyQualifiedName~IntegracionTests"
-m 8 src/PrintThermal.Emulator.Api/Integracion/ReceptorAlAlmacen.cs "            if (c.Cerrada)" "            if (!c.Cerrada)" "FullyQualifiedName~IntegracionTests"
+m 8 src/PrintThermal.Emulator.Api/Integracion/ReceptorAlAlmacen.cs "            if (c.Cerrada)" "            if (c.Cerrada && datos.Length < 0)" "FullyQualifiedName~IntegracionTests"
+m 9 src/PrintThermal.Emulator.Api/Integracion/ReceptorAlAlmacen.cs "if (!_conexiones.TryGetValue(conexion.Id, out var c))" "var c = _conexiones.GetOrAdd(conexion.Id, _ => Nueva(conexion)); if (c is null)" "FullyQualifiedName~IntegracionTests"
+m 10 src/PrintThermal.Emulator.Api/Integracion/ReceptorAlAlmacen.cs "            Terminar(vieja);" "" "FullyQualifiedName~IntegracionTests"
 ```
 
 Resultado:
 
 ```text
-MUTANTE 1 (src/PrintThermal.Emulator.Api/Integracion/ReceptorAlAlmacen.cs): MUERTO — Failed!  - Failed:     1, Passed:     7, Skipped:     0, Total:     8, Duration: 3 s
+MUTANTE 1 (src/PrintThermal.Emulator.Api/Integracion/ReceptorAlAlmacen.cs): MUERTO — Failed!  - Failed:     2, Passed:     7, Skipped:     0, Total:     9, Duration: 3 s
 MUTANTE 2 (src/PrintThermal.Emulator.Api/Integracion/ReceptorAlAlmacen.cs): MUERTO — Failed!  - Failed:     5, Passed:     1, Skipped:     0, Total:     6, Duration: 1 s
-MUTANTE 3 (src/PrintThermal.Emulator.Api/Program.cs): MUERTO — Failed!  - Failed:     8, Passed:     0, Skipped:     0, Total:     8, Duration: 2 s
-MUTANTE 4 (Dockerfile): MUERTO — Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 20 ms
-MUTANTE 5 (.github/workflows/release.yml): MUERTO — Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 107 ms
-MUTANTE 6 (.github/workflows/release.yml): MUERTO — Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 97 ms
-MUTANTE 7 (src/PrintThermal.Emulator.Api/Integracion/AlmacenEnDisco.cs): MUERTO — Failed!  - Failed:     1, Passed:     7, Skipped:     0, Total:     8, Duration: 2 s
-MUTANTE 8 (src/PrintThermal.Emulator.Api/Integracion/ReceptorAlAlmacen.cs): MUERTO — Failed!  - Failed:     8, Passed:     0, Skipped:     0, Total:     8, Duration: 11 s
+MUTANTE 3 (src/PrintThermal.Emulator.Api/Program.cs): MUERTO — Failed!  - Failed:     9, Passed:     0, Skipped:     0, Total:     9, Duration: 2 s
+MUTANTE 4 (Dockerfile): MUERTO — Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 29 ms
+MUTANTE 5 (.github/workflows/release.yml): MUERTO — Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 31 ms
+MUTANTE 6 (.github/workflows/release.yml): MUERTO — Failed!  - Failed:     1, Passed:     1, Skipped:     0, Total:     2, Duration: 24 ms
+MUTANTE 7 (src/PrintThermal.Emulator.Api/Integracion/AlmacenEnDisco.cs): MUERTO — Failed!  - Failed:     2, Passed:     7, Skipped:     0, Total:     9, Duration: 2 s
+MUTANTE 8 (src/PrintThermal.Emulator.Api/Integracion/ReceptorAlAlmacen.cs): VIVO — Passed!  - Failed:     0, Passed:     9, Skipped:     0, Total:     9, Duration: 2 s
+MUTANTE 9 (src/PrintThermal.Emulator.Api/Integracion/ReceptorAlAlmacen.cs): MUERTO — Failed!  - Failed:     1, Passed:     8, Skipped:     0, Total:     9, Duration: 2 s
+MUTANTE 10 (src/PrintThermal.Emulator.Api/Integracion/ReceptorAlAlmacen.cs): MUERTO — Failed!  - Failed:     1, Passed:     8, Skipped:     0, Total:     9, Duration: 3 s
 ```
 
-8 de 8 en rojo. Cubren REQ-01 (5, 6), REQ-02 (2), REQ-03 (1, 3, 7, 8) y REQ-04 (4). En una corrida anterior el mutante 3 mataba por error de compilación y el 7 sobrevivía (la lista en disco no tenía prueba de orden): se reescribió el 3 y se agregó la prueba.
+9 de 10 en rojo, al menos uno por requisito: REQ-01 (5, 6), REQ-02 (2), REQ-03 (1, 3, 7, 9, 10) y REQ-04 (4).
+
+Sobrevive el 8. Quita la guarda que descarta bytes de una conexión que se cerró mientras `Recibidos` ya la tenía tomada. Esa carrera no se reproduce con pruebas de un solo hilo: los bytes que llegan después del cierre los descarta antes la búsqueda (mutante 9). Queda como guarda sin prueba (NO VERIFICADO).
+
+En corridas anteriores, el mutante 3 mataba por un error de compilación y el 7 sobrevivía, porque la lista en disco no tenía prueba de orden. Se reescribió el 3 y se agregó la prueba.

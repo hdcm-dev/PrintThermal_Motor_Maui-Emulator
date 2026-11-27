@@ -6,6 +6,8 @@ auditor: subagente Claude Opus (mismo modelo que el ejecutor) en otro contexto q
 
 1. [Ronda 1](#1-ronda-1)
 2. [Respuesta](#2-respuesta)
+3. [Ronda 2](#3-ronda-2)
+4. [Respuesta a la ronda 2](#4-respuesta-a-la-ronda-2)
 
 ## 1. Ronda 1
 
@@ -40,3 +42,28 @@ Auditor refutador en otro contexto (mismo modelo, sólo lectura, sin la conclusi
 | 10 | NO VERIFICADO con volumen con nombre; con carpeta montada, el dueño lo pone el equipo (documentado en README y Dockerfile). |
 | 11 | `plan.md` §2 suma esas superficies. |
 | 12 | Captura retirada. |
+
+## 3. Ronda 2
+
+El mismo auditor revisó la cabeza `9457d91`. Veredicto: **refutado**.
+
+1. El extremo a extremo no corrió sobre el código entregado: la imagen es anterior a los cambios del receptor y la evidencia no declaraba su commit.
+2. `BytesDespuesDelCierreNoReabrenElTicket` no mandaba bytes después del cierre. El mutante 8 moría por otra causa.
+3. Un `Recibidos` posterior al cierre creaba una conexión nueva que nunca se terminaba. Además, los ids de conexión vuelven a empezar con cada periférico. Y el texto «(ya cerrada)» era código muerto.
+4. Las pruebas que sumó la auditoría no tienen rojo propio.
+5. Menores: la evidencia nombraba una captura retirada, y la salida de las compuertas no está en el repositorio.
+
+Lo que dio por resuelto: la evidencia versionada, el verde y la mutación sobre la cabeza, el texto del candado de regresión, las conexiones intercaladas, las aserciones del workflow, la captura de errores al guardar y los datos publicables.
+
+## 4. Respuesta a la ronda 2
+
+| # | Respuesta |
+|---|---|
+| 1 | La evidencia declara que la imagen salió de `5066fa3` y que el receptor final lo cubren las pruebas. En la parcela queda NO VERIFICADO. La prueba con la imagen publicada se hace después del release y queda en la bitácora del repositorio de documentación. |
+| 2 | La prueba manda bytes después del cierre y vuelve a cerrar. El mutante 9 (crear la conexión al recibir) la pone en rojo. |
+| 3 | `Recibidos` ya no crea conexiones: sin `Abierta` previa, descarta. `Abierta` con un id que ya existe termina primero el ticket de la conexión anterior (prueba `UnaConexionNuevaConElMismoIdTerminaLaAnterior`, mutante 10). El texto muerto se quitó. La guarda de la carrera (mutante 8) sobrevive y queda NO VERIFICADO. |
+| 4 | Declarado en el cierre: el poder de esas pruebas lo mide la mutación, 9 de 10. |
+| 5 | Se corrigió la referencia a la captura. La salida de las compuertas va a la bitácora del repositorio de documentación, como en las parcelas anteriores. |
+
+No se corrió una tercera ronda.
+
