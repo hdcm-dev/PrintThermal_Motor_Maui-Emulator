@@ -1,0 +1,298 @@
+# Prueba real de PAR-PTE-03 contra el emulador de Android (2026-11-27)
+
+Periférico «58HB6» con el transporte propio en C# (sin Bumble): `PrintThermal.Emulator.Bluetooth` publicado autocontenido
+(linux-x64, un archivo, sha256 c43719203ca7b8cf399221da47b129b364c24b417b99e649ec16b21242ee9673), con un ejecutable local
+de prueba que usa `ServicioPeriferico` + `TransporteNetsim` y escribe lo recibido con su SHA-256 (no versionado).
+App de Android: la app Java mínima de la prueba corta (`createRfcommSocketToServiceRecord` con 0x1101, la llamada que usa
+la librería cliente). Emulador: Android 17, API 37, `emulator` 37.2.12 con netsim y captura pcap; contenedor con turno,
+2 vCPU / 6 GB. Direcciones: las del periférico (04:00:00:00:00:0X) son las fijas que se le pasan al emulador de impresora
+(sintéticas); la de Android va enmascarada como la muestra el propio Android.
+
+Código medido: desde la segunda dirección (04:00:00:00:00:02), el de `src/PrintThermal.Emulator.Bluetooth/` del commit
+2cec4b8 de la rama (el binario de arriba se compiló de ese árbol). El descubrimiento con la primera dirección (§2) y el
+primer intento de emparejamiento (§3) corrieron con un binario anterior que mandaba pings de HTTP/2 cada 30 s (§6).
+Cambios posteriores, por el auditor y la mesa: L2CAP rechaza opciones de configuración desconocidas que no son sugerencia
+(Android mandó sólo MTU); SDP corrige TotalServiceRecordCount en ServiceSearch (Android no lo usó) y exige
+MaximumAttributeByteCount de 7 o más (en el camino de ServiceSearchAttribute que usó Android, sin efecto con sus máximos);
+el transporte declara explícito el ping de HTTP/2 desactivado, que ya era el valor del binario medido.
+
+## 1. Red: el periférico no llega a netsim desde el equipo de cómputo (desvío)
+
+netsim publica su gRPC sólo en loopback dentro del contenedor del emulador (`/tmp/netsim.ini`: `grpc.port=37397`,
+`hci.port=6402`; `netstat`: `127.0.0.1:37397 LISTEN netsimd`). El contenedor no publica puertos (`PortBindings` vacío).
+- Desde el equipo del emulador a la IP del contenedor, puerto gRPC: `Conexión rehusada`.
+- Desde el equipo de cómputo al equipo del emulador, puerto gRPC: rechazado (rc=1).
+Para correrlo desde el equipo de cómputo haría falta un reenvío dentro del contenedor y además publicar el puerto o un
+túnel entre equipos, que exponen netsim fuera del contenedor. Desvío: el periférico corrió dentro del contenedor del
+emulador (`docker exec`, sin otro contenedor), dentro del turno del emulador, como en la prueba corta.
+
+## 2. Descubrimiento (CE-1): 3 de 3, ~2 s
+
+Antes de emparejar (dirección 04:00:00:00:00:01):
+11-27 15:07:33.506 I/SPIKE   ( 3407): SCAN start=true
+11-27 15:07:35.604 I/SPIKE   ( 3407): FOUND 04:00:00:00:00:01 name=58HB6 class=40680
+11-27 15:07:50.081 I/SPIKE   ( 3462): SCAN start=true
+11-27 15:07:52.122 I/SPIKE   ( 3462): FOUND 04:00:00:00:00:01 name=58HB6 class=40680
+11-27 15:08:06.472 I/SPIKE   ( 3512): SCAN start=true
+11-27 15:08:08.512 I/SPIKE   ( 3512): FOUND 04:00:00:00:00:01 name=58HB6 class=40680
+
+Ya emparejada (dirección 04:00:00:00:00:02; Android informa la clase que guardó al vincular sin descubrir antes, 0x1F00):
+intento 1 rc=0
+11-27 15:13:23.402 I/SPIKE   ( 4528): SCAN start=true
+11-27 15:13:25.608 I/SPIKE   ( 4528): FOUND 04:00:00:00:00:02 name=58HB6 class=1f00
+intento 2 rc=0
+11-27 15:13:39.974 I/SPIKE   ( 4577): SCAN start=true
+11-27 15:13:42.017 I/SPIKE   ( 4577): FOUND 04:00:00:00:00:02 name=58HB6 class=1f00
+intento 3 rc=0
+11-27 15:13:56.269 I/SPIKE   ( 4642): SCAN start=true
+11-27 15:13:58.307 I/SPIKE   ( 4642): FOUND 04:00:00:00:00:02 name=58HB6 class=1f00
+
+## 3. Emparejamiento (CE-2): SSP por confirmación
+
+Primer intento (04:00:00:00:00:01): el toque en «Pair» llegó 31 s después del pedido de confirmación; Android quedó con el
+vínculo (state=12) pero su seguridad quedó «AUTHENTICATING» y no pidió la clave en la conexión siguiente
+(`btm_sec_connected: Connection complete during pairing process`; el RFCOMM venció por tiempo). Causa sin separar
+(LAZ-0011): el temporizador de emparejamiento de Android o el binario de entonces, que mandaba pings de HTTP/2 (NO
+VERIFICADO). Se repitió con otra dirección y el toque a tiempo:
+11-27 15:12:45.274 I/SPIKE   ( 4329): CREATEBOND true
+11-27 15:12:45.718 I/SPIKE   ( 4329): BOND 04:00:00:00:00:02 state=11
+11-27 15:12:47.510 I/SPIKE   ( 4329): PAIRING_REQUEST variant=3
+11-27 15:12:56.829 I/SPIKE   ( 4329): BOND 04:00:00:00:00:02 state=12
+Diálogo: «Pair with 58HB6?» (variante 3, consentimiento). Lado del emulador de impresora:
+15:12:37.948 PERIFERICO netsim=http://<loopback>:<puerto gRPC>/ direccion=04:00:00:00:00:02
+15:12:38.075 anunciando «58HB6» en 04:00:00:00:00:02, canal RFCOMM 1
+15:12:47.568 pedido de conexión ACL de XX:XX:XX:XX:BB:BB; se acepta
+15:12:47.627 conexión ACL 0x000 con XX:XX:XX:XX:BB:BB
+15:12:47.756 seguridad: XX:XX:XX:XX:BB:BB declara IO 0x01, autenticación 0x03
+15:12:48.535 seguridad: confirmación pedida por XX:XX:XX:XX:BB:BB; se acepta
+15:12:57.435 seguridad: emparejamiento con XX:XX:XX:XX:BB:BB terminó con estado 0x00
+15:12:57.718 seguridad: vínculo guardado con XX:XX:XX:XX:BB:BB (tipo de clave 4)
+15:12:57.739 L2CAP: canal abierto PSM 0x0001 CID 0x0040, MTU remoto 1024
+15:12:57.835 cifrado en 0x000: estado 0x00, activo 1
+15:12:57.935 L2CAP: canal abierto PSM 0x0001 CID 0x0041, MTU remoto 1024
+15:13:02.035 desconexión ACL 0x000 de XX:XX:XX:XX:BB:BB, motivo 0x13
+
+`dumpsys bluetooth_manager` (Android 17, SDK 37):
+    XX:XX:XX:XX:00:02(Public ) => XX:XX:XX:XX:00:02(Public ) [BR/EDR] [0x001F00] [Pairing Algorithm BR/EDR: 2 LE: N/A] [ACL BR/EDR:N LE:N] [ Encryption status(BR/EDR): N/A LE: N/A] 58HB6
+        [BR/EDR UUIDs]: 00001101-0000-1000-8000-00805f9b34fb
+
+## 4. Recepción íntegra (CE-3): SHA-256 igual, 5 de 5 (64 KB aleatorios) y 5 de 5 (ticket de 4104 B)
+
+Antes de la serie hubo un envío de prueba de 64 KB, el primero después de emparejar (conexión 1 del registro de §6),
+también igual y fuera de la cuenta:
+random 1 IGUAL
+  tx: 11-27 15:13:10.765 I/SPIKE   ( 4439): SENT kind=random bytes=65536 sha256=29a3dec6582887ef2519d0d16d1b93021921178f779bd9e616db08aa1f30f795
+  rx: 15:13:11.927 CIERRE conexion=1 bytes=65536 sha256=29a3dec6582887ef2519d0d16d1b93021921178f779bd9e616db08aa1f30f795
+
+La serie:
+
+random 1 IGUAL
+  tx: 11-27 15:14:19.614 I/SPIKE   ( 4697): SENT kind=random bytes=65536 sha256=032cb242c4fdeb7860d85d153d7bed8781e2430b30e81e716f717233d0bec3f6
+  rx: 15:14:20.776 CIERRE conexion=2 bytes=65536 sha256=032cb242c4fdeb7860d85d153d7bed8781e2430b30e81e716f717233d0bec3f6
+11-27 15:14:13.504 I/SPIKE   ( 4697): PRECONNECT bond=12
+11-27 15:14:15.613 I/SPIKE   ( 4697): CONNECT ok
+random 2 IGUAL
+  tx: 11-27 15:14:27.673 I/SPIKE   ( 4786): SENT kind=random bytes=65536 sha256=58783d8f0023c5f00f7aac3e007ee47d50b9a53d6c29e78d3a5022b6fafba498
+  rx: 15:14:28.835 CIERRE conexion=3 bytes=65536 sha256=58783d8f0023c5f00f7aac3e007ee47d50b9a53d6c29e78d3a5022b6fafba498
+11-27 15:14:23.209 I/SPIKE   ( 4786): PRECONNECT bond=12
+11-27 15:14:23.672 I/SPIKE   ( 4786): CONNECT ok
+random 3 IGUAL
+  tx: 11-27 15:14:36.176 I/SPIKE   ( 4857): SENT kind=random bytes=65536 sha256=2dfaafea75bb634b144c29d32994d9c1abd0eca882f91c1a95b45ca564f64429
+  rx: 15:14:37.334 CIERRE conexion=4 bytes=65536 sha256=2dfaafea75bb634b144c29d32994d9c1abd0eca882f91c1a95b45ca564f64429
+11-27 15:14:31.584 I/SPIKE   ( 4857): PRECONNECT bond=12
+11-27 15:14:32.170 I/SPIKE   ( 4857): CONNECT ok
+random 4 IGUAL
+  tx: 11-27 15:14:43.979 I/SPIKE   ( 4930): SENT kind=random bytes=65536 sha256=85f5fd8192902674f4a3576dcc9857aee12394207033ea04833f0d4e2bb49e50
+  rx: 15:14:45.145 CIERRE conexion=5 bytes=65536 sha256=85f5fd8192902674f4a3576dcc9857aee12394207033ea04833f0d4e2bb49e50
+11-27 15:14:39.672 I/SPIKE   ( 4930): PRECONNECT bond=12
+11-27 15:14:39.978 I/SPIKE   ( 4930): CONNECT ok
+random 5 IGUAL
+  tx: 11-27 15:14:52.182 I/SPIKE   ( 4994): SENT kind=random bytes=65536 sha256=bcc6affea52d31748b7ddc7262978cc91ddcc9d3acdcaad8880678ff629267fb
+  rx: 15:14:53.345 CIERRE conexion=6 bytes=65536 sha256=bcc6affea52d31748b7ddc7262978cc91ddcc9d3acdcaad8880678ff629267fb
+11-27 15:14:47.568 I/SPIKE   ( 4994): PRECONNECT bond=12
+11-27 15:14:48.181 I/SPIKE   ( 4994): CONNECT ok
+ticket 1 IGUAL
+  tx: 11-27 15:15:00.664 I/SPIKE   ( 5066): SENT kind=ticket bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+  rx: 15:15:01.825 CIERRE conexion=7 bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+11-27 15:14:56.104 I/SPIKE   ( 5066): PRECONNECT bond=12
+11-27 15:14:56.591 I/SPIKE   ( 5066): CONNECT ok
+ticket 2 IGUAL
+  tx: 11-27 15:15:09.116 I/SPIKE   ( 5140): SENT kind=ticket bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+  rx: 15:15:10.275 CIERRE conexion=8 bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+11-27 15:15:04.706 I/SPIKE   ( 5140): PRECONNECT bond=12
+11-27 15:15:05.115 I/SPIKE   ( 5140): CONNECT ok
+ticket 3 IGUAL
+  tx: 11-27 15:15:17.076 I/SPIKE   ( 5206): SENT kind=ticket bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+  rx: 15:15:18.235 CIERRE conexion=9 bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+11-27 15:15:12.593 I/SPIKE   ( 5206): PRECONNECT bond=12
+11-27 15:15:13.074 I/SPIKE   ( 5206): CONNECT ok
+ticket 4 IGUAL
+  tx: 11-27 15:15:24.975 I/SPIKE   ( 5276): SENT kind=ticket bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+  rx: 15:15:26.135 CIERRE conexion=10 bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+11-27 15:15:20.583 I/SPIKE   ( 5276): PRECONNECT bond=12
+11-27 15:15:20.972 I/SPIKE   ( 5276): CONNECT ok
+ticket 5 IGUAL
+  tx: 11-27 15:15:33.382 I/SPIKE   ( 5350): SENT kind=ticket bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+  rx: 15:15:34.545 CIERRE conexion=11 bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+11-27 15:15:28.778 I/SPIKE   ( 5350): PRECONNECT bond=12
+11-27 15:15:29.381 I/SPIKE   ( 5350): CONNECT ok
+
+## 5. Reconexión sin reemparejar: 2 reinicios del emulador de impresora, mismo archivo de claves
+
+reinicio 1:
+15:15:57.815 anunciando «58HB6» en 04:00:00:00:00:02, canal RFCOMM 1
+ticket 1 IGUAL
+  tx: 11-27 15:16:07.402 I/SPIKE   ( 5441): SENT kind=ticket bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+  rx: 15:16:08.567 CIERRE conexion=1 bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+11-27 15:16:01.275 I/SPIKE   ( 5441): PRECONNECT bond=12
+11-27 15:16:03.401 I/SPIKE   ( 5441): CONNECT ok
+15:16:04.164 seguridad: clave de enlace guardada para XX:XX:XX:XX:BB:BB
+15:16:04.395 cifrado en 0x000: estado 0x00, activo 1
+reinicio 2:
+15:16:13.453 anunciando «58HB6» en 04:00:00:00:00:02, canal RFCOMM 1
+ticket 1 IGUAL
+  tx: 11-27 15:16:22.712 I/SPIKE   ( 5541): SENT kind=ticket bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+  rx: 15:16:23.883 CIERRE conexion=1 bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+11-27 15:16:16.475 I/SPIKE   ( 5541): PRECONNECT bond=12
+11-27 15:16:18.711 I/SPIKE   ( 5541): CONNECT ok
+15:16:19.343 seguridad: clave de enlace guardada para XX:XX:XX:XX:BB:BB
+15:16:19.625 cifrado en 0x000: estado 0x00, activo 1
+
+## 6. Registro completo del emulador de impresora
+
+Incluye la primera corrida, donde netsim cortó el flujo dos veces por los pings de HTTP/2 cada 30 s («grpc-status 14:
+Too many pings» y «ENHANCE_YOUR_CALM»); el servicio informó y reintentó. Se quitaron los pings (ese binario es el de
+arriba) y la segunda corrida no tuvo cortes (0 líneas con error o reintento en 113).
+
+15:05:05.136 PERIFERICO netsim=http://<loopback>:<puerto gRPC>/ direccion=04:00:00:00:00:01
+15:05:05.653 anunciando «58HB6» en 04:00:00:00:00:01, canal RFCOMM 1
+15:07:12.815 periférico: netsim cerró el flujo con grpc-status 14: Too many pings; reintento en 2 s
+15:07:14.827 anunciando «58HB6» en 04:00:00:00:00:01, canal RFCOMM 1
+15:08:32.257 pedido de conexión ACL de XX:XX:XX:XX:BB:BB; se acepta
+15:08:32.268 conexión ACL 0x000 con XX:XX:XX:XX:BB:BB
+15:08:33.156 seguridad: XX:XX:XX:XX:BB:BB declara IO 0x01, autenticación 0x03
+15:08:33.604 seguridad: confirmación pedida por XX:XX:XX:XX:BB:BB; se acepta
+15:09:04.925 seguridad: emparejamiento con XX:XX:XX:XX:BB:BB terminó con estado 0x00
+15:09:05.320 seguridad: vínculo guardado con XX:XX:XX:XX:BB:BB (tipo de clave 4)
+15:09:05.339 L2CAP: canal abierto PSM 0x0001 CID 0x0040, MTU remoto 1024
+15:09:05.565 L2CAP: canal abierto PSM 0x0001 CID 0x0041, MTU remoto 1024
+15:09:09.655 desconexión ACL 0x000 de XX:XX:XX:XX:BB:BB, motivo 0x13
+15:09:26.045 pedido de conexión ACL de XX:XX:XX:XX:BB:BB; se acepta
+15:09:26.055 conexión ACL 0x001 con XX:XX:XX:XX:BB:BB
+15:09:26.218 L2CAP: canal abierto PSM 0x0001 CID 0x0040, MTU remoto 1024
+15:10:30.384 desconexión ACL 0x001 de XX:XX:XX:XX:BB:BB, motivo 0x13
+15:12:04.826 periférico: The HTTP/2 server closed the connection. HTTP/2 error code 'ENHANCE_YOUR_CALM' (0xb). (HttpProtocolError); reintento en 2 s
+15:12:06.853 anunciando «58HB6» en 04:00:00:00:00:01, canal RFCOMM 1
+15:12:37.948 PERIFERICO netsim=http://<loopback>:<puerto gRPC>/ direccion=04:00:00:00:00:02
+15:12:38.075 anunciando «58HB6» en 04:00:00:00:00:02, canal RFCOMM 1
+15:12:47.568 pedido de conexión ACL de XX:XX:XX:XX:BB:BB; se acepta
+15:12:47.627 conexión ACL 0x000 con XX:XX:XX:XX:BB:BB
+15:12:47.756 seguridad: XX:XX:XX:XX:BB:BB declara IO 0x01, autenticación 0x03
+15:12:48.535 seguridad: confirmación pedida por XX:XX:XX:XX:BB:BB; se acepta
+15:12:57.435 seguridad: emparejamiento con XX:XX:XX:XX:BB:BB terminó con estado 0x00
+15:12:57.718 seguridad: vínculo guardado con XX:XX:XX:XX:BB:BB (tipo de clave 4)
+15:12:57.739 L2CAP: canal abierto PSM 0x0001 CID 0x0040, MTU remoto 1024
+15:12:57.835 cifrado en 0x000: estado 0x00, activo 1
+15:12:57.935 L2CAP: canal abierto PSM 0x0001 CID 0x0041, MTU remoto 1024
+15:13:02.035 desconexión ACL 0x000 de XX:XX:XX:XX:BB:BB, motivo 0x13
+15:13:07.050 pedido de conexión ACL de XX:XX:XX:XX:BB:BB; se acepta
+15:13:07.054 conexión ACL 0x001 con XX:XX:XX:XX:BB:BB
+15:13:07.317 L2CAP: canal abierto PSM 0x0001 CID 0x0040, MTU remoto 1024
+15:13:07.618 seguridad: clave de enlace guardada para XX:XX:XX:XX:BB:BB
+15:13:07.755 cifrado en 0x001: estado 0x00, activo 1
+15:13:07.845 L2CAP: canal abierto PSM 0x0003 CID 0x0041, MTU remoto 1691
+15:13:07.905 RFCOMM: abierto DLCI 2 (conexión 1, créditos sí, N1 990)
+15:13:08.102 RFCOMM ABIERTO conexion=1 canal=1
+15:13:11.926 RFCOMM: cerrado DLCI 2 (conexión 1)
+15:13:11.927 CIERRE conexion=1 bytes=65536 sha256=29a3dec6582887ef2519d0d16d1b93021921178f779bd9e616db08aa1f30f795
+15:13:15.995 desconexión ACL 0x001 de XX:XX:XX:XX:BB:BB, motivo 0x13
+15:14:15.732 pedido de conexión ACL de XX:XX:XX:XX:BB:BB; se acepta
+15:14:15.745 conexión ACL 0x002 con XX:XX:XX:XX:BB:BB
+15:14:16.236 L2CAP: canal abierto PSM 0x0001 CID 0x0040, MTU remoto 1024
+15:14:16.465 seguridad: clave de enlace guardada para XX:XX:XX:XX:BB:BB
+15:14:16.605 cifrado en 0x002: estado 0x00, activo 1
+15:14:16.694 L2CAP: canal abierto PSM 0x0003 CID 0x0041, MTU remoto 1691
+15:14:16.755 RFCOMM: abierto DLCI 2 (conexión 2, créditos sí, N1 990)
+15:14:16.755 RFCOMM ABIERTO conexion=2 canal=1
+15:14:20.775 RFCOMM: cerrado DLCI 2 (conexión 2)
+15:14:20.776 CIERRE conexion=2 bytes=65536 sha256=032cb242c4fdeb7860d85d153d7bed8781e2430b30e81e716f717233d0bec3f6
+15:14:24.525 L2CAP: canal abierto PSM 0x0001 CID 0x0042, MTU remoto 1024
+15:14:24.655 L2CAP: canal abierto PSM 0x0003 CID 0x0043, MTU remoto 1691
+15:14:24.764 RFCOMM: abierto DLCI 2 (conexión 3, créditos sí, N1 990)
+15:14:24.764 RFCOMM ABIERTO conexion=3 canal=1
+15:14:28.834 RFCOMM: cerrado DLCI 2 (conexión 3)
+15:14:28.835 CIERRE conexion=3 bytes=65536 sha256=58783d8f0023c5f00f7aac3e007ee47d50b9a53d6c29e78d3a5022b6fafba498
+15:14:32.985 L2CAP: canal abierto PSM 0x0001 CID 0x0044, MTU remoto 1024
+15:14:33.065 L2CAP: canal abierto PSM 0x0003 CID 0x0045, MTU remoto 1691
+15:14:33.245 RFCOMM: abierto DLCI 2 (conexión 4, créditos sí, N1 990)
+15:14:33.245 RFCOMM ABIERTO conexion=4 canal=1
+15:14:37.334 RFCOMM: cerrado DLCI 2 (conexión 4)
+15:14:37.334 CIERRE conexion=4 bytes=65536 sha256=2dfaafea75bb634b144c29d32994d9c1abd0eca882f91c1a95b45ca564f64429
+15:14:40.865 L2CAP: canal abierto PSM 0x0001 CID 0x0046, MTU remoto 1024
+15:14:41.035 L2CAP: canal abierto PSM 0x0003 CID 0x0047, MTU remoto 1691
+15:14:41.105 RFCOMM: abierto DLCI 2 (conexión 5, créditos sí, N1 990)
+15:14:41.105 RFCOMM ABIERTO conexion=5 canal=1
+15:14:45.144 RFCOMM: cerrado DLCI 2 (conexión 5)
+15:14:45.145 CIERRE conexion=5 bytes=65536 sha256=85f5fd8192902674f4a3576dcc9857aee12394207033ea04833f0d4e2bb49e50
+15:14:49.035 L2CAP: canal abierto PSM 0x0001 CID 0x0048, MTU remoto 1024
+15:14:49.135 L2CAP: canal abierto PSM 0x0003 CID 0x0049, MTU remoto 1691
+15:14:49.245 RFCOMM: abierto DLCI 2 (conexión 6, créditos sí, N1 990)
+15:14:49.246 RFCOMM ABIERTO conexion=6 canal=1
+15:14:53.345 RFCOMM: cerrado DLCI 2 (conexión 6)
+15:14:53.345 CIERRE conexion=6 bytes=65536 sha256=bcc6affea52d31748b7ddc7262978cc91ddcc9d3acdcaad8880678ff629267fb
+15:14:57.335 L2CAP: canal abierto PSM 0x0001 CID 0x004A, MTU remoto 1024
+15:14:57.535 L2CAP: canal abierto PSM 0x0003 CID 0x004B, MTU remoto 1691
+15:14:57.655 RFCOMM: abierto DLCI 2 (conexión 7, créditos sí, N1 990)
+15:14:57.655 RFCOMM ABIERTO conexion=7 canal=1
+15:15:01.825 RFCOMM: cerrado DLCI 2 (conexión 7)
+15:15:01.825 CIERRE conexion=7 bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+15:15:05.945 L2CAP: canal abierto PSM 0x0001 CID 0x004C, MTU remoto 1024
+15:15:06.164 L2CAP: canal abierto PSM 0x0003 CID 0x004D, MTU remoto 1691
+15:15:06.255 RFCOMM: abierto DLCI 2 (conexión 8, créditos sí, N1 990)
+15:15:06.255 RFCOMM ABIERTO conexion=8 canal=1
+15:15:10.274 RFCOMM: cerrado DLCI 2 (conexión 8)
+15:15:10.275 CIERRE conexion=8 bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+15:15:13.918 L2CAP: canal abierto PSM 0x0001 CID 0x004E, MTU remoto 1024
+15:15:14.127 L2CAP: canal abierto PSM 0x0003 CID 0x004F, MTU remoto 1691
+15:15:14.217 RFCOMM: abierto DLCI 2 (conexión 9, créditos sí, N1 990)
+15:15:14.217 RFCOMM ABIERTO conexion=9 canal=1
+15:15:18.234 RFCOMM: cerrado DLCI 2 (conexión 9)
+15:15:18.235 CIERRE conexion=9 bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+15:15:21.861 L2CAP: canal abierto PSM 0x0001 CID 0x0050, MTU remoto 1024
+15:15:22.044 L2CAP: canal abierto PSM 0x0003 CID 0x0051, MTU remoto 1691
+15:15:22.105 RFCOMM: abierto DLCI 2 (conexión 10, créditos sí, N1 990)
+15:15:22.105 RFCOMM ABIERTO conexion=10 canal=1
+15:15:26.135 RFCOMM: cerrado DLCI 2 (conexión 10)
+15:15:26.135 CIERRE conexion=10 bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+15:15:30.055 L2CAP: canal abierto PSM 0x0001 CID 0x0052, MTU remoto 1024
+15:15:30.355 L2CAP: canal abierto PSM 0x0003 CID 0x0053, MTU remoto 1691
+15:15:30.524 RFCOMM: abierto DLCI 2 (conexión 11, créditos sí, N1 990)
+15:15:30.525 RFCOMM ABIERTO conexion=11 canal=1
+15:15:34.545 RFCOMM: cerrado DLCI 2 (conexión 11)
+15:15:34.545 CIERRE conexion=11 bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+15:15:38.615 desconexión ACL 0x002 de XX:XX:XX:XX:BB:BB, motivo 0x13
+15:15:57.699 PERIFERICO netsim=http://<loopback>:<puerto gRPC>/ direccion=04:00:00:00:00:02
+15:15:57.815 anunciando «58HB6» en 04:00:00:00:00:02, canal RFCOMM 1
+15:16:03.457 pedido de conexión ACL de XX:XX:XX:XX:BB:BB; se acepta
+15:16:03.520 conexión ACL 0x000 con XX:XX:XX:XX:BB:BB
+15:16:03.729 L2CAP: canal abierto PSM 0x0001 CID 0x0040, MTU remoto 1024
+15:16:04.164 seguridad: clave de enlace guardada para XX:XX:XX:XX:BB:BB
+15:16:04.395 cifrado en 0x000: estado 0x00, activo 1
+15:16:04.485 L2CAP: canal abierto PSM 0x0003 CID 0x0041, MTU remoto 1691
+15:16:04.546 RFCOMM: abierto DLCI 2 (conexión 1, créditos sí, N1 990)
+15:16:04.555 RFCOMM ABIERTO conexion=1 canal=1
+15:16:08.566 RFCOMM: cerrado DLCI 2 (conexión 1)
+15:16:08.567 CIERRE conexion=1 bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+15:16:13.336 PERIFERICO netsim=http://<loopback>:<puerto gRPC>/ direccion=04:00:00:00:00:02
+15:16:13.453 anunciando «58HB6» en 04:00:00:00:00:02, canal RFCOMM 1
+15:16:18.657 pedido de conexión ACL de XX:XX:XX:XX:BB:BB; se acepta
+15:16:18.666 conexión ACL 0x000 con XX:XX:XX:XX:BB:BB
+15:16:18.826 L2CAP: canal abierto PSM 0x0001 CID 0x0040, MTU remoto 1024
+15:16:19.343 seguridad: clave de enlace guardada para XX:XX:XX:XX:BB:BB
+15:16:19.625 cifrado en 0x000: estado 0x00, activo 1
+15:16:19.745 L2CAP: canal abierto PSM 0x0003 CID 0x0041, MTU remoto 1691
+15:16:19.856 RFCOMM: abierto DLCI 2 (conexión 1, créditos sí, N1 990)
+15:16:19.865 RFCOMM ABIERTO conexion=1 canal=1
+15:16:23.882 RFCOMM: cerrado DLCI 2 (conexión 1)
+15:16:23.883 CIERRE conexion=1 bytes=4104 sha256=428612ea0c338e17113befbd5e3b3753b9593bba0fd547a8bfccd3c496c94e94
+15:16:27.945 desconexión ACL 0x000 de XX:XX:XX:XX:BB:BB, motivo 0x13

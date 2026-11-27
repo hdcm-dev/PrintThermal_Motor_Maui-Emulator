@@ -1,6 +1,6 @@
 ---
 id: REQ-HIS-Descubrimiento-Y-Emparejamiento
-version: 1
+version: 2
 epica: REQ-EPI-Medio-Emulado
 gobierno: parcela
 tipo: referencia
@@ -9,6 +9,9 @@ rutas:
   - src/PrintThermal.Emulator.Bluetooth/L2cap/**
   - src/PrintThermal.Emulator.Bluetooth/Sdp/**
   - src/PrintThermal.Emulator.Bluetooth/Seguridad/**
+  - tests/PrintThermal.Emulator.Tests/Bluetooth/Hci*.cs
+  - tests/PrintThermal.Emulator.Tests/Bluetooth/Sdp*.cs
+  - tests/PrintThermal.Emulator.Tests/Bluetooth/Seguridad*.cs
 ---
 # REQ-HIS-Descubrimiento-Y-Emparejamiento
 
@@ -31,10 +34,11 @@ La impresora emulada se anuncia por Bluetooth Classic con el nombre «58HB6», p
 ## 3. Trazas
 
 - Sube de: REQ-EPI-Medio-Emulado
-- Implementado en: todavía no hay código (siembra del 2026-11-27).
+- Implementado en: `src/PrintThermal.Emulator.Bluetooth/{Hci,L2cap,Sdp,Seguridad}/` (PAR-PTE-03); pruebas en `tests/PrintThermal.Emulator.Tests/Bluetooth/`.
 
 ## 4. Historial
 
 | Versión | Parcela | Cambio |
 |---|---|---|
 | v1 | siembra | Alta |
+| v2 | PAR-PTE-03 | `rutas:` suma las pruebas de la historia (`tests/…/Bluetooth/Hci*.cs`, `Sdp*.cs`, `Seguridad*.cs`); código en `Hci`, `L2cap`, `Sdp` y `Seguridad` |

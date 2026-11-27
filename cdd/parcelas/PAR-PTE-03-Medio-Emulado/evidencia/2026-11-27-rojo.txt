@@ -1,0 +1,222 @@
+# Rojo: dotnet test PrintThermal.Emulator.slnx (2026-11-27), pruebas de PAR-PTE-03 contra la superficie pública sin implementar (NotImplementedException)
+# Contenedor mcr.microsoft.com/dotnet/sdk:10.0.403, turno 226, 2 CPU / 4 GB. Resultado esperado: 13 en rojo (las nuevas), 4 en verde (esqueleto).
+10.0.403
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  PrintThermal.Emulator.Core -> /w/src/PrintThermal.Emulator.Core/bin/Debug/net10.0/PrintThermal.Emulator.Core.dll
+  PrintThermal.Emulator.Bluetooth -> /w/src/PrintThermal.Emulator.Bluetooth/bin/Debug/net10.0/PrintThermal.Emulator.Bluetooth.dll
+  PrintThermal.Emulator.Client -> /w/src/PrintThermal.Emulator.Client/bin/Debug/net10.0/PrintThermal.Emulator.Client.dll
+  PrintThermal.Emulator.Api -> /w/src/PrintThermal.Emulator.Api/bin/Debug/net10.0/PrintThermal.Emulator.Api.dll
+  PrintThermal.Emulator.Tests -> /w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll
+Test run for /w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 10.0.14)
+[xUnit.net 00:00:00.06]   Discovering: PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.85]   Discovered:  PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.87]   Starting:    PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.91]     PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.UnCanalSinServidorSeRechazaConDm [FAIL]
+[xUnit.net 00:00:00.91]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:00.91]       Stack Trace:
+[xUnit.net 00:00:00.91]         /w/src/PrintThermal.Emulator.Bluetooth/Hci/PerifericoBluetooth.cs(18,0): at PrintThermal.Emulator.Bluetooth.Hci.PerifericoBluetooth.EjecutarAsync(CancellationToken ct)
+[xUnit.net 00:00:00.91]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/RfcommTests.cs(66,0): at PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.UnCanalSinServidorSeRechazaConDm()
+[xUnit.net 00:00:00.91]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.92]     PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LosBytesLleganIntegros [FAIL]
+[xUnit.net 00:00:00.92]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:00.92]       Stack Trace:
+[xUnit.net 00:00:00.92]         /w/src/PrintThermal.Emulator.Bluetooth/Hci/PerifericoBluetooth.cs(18,0): at PrintThermal.Emulator.Bluetooth.Hci.PerifericoBluetooth.EjecutarAsync(CancellationToken ct)
+[xUnit.net 00:00:00.92]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/RfcommTests.cs(32,0): at PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LosBytesLleganIntegros()
+[xUnit.net 00:00:00.92]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.92]     PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LaFcsCoincideConLasTramasDeReferencia [FAIL]
+[xUnit.net 00:00:00.92]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:00.92]       Stack Trace:
+[xUnit.net 00:00:00.92]         /w/src/PrintThermal.Emulator.Bluetooth/Rfcomm/Fcs.cs(7,0): at PrintThermal.Emulator.Bluetooth.Rfcomm.Fcs.Calcular(ReadOnlySpan`1 datos)
+[xUnit.net 00:00:00.92]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/RfcommTests.cs(20,0): at PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LaFcsCoincideConLasTramasDeReferencia()
+[xUnit.net 00:00:00.92]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+[xUnit.net 00:00:00.92]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.93]     PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LaDireccionFijaViajaANetsimEnOrdenInvertido [FAIL]
+[xUnit.net 00:00:00.93]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:00.93]       Stack Trace:
+[xUnit.net 00:00:00.93]         /w/src/PrintThermal.Emulator.Bluetooth/Hci/Netsim/MensajesNetsim.cs(10,0): at PrintThermal.Emulator.Bluetooth.Hci.Netsim.MensajesNetsim.PedidoInicial(DireccionBluetooth direccion, String nombreDispositivo)
+[xUnit.net 00:00:00.93]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SeguridadTests.cs(101,0): at PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LaDireccionFijaViajaANetsimEnOrdenInvertido()
+[xUnit.net 00:00:00.93]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+[xUnit.net 00:00:00.93]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Failed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.UnCanalSinServidorSeRechazaConDm [16 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Bluetooth.Hci.PerifericoBluetooth.EjecutarAsync(CancellationToken ct) in /w/src/PrintThermal.Emulator.Bluetooth/Hci/PerifericoBluetooth.cs:line 18
+   at PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.UnCanalSinServidorSeRechazaConDm() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/RfcommTests.cs:line 66
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LosBytesLleganIntegros [< 1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Bluetooth.Hci.PerifericoBluetooth.EjecutarAsync(CancellationToken ct) in /w/src/PrintThermal.Emulator.Bluetooth/Hci/PerifericoBluetooth.cs:line 18
+   at PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LosBytesLleganIntegros() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/RfcommTests.cs:line 32
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LaFcsCoincideConLasTramasDeReferencia [< 1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Bluetooth.Rfcomm.Fcs.Calcular(ReadOnlySpan`1 datos) in /w/src/PrintThermal.Emulator.Bluetooth/Rfcomm/Fcs.cs:line 7
+   at PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LaFcsCoincideConLasTramasDeReferencia() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/RfcommTests.cs:line 20
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10 [25 ms]
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado [1 ms]
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma [1 ms]
+  Failed PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LaDireccionFijaViajaANetsimEnOrdenInvertido [2 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Bluetooth.Hci.Netsim.MensajesNetsim.PedidoInicial(DireccionBluetooth direccion, String nombreDispositivo) in /w/src/PrintThermal.Emulator.Bluetooth/Hci/Netsim/MensajesNetsim.cs:line 10
+   at PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LaDireccionFijaViajaANetsimEnOrdenInvertido() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SeguridadTests.cs:line 101
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral [1 ms]
+[xUnit.net 00:00:00.94]     PrintThermal.Emulator.Tests.Bluetooth.HciTests.SiNetsimNoRespondeElServicioLoInformaYReintenta [FAIL]
+[xUnit.net 00:00:00.94]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:00.94]       Stack Trace:
+[xUnit.net 00:00:00.94]         /w/src/PrintThermal.Emulator.Bluetooth/Hci/PerifericoBluetooth.cs(31,0): at PrintThermal.Emulator.Bluetooth.Hci.ServicioPeriferico.EjecutarAsync(CancellationToken ct)
+[xUnit.net 00:00:00.94]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/HciTests.cs(35,0): at PrintThermal.Emulator.Tests.Bluetooth.HciTests.SiNetsimNoRespondeElServicioLoInformaYReintenta()
+[xUnit.net 00:00:00.94]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.94]     PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElEmparejamientoPorConfirmacionSeCompleta [FAIL]
+[xUnit.net 00:00:00.94]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:00.94]       Stack Trace:
+[xUnit.net 00:00:00.94]         /w/src/PrintThermal.Emulator.Bluetooth/Hci/PerifericoBluetooth.cs(18,0): at PrintThermal.Emulator.Bluetooth.Hci.PerifericoBluetooth.EjecutarAsync(CancellationToken ct)
+[xUnit.net 00:00:00.94]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SeguridadTests.cs(28,0): at PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ArrancarAsync(IAlmacenDeClaves claves)
+[xUnit.net 00:00:00.94]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SeguridadTests.cs(38,0): at PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElEmparejamientoPorConfirmacionSeCompleta()
+[xUnit.net 00:00:00.94]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.94]     PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LosPaquetesHciViajanSinElByteH4 [FAIL]
+[xUnit.net 00:00:00.94]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:00.94]       Stack Trace:
+[xUnit.net 00:00:00.94]         /w/src/PrintThermal.Emulator.Bluetooth/Hci/Netsim/MensajesNetsim.cs(12,0): at PrintThermal.Emulator.Bluetooth.Hci.Netsim.MensajesNetsim.PedidoHci(PaqueteHci paquete)
+[xUnit.net 00:00:00.94]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SeguridadTests.cs(112,0): at PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LosPaquetesHciViajanSinElByteH4()
+[xUnit.net 00:00:00.94]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+[xUnit.net 00:00:00.94]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.94]     PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElRegistroSdpPublicaSppConNombre58HB6 [FAIL]
+[xUnit.net 00:00:00.94]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:00.94]       Stack Trace:
+[xUnit.net 00:00:00.94]         /w/src/PrintThermal.Emulator.Bluetooth/Sdp/ServidorSdp.cs(15,0): at PrintThermal.Emulator.Bluetooth.Sdp.RegistroSpp.Crear(UInt32 handle, Byte canal, String nombre)
+[xUnit.net 00:00:00.94]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs(31,0): at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ServidorConSpp()
+[xUnit.net 00:00:00.94]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs(80,0): at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElRegistroSdpPublicaSppConNombre58HB6()
+[xUnit.net 00:00:00.94]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+[xUnit.net 00:00:00.94]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.94]     PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElPinHeredadoSeContestaConElDeLaImpresora [FAIL]
+[xUnit.net 00:00:00.94]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:00.94]       Stack Trace:
+[xUnit.net 00:00:00.94]         /w/src/PrintThermal.Emulator.Bluetooth/Hci/PerifericoBluetooth.cs(18,0): at PrintThermal.Emulator.Bluetooth.Hci.PerifericoBluetooth.EjecutarAsync(CancellationToken ct)
+[xUnit.net 00:00:00.94]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SeguridadTests.cs(28,0): at PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ArrancarAsync(IAlmacenDeClaves claves)
+[xUnit.net 00:00:00.94]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SeguridadTests.cs(80,0): at PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElPinHeredadoSeContestaConElDeLaImpresora()
+[xUnit.net 00:00:00.94]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.94]     PrintThermal.Emulator.Tests.Bluetooth.SdpTests.BusquedaDeServiciosYPedidoDeAtributosPorHandle [FAIL]
+[xUnit.net 00:00:00.94]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:00.94]       Stack Trace:
+[xUnit.net 00:00:00.94]         /w/src/PrintThermal.Emulator.Bluetooth/Sdp/ServidorSdp.cs(15,0): at PrintThermal.Emulator.Bluetooth.Sdp.RegistroSpp.Crear(UInt32 handle, Byte canal, String nombre)
+[xUnit.net 00:00:00.94]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs(31,0): at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ServidorConSpp()
+[xUnit.net 00:00:00.94]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs(122,0): at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.BusquedaDeServiciosYPedidoDeAtributosPorHandle()
+[xUnit.net 00:00:00.94]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+[xUnit.net 00:00:00.94]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.94]     PrintThermal.Emulator.Tests.Bluetooth.SdpTests.LaBusquedaConUuidDe16BitsYConContinuacionDevuelveLoMismo [FAIL]
+[xUnit.net 00:00:00.94]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:00.94]       Stack Trace:
+[xUnit.net 00:00:00.94]         /w/src/PrintThermal.Emulator.Bluetooth/Sdp/ServidorSdp.cs(15,0): at PrintThermal.Emulator.Bluetooth.Sdp.RegistroSpp.Crear(UInt32 handle, Byte canal, String nombre)
+[xUnit.net 00:00:00.94]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs(31,0): at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ServidorConSpp()
+[xUnit.net 00:00:00.94]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs(104,0): at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.LaBusquedaConUuidDe16BitsYConContinuacionDevuelveLoMismo()
+[xUnit.net 00:00:00.94]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+[xUnit.net 00:00:00.94]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.94]     PrintThermal.Emulator.Tests.Bluetooth.SdpTests.UnUuidQueNoEstaNoDevuelveRegistros [FAIL]
+[xUnit.net 00:00:00.94]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:00.94]       Stack Trace:
+[xUnit.net 00:00:00.94]         /w/src/PrintThermal.Emulator.Bluetooth/Sdp/ServidorSdp.cs(15,0): at PrintThermal.Emulator.Bluetooth.Sdp.RegistroSpp.Crear(UInt32 handle, Byte canal, String nombre)
+[xUnit.net 00:00:00.94]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs(31,0): at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ServidorConSpp()
+[xUnit.net 00:00:00.94]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs(115,0): at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.UnUuidQueNoEstaNoDevuelveRegistros()
+[xUnit.net 00:00:00.94]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+[xUnit.net 00:00:00.94]            at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:00.94]     PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElPerifericoSeAnunciaComo58HB6ConDireccionFijaYEscaneoAbierto [FAIL]
+[xUnit.net 00:00:00.94]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:00.94]       Stack Trace:
+[xUnit.net 00:00:00.94]         /w/src/PrintThermal.Emulator.Bluetooth/Hci/PerifericoBluetooth.cs(18,0): at PrintThermal.Emulator.Bluetooth.Hci.PerifericoBluetooth.EjecutarAsync(CancellationToken ct)
+[xUnit.net 00:00:00.94]         /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs(149,0): at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElPerifericoSeAnunciaComo58HB6ConDireccionFijaYEscaneoAbierto()
+[xUnit.net 00:00:00.94]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:00.94]   Finished:    PrintThermal.Emulator.Tests
+  Failed PrintThermal.Emulator.Tests.Bluetooth.HciTests.SiNetsimNoRespondeElServicioLoInformaYReintenta [< 1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Bluetooth.Hci.ServicioPeriferico.EjecutarAsync(CancellationToken ct) in /w/src/PrintThermal.Emulator.Bluetooth/Hci/PerifericoBluetooth.cs:line 31
+   at PrintThermal.Emulator.Tests.Bluetooth.HciTests.SiNetsimNoRespondeElServicioLoInformaYReintenta() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/HciTests.cs:line 35
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElEmparejamientoPorConfirmacionSeCompleta [1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Bluetooth.Hci.PerifericoBluetooth.EjecutarAsync(CancellationToken ct) in /w/src/PrintThermal.Emulator.Bluetooth/Hci/PerifericoBluetooth.cs:line 18
+   at PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ArrancarAsync(IAlmacenDeClaves claves) in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SeguridadTests.cs:line 28
+   at PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElEmparejamientoPorConfirmacionSeCompleta() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SeguridadTests.cs:line 38
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LosPaquetesHciViajanSinElByteH4 [< 1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Bluetooth.Hci.Netsim.MensajesNetsim.PedidoHci(PaqueteHci paquete) in /w/src/PrintThermal.Emulator.Bluetooth/Hci/Netsim/MensajesNetsim.cs:line 12
+   at PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LosPaquetesHciViajanSinElByteH4() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SeguridadTests.cs:line 112
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Failed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElRegistroSdpPublicaSppConNombre58HB6 [< 1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Bluetooth.Sdp.RegistroSpp.Crear(UInt32 handle, Byte canal, String nombre) in /w/src/PrintThermal.Emulator.Bluetooth/Sdp/ServidorSdp.cs:line 15
+   at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ServidorConSpp() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs:line 31
+   at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElRegistroSdpPublicaSppConNombre58HB6() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs:line 80
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Failed PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElPinHeredadoSeContestaConElDeLaImpresora [< 1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Bluetooth.Hci.PerifericoBluetooth.EjecutarAsync(CancellationToken ct) in /w/src/PrintThermal.Emulator.Bluetooth/Hci/PerifericoBluetooth.cs:line 18
+   at PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ArrancarAsync(IAlmacenDeClaves claves) in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SeguridadTests.cs:line 28
+   at PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElPinHeredadoSeContestaConElDeLaImpresora() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SeguridadTests.cs:line 80
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.BusquedaDeServiciosYPedidoDeAtributosPorHandle [< 1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Bluetooth.Sdp.RegistroSpp.Crear(UInt32 handle, Byte canal, String nombre) in /w/src/PrintThermal.Emulator.Bluetooth/Sdp/ServidorSdp.cs:line 15
+   at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ServidorConSpp() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs:line 31
+   at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.BusquedaDeServiciosYPedidoDeAtributosPorHandle() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs:line 122
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Failed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.LaBusquedaConUuidDe16BitsYConContinuacionDevuelveLoMismo [< 1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Bluetooth.Sdp.RegistroSpp.Crear(UInt32 handle, Byte canal, String nombre) in /w/src/PrintThermal.Emulator.Bluetooth/Sdp/ServidorSdp.cs:line 15
+   at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ServidorConSpp() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs:line 31
+   at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.LaBusquedaConUuidDe16BitsYConContinuacionDevuelveLoMismo() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs:line 104
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Failed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.UnUuidQueNoEstaNoDevuelveRegistros [< 1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Bluetooth.Sdp.RegistroSpp.Crear(UInt32 handle, Byte canal, String nombre) in /w/src/PrintThermal.Emulator.Bluetooth/Sdp/ServidorSdp.cs:line 15
+   at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ServidorConSpp() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs:line 31
+   at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.UnUuidQueNoEstaNoDevuelveRegistros() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs:line 115
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+  Failed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElPerifericoSeAnunciaComo58HB6ConDireccionFijaYEscaneoAbierto [1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Bluetooth.Hci.PerifericoBluetooth.EjecutarAsync(CancellationToken ct) in /w/src/PrintThermal.Emulator.Bluetooth/Hci/PerifericoBluetooth.cs:line 18
+   at PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElPerifericoSeAnunciaComo58HB6ConDireccionFijaYEscaneoAbierto() in /w/tests/PrintThermal.Emulator.Tests/Bluetooth/SdpTests.cs:line 149
+--- End of stack trace from previous location ---
+Test Run Failed.
+Total tests: 17
+     Passed: 4
+     Failed: 13
+ Total time: 1.2416 Seconds
+Results File: /w/out/pruebas.trx
