@@ -17,7 +17,7 @@
 
 ## 2. Superficies
 
-`Dockerfile`, `.dockerignore`, `.github/workflows/release.yml`, `src/PrintThermal.Emulator.Api/Integracion/**`, `src/PrintThermal.Emulator.Api/Program.cs`, `tests/PrintThermal.Emulator.Tests/Distribucion/**`, `tests/PrintThermal.Emulator.Tests/Api/IntegracionTests.cs`.
+`Dockerfile`, `.dockerignore`, `.github/workflows/release.yml`, `src/PrintThermal.Emulator.Api/Integracion/**`, `src/PrintThermal.Emulator.Api/Program.cs`, `tests/PrintThermal.Emulator.Tests/Distribucion/**`, `tests/PrintThermal.Emulator.Tests/Api/IntegracionTests.cs`. Además: `src/PrintThermal.Emulator.Api/PrintThermal.Emulator.Api.csproj` (referencias a Core y Bluetooth), `README.md` (uso previsto, D4), el corpus de las dos historias y el avance en LAZ-0001, LAZ-0006, LAZ-0008 y LAZ-0010.
 
 ## 3. Riesgos
 

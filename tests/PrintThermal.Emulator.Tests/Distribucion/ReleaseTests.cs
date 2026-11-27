@@ -7,8 +7,8 @@ using PrintThermal.Emulator.Tests.EscPos;
 namespace PrintThermal.Emulator.Tests.Distribucion;
 
 /// <summary>
-/// El workflow de release y el Dockerfile (PAR-PTE-05 REQ-01 y REQ-04). Se leen como texto: la corrida real del
-/// release queda en la evidencia de la parcela; acá se fija lo que no puede cambiar sin que una prueba lo note.
+/// El workflow de release y el Dockerfile (PAR-PTE-05 REQ-01 y REQ-04). Se leen como texto: fijan lo que no puede
+/// cambiar sin que una prueba lo note. La corrida real del release se verifica al publicar la etiqueta.
 /// </summary>
 public sealed partial class ReleaseTests
 {
@@ -44,6 +44,12 @@ public sealed partial class ReleaseTests
         Assert.True(release > prueba, "crea el release antes de probar");
         Assert.Contains(Imagen + ":${VERSION}", yml);
         Assert.Contains("docker login ghcr.io", yml);
+
+        // Ningún paso puede fallar sin cortar el workflow: sin «continue-on-error», «|| true» ni pasos condicionales.
+        Assert.DoesNotContain("continue-on-error", yml);
+        Assert.DoesNotContain("|| true", yml);
+        Assert.DoesNotMatch(@"(?m)^\s+if:", yml);
+        Assert.Matches(@"(?m)^\s+run: dotnet test PrintThermal\.Emulator\.slnx --configuration Release --no-build\s*$", yml);
 
         // Una etiqueta repetida falla antes de publicar nada.
         int repetida = yml.IndexOf("gh release view", StringComparison.Ordinal);

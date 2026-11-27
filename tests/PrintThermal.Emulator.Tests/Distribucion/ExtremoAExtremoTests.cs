@@ -10,9 +10,10 @@ namespace PrintThermal.Emulator.Tests.Distribucion;
 
 /// <summary>
 /// PAR-PTE-05 REQ-02. La corrida real (emulador de Android API 37, app de ejemplo de la librería cliente, imagen del
-/// emulador de impresora en la red del emulador) está en la evidencia de la parcela. De ella quedan los bytes que
-/// llegaron por RFCOMM y la huella del PNG que entregó la API: esta prueba repite la cadena receptor → almacén → API
-/// con esos bytes, troceados como llegaron (tramas RFCOMM), y exige la misma huella.
+/// emulador de impresora en la red del emulador) está en <c>cdd/parcelas/PAR-PTE-05-Distribucion/evidencia/</c>. De
+/// ella quedan los bytes que entregó la API por cada ticket y la huella del PNG que entregó: esta prueba repite la
+/// cadena receptor → almacén → API con esos bytes, en trozos chicos, y exige la misma huella. Es un candado de
+/// regresión de la corrida real (la huella sale del mismo intérprete), no una prueba de fidelidad contra la 58HB6.
 /// </summary>
 public sealed class ExtremoAExtremoTests : IDisposable
 {
@@ -63,8 +64,10 @@ public sealed class ExtremoAExtremoTests : IDisposable
     }
 
     [Fact]
-    public void LaCorridaRealDejoCincoTickets()
+    public void LaCorridaRealDejoCincoTicketsConSuArchivo()
     {
-        Assert.Equal(5, Capturas.Count());
+        var capturas = Capturas.ToList();
+        Assert.Equal(5, capturas.Count);
+        Assert.All(capturas, c => Assert.True(File.Exists(Path.Combine(Captura, (string)c[0])), (string)c[0]));
     }
 }

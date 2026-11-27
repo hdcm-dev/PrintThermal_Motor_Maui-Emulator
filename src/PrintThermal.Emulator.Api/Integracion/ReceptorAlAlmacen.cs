@@ -24,28 +24,22 @@ public sealed class ReceptorAlAlmacen(AlmacenEnDisco almacen, PerfilDeImpresora?
     public void Abierta(InfoConexionRfcomm conexion)
     {
         ArgumentNullException.ThrowIfNull(conexion);
-        var interprete = new Interprete(perfil);
-        interprete.TicketTerminado += Guardar;
-        interprete.Aviso += a => _registro($"conexión {conexion.Id}: {a}");
-        var anterior = _conexiones.GetOrAdd(conexion.Id, _ => new Conexion(interprete));
-        if (!ReferenceEquals(anterior.Interprete, interprete))
-        {
-            _registro($"conexión {conexion.Id}: abierta dos veces; sigue la primera");
-        }
-        _registro($"conexión {conexion.Id} abierta desde {conexion.Par} (canal {conexion.Canal})");
+        var c = _conexiones.GetOrAdd(conexion.Id, _ => Nueva(conexion));
+        _registro($"conexión {conexion.Id} abierta desde {conexion.Par} (canal {conexion.Canal}){(c.Cerrada ? " (ya cerrada)" : "")}");
     }
 
     /// <inheritdoc />
     public void Recibidos(InfoConexionRfcomm conexion, ReadOnlySpan<byte> datos)
     {
         ArgumentNullException.ThrowIfNull(conexion);
-        if (!_conexiones.TryGetValue(conexion.Id, out var c))
-        {
-            Abierta(conexion);
-            c = _conexiones[conexion.Id];
-        }
+        var c = _conexiones.GetOrAdd(conexion.Id, _ => Nueva(conexion));
         lock (c.Cerrojo)
         {
+            if (c.Cerrada)
+            {
+                _registro($"conexión {conexion.Id}: {datos.Length} bytes después del cierre, descartados");
+                return;
+            }
             c.Interprete.Alimentar(datos);
         }
     }
@@ -58,10 +52,19 @@ public sealed class ReceptorAlAlmacen(AlmacenEnDisco almacen, PerfilDeImpresora?
         {
             lock (c.Cerrojo)
             {
+                c.Cerrada = true;
                 c.Interprete.Finalizar();
             }
             _registro($"conexión {conexion.Id} cerrada");
         }
+    }
+
+    private Conexion Nueva(InfoConexionRfcomm conexion)
+    {
+        var interprete = new Interprete(perfil);
+        interprete.TicketTerminado += Guardar;
+        interprete.Aviso += a => _registro($"conexión {conexion.Id}: {a}");
+        return new Conexion(interprete);
     }
 
     private void Guardar(TicketInterpretado ticket)
@@ -71,8 +74,9 @@ public sealed class ReceptorAlAlmacen(AlmacenEnDisco almacen, PerfilDeImpresora?
             var g = almacen.Guardar(ticket);
             _registro($"ticket {g.Id}: {ticket.Bytes.Length} bytes, {ticket.Ancho}x{ticket.Alto}");
         }
-        catch (Exception e) when (e is IOException or UnauthorizedAccessException)
+        catch (Exception e)
         {
+            // Ningún error de guardado sale por Alimentar: cortaría el medio Bluetooth y todas sus conexiones.
             _registro($"no se pudo guardar un ticket de {ticket.Bytes.Length} bytes en {almacen.Carpeta}: {e.Message}");
         }
     }
@@ -82,5 +86,7 @@ public sealed class ReceptorAlAlmacen(AlmacenEnDisco almacen, PerfilDeImpresora?
         public Interprete Interprete { get; } = interprete;
 
         public Lock Cerrojo { get; } = new();
+
+        public bool Cerrada { get; set; }
     }
 }

@@ -143,4 +143,70 @@ public sealed class IntegracionTests : IDisposable
         Assert.False(File.Exists(Path.Combine(_salida, info.Id + ".png")));
         Assert.False(File.Exists(Path.Combine(_salida, info.Id + ".bin")));
     }
+
+    [Fact]
+    public async Task CadaTicketConCorteLlegaSinCerrarLaConexion()
+    {
+        await using var fabrica = new FabricaConSalida(_salida);
+        using var http = fabrica.CreateClient();
+        var receptor = fabrica.Services.GetRequiredService<ReceptorAlAlmacen>();
+        var info = new InfoConexionRfcomm(6, DireccionBluetooth.Parse("02:00:00:00:00:01"), 1);
+        byte[] primero = [0x1B, 0x40, .. "uno\n"u8, 0x1D, 0x56, 0x01];
+        byte[] segundo = [0x1B, 0x40, .. "dos\n"u8, 0x1D, 0x56, 0x01];
+
+        receptor.Abierta(info);
+        receptor.Recibidos(info, primero);
+        var t1 = await http.GetFromJsonAsync<TicketInfo>("/api/tickets/ultimo");
+        Assert.Equal(primero, await http.GetByteArrayAsync($"/api/tickets/{t1!.Id}.bin"));
+
+        receptor.Recibidos(info, segundo);
+        var t2 = await http.GetFromJsonAsync<TicketInfo>("/api/tickets/ultimo");
+        Assert.NotEqual(t1.Id, t2!.Id);
+        Assert.Equal(segundo, await http.GetByteArrayAsync($"/api/tickets/{t2.Id}.bin"));
+        Assert.Equal(1, receptor.Abiertas);
+    }
+
+    [Fact]
+    public async Task DosConexionesIntercaladasNoSeMezclan()
+    {
+        await using var fabrica = new FabricaConSalida(_salida);
+        using var http = fabrica.CreateClient();
+        var receptor = fabrica.Services.GetRequiredService<ReceptorAlAlmacen>();
+        var a = new InfoConexionRfcomm(7, DireccionBluetooth.Parse("02:00:00:00:00:01"), 1);
+        var b = new InfoConexionRfcomm(8, DireccionBluetooth.Parse("02:00:00:00:00:02"), 1);
+        var datosA = Dorados.Leer("01-texto.bin");
+        var datosB = Dorados.Leer("05-ean13.bin");
+
+        receptor.Abierta(a);
+        receptor.Abierta(b);
+        for (var i = 0; i < Math.Max(datosA.Length, datosB.Length); i += 5)
+        {
+            if (i < datosA.Length) receptor.Recibidos(a, datosA.AsSpan(i, Math.Min(5, datosA.Length - i)));
+            if (i < datosB.Length) receptor.Recibidos(b, datosB.AsSpan(i, Math.Min(5, datosB.Length - i)));
+        }
+        receptor.Cerrada(a);
+        receptor.Cerrada(b);
+
+        var lista = await http.GetFromJsonAsync<List<TicketInfo>>("/api/tickets");
+        Assert.Equal(2, lista!.Count);
+        var bins = new List<byte[]>();
+        foreach (var t in lista)
+        {
+            bins.Add(await http.GetByteArrayAsync($"/api/tickets/{t.Id}.bin"));
+        }
+        Assert.Contains(bins, x => x.AsSpan().SequenceEqual(datosA));
+        Assert.Contains(bins, x => x.AsSpan().SequenceEqual(datosB));
+    }
+
+    [Fact]
+    public async Task BytesDespuesDelCierreNoReabrenElTicket()
+    {
+        await using var fabrica = new FabricaConSalida(_salida);
+        using var http = fabrica.CreateClient();
+        var receptor = fabrica.Services.GetRequiredService<ReceptorAlAlmacen>();
+        Transmitir(receptor, 9, Dorados.Leer("01-texto.bin"), trozo: 50);
+
+        Assert.Equal(0, receptor.Abiertas);
+        Assert.Single((await http.GetFromJsonAsync<List<TicketInfo>>("/api/tickets"))!);
+    }
 }
