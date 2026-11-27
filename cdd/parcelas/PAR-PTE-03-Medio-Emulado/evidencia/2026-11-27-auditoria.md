@@ -1,13 +1,19 @@
-# Auditoría de cierre · PAR-PTE-03 (dos rondas)
+# Auditoría de cierre · PAR-PTE-03 (tres rondas)
 
-Informes verbatim del auditor refutador (04 §2 paso 5). La primera ronda auditó la cabeza 05789b1; la segunda, después de las correcciones.
+## Índice
+
+1. [Ronda 1](#ronda-1)
+2. [Ronda 2](#ronda-2)
+3. [Ronda 3](#ronda-3)
+
+Informes verbatim del auditor refutador (04 §2 paso 5). La primera ronda auditó la cabeza 05789b1; la segunda, ade3907 más sus correcciones; la tercera, ed5c15a.
 
 ## Ronda 1
 
 auditor: claude -p, claude-opus-5-5, otro contexto sin la ejecución (mismo modelo: garantía reducida)
 VEREDICTO: refutado
 
-## Hallazgos
+### Hallazgos
 
 1. **bloqueante · E2 + E1 · Entrega «al almacén» sin dueño y sin declarar.** REQ-03 dice «deberá entregarlos al almacén sin cambios» (`parcela.md:49`) y la historia, «se entregan al almacén de tickets» (`REQ-HIS-Recepcion-Integra.md:22`). Su traza v2 afirma en presente que la entrega va por `IReceptorDeBytes`, «que el host del servicio conecta con el almacén» (`:31`). D6 (`parcela.md:30`) manda esa conexión a PAR-PTE-04. Sin embargo, `PAR-PTE-04-Acceso/parcela.md` no lee ni modifica REQ-HIS-Recepcion-Integra, y un grep de `Bluetooth|RFCOMM|Receptor|Recepcion|PAR-PTE-03` en PAR-PTE-04, 05 y 06 no devuelve nada. No se aplica la excepción «trabajo de una parcela ya planificada» (04 §6), porque ninguna parcela lo planifica. Falta una fila en `pendientes:` con su LAZ, o planificar la conexión en PAR-PTE-04. La prueba `LosBytesLleganIntegros` llega hasta `ReceptorEnMemoria`, no hasta el almacén.
 
@@ -33,7 +39,7 @@ VEREDICTO: refutado
 
 NO VERIFICADO: si responder DM a un PN de un DLCI sin servidor (`SesionRfcomm.cs:255-258`) cumple TS 07.10 y RFCOMM, o si correspondía contestar con PN. Tampoco verifiqué si echar de vuelta la bandera de continuación en la respuesta de configuración L2CAP (`MultiplexorL2cap.cs:192`) es lo que pide la especificación.
 
-## Lo que revisé y está bien
+### Lo que revisé y está bien
 
 - **RFCOMM, bit C/R:** las respuestas UA y DM del lado que responde llevan C/R=1, y sus comandos UIH y DISC llevan C/R=0 (`SesionRfcomm.cs:287-297`). Es coherente con la tabla de TS 07.10 §5.2.1.2. El simulador también verifica C/R=1 en UA y C/R=0 en la PN de respuesta.
 - **RFCOMM, FCS y créditos:** la FCS de UIH cubre sólo dirección y control, y la de las demás tramas incluye el largo (`:307`). La PN pide control por créditos con 0xF0 y responde 0xE0. K va en 3 bits (≤7) y N1 en little endian en los octetos 4-5; N1 ≤ MTU−6, con cabecera máxima de 6. Una trama de crédito sin datos no consume crédito (`:179-181`). MSC 0xE3/0xE1 con la dirección `(dlci<<2)|3`. Valores de control: SABM 0x3F, UA 0x73, DM 0x1F, DISC 0x53.
