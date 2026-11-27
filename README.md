@@ -4,6 +4,10 @@ Emulador de una impresora térmica Bluetooth ESC/POS de 58 mm (58HB6) para prueb
 
 **Estado:** versión 1.0 (sprint 1, `cdd/sprints/SPR-01.md`). La impresora emulada se anuncia por Bluetooth Classic como «58HB6» en el emulador de Android, recibe por RFCOMM, interpreta ESC/POS a PNG y entrega cada ticket por la API y el visor. La fidelidad contra la 58HB6 física no está medida.
 
+## Documentación de uso
+
+Para montar el emulador, emparejar, imprimir y leer los tickets (escrita para agentes que no conocen el emulador): [docs/README.md](docs/README.md). Sus ejemplos corren en la CI.
+
 ## Proyectos
 
 | Proyecto | Qué hace |
@@ -24,6 +28,8 @@ dotnet test PrintThermal.Emulator.slnx
 El SDK está fijado en `global.json` y las versiones de los paquetes en `Directory.Packages.props`.
 
 ## Imagen y uso previsto
+
+Resumen; el detalle está en [Montaje](docs/montaje.md).
 
 La imagen se publica en `ghcr.io/hdcm-dev/printthermal_motor_maui-emulator:<versión>` con cada etiqueta `v*` (`.github/workflows/release.yml`); el release adjunta el binario.
 
