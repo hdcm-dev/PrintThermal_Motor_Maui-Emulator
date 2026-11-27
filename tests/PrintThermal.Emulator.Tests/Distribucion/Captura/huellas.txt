@@ -1,0 +1,1 @@
+# archivo.bin huella-sha256-del-png trozo — se completa con la corrida real (PAR-PTE-05 T4)
