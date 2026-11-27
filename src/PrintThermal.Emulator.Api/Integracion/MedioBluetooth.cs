@@ -18,6 +18,9 @@ public sealed class OpcionesDelMedio
     /// <summary>Archivo de claves de emparejamiento; por omisión, <c>claves-bluetooth.txt</c> en la carpeta de salida.</summary>
     public string? ArchivoDeClaves { get; set; }
 
+    /// <summary>Tras un vínculo que terminó sin cifrar, una conexión breve con el teléfono (LAZ-0011, ADR-0009).</summary>
+    public bool ReconexionTrasVinculoSinCifrar { get; set; } = true;
+
     /// <summary>Registra cada comando y evento HCI del periférico (diagnóstico).</summary>
     public bool TrazaHci { get; set; }
 }
@@ -38,7 +41,7 @@ public sealed class MedioBluetooth : BackgroundService, IEstadoDelMedio
         ArgumentException.ThrowIfNullOrWhiteSpace(opciones.Netsim);
         var url = new Uri(opciones.Netsim);
         var direccion = DireccionBluetooth.Parse(opciones.Direccion);
-        var periferico = new OpcionesPeriferico { TrazaHci = opciones.TrazaHci };
+        var periferico = new OpcionesPeriferico { TrazaHci = opciones.TrazaHci, ReconexionTrasVinculoSinCifrar = opciones.ReconexionTrasVinculoSinCifrar };
         var claves = new AlmacenDeClavesEnArchivo(opciones.ArchivoDeClaves ?? Path.Combine(carpetaDeSalida, "claves-bluetooth.txt"));
         _receptor = receptor;
         _servicio = new ServicioPeriferico(

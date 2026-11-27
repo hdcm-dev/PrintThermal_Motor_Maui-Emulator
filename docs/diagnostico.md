@@ -54,8 +54,8 @@ Si el emulador de Android se reinició, netsim pudo cambiar de puerto: releerlo 
 
 ## 3. No empareja o el vínculo no sirve
 
-- **Android vincula pero la conexión no cifra** (en el registro no aparece `cifrado …: activo 1`): se vinculó con `createBond()` y se conectó después, o se tardó en confirmar. Vincular conectando y confirmar enseguida ([Emparejar e imprimir](emparejar-e-imprimir.md) §2 y §3; LAZ-0011).
-- **Recuperar un vínculo trabado:** olvidar el equipo en Android, usar otra `Emulador__Bluetooth__Direccion` o borrar `claves-bluetooth.txt` son las opciones; ninguna está medida como arreglo (NO VERIFICADO, LAZ-0011). Lo que sí se hizo en las pruebas: repetir con otra dirección, vinculando conectando.
+- **Android vincula pero la conexión no cifra** (en el registro no aparece `cifrado …: activo 1`): si se vinculó desde Ajustes, el registro debe mostrar `reconexión breve` después del vínculo ([Emparejar e imprimir](emparejar-e-imprimir.md) §3). Si no la muestra, revisar que `Emulador__Bluetooth__ReconexionTrasVinculoSinCifrar` no esté en `false`. Si la confirmación tardó, la conexión pudo vencer: volver a conectar. Para ver cada evento HCI de la impresora, `Emulador__Bluetooth__TrazaHci=true` ([Montaje](montaje.md) §5).
+- **Recuperar un vínculo trabado:** una conexión que Android corta con el manejador correcto lo destraba: en PAR-PTE-07, después de una conexión vencida, la siguiente cifró e imprimió (1 de 1, sin la reconexión breve). Olvidar el equipo en Android, usar otra `Emulador__Bluetooth__Direccion` o borrar `claves-bluetooth.txt`: NO VERIFICADO como arreglo.
 - **Android no muestra el diálogo:** comprobar que la app conecta por RFCOMM a «58HB6» (§2 de la página de emparejamiento) y que la impresora se anuncia (§2 de esta página).
 
 ## 4. No llega el ticket

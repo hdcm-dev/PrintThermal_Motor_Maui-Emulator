@@ -8,7 +8,7 @@ alcance: corpus
 ids: [REQ-HIS-Visor-Web@v3]
 deuda:
 normalizado:
-parcela:
+parcela: PAR-PTE-07
 ---
 # LAZ-0015 · El ticket desborda su tarjeta en el visor con pantalla angosta
 

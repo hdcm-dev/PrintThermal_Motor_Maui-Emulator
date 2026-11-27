@@ -8,7 +8,7 @@ alcance: corpus
 ids: [REQ-HIS-Descubrimiento-Y-Emparejamiento@v3]
 deuda:
 normalizado:
-parcela:
+parcela: PAR-PTE-07
 ---
 # LAZ-0011 · Un vínculo quedó inservible en la prueba real: consentimiento tardío o binario con pings
 
