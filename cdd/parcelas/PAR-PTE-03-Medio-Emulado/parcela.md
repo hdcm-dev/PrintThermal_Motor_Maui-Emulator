@@ -2,7 +2,7 @@
 id: PAR-PTE-03
 titulo: Bluetooth Classic propio en C# contra netsim: descubrimiento, emparejamiento y recepción por RFCOMM
 version: 1.0
-estado: en-curso
+estado: cerrada
 velocidad: completa
 base_commit: 9dec7ce0bdb56b1ee990cc97cba6015cf79c0afb
 sprint: SPR-01
@@ -20,6 +20,7 @@ modifica:
   - REQ-HIS-Recepcion-Integra@v1
 appetite: tres días
 pendientes:
+  - {que: "el periférico en un contenedor propio con --network container: del emulador no está medido (la prueba real corrió dentro del contenedor del emulador)", registro: LAZ-0005}
 decisiones:
   - {id: D1, tema: "TS-2 y TS-3: pila propia frente a puente y emparejamiento emulado frente al real (mesa sobre el resultado juzgado de la prueba corta)", clase: K2, adr: ADR-0004}
   - {id: D2, tema: "gRPC de netsim sin paquetes: HTTP/2 sin TLS de HttpClient y protobuf escrito a mano para los cinco mensajes que se usan; no suma dependencias ni toca Directory.Packages.props", clase: K1}
@@ -69,8 +70,19 @@ Que el emulador de Android descubra, empareje e imprima en «58HB6» (CE-1, CE-2
 
 ## Tareas
 
-- Pruebas primero: cada `prueba:` en rojo antes del código.
+`tasks.md`. Pruebas primero: cada `prueba:` en rojo antes del código (`evidencia/2026-11-27-rojo.txt`).
+
+## Clarify
+
+Sin persona en esta corrida; no hubo huecos que reabrieran la parcela. Lo que el corpus no fijaba se decidió como K1 (D2 a D6).
 
 ## Cierre
 
-Pendiente.
+- Versiones subidas: REQ-HIS-Descubrimiento-Y-Emparejamiento v1 → v2 y REQ-HIS-Recepcion-Integra v1 → v2 (`rutas:` con sus pruebas, trazas al código; D5). ADR-0004 no se tocó (gobierno humano).
+- Changelog: «PAR-PTE-03 · Transporte Bluetooth Classic propio en C# …» en `cdd/corpus/CHANGELOG.md`. Sprint: fila de PAR-PTE-03 en `cdd/sprints/SPR-01.md`.
+- Evidencia: `evidencia/2026-11-27-rojo.txt` (13 nuevas en rojo, 4 del esqueleto en verde), `evidencia/2026-11-27-pruebas.txt` y `.trx` (20 de 20; la de desconexión a mitad de ticket se agregó después del verde y pasó de entrada, caracteriza el caso borde), `evidencia/2026-11-27-mutacion.txt` (seis mutaciones sobre REQ-01, REQ-02 y REQ-03, las seis en rojo), `evidencia/2026-11-27-prueba-real.txt` (Android 17, API 37: descubre 3 de 3 en unos 2 s, empareja por SSP con consentimiento, SHA-256 igual 10 de 10 con 64 KB y con el ticket de 4104 B, reconecta sin reemparejar tras 2 reinicios del emulador de impresora).
+- Desvío de la prueba real: el periférico corrió dentro del contenedor del emulador, en su turno, porque netsim publica su gRPC sólo en loopback y desde el equipo de cómputo no se llega (medido, §1 de la evidencia). El contenedor propio unido a la red del emulador sigue sin medir: LAZ-0005.
+- Decisiones: D1 (K2) la decidió una mesa de otro contexto (expediente en el repositorio de documentación, `PROMPTs/SDD/02-Mesa-TS2-TS3/`); va al lote de K2 de la Review con el texto propuesto para ADR-0004. D2 a D6, K1.
+- NO VERIFICADO: cómo empareja y qué registro SDP publica la 58HB6 real (Especificación, «[MEDIR]», segunda etapa); el emparejamiento con PIN heredado contra Android (RootCanal no lo valida); el periférico con la librería cliente compilada (se usó la app Java mínima que hace la misma llamada); la causa de que Android quede «AUTHENTICATING» si el consentimiento llega 31 s tarde.
+- Lo aprendido: netsim corta el flujo gRPC si recibe pings de HTTP/2 cada 30 s sin datos («Too many pings», «ENHANCE_YOUR_CALM»): el transporte no manda pings. Al automatizar el emparejamiento, el toque en «Pair» tiene que llegar enseguida. Android guarda la clase 0x1F00 si se vincula una dirección sin descubrirla antes.
+- Auditor: `evidencia/2026-11-27-auditoria.md`.

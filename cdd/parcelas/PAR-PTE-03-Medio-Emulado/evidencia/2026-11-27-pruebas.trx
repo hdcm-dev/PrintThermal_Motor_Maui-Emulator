@@ -1,144 +1,150 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TestRun id="ba23f9a9-71ed-422c-aa50-5ac0ab623d12" name="@32cfa67701ea 2026-11-27 15:27:42" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
-  <Times creation="2026-11-27T15:27:42.4092259+00:00" queuing="2026-11-27T15:27:42.4092260+00:00" start="2026-11-27T15:27:41.6903681+00:00" finish="2026-11-27T15:27:43.5806861+00:00" />
-  <TestSettings name="default" id="ca8095b1-4c86-4b54-88c9-b9f02f27422c">
-    <Deployment runDeploymentRoot="_32cfa67701ea_2026-11-27_15_27_42" />
+<TestRun id="9b248dc5-b265-456d-bc55-18f9d7755455" name="@3bc8b4324026 2026-11-27 15:34:31" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-11-27T15:34:31.7421903+00:00" queuing="2026-11-27T15:34:31.7421904+00:00" start="2026-11-27T15:34:29.9644250+00:00" finish="2026-11-27T15:34:32.0557829+00:00" />
+  <TestSettings name="default" id="f5cf3b2d-f85e-4060-b169-5976406964f8">
+    <Deployment runDeploymentRoot="_3bc8b4324026_2026-11-27_15_34_31" />
   </TestSettings>
   <Results>
-    <UnitTestResult executionId="429bc0fb-f24d-4870-89f3-c4bac82156ed" testId="da4f4b1f-4e2a-98d1-2407-dd65c565fbd1" testName="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.UnCanalSinServidorSeRechazaConDm" computerName="32cfa67701ea" duration="00:00:00.0151240" startTime="2026-11-27T15:27:42.3823556+00:00" endTime="2026-11-27T15:27:42.3900110+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="429bc0fb-f24d-4870-89f3-c4bac82156ed" />
-    <UnitTestResult executionId="4e2851ac-850b-461e-b81a-a4a8b378694a" testId="12a1f6cf-92a0-d01b-0f04-d72a8ba723b2" testName="PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests.SinNetsimEscuchandoElServicioQuedaEnErrorYReintenta" computerName="32cfa67701ea" duration="00:00:00.8417572" startTime="2026-11-27T15:27:42.5060797+00:00" endTime="2026-11-27T15:27:43.3482510+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4e2851ac-850b-461e-b81a-a4a8b378694a" />
-    <UnitTestResult executionId="053545bb-9986-432b-a15f-b1d74f3a5f46" testId="76486f78-8d92-1f47-1cb4-552d800366db" testName="PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral" computerName="32cfa67701ea" duration="00:00:00.0015127" startTime="2026-11-27T15:27:42.5045193+00:00" endTime="2026-11-27T15:27:42.5058940+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="053545bb-9986-432b-a15f-b1d74f3a5f46" />
-    <UnitTestResult executionId="d752f4d4-8918-4f53-9720-b4e258ac2b4b" testId="be6321cd-426b-afc5-7e56-743e19e27267" testName="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElEmparejamientoPorConfirmacionSeCompleta" computerName="32cfa67701ea" duration="00:00:00.0429688" startTime="2026-11-27T15:27:42.3256548+00:00" endTime="2026-11-27T15:27:42.3680612+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d752f4d4-8918-4f53-9720-b4e258ac2b4b" />
-    <UnitTestResult executionId="e9bc3a3a-3c67-46b1-b545-a0a6bcdb00cc" testId="64177240-8f29-3507-e466-4e6e55523b3b" testName="PrintThermal.Emulator.Tests.Bluetooth.HciTests.SiNetsimNoRespondeElServicioLoInformaYReintenta" computerName="32cfa67701ea" duration="00:00:00.9016038" startTime="2026-11-27T15:27:42.3820240+00:00" endTime="2026-11-27T15:27:43.2740712+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e9bc3a3a-3c67-46b1-b545-a0a6bcdb00cc" />
-    <UnitTestResult executionId="8662caa4-0006-427b-9959-01feb4d3514c" testId="2b4d650c-150d-c868-282a-e16b05a7a347" testName="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LosBytesLleganIntegros" computerName="32cfa67701ea" duration="00:00:00.0746565" startTime="2026-11-27T15:27:42.3903487+00:00" endTime="2026-11-27T15:27:42.4650045+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8662caa4-0006-427b-9959-01feb4d3514c" />
-    <UnitTestResult executionId="9d6f858c-f238-410e-8e57-e846834f3b52" testId="6f4433c9-3ef4-5f4e-9c8c-36eb4f32c83f" testName="PrintThermal.Emulator.Tests.Bluetooth.SdpTests.BusquedaDeServiciosYPedidoDeAtributosPorHandle" computerName="32cfa67701ea" duration="00:00:00.0075415" startTime="2026-11-27T15:27:42.2945861+00:00" endTime="2026-11-27T15:27:42.2947194+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9d6f858c-f238-410e-8e57-e846834f3b52" />
-    <UnitTestResult executionId="deeb5ee6-913f-4b91-9ba3-1156d693165d" testId="1345676d-d40b-5acf-e0aa-59d948ecbfcf" testName="PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElRegistroSdpPublicaSppConNombre58HB6" computerName="32cfa67701ea" duration="00:00:00.0365057" startTime="2026-11-27T15:27:42.2355380+00:00" endTime="2026-11-27T15:27:42.2854333+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="deeb5ee6-913f-4b91-9ba3-1156d693165d" />
-    <UnitTestResult executionId="fc2be18e-f44f-4a49-a805-35ea218543fe" testId="2284e388-61bf-b2ce-6042-a95fa9c3e865" testName="PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests.ElTransporteHablaGrpcSobreHttp2ConNetsim" computerName="32cfa67701ea" duration="00:00:00.1660619" startTime="2026-11-27T15:27:43.3484747+00:00" endTime="2026-11-27T15:27:43.5147287+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fc2be18e-f44f-4a49-a805-35ea218543fe" />
-    <UnitTestResult executionId="ec9f9b51-5ceb-4406-9568-27b802af20ca" testId="cffe985a-bcd7-1ffe-5dc4-1912863dc9d0" testName="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElPinHeredadoSeContestaConElDeLaImpresora" computerName="32cfa67701ea" duration="00:00:00.0015038" startTime="2026-11-27T15:27:42.3712386+00:00" endTime="2026-11-27T15:27:42.3820920+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ec9f9b51-5ceb-4406-9568-27b802af20ca" />
-    <UnitTestResult executionId="5d6e3c0b-a050-471e-ac00-331556097761" testId="f280a2fa-aad5-7e34-c258-016c51304881" testName="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LosPaquetesHciViajanSinElByteH4" computerName="32cfa67701ea" duration="00:00:00.0021620" startTime="2026-11-27T15:27:42.3683117+00:00" endTime="2026-11-27T15:27:42.3709684+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5d6e3c0b-a050-471e-ac00-331556097761" />
-    <UnitTestResult executionId="0264b6d3-246a-407b-85e1-e3e020f0c3b5" testId="2e9a18d1-794d-8971-7dc2-cb2552a6f83f" testName="PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10" computerName="32cfa67701ea" duration="00:00:00.0352825" startTime="2026-11-27T15:27:42.4655080+00:00" endTime="2026-11-27T15:27:42.5008864+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0264b6d3-246a-407b-85e1-e3e020f0c3b5" />
-    <UnitTestResult executionId="a09bee64-690d-4a01-a15f-7781076c67bc" testId="c9916706-90c4-7fe6-b07a-f7b0c6f86c72" testName="PrintThermal.Emulator.Tests.Bluetooth.SdpTests.UnUuidQueNoEstaNoDevuelveRegistros" computerName="32cfa67701ea" duration="00:00:00.0004895" startTime="2026-11-27T15:27:42.2956814+00:00" endTime="2026-11-27T15:27:42.2957589+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a09bee64-690d-4a01-a15f-7781076c67bc" />
-    <UnitTestResult executionId="8608e637-0712-4443-86eb-493788908c15" testId="0c24fb9f-7610-dc44-d347-23362e0163c2" testName="PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado" computerName="32cfa67701ea" duration="00:00:00.0018278" startTime="2026-11-27T15:27:42.5011024+00:00" endTime="2026-11-27T15:27:42.5027509+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8608e637-0712-4443-86eb-493788908c15" />
-    <UnitTestResult executionId="bf2bbc6e-a72b-4440-9cc2-e4ca3cdddc1e" testId="9835ec84-5bd6-890f-d506-95048951d8ca" testName="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LaFcsCoincideConLasTramasDeReferencia" computerName="32cfa67701ea" duration="00:00:00.0002811" startTime="2026-11-27T15:27:42.4651861+00:00" endTime="2026-11-27T15:27:42.4653196+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bf2bbc6e-a72b-4440-9cc2-e4ca3cdddc1e" />
-    <UnitTestResult executionId="7ff7c2dd-c234-4ef1-8396-c0fdc9661bbf" testId="aca93dc4-4250-ed8c-2993-e8b79eb9e536" testName="PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElPerifericoSeAnunciaComo58HB6ConDireccionFijaYEscaneoAbierto" computerName="32cfa67701ea" duration="00:00:00.0688065" startTime="2026-11-27T15:27:42.2959622+00:00" endTime="2026-11-27T15:27:42.3665788+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7ff7c2dd-c234-4ef1-8396-c0fdc9661bbf" />
-    <UnitTestResult executionId="c4283804-b2dc-4463-b29f-3de7e706bae2" testId="dc07fbac-ff91-ba44-9039-84f942f70e1c" testName="PrintThermal.Emulator.Tests.Bluetooth.SdpTests.LaBusquedaConUuidDe16BitsYConContinuacionDevuelveLoMismo" computerName="32cfa67701ea" duration="00:00:00.0005368" startTime="2026-11-27T15:27:42.2953940+00:00" endTime="2026-11-27T15:27:42.2954804+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c4283804-b2dc-4463-b29f-3de7e706bae2" />
-    <UnitTestResult executionId="3712ec84-4b29-4e66-a2c0-1dc720c94634" testId="a08a76cf-72b1-c20b-9cef-6b647dbf9ea3" testName="PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma" computerName="32cfa67701ea" duration="00:00:00.0015338" startTime="2026-11-27T15:27:42.5029309+00:00" endTime="2026-11-27T15:27:42.5043378+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3712ec84-4b29-4e66-a2c0-1dc720c94634" />
-    <UnitTestResult executionId="c7cc976d-01d2-49c0-9416-4fb6f5b19378" testId="64bbfc92-1880-de6e-8648-78014d592755" testName="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LaDireccionFijaViajaANetsimEnOrdenInvertido" computerName="32cfa67701ea" duration="00:00:00.0021833" startTime="2026-11-27T15:27:42.3225110+00:00" endTime="2026-11-27T15:27:42.3251881+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c7cc976d-01d2-49c0-9416-4fb6f5b19378" />
+    <UnitTestResult executionId="b99358e4-a356-48f7-94e1-156114a0ede2" testId="1345676d-d40b-5acf-e0aa-59d948ecbfcf" testName="PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElRegistroSdpPublicaSppConNombre58HB6" computerName="3bc8b4324026" duration="00:00:00.0193392" startTime="2026-11-27T15:34:31.7303076+00:00" endTime="2026-11-27T15:34:31.7496800+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b99358e4-a356-48f7-94e1-156114a0ede2" />
+    <UnitTestResult executionId="642d93b0-b0c7-470a-8edb-250eb477748b" testId="2284e388-61bf-b2ce-6042-a95fa9c3e865" testName="PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests.ElTransporteHablaGrpcSobreHttp2ConNetsim" computerName="3bc8b4324026" duration="00:00:00.2784987" startTime="2026-11-27T15:34:31.6961314+00:00" endTime="2026-11-27T15:34:31.9746121+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="642d93b0-b0c7-470a-8edb-250eb477748b" />
+    <UnitTestResult executionId="65872274-f6ae-4f94-942d-a4bf17063825" testId="a08a76cf-72b1-c20b-9cef-6b647dbf9ea3" testName="PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma" computerName="3bc8b4324026" duration="00:00:00.0034015" startTime="2026-11-27T15:34:31.7231589+00:00" endTime="2026-11-27T15:34:31.7267105+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="65872274-f6ae-4f94-942d-a4bf17063825" />
+    <UnitTestResult executionId="df5e399e-4c61-4f3a-99dc-70fcc483e82e" testId="64bbfc92-1880-de6e-8648-78014d592755" testName="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LaDireccionFijaViajaANetsimEnOrdenInvertido" computerName="3bc8b4324026" duration="00:00:00.0559415" startTime="2026-11-27T15:34:30.4748844+00:00" endTime="2026-11-27T15:34:30.5351162+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="df5e399e-4c61-4f3a-99dc-70fcc483e82e" />
+    <UnitTestResult executionId="f3f76596-896e-4e36-ad10-0588c63f55c5" testId="f280a2fa-aad5-7e34-c258-016c51304881" testName="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LosPaquetesHciViajanSinElByteH4" computerName="3bc8b4324026" duration="00:00:00.0037939" startTime="2026-11-27T15:34:31.5733021+00:00" endTime="2026-11-27T15:34:31.5767559+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f3f76596-896e-4e36-ad10-0588c63f55c5" />
+    <UnitTestResult executionId="b5056157-c8d5-4b36-9d5d-37ae3becbadd" testId="dc07fbac-ff91-ba44-9039-84f942f70e1c" testName="PrintThermal.Emulator.Tests.Bluetooth.SdpTests.LaBusquedaConUuidDe16BitsYConContinuacionDevuelveLoMismo" computerName="3bc8b4324026" duration="00:00:00.0005592" startTime="2026-11-27T15:34:31.7561944+00:00" endTime="2026-11-27T15:34:31.7563984+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b5056157-c8d5-4b36-9d5d-37ae3becbadd" />
+    <UnitTestResult executionId="9732c5e3-e65a-4e52-9fa9-620dc2c5bc7c" testId="0c24fb9f-7610-dc44-d347-23362e0163c2" testName="PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado" computerName="3bc8b4324026" duration="00:00:00.0254967" startTime="2026-11-27T15:34:31.6977399+00:00" endTime="2026-11-27T15:34:31.7229802+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9732c5e3-e65a-4e52-9fa9-620dc2c5bc7c" />
+    <UnitTestResult executionId="49430376-7de1-4162-bba2-a9d10c4f0c01" testId="2e9a18d1-794d-8971-7dc2-cb2552a6f83f" testName="PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10" computerName="3bc8b4324026" duration="00:00:00.0128136" startTime="2026-11-27T15:34:31.6930896+00:00" endTime="2026-11-27T15:34:31.6973648+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="49430376-7de1-4162-bba2-a9d10c4f0c01" />
+    <UnitTestResult executionId="543e0f32-0c3e-40c2-9ee5-5226586b81bb" testId="c9916706-90c4-7fe6-b07a-f7b0c6f86c72" testName="PrintThermal.Emulator.Tests.Bluetooth.SdpTests.UnUuidQueNoEstaNoDevuelveRegistros" computerName="3bc8b4324026" duration="00:00:00.0002401" startTime="2026-11-27T15:34:31.7568354+00:00" endTime="2026-11-27T15:34:31.7569819+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="543e0f32-0c3e-40c2-9ee5-5226586b81bb" />
+    <UnitTestResult executionId="c66db508-9a00-4600-9fdd-5f34107761cc" testId="6f4433c9-3ef4-5f4e-9c8c-36eb4f32c83f" testName="PrintThermal.Emulator.Tests.Bluetooth.SdpTests.BusquedaDeServiciosYPedidoDeAtributosPorHandle" computerName="3bc8b4324026" duration="00:00:00.0049060" startTime="2026-11-27T15:34:31.7500159+00:00" endTime="2026-11-27T15:34:31.7547538+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c66db508-9a00-4600-9fdd-5f34107761cc" />
+    <UnitTestResult executionId="52e256b2-8ece-481f-b9eb-8d46345f0bbd" testId="9835ec84-5bd6-890f-d506-95048951d8ca" testName="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LaFcsCoincideConLasTramasDeReferencia" computerName="3bc8b4324026" duration="00:00:00.0001859" startTime="2026-11-27T15:34:31.6777187+00:00" endTime="2026-11-27T15:34:31.6778460+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="52e256b2-8ece-481f-b9eb-8d46345f0bbd" />
+    <UnitTestResult executionId="36b666eb-bb5a-4356-8c91-9381c9271c0e" testId="be6321cd-426b-afc5-7e56-743e19e27267" testName="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElEmparejamientoPorConfirmacionSeCompleta" computerName="3bc8b4324026" duration="00:00:01.0336574" startTime="2026-11-27T15:34:30.5416029+00:00" endTime="2026-11-27T15:34:31.5713187+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="36b666eb-bb5a-4356-8c91-9381c9271c0e" />
+    <UnitTestResult executionId="5a2d7fe8-1cba-4a5d-b21e-2262b28e35b6" testId="12a1f6cf-92a0-d01b-0f04-d72a8ba723b2" testName="PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests.SinNetsimEscuchandoElServicioQuedaEnErrorYReintenta" computerName="3bc8b4324026" duration="00:00:00.0957603" startTime="2026-11-27T15:34:31.5996726+00:00" endTime="2026-11-27T15:34:31.6956789+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5a2d7fe8-1cba-4a5d-b21e-2262b28e35b6" />
+    <UnitTestResult executionId="57f9209b-a74d-4eb8-922f-e27d4127d233" testId="e56ff6bc-95f0-223b-b8a7-f77a126019d4" testName="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.UnaDesconexionAMitadDelTicketCierraLaConexionConLoRecibido" computerName="3bc8b4324026" duration="00:00:00.0061444" startTime="2026-11-27T15:34:31.6919647+00:00" endTime="2026-11-27T15:34:31.6922232+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="57f9209b-a74d-4eb8-922f-e27d4127d233" />
+    <UnitTestResult executionId="0310a559-8ba0-4f38-8da8-3bc0883aa6f6" testId="2b4d650c-150d-c868-282a-e16b05a7a347" testName="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LosBytesLleganIntegros" computerName="3bc8b4324026" duration="00:00:00.0363633" startTime="2026-11-27T15:34:31.6409079+00:00" endTime="2026-11-27T15:34:31.6773257+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0310a559-8ba0-4f38-8da8-3bc0883aa6f6" />
+    <UnitTestResult executionId="16599a28-f1cc-49de-a3f2-dc8af4a9cc2a" testId="64177240-8f29-3507-e466-4e6e55523b3b" testName="PrintThermal.Emulator.Tests.Bluetooth.HciTests.SiNetsimNoRespondeElServicioLoInformaYReintenta" computerName="3bc8b4324026" duration="00:00:01.0242470" startTime="2026-11-27T15:34:30.5715439+00:00" endTime="2026-11-27T15:34:31.5961520+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="16599a28-f1cc-49de-a3f2-dc8af4a9cc2a" />
+    <UnitTestResult executionId="de384287-8caf-4e06-b727-910190a254d9" testId="aca93dc4-4250-ed8c-2993-e8b79eb9e536" testName="PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElPerifericoSeAnunciaComo58HB6ConDireccionFijaYEscaneoAbierto" computerName="3bc8b4324026" duration="00:00:00.0034532" startTime="2026-11-27T15:34:31.7573341+00:00" endTime="2026-11-27T15:34:31.7593877+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="de384287-8caf-4e06-b727-910190a254d9" />
+    <UnitTestResult executionId="a69a058e-fefe-45de-a4a1-7aa5ae71e1d1" testId="76486f78-8d92-1f47-1cb4-552d800366db" testName="PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral" computerName="3bc8b4324026" duration="00:00:00.0026470" startTime="2026-11-27T15:34:31.7273037+00:00" endTime="2026-11-27T15:34:31.7296887+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a69a058e-fefe-45de-a4a1-7aa5ae71e1d1" />
+    <UnitTestResult executionId="639c1343-fefd-40a5-b0d0-e41a43d2c500" testId="da4f4b1f-4e2a-98d1-2407-dd65c565fbd1" testName="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.UnCanalSinServidorSeRechazaConDm" computerName="3bc8b4324026" duration="00:00:00.0554466" startTime="2026-11-27T15:34:31.5859349+00:00" endTime="2026-11-27T15:34:31.6404850+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="639c1343-fefd-40a5-b0d0-e41a43d2c500" />
+    <UnitTestResult executionId="730ef697-6d41-4070-bacc-9bc4605c9089" testId="cffe985a-bcd7-1ffe-5dc4-1912863dc9d0" testName="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElPinHeredadoSeContestaConElDeLaImpresora" computerName="3bc8b4324026" duration="00:00:00.0031981" startTime="2026-11-27T15:34:31.5770943+00:00" endTime="2026-11-27T15:34:31.5803989+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="730ef697-6d41-4070-bacc-9bc4605c9089" />
   </Results>
   <TestDefinitions>
     <UnitTest name="PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="2e9a18d1-794d-8971-7dc2-cb2552a6f83f">
-      <Execution id="0264b6d3-246a-407b-85e1-e3e020f0c3b5" />
+      <Execution id="49430376-7de1-4162-bba2-a9d10c4f0c01" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.EsqueletoTests" name="LaSolucionDeclaraLosCincoProyectosEnNet10" />
     </UnitTest>
     <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LosPaquetesHciViajanSinElByteH4" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="f280a2fa-aad5-7e34-c258-016c51304881">
-      <Execution id="5d6e3c0b-a050-471e-ac00-331556097761" />
+      <Execution id="f3f76596-896e-4e36-ad10-0588c63f55c5" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests" name="LosPaquetesHciViajanSinElByteH4" />
     </UnitTest>
-    <UnitTest name="PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="0c24fb9f-7610-dc44-d347-23362e0163c2">
-      <Execution id="8608e637-0712-4443-86eb-493788908c15" />
-      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.EsqueletoTests" name="ElSdkEstaFijado" />
-    </UnitTest>
     <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.SdpTests.UnUuidQueNoEstaNoDevuelveRegistros" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="c9916706-90c4-7fe6-b07a-f7b0c6f86c72">
-      <Execution id="a09bee64-690d-4a01-a15f-7781076c67bc" />
+      <Execution id="543e0f32-0c3e-40c2-9ee5-5226586b81bb" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.SdpTests" name="UnUuidQueNoEstaNoDevuelveRegistros" />
     </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="0c24fb9f-7610-dc44-d347-23362e0163c2">
+      <Execution id="9732c5e3-e65a-4e52-9fa9-620dc2c5bc7c" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.EsqueletoTests" name="ElSdkEstaFijado" />
+    </UnitTest>
     <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElEmparejamientoPorConfirmacionSeCompleta" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="be6321cd-426b-afc5-7e56-743e19e27267">
-      <Execution id="d752f4d4-8918-4f53-9720-b4e258ac2b4b" />
+      <Execution id="36b666eb-bb5a-4356-8c91-9381c9271c0e" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests" name="ElEmparejamientoPorConfirmacionSeCompleta" />
     </UnitTest>
     <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.HciTests.SiNetsimNoRespondeElServicioLoInformaYReintenta" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="64177240-8f29-3507-e466-4e6e55523b3b">
-      <Execution id="e9bc3a3a-3c67-46b1-b545-a0a6bcdb00cc" />
+      <Execution id="16599a28-f1cc-49de-a3f2-dc8af4a9cc2a" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.HciTests" name="SiNetsimNoRespondeElServicioLoInformaYReintenta" />
     </UnitTest>
     <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests.ElTransporteHablaGrpcSobreHttp2ConNetsim" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="2284e388-61bf-b2ce-6042-a95fa9c3e865">
-      <Execution id="fc2be18e-f44f-4a49-a805-35ea218543fe" />
+      <Execution id="642d93b0-b0c7-470a-8edb-250eb477748b" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests" name="ElTransporteHablaGrpcSobreHttp2ConNetsim" />
     </UnitTest>
     <UnitTest name="PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="a08a76cf-72b1-c20b-9cef-6b647dbf9ea3">
-      <Execution id="3712ec84-4b29-4e66-a2c0-1dc720c94634" />
+      <Execution id="65872274-f6ae-4f94-942d-a4bf17063825" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.EsqueletoTests" name="LaCiCompilaYPruebaSinDescargarLaNorma" />
     </UnitTest>
     <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.SdpTests.LaBusquedaConUuidDe16BitsYConContinuacionDevuelveLoMismo" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="dc07fbac-ff91-ba44-9039-84f942f70e1c">
-      <Execution id="c4283804-b2dc-4463-b29f-3de7e706bae2" />
+      <Execution id="b5056157-c8d5-4b36-9d5d-37ae3becbadd" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.SdpTests" name="LaBusquedaConUuidDe16BitsYConContinuacionDevuelveLoMismo" />
     </UnitTest>
     <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LaFcsCoincideConLasTramasDeReferencia" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="9835ec84-5bd6-890f-d506-95048951d8ca">
-      <Execution id="bf2bbc6e-a72b-4440-9cc2-e4ca3cdddc1e" />
+      <Execution id="52e256b2-8ece-481f-b9eb-8d46345f0bbd" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests" name="LaFcsCoincideConLasTramasDeReferencia" />
     </UnitTest>
     <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests.SinNetsimEscuchandoElServicioQuedaEnErrorYReintenta" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="12a1f6cf-92a0-d01b-0f04-d72a8ba723b2">
-      <Execution id="4e2851ac-850b-461e-b81a-a4a8b378694a" />
+      <Execution id="5a2d7fe8-1cba-4a5d-b21e-2262b28e35b6" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests" name="SinNetsimEscuchandoElServicioQuedaEnErrorYReintenta" />
     </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.UnaDesconexionAMitadDelTicketCierraLaConexionConLoRecibido" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="e56ff6bc-95f0-223b-b8a7-f77a126019d4">
+      <Execution id="57f9209b-a74d-4eb8-922f-e27d4127d233" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests" name="UnaDesconexionAMitadDelTicketCierraLaConexionConLoRecibido" />
+    </UnitTest>
     <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.UnCanalSinServidorSeRechazaConDm" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="da4f4b1f-4e2a-98d1-2407-dd65c565fbd1">
-      <Execution id="429bc0fb-f24d-4870-89f3-c4bac82156ed" />
+      <Execution id="639c1343-fefd-40a5-b0d0-e41a43d2c500" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests" name="UnCanalSinServidorSeRechazaConDm" />
     </UnitTest>
     <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElRegistroSdpPublicaSppConNombre58HB6" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="1345676d-d40b-5acf-e0aa-59d948ecbfcf">
-      <Execution id="deeb5ee6-913f-4b91-9ba3-1156d693165d" />
+      <Execution id="b99358e4-a356-48f7-94e1-156114a0ede2" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.SdpTests" name="ElRegistroSdpPublicaSppConNombre58HB6" />
     </UnitTest>
-    <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LosBytesLleganIntegros" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="2b4d650c-150d-c868-282a-e16b05a7a347">
-      <Execution id="8662caa4-0006-427b-9959-01feb4d3514c" />
-      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests" name="LosBytesLleganIntegros" />
-    </UnitTest>
     <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElPerifericoSeAnunciaComo58HB6ConDireccionFijaYEscaneoAbierto" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="aca93dc4-4250-ed8c-2993-e8b79eb9e536">
-      <Execution id="7ff7c2dd-c234-4ef1-8396-c0fdc9661bbf" />
+      <Execution id="de384287-8caf-4e06-b727-910190a254d9" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.SdpTests" name="ElPerifericoSeAnunciaComo58HB6ConDireccionFijaYEscaneoAbierto" />
     </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LosBytesLleganIntegros" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="2b4d650c-150d-c868-282a-e16b05a7a347">
+      <Execution id="0310a559-8ba0-4f38-8da8-3bc0883aa6f6" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.RfcommTests" name="LosBytesLleganIntegros" />
+    </UnitTest>
     <UnitTest name="PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="76486f78-8d92-1f47-1cb4-552d800366db">
-      <Execution id="053545bb-9986-432b-a15f-b1d74f3a5f46" />
+      <Execution id="a69a058e-fefe-45de-a4a1-7aa5ae71e1d1" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.EsqueletoTests" name="CadaPaqueteTieneVersionFijaYCentral" />
     </UnitTest>
     <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.ElPinHeredadoSeContestaConElDeLaImpresora" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="cffe985a-bcd7-1ffe-5dc4-1912863dc9d0">
-      <Execution id="ec9f9b51-5ceb-4406-9568-27b802af20ca" />
+      <Execution id="730ef697-6d41-4070-bacc-9bc4605c9089" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests" name="ElPinHeredadoSeContestaConElDeLaImpresora" />
     </UnitTest>
-    <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LaDireccionFijaViajaANetsimEnOrdenInvertido" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="64bbfc92-1880-de6e-8648-78014d592755">
-      <Execution id="c7cc976d-01d2-49c0-9416-4fb6f5b19378" />
-      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests" name="LaDireccionFijaViajaANetsimEnOrdenInvertido" />
-    </UnitTest>
     <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.SdpTests.BusquedaDeServiciosYPedidoDeAtributosPorHandle" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="6f4433c9-3ef4-5f4e-9c8c-36eb4f32c83f">
-      <Execution id="9d6f858c-f238-410e-8e57-e846834f3b52" />
+      <Execution id="c66db508-9a00-4600-9fdd-5f34107761cc" />
       <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.SdpTests" name="BusquedaDeServiciosYPedidoDeAtributosPorHandle" />
+    </UnitTest>
+    <UnitTest name="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LaDireccionFijaViajaANetsimEnOrdenInvertido" storage="/w/tests/printthermal.emulator.tests/bin/debug/net10.0/printthermal.emulator.tests.dll" id="64bbfc92-1880-de6e-8648-78014d592755">
+      <Execution id="df5e399e-4c61-4f3a-99dc-70fcc483e82e" />
+      <TestMethod codeBase="/w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner3/netcore/" className="PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests" name="LaDireccionFijaViajaANetsimEnOrdenInvertido" />
     </UnitTest>
   </TestDefinitions>
   <TestEntries>
-    <TestEntry testId="da4f4b1f-4e2a-98d1-2407-dd65c565fbd1" executionId="429bc0fb-f24d-4870-89f3-c4bac82156ed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="12a1f6cf-92a0-d01b-0f04-d72a8ba723b2" executionId="4e2851ac-850b-461e-b81a-a4a8b378694a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="76486f78-8d92-1f47-1cb4-552d800366db" executionId="053545bb-9986-432b-a15f-b1d74f3a5f46" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="be6321cd-426b-afc5-7e56-743e19e27267" executionId="d752f4d4-8918-4f53-9720-b4e258ac2b4b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="64177240-8f29-3507-e466-4e6e55523b3b" executionId="e9bc3a3a-3c67-46b1-b545-a0a6bcdb00cc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="2b4d650c-150d-c868-282a-e16b05a7a347" executionId="8662caa4-0006-427b-9959-01feb4d3514c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="6f4433c9-3ef4-5f4e-9c8c-36eb4f32c83f" executionId="9d6f858c-f238-410e-8e57-e846834f3b52" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="1345676d-d40b-5acf-e0aa-59d948ecbfcf" executionId="deeb5ee6-913f-4b91-9ba3-1156d693165d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="2284e388-61bf-b2ce-6042-a95fa9c3e865" executionId="fc2be18e-f44f-4a49-a805-35ea218543fe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="cffe985a-bcd7-1ffe-5dc4-1912863dc9d0" executionId="ec9f9b51-5ceb-4406-9568-27b802af20ca" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="f280a2fa-aad5-7e34-c258-016c51304881" executionId="5d6e3c0b-a050-471e-ac00-331556097761" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="2e9a18d1-794d-8971-7dc2-cb2552a6f83f" executionId="0264b6d3-246a-407b-85e1-e3e020f0c3b5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="c9916706-90c4-7fe6-b07a-f7b0c6f86c72" executionId="a09bee64-690d-4a01-a15f-7781076c67bc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="0c24fb9f-7610-dc44-d347-23362e0163c2" executionId="8608e637-0712-4443-86eb-493788908c15" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="9835ec84-5bd6-890f-d506-95048951d8ca" executionId="bf2bbc6e-a72b-4440-9cc2-e4ca3cdddc1e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="aca93dc4-4250-ed8c-2993-e8b79eb9e536" executionId="7ff7c2dd-c234-4ef1-8396-c0fdc9661bbf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="dc07fbac-ff91-ba44-9039-84f942f70e1c" executionId="c4283804-b2dc-4463-b29f-3de7e706bae2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="a08a76cf-72b1-c20b-9cef-6b647dbf9ea3" executionId="3712ec84-4b29-4e66-a2c0-1dc720c94634" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="64bbfc92-1880-de6e-8648-78014d592755" executionId="c7cc976d-01d2-49c0-9416-4fb6f5b19378" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1345676d-d40b-5acf-e0aa-59d948ecbfcf" executionId="b99358e4-a356-48f7-94e1-156114a0ede2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2284e388-61bf-b2ce-6042-a95fa9c3e865" executionId="642d93b0-b0c7-470a-8edb-250eb477748b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a08a76cf-72b1-c20b-9cef-6b647dbf9ea3" executionId="65872274-f6ae-4f94-942d-a4bf17063825" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="64bbfc92-1880-de6e-8648-78014d592755" executionId="df5e399e-4c61-4f3a-99dc-70fcc483e82e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f280a2fa-aad5-7e34-c258-016c51304881" executionId="f3f76596-896e-4e36-ad10-0588c63f55c5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dc07fbac-ff91-ba44-9039-84f942f70e1c" executionId="b5056157-c8d5-4b36-9d5d-37ae3becbadd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0c24fb9f-7610-dc44-d347-23362e0163c2" executionId="9732c5e3-e65a-4e52-9fa9-620dc2c5bc7c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2e9a18d1-794d-8971-7dc2-cb2552a6f83f" executionId="49430376-7de1-4162-bba2-a9d10c4f0c01" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c9916706-90c4-7fe6-b07a-f7b0c6f86c72" executionId="543e0f32-0c3e-40c2-9ee5-5226586b81bb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6f4433c9-3ef4-5f4e-9c8c-36eb4f32c83f" executionId="c66db508-9a00-4600-9fdd-5f34107761cc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9835ec84-5bd6-890f-d506-95048951d8ca" executionId="52e256b2-8ece-481f-b9eb-8d46345f0bbd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="be6321cd-426b-afc5-7e56-743e19e27267" executionId="36b666eb-bb5a-4356-8c91-9381c9271c0e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12a1f6cf-92a0-d01b-0f04-d72a8ba723b2" executionId="5a2d7fe8-1cba-4a5d-b21e-2262b28e35b6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e56ff6bc-95f0-223b-b8a7-f77a126019d4" executionId="57f9209b-a74d-4eb8-922f-e27d4127d233" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2b4d650c-150d-c868-282a-e16b05a7a347" executionId="0310a559-8ba0-4f38-8da8-3bc0883aa6f6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="64177240-8f29-3507-e466-4e6e55523b3b" executionId="16599a28-f1cc-49de-a3f2-dc8af4a9cc2a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="aca93dc4-4250-ed8c-2993-e8b79eb9e536" executionId="de384287-8caf-4e06-b727-910190a254d9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="76486f78-8d92-1f47-1cb4-552d800366db" executionId="a69a058e-fefe-45de-a4a1-7aa5ae71e1d1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="da4f4b1f-4e2a-98d1-2407-dd65c565fbd1" executionId="639c1343-fefd-40a5-b0d0-e41a43d2c500" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cffe985a-bcd7-1ffe-5dc4-1912863dc9d0" executionId="730ef697-6d41-4070-bacc-9bc4605c9089" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
   </TestEntries>
   <TestLists>
     <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
     <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
   </TestLists>
   <ResultSummary outcome="Completed">
-    <Counters total="19" executed="19" passed="19" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Counters total="20" executed="20" passed="20" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
     <Output>
       <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 10.0.14)
-[xUnit.net 00:00:00.09]   Discovering: PrintThermal.Emulator.Tests
-[xUnit.net 00:00:00.12]   Discovered:  PrintThermal.Emulator.Tests
-[xUnit.net 00:00:00.15]   Starting:    PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.13]   Discovering: PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.17]   Discovered:  PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.19]   Starting:    PrintThermal.Emulator.Tests
 warn: Microsoft.AspNetCore.Server.Kestrel[0]
       Overriding address(es) 'http://*:8080'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:36701
+      Now listening on: http://127.0.0.1:43147
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -146,16 +152,16 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: /w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/2 POST http://127.0.0.1:36701/netsim.packet.PacketStreamer/StreamPackets - application/grpc -
+      Request starting HTTP/2 POST http://127.0.0.1:43147/netsim.packet.PacketStreamer/StreamPackets - application/grpc -
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
       Executing endpoint 'HTTP: POST /netsim.packet.PacketStreamer/StreamPackets'
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
       Executed endpoint 'HTTP: POST /netsim.packet.PacketStreamer/StreamPackets'
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/2 POST http://127.0.0.1:36701/netsim.packet.PacketStreamer/StreamPackets - 200 - application/grpc 71.8172ms
+      Request finished HTTP/2 POST http://127.0.0.1:43147/netsim.packet.PacketStreamer/StreamPackets - 200 - application/grpc 76.0530ms
 info: Microsoft.AspNetCore.Server.Kestrel[32]
-      Connection id "0HNQCJBTK8VUQ", Request id "0HNQCJBTK8VUQ:00000001": the application completed without reading the entire request body.
-[xUnit.net 00:00:01.45]   Finished:    PrintThermal.Emulator.Tests
+      Connection id "0HNQCJFNBF4UB", Request id "0HNQCJFNBF4UB:00000001": the application completed without reading the entire request body.
+[xUnit.net 00:00:01.71]   Finished:    PrintThermal.Emulator.Tests
 </StdOut>
     </Output>
   </ResultSummary>

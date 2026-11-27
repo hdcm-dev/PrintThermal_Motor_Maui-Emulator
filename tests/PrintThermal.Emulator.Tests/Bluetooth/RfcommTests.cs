@@ -78,11 +78,33 @@ public class RfcommTests
         await corrida.WaitAsync(TimeSpan.FromSeconds(5));
     }
 
-    /// <summary>
-    /// Lo que hace Android con createRfcommSocketToServiceRecord + write: L2CAP al PSM 3, SABM y PN con créditos en el
-    /// DLCI 0, SABM en el canal, MSC, datos en UIH respetando los créditos que da el host, y DISC.
-    /// </summary>
-    private static async Task<InfoConexionRfcomm> EnviarPorRfcommAsync(ControladorFalso c, AndroidSimulado android, ReceptorEnMemoria receptor, ushort cid, byte[] carga)
+    [Fact]
+    public async Task UnaDesconexionAMitadDelTicketCierraLaConexionConLoRecibido()
+    {
+        var c = new ControladorFalso();
+        var receptor = new ReceptorEnMemoria();
+        var p = new PerifericoBluetooth(c, new OpcionesPeriferico(), receptor, new AlmacenDeClavesEnMemoria());
+        var corrida = p.EjecutarAsync();
+        await p.Anunciando.WaitAsync(TimeSpan.FromSeconds(5));
+        var android = new AndroidSimulado(c);
+        await android.ConectarAclAsync();
+        var (cidHost, n1, _) = await AbrirCanalAsync(c, android, CidAndroid);
+
+        var parte = new byte[Math.Min(n1, 300)];
+        new Random(6).NextBytes(parte);
+        var cerrada = receptor.UltimaCerrada.Task;
+        c.Acl(AndroidSimulado.L2cap(cidHost, AndroidSimulado.Trama(DlciCanal1, true, 0xEF, parte)));
+        c.Evento(0x05, 0x00, (byte)c.Handle, (byte)(c.Handle >> 8), 0x08); // Disconnection Complete: se perdió el enlace
+
+        var info = await cerrada.WaitAsync(TimeSpan.FromSeconds(5));
+        Assert.Equal(parte, receptor.Datos[info.Id].ToArray());
+        Assert.Equal(0, p.ConexionesAcl);
+        c.Cortar();
+        await corrida.WaitAsync(TimeSpan.FromSeconds(5));
+    }
+
+    /// <summary>L2CAP al PSM 3, SABM y PN con créditos en el DLCI 0, SABM en el canal y MSC. Devuelve N1 y los créditos.</summary>
+    private static async Task<(ushort CidHost, int N1, int Creditos)> AbrirCanalAsync(ControladorFalso c, AndroidSimulado android, ushort cid)
     {
         var (cidHost, mtuHost) = await android.AbrirL2capAsync(0x0003, cid);
         void Mandar(byte[] trama) => c.Acl(AndroidSimulado.L2cap(cidHost, trama));
@@ -115,6 +137,19 @@ public class RfcommTests
         Mandar(AndroidSimulado.Trama(0, true, 0xEF, [0xE3, 0x05, (DlciCanal1 << 2) | 3, 0x8D]));
         var mscResp = await Recibir();
         Assert.Equal(new byte[] { 0xE1, 0x05, (DlciCanal1 << 2) | 3, 0x8D }, mscResp.Info);
+
+        return (cidHost, n1, creditos);
+    }
+
+    /// <summary>
+    /// Lo que hace Android con createRfcommSocketToServiceRecord + write: abre el canal, manda los datos en UIH respetando
+    /// los créditos que da el host, y cierra con DISC.
+    /// </summary>
+    private static async Task<InfoConexionRfcomm> EnviarPorRfcommAsync(ControladorFalso c, AndroidSimulado android, ReceptorEnMemoria receptor, ushort cid, byte[] carga)
+    {
+        var (cidHost, n1, creditos) = await AbrirCanalAsync(c, android, cid);
+        void Mandar(byte[] trama) => c.Acl(AndroidSimulado.L2cap(cidHost, trama));
+        async Task<AndroidSimulado.TramaLeida> Recibir() => AndroidSimulado.Leer(await android.RecibirAsync(cid), conCreditos: true);
 
         for (var o = 0; o < carga.Length;)
         {
