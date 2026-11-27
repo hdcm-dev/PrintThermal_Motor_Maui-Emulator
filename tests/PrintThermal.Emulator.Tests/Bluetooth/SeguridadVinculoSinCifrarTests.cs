@@ -16,8 +16,9 @@ public sealed class SeguridadVinculoSinCifrarTests
     private static async Task<(ControladorFalso C, Task Corrida)> EmparejarAsync(bool reconexion = true)
     {
         var c = new ControladorFalso();
-        var p = new PerifericoBluetooth(c, new OpcionesPeriferico { ReconexionTrasVinculoSinCifrar = reconexion },
-            new ReceptorEnMemoria(), new AlmacenDeClavesEnMemoria());
+        // Con la opción por omisión: la reconexión breve viene prendida.
+        var opciones = reconexion ? new OpcionesPeriferico() : new OpcionesPeriferico { ReconexionTrasVinculoSinCifrar = false };
+        var p = new PerifericoBluetooth(c, opciones, new ReceptorEnMemoria(), new AlmacenDeClavesEnMemoria());
         var corrida = p.EjecutarAsync();
         await p.Anunciando.WaitAsync(TimeSpan.FromSeconds(5));
         await new AndroidSimulado(c).ConectarAclAsync();
