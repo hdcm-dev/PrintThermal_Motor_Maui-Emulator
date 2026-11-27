@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http.Json;
+using Microsoft.AspNetCore.Hosting;
 using PrintThermal.Emulator.Client;
 
 namespace PrintThermal.Emulator.Tests.Api;
@@ -104,6 +105,21 @@ public sealed class TicketsApiTests
 
         Assert.Equal(HttpStatusCode.BadRequest, respuesta.StatusCode);
         Assert.Equal("application/problem+json", respuesta.Content.Headers.ContentType?.MediaType);
+    }
+
+    [Fact]
+    public async Task EnProduccionLosErroresDeEnlaceYDeRutaSonProblemDetails()
+    {
+        await using var fabrica = new FabricaDelEmulador();
+        using var http = fabrica.WithWebHostBuilder(b => b.UseEnvironment("Production")).CreateClient();
+
+        using var enlace = await http.GetAsync("/api/tickets/esperar?segundos=abc");
+        Assert.Equal(HttpStatusCode.BadRequest, enlace.StatusCode);
+        Assert.Equal("application/problem+json", enlace.Content.Headers.ContentType?.MediaType);
+
+        using var ruta = await http.GetAsync("/api/tickets/con.punto");
+        Assert.Equal(HttpStatusCode.NotFound, ruta.StatusCode);
+        Assert.Equal("application/problem+json", ruta.Content.Headers.ContentType?.MediaType);
     }
 
     [Fact]

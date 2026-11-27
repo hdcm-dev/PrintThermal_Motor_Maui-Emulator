@@ -2,7 +2,7 @@
 id: PAR-PTE-04
 titulo: API de tickets con OpenAPI y Scalar, visor Blazor y cliente tipado
 version: 1.1
-estado: lista
+estado: cerrada
 velocidad: completa
 base_commit: 9dec7ce0bdb56b1ee990cc97cba6015cf79c0afb
 sprint: SPR-01
@@ -119,10 +119,14 @@ Esta corrida es un paso de un flujo de trabajo sin persona disponible para pregu
 - Changelog: «PAR-PTE-04 · API de tickets con OpenAPI y Scalar, visor Blazor y cliente tipado…» en `cdd/corpus/CHANGELOG.md`.
 - Evidencia (todas las corridas con SDK 10.0.403 en contenedor con turno):
   - `evidencia/2026-11-27-rojo.txt`: 29 de 37 en rojo sobre el esqueleto (commit `386c214`). Las seis pruebas de REQ-01 a REQ-06 fallan por falta de comportamiento.
-  - Tras la auditoría, las pruebas se reforzaron: ProblemDetails en los 400 y en una ruta inexistente, más el resto de las operaciones del cliente. Esos refuerzos no tienen un rojo propio; los cubre la mutación.
-  - `evidencia/2026-11-27-pruebas.txt` y `.trx`: 38 de 38 en verde con el código final. El `computerName` del TRX es el id efímero del contenedor.
-  - `evidencia/2026-11-27-mutacion.txt`: seis mutantes con su diff, uno por REQ; los seis en rojo.
-  - `evidencia/2026-11-27-escucha.txt`: el host publicado, sin `ASPNETCORE_HTTP_PORTS` ni `ASPNETCORE_URLS`, escucha sólo en `127.0.0.1:5080`. Responde 200 por loopback y no responde por la IP del contenedor. Así REQ-06 queda medido en el host, y no sólo en el ayudante que prueba la unidad.
+  - Tras la auditoría, las pruebas se reforzaron:
+    - ProblemDetails en los 400 y en una ruta inexistente, también en Production;
+    - el resto de las operaciones del cliente.
+
+    Esos refuerzos no tienen un rojo propio. Los seis REQ los cubre la mutación.
+  - `evidencia/2026-11-27-pruebas.txt` y `.trx`: 39 de 39 en verde con el código final. El `computerName` del TRX es el id efímero del contenedor.
+  - `evidencia/2026-11-27-mutacion.txt`: seis mutantes con su diff completo, uno por REQ; los seis en rojo.
+  - `evidencia/2026-11-27-escucha.txt`: el host publicado, sin `ASPNETCORE_HTTP_PORTS` ni `ASPNETCORE_URLS`, escucha sólo en `127.0.0.1:5080`. Responde 200 por loopback y no responde por la IP del contenedor. Así REQ-06 queda medido en el host, y no sólo en el ayudante que prueba la unidad. El archivo trae los comandos para repetirlo. Ninguna prueba automática lo vigila: si se quita la llamada a `UseUrls` de `Program.cs`, las pruebas siguen en verde. `WebApplicationFactory` no escucha en un puerto, y la imagen de prueba fija `ASPNETCORE_HTTP_PORTS` (LAZ-0003).
   - La corrida de la CI pública del PR la mide la guarda del merge y no es evidencia de esta carpeta.
 - Recorrido en navegador real (`recorrido/guion.md`, doce capturas a 1440 y 360 px, `recorrido/consola.txt` sin errores ni avisos):
   - se ven los cuatro estados: vacío (al abrir y tras limpiar), datos (con llegada en vivo por la espera), cargando (API que no responde) y error (por plazo e inmediato);
@@ -147,12 +151,25 @@ Esta corrida es un paso de un flujo de trabajo sin persona disponible para pregu
   - lectura no atómica de `/api/estado` → una sola lectura;
   - contrato «sólo aditivo» → escrito en la historia.
 
-  La segunda ronda está en el mismo archivo.
+  La segunda ronda también refutó el cierre. Se corrigió o se registró esto:
+  - SPR-01 decía «cerrada» con la parcela todavía `en-curso`: el estado pasa a `cerrada` en este mismo commit, después de responder la ronda 2;
+  - M3 no tenía diff → se rehízo la mutación;
+  - ProblemDetails no estaba probado en Production → prueba nueva;
+  - la escucha no se podía repetir → comandos en `escucha.txt`;
+  - faltaba la consola de la primera navegación → está declarada en el guion;
+  - la documentación del riesgo de borrar todo se nombra abajo, como trabajo de PAR-PTE-06.
+
+  Quedan como observaciones aceptadas, sin cambio:
+  - el plazo de 75 s también para la carga inicial;
+  - lecturas del estado del visor fuera del dispatcher, que son benignas;
+  - `despuesDe` sin validar, que da 204 si no hay un id mayor;
+  - el texto de la excepción en inglés en el error del visor.
 - Lo que queda abierto, en `pendientes:`:
   - LAZ-0001: conectar el almacén y el medio reales;
   - LAZ-0002: la escala, sin medir;
   - LAZ-0003: escucha dentro de la imagen;
   - LAZ-0004: orden de fusión.
+- Trabajo de una parcela ya planificada: la documentación de uso (PAR-PTE-06) explica el patrón estado → imprimir → esperar y el riesgo de borrar todo con varios consumidores (plan.md §1, pedido de la mesa).
 - NO VERIFICADO:
   - la API y el visor con tickets reales del medio Bluetooth (esta parcela usa la fuente simulada);
   - la escala de 8 puntos por mm en la 58HB6.

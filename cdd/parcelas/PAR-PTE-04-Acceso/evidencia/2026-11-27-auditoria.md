@@ -43,3 +43,64 @@ VEREDICTO: refutado
 ### Respuesta a la ronda 1
 
 Ver «## Cierre» de la parcela, punto «Auditoría». Cada hallazgo se corrigió en código o en pruebas, o quedó registrado en LAZ-0003 y LAZ-0004.
+
+## Ronda 2 (2026-11-27, sobre 5ce52a4)
+
+auditor: claude -p Claude Opus (mismo modelo) en otro contexto nuevo, que no vio la ejecución ni la ronda 1 salvo por este archivo; sólo lectura. Garantía reducida.
+
+Informe literal:
+
+**Auditoría refutadora · PAR-PTE-04 · ronda 2** (sólo lectura, sobre 5ce52a4)
+
+**Hallazgos**
+
+1. **Bloqueante · la respuesta dice que todos los hallazgos de la ronda 1 se resolvieron, pero el n.º 2 sigue igual.** `parcela.md:139` afirma: «Cada hallazgo se corrigió en código o en pruebas, o se registró». La lista de nueve puntos que sigue no menciona el n.º 2, y nada cambió:
+   - `cdd/sprints/SPR-01.md:24` sigue dando PAR-PTE-04 por «cerrada»; 5ce52a4 no toca SPR-01.
+   - `parcela.md:5` sigue en `estado: en-curso`.
+   - `tasks.md:15` marca T5 («auditoría, compuertas y PR») `[x]`, con la auditoría todavía abierta.
+   - Con LAZ-0004 abierto, el tablero sigue diciendo que la parcela terminó, que es justo lo que la ronda 1 señaló.
+2. **Menor · el Cierre vuelve a citar algo que todavía no existe.** `parcela.md:150` dice «La segunda ronda está en el mismo archivo», pero `auditoria.md` sólo tiene la ronda 1 y la respuesta (`:43-45`). Es el mismo defecto que la ronda 1 marcó con `auditoria.md`.
+3. **Menor · la mutación se rehízo, pero M3 sigue sin diff.** `mutacion.txt:27-29` trae los encabezados `---`/`+++` sin ninguna línea `-` ni `+`. Probablemente el filtro descartó `-app.MapScalarApiReference();` por no tener sangría. M3 no se puede reproducir, así que el n.º 6 de la ronda 1 queda resuelto sólo en parte. El archivo sigue siendo un extracto («con su prueba filtrada», `:1`).
+4. **Menor · «ProblemDetails… con pruebas» se probó sólo en Development.** `pruebas.txt:45` muestra `Hosting environment: Development`. En `:164-173`, el `problem+json` de `segundos=abc` lo produce `DeveloperExceptionPageMiddleware`. La ronda 1 hablaba de Production (`ThrowOnBadRequest=false`), y ese camino depende sólo de `UseStatusCodePages` (`Program.cs:49`). Probablemente funciona, pero ninguna prueba ni evidencia lo cubre. `REQ-HIS-Api-De-Tickets.md:37` lo afirma igual.
+5. **Menor · REQ-06 sigue sin una guarda automática sobre el host.**
+   - `EscuchaTests.cs:16-22` prueba sólo `Direcciones`. Si se borra `UseUrls` en `Program.cs:12-15`, las 38 pruebas siguen en verde.
+   - `escucha.txt` es una medición manual. No trae el comando, ni cómo se quitó `ASPNETCORE_HTTP_PORTS`, ni cómo se obtuvo la IP. No se puede repetir.
+   - Está declarado en el Cierre, así que no es un pendiente oculto, pero queda una regresión posible que ninguna prueba detecta.
+6. **Menor · la consola no cubre todas las navegaciones, aunque `guion.md:54` dice que sí.**
+   - Los tickets llegaron a las 15:30:09 y 15:30:49 (`1440-datos-dos-tickets.png`). El primer bloque de `consola.txt:7-9` es de las 15:30:53, o sea, la recarga del paso 4.
+   - Falta la navegación inicial de los pasos 1 a 3, que es donde se juzga la llegada en vivo.
+   - El encabezado (`:4-5`) explica huecos en los `msgid` «por otras pestañas», pero ahora 222-231 son correlativos. La explicación quedó vieja y no tapa la navegación que falta.
+7. **Observación · el visor usa un plazo de 75 s para todos los pedidos.** `Program.cs:44` aplica `EsperaMaxima+15` también a `/api/estado` y a la lista. Con la API inalcanzable, la vista queda 75 s en «cargando». Mientras dura el renderizado en flujo no hay interactividad: `blazor.web.js` recién se conecta a las 15:32:53 (`consola.txt:18-19`). El recorrido lo muestra y la historia lo admite (`REQ-HIS-Visor-Web.md:35`), así que no hace falso ningún criterio.
+8. **Observación · el visor lee su estado fuera del dispatcher.** `Inicio.razor:181-193` lee `Tickets` y `ErrorDeCarga` fuera de `InvokeAsync`. Además, `LimpiarAsync` y el bucle pueden intercalar dos `CargarAsync`. Una lista vieja después de limpiar se corrige en 25 s o menos. Es benigno.
+9. **Observación · `despuesDe` no se valida.** `EndpointsDeTickets.cs:138` acepta cualquier texto. Con `despuesDe=abc` (las letras ordenan después de los dígitos), la espera nunca devuelve nada y siempre responde 204. El contrato dice «ids… mayores que 0», pero no hay 400.
+10. **Observación · la UI muestra el texto crudo de la excepción, en inglés.** `Inicio.razor:168` lo pasa tal cual: «Connection refused (127.0.0.1:9)», «The request was canceled…». Con un `Visor:UrlApi` real, la página expondría el host interno.
+11. **Observación · una promesa a otra parcela sin registro.** `plan.md:36` dice que el riesgo de DELETE «lo dirá la documentación de uso (PAR-PTE-06)». No hay LAZ ni pendiente. La descripción en el OpenAPI (`EndpointsDeTickets.cs:106`) ya cumple lo que pidió la mesa, así que es menor.
+
+**Verificado sin objeciones**
+- REQ-01 a REQ-06: las pruebas existen y fallan en `rojo.txt` por comportamiento (NotFound, `NotImplementedException`, falta de `data-estado`). Pasan en `pruebas.txt` (38 de 38), y M1 a M6 quedan en rojo.
+- El refuerzo de REQ-05 (`ClienteTests.cs:24-30`) recorre ahora todas las operaciones del cliente, como pidió la mesa para D2.
+- Ronda 1, resueltos:
+  - n.º 1: LAZ-0004;
+  - n.º 4: LAZ-0003 y `escucha.txt`;
+  - n.º 5: cobertura del cliente;
+  - n.º 7: capturas de «cargando» y del vacío tras limpiar, coherentes con el guion;
+  - n.º 9: pausa tras fallar la recarga;
+  - n.º 10: `/api/estado` con una sola lectura;
+  - n.º 11: «sólo aditivo» escrito en `REQ-HIS-Api-De-Tickets.md:36`.
+- El almacén no pierde avisos: `Guardar` cambia la señal bajo el mismo cerrojo con que la espera revisa la lista. Los cinco cambios de la mesa están implementados.
+- Higiene: no hay IPs fuera de loopback, ni MAC, ni credenciales, ni rutas personales. `<emulador>` y `<ip del contenedor>` están enmascarados. El `computerName` del TRX es un id de contenedor (`7a5d830aff22`).
+
+**Lo que quedó abierto y no está declarado:**
+- SPR-01 da por «cerrada» una parcela `en-curso`, con auditoría abierta, y T5 figura `[x]`. El Cierre dice que todo lo de la ronda 1 quedó resuelto, y esto no lo está.
+- La segunda ronda que cita `parcela.md:150` todavía no existe.
+- M3 sigue sin diff.
+- ProblemDetails en Production, para errores de enlace, no está medido.
+- No hay una guarda automática de REQ-06 sobre el host.
+- Falta la consola de la primera navegación del recorrido.
+- La documentación del riesgo de DELETE se promete a PAR-PTE-06 sin registro.
+
+VEREDICTO: refutado
+
+### Respuesta a la ronda 2
+
+Ver «## Cierre» de la parcela, punto «Auditoría»: lo corregido (estado, mutación con diff completo, ProblemDetails en Production, comandos de la escucha, consola declarada, trabajo de PAR-PTE-06 nombrado) y las observaciones aceptadas sin cambio. Lo que queda abierto está en `pendientes:` (LAZ-0001 a LAZ-0004).

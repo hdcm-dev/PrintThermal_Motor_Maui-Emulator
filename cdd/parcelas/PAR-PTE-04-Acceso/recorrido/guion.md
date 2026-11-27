@@ -51,7 +51,7 @@
 
 - 1440 px: `1440-vacio.png`, `1440-datos-llega-el-primero.png`, `1440-datos-dos-tickets.png`, `1440-datos-otro-ticket.png`, `1440-datos-confirmar-limpieza.png`, `1440-vacio-tras-limpiar.png` y `1440-error.png`.
 - 360 px: `360-vacio.png`, `360-datos.png`, `360-cargando.png`, `360-error-por-plazo.png` y `360-error.png`.
-- `consola.txt`: la consola de cada navegación, sin errores ni avisos.
+- `consola.txt`: la consola de cada navegación desde la recarga del paso 4, sin errores ni avisos. La consola de la primera navegación (pasos 1 a 3) no se guardó antes de recargar. Muestra la misma página y el mismo servidor, pero no queda registrada.
 - Este es el tercer recorrido. Los dos anteriores se descartaron:
   - el primero, por un 404 de `/favicon.ico` en la consola y por el rótulo «Consultando el estado…» visible en el estado de error;
   - el segundo, porque tras un error en el prerenderizado el circuito volvía a «cargando» (error → cargando, medido con el mismo observador).

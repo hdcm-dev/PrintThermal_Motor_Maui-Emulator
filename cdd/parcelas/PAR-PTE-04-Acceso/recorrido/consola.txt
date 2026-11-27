@@ -1,8 +1,8 @@
 # Consola del navegador · recorrido final de PAR-PTE-04 (2026-11-27, 15:29 a 15:34 UTC)
 # Chrome 157 (contenedor del navegador de juicio), por chrome-devtools-mcp (list_console_messages).
 # Literal salvo la dirección del servidor, reemplazada por <emulador> (puerto 18604: con fuente simulada; 18605: API en un
-# puerto cerrado; 18606: API inalcanzable). Los msgid no son correlativos entre bloques porque el navegador es compartido:
-# los números intermedios son de otras pestañas, no de esta.
+# puerto cerrado; 18606: API inalcanzable). La consola de la primera navegación (pasos 1 a 3 del guion) no se guardó antes
+# de la recarga del paso 4; este archivo empieza en esa recarga.
 
 ## 18604 · 1440 px · carga, llegada de tickets, recarga, elegir, descargar, limpiar (navegación de 15:30:53)
 msgid=222 [info] [2026-11-27T15:30:53.672Z] Information: Normalizing '_blazor' to 'http://<emulador>:18604/_blazor'. (1 args)

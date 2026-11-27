@@ -1,5 +1,6 @@
-# Escucha del host publicado (2026-11-27), código final: sin ASPNETCORE_HTTP_PORTS ni ASPNETCORE_URLS, el host escucha sólo en 127.0.0.1:5080 (REQ-06 en el host, no sólo en el ayudante); la imagen base trae ASPNETCORE_HTTP_PORTS=8080 (LAZ-0003)
+# Escucha del host publicado (2026-11-27), código final: sin ASPNETCORE_HTTP_PORTS ni ASPNETCORE_URLS, el host escucha sólo en 127.0.0.1:5080 (REQ-06 medido en el host); la imagen base trae ASPNETCORE_HTTP_PORTS=8080 (LAZ-0003)
 # Contenedor mcr.microsoft.com/dotnet/sdk:10.0.403 con turno en el equipo de cómputo, 2 CPU / 4 GB.
+Comandos: dotnet publish src/PrintThermal.Emulator.Api -c Release -o /app; cd /app; env -u ASPNETCORE_HTTP_PORTS -u ASPNETCORE_URLS dotnet PrintThermal.Emulator.Api.dll; curl http://127.0.0.1:5080/api/estado; curl --max-time 3 http://$(hostname -i):5080/api/estado
 ASPNETCORE_HTTP_PORTS de la imagen: 8080
       Now listening on: http://127.0.0.1:5080
       Hosting environment: Production
