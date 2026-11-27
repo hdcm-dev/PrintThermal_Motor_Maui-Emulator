@@ -63,13 +63,26 @@ public class InterpreteTests
     [InlineData(100_000)]
     public void ElTroceoNoCambiaElResultado(int trozo)
     {
-        foreach (var vector in Nombres)
+        // Los vectores de la librería y un flujo propio con las cargas que se miden por longitud y que la librería no
+        // usa en sus vectores: ESC D, DLE DC4, GS ( L, GS 8 L y FS q, cada uno seguido de texto.
+        var cargas = B(0x1B, 0x40, 0x1B, 0x44, 0x08, 0x10, 0x00, "a", 0x0A,
+            0x10, 0x14, 0x01, 0x00, 0x01, "b", 0x0A,
+            0x1D, 0x28, 0x4C, 0x04, 0x00, 0x30, 0x42, 0x41, 0x42, "c", 0x0A,
+            0x1D, 0x38, 0x4C, 0x03, 0x00, 0x00, 0x00, 0x30, 0x0A, 0x0A, "d", 0x0A,
+            0x1C, 0x71, 0x01, 0x01, 0x00, 0x01, 0x00, Enumerable.Repeat((byte)0x0A, 8).ToArray(), "e", 0x0A,
+            0x1D, 0x56, 0x01);
+        var flujos = Nombres.Select(v => (v, Dorados.Leer(v + ".bin"))).Append(("cargas", cargas));
+        foreach (var (nombre, bytes) in flujos)
         {
-            var bytes = Dorados.Leer(vector + ".bin");
             var entero = Assert.Single(Interpretar(bytes, bytes.Length));
             var troceado = Assert.Single(Interpretar(bytes, trozo));
-            Assert.True(Imagen.DePng(entero.Png).Negro.SequenceEqual(Imagen.DePng(troceado.Png).Negro), vector);
+            Assert.True(Imagen.DePng(entero.Png).Negro.SequenceEqual(Imagen.DePng(troceado.Png).Negro), nombre);
+            Assert.Equal(entero.Bytes, troceado.Bytes);
+            Assert.Equal(entero.Avisos, troceado.Avisos);
         }
+        // En el flujo propio, cada carga se consumió entera: no quedó ningún 0x0A de carga dibujado como salto extra.
+        var unaLinea = Imagen.DePng(Assert.Single(Interpretar(B(0x1B, 0x40, "a", 0x0A, "b", 0x0A, "c", 0x0A, "d", 0x0A, "e", 0x0A, 0x1D, 0x56, 0x01))).Png);
+        Assert.Equal(unaLinea.Negro, Imagen.DePng(Assert.Single(Interpretar(cargas, trozo)).Png).Negro);
     }
 
     [Theory]
@@ -190,8 +203,44 @@ public class InterpreteTests
 
         var ticket = Assert.Single(Interpretar(bytes));
 
-        Assert.Equal(new PerfilDeImpresora().AltoMaximo, ticket.Alto);
+        var perfil = new PerfilDeImpresora();
+        Assert.Equal(perfil.AltoMaximo, ticket.Alto);
         Assert.Single(ticket.Avisos, a => a.Contains("alto máximo"));
+        // «Fin» cae después del tope: no se dibuja, ni encima del margen inferior.
+        Assert.Equal(0, Imagen.DePng(ticket.Png).PuntosNegros);
+    }
+
+    [Fact]
+    public void LaNegritaUsaOtraFuente()
+    {
+        bool[] Png(int negrita) => Imagen.DePng(Assert.Single(Interpretar(B(0x1B, 0x40, 0x1B, 0x45, negrita, "Acta", 0x0A, 0x1D, 0x56, 0x01))).Png).Negro;
+
+        Assert.True(Png(1).Count(n => n) > Png(0).Count(n => n));
+    }
+
+    [Fact]
+    public void LosAvisosDeUnTicketTienenTope()
+    {
+        var bytes = B(0x1B, 0x40, Enumerable.Repeat((byte)0x01, 1000).ToArray(), "x", 0x0A, 0x1D, 0x56, 0x01);
+        var todos = new List<string>();
+        var tickets = new List<TicketInterpretado>();
+        var interprete = new Interprete();
+        interprete.Aviso += todos.Add;
+        interprete.TicketTerminado += tickets.Add;
+        interprete.Alimentar(bytes);
+
+        var ticket = Assert.Single(tickets);
+        Assert.Equal(1000, todos.Count);
+        Assert.Equal(201, ticket.Avisos.Count);
+        Assert.Contains("800 avisos más", ticket.Avisos[^1]);
+    }
+
+    [Fact]
+    public void LaLicenciaDeLaFuenteViajaConLoCompilado()
+    {
+        var ruta = Path.Combine(AppContext.BaseDirectory, "Licencias", "TerminusFont-OFL.txt");
+        Assert.True(File.Exists(ruta), ruta);
+        Assert.Contains("SIL OPEN FONT LICENSE Version 1.1", File.ReadAllText(ruta));
     }
 
     [Fact]
@@ -288,10 +337,13 @@ public class InterpreteTests
         // GS v 0 de 65535 x 65535 bytes: no se espera esa carga; el resto del ticket se interpreta.
         var bytes = B(0x1B, 0x40, 0x1D, 0x76, 0x30, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, "Texto", 0x0A, 0x1D, 0x56, 0x01);
 
+        // Referencia: sólo se descarta «1D 76»; el resto de la cabecera se interpreta como datos, igual que sin él.
+        var referencia = B(0x1B, 0x40, 0x30, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, "Texto", 0x0A, 0x1D, 0x56, 0x01);
+
         var ticket = Assert.Single(Interpretar(bytes));
 
         Assert.Contains(ticket.Avisos, a => a.Contains("desmesurada"));
-        Assert.True(Imagen.DePng(ticket.Png).PuntosNegros > 0);
+        Assert.Equal(Imagen.DePng(Assert.Single(Interpretar(referencia)).Png).Negro, Imagen.DePng(ticket.Png).Negro);
     }
 
     [Fact]

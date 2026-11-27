@@ -22,6 +22,12 @@ public sealed class Interprete
     /// <summary>Tope de la carga de un comando (GS v 0 de 384 x 65535 puntos ocupa 3 MiB): más que esto se descarta.</summary>
     private const long CargaMaxima = 4L << 20;
 
+    /// <summary>Avisos que guarda un ticket; los siguientes se cuentan en un último aviso (el evento <see cref="Aviso"/> los emite todos).</summary>
+    private const int AvisosMaximos = 200;
+
+    /// <summary>Bytes de un ticket: al superarlos se cierra con aviso (un flujo sin fin no agota la memoria).</summary>
+    private const long BytesMaximos = 32L << 20;
+
     private readonly PerfilDeImpresora _perfil;
     private byte[] _pendiente = new byte[1024];
     private int _inicio;
@@ -34,6 +40,7 @@ public sealed class Interprete
     private int _y;
     private bool _contenido;
     private bool _altoAgotado;
+    private int _avisosOmitidos;
 
     // Estado de la impresora.
     private Alineacion _alineacion;
@@ -52,7 +59,7 @@ public sealed class Interprete
     public Interprete(PerfilDeImpresora? perfil = null)
     {
         _perfil = perfil ?? new PerfilDeImpresora();
-        _lienzo = new Lienzo(_perfil.AnchoPuntos, _perfil.AltoMaximo);
+        _lienzo = new Lienzo(_perfil.AnchoPuntos, _perfil.AltoMaximo, _perfil.AltoMaximo - _perfil.Margen);
         Reiniciar();
     }
 
@@ -151,7 +158,8 @@ public sealed class Interprete
         {
             0x40 or 0x32 => 2,
             0x61 or 0x21 or 0x45 or 0x47 or 0x2D or 0x74 or 0x64 or 0x4A or 0x33 or 0x4D => 3,
-            0x20 or 0x52 or 0x7B or 0x56 or 0x3D or 0x25 or 0x55 => 3,
+            0x20 or 0x52 or 0x7B or 0x56 or 0x3D or 0x25 or 0x55 or 0x3F or 0x72 or 0x54 => 3,
+            0x57 => 10,
             0x63 or 0x24 or 0x5C => 4,
             0x70 => 5,
             0x2A => b.Length < 5 ? 0 : 5 + (b[3] | b[4] << 8) * (b[2] <= 1 ? 1 : 3),
@@ -216,7 +224,7 @@ public sealed class Interprete
                 Configura(cmd);
                 if ((cmd[2] & 1) == 1) Avisar("ESC M: fuente B no disponible, se dibuja con la fuente A");
                 break;
-            case 0x20 or 0x52 or 0x7B or 0x56 or 0x3D or 0x25 or 0x55 or 0x63 or 0x24 or 0x5C or 0x70 or 0x2A or 0x44:
+            case 0x20 or 0x52 or 0x7B or 0x56 or 0x3D or 0x25 or 0x55 or 0x3F or 0x72 or 0x54 or 0x57 or 0x63 or 0x24 or 0x5C or 0x70 or 0x2A or 0x44:
                 Configura(cmd);
                 Avisar($"comando ignorado {Hex(cmd[..2])} en el byte {Posicion(largo)}");
                 break;
@@ -264,10 +272,10 @@ public sealed class Interprete
                 if (b.Length < 4) return 0;
                 largo = 4 + b[2] * b[3] * 8;
                 break;
-            case 0x68 or 0x77 or 0x48 or 0x66 or 0x21 or 0x42 or 0x49 or 0x61 or 0x72 or 0x2F:
+            case 0x68 or 0x77 or 0x48 or 0x66 or 0x21 or 0x42 or 0x49 or 0x61 or 0x72 or 0x2F or 0x62:
                 largo = 3;
                 break;
-            case 0x4C or 0x57 or 0x50:
+            case 0x4C or 0x57 or 0x50 or 0x5C or 0x24:
                 largo = 4;
                 break;
             default:
@@ -316,7 +324,7 @@ public sealed class Interprete
                 Consulta(cmd);
                 Avisar($"comando ignorado {Hex(cmd[..2])}: estado automático o consulta sin respuesta configurada");
                 break;
-            case 0x38 or 0x2A or 0x66 or 0x42 or 0x2F or 0x4C or 0x57 or 0x50:
+            case 0x38 or 0x2A or 0x66 or 0x42 or 0x2F or 0x4C or 0x57 or 0x50 or 0x62 or 0x5C or 0x24:
                 Configura(cmd);
                 Avisar($"comando ignorado {Hex(cmd[..2])} en el byte {Posicion(largo)}");
                 break;
@@ -442,17 +450,19 @@ public sealed class Interprete
     {
         _bytes = new MemoryStream();
         _avisos = [];
-        _lienzo = new Lienzo(_perfil.AnchoPuntos, _perfil.AltoMaximo);
+        _lienzo = new Lienzo(_perfil.AnchoPuntos, _perfil.AltoMaximo, _perfil.AltoMaximo - _perfil.Margen);
         _y = _perfil.Margen;
         _lienzo.Asegurar(_y);
         _contenido = false;
         _altoAgotado = false;
+        _avisosOmitidos = 0;
     }
 
     private void CerrarTicket()
     {
         ImprimirLinea(avanzarSiVacia: false);
         _lienzo.Asegurar(Math.Max(_y, _lienzo.Alto) + _perfil.Margen);
+        if (_avisosOmitidos > 0) _avisos.Add($"{_avisosOmitidos} avisos más no se guardaron en el ticket");
         var ticket = new TicketInterpretado(_bytes!.ToArray(), _lienzo.APng(), _lienzo.Ancho, _lienzo.Alto, _avisos);
         _bytes = null;
         TicketTerminado?.Invoke(ticket);
@@ -463,6 +473,11 @@ public sealed class Interprete
     {
         if (_bytes is null) AbrirTicket();
         _bytes!.Write(cmd);
+        if (_bytes.Length > BytesMaximos)
+        {
+            Avisar($"el ticket superó {BytesMaximos} bytes: se cierra acá");
+            CerrarTicket();
+        }
     }
 
     /// <summary>Bytes de un comando que cambia el estado: forma parte del ticket, abriéndolo si hace falta.</summary>
@@ -475,7 +490,11 @@ public sealed class Interprete
 
     private void Avisar(string mensaje)
     {
-        if (_bytes is not null) _avisos.Add(mensaje);
+        if (_bytes is not null)
+        {
+            if (_avisos.Count < AvisosMaximos) _avisos.Add(mensaje);
+            else _avisosOmitidos++;
+        }
         Aviso?.Invoke(mensaje);
     }
 
@@ -695,6 +714,7 @@ public sealed class Interprete
         ImprimirLinea(avanzarSiVacia: false);
         var modulos = CodigoEan13.Modulos(trece);
         int ancho = modulos.Length * _anchoModulo;
+        if (ancho > _lienzo.Ancho) Avisar($"código de barras de {ancho} puntos: se recorta a {_lienzo.Ancho}");
         int x0 = Origen(Math.Min(ancho, _lienzo.Ancho));
         _lienzo.Asegurar(_y + _altoBarras);
         for (int i = 0; i < modulos.Length; i++)

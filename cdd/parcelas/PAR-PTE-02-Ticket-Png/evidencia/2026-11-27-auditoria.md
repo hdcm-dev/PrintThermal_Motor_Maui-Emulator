@@ -6,10 +6,12 @@ auditor: agente auditor Claude Opus 5.5 (Claude Code sin interfaz, `claude -p`),
 
 1. [Informe del auditor](#1-informe-del-auditor)
 2. [Qué se hizo con cada hallazgo](#2-qué-se-hizo-con-cada-hallazgo)
+3. [Segunda ronda](#3-segunda-ronda)
+4. [Qué se hizo en la segunda ronda](#4-qué-se-hizo-en-la-segunda-ronda)
 
 ## 1. Informe del auditor
 
-Texto tal como lo devolvió, sobre la cabeza `8d7ce53` más cambios sin commitear (el tope de carga, que se estaba escribiendo durante la auditoría):
+Texto tal como lo devolvió, sobre la cabeza `8d7ce53` (tras el rebase sobre `af03a45`, el mismo árbol es `81b212c`) más cambios sin commitear (el tope de carga, que se estaba escribiendo durante la auditoría):
 
 > Hay dos hallazgos graves: el cierre no se sostiene tal como está en el árbol.
 >
@@ -90,4 +92,80 @@ Texto tal como lo devolvió, sobre la cabeza `8d7ce53` más cambios sin commitea
 | 14 | Compactación O(n²) | El búfer pendiente lleva un inicio y compacta sólo cuando falta lugar |
 | 15 | `\d` y `$` en la regex | `^[0-9]{8}T[0-9]{9}-[0-9]{4}\z`; prueba con un id terminado en `\n` |
 
-Tras las correcciones no se volvió a correr el auditor.
+## 3. Segunda ronda
+
+Mismo auditor, contexto nuevo, sobre la cabeza `e4a9316` (árbol limpio). Texto tal como lo devolvió:
+
+> **Auditoría del cierre de PAR-PTE-02, segunda ronda** (cabeza `e4a9316`, árbol limpio)
+>
+> Las 15 correcciones de la primera ronda están en el código. Pero hay una prueba que no puede fallar, una afirmación de `## Cierre` que es falsa y pendientes sin registrar.
+>
+> ### Graves
+>
+> 1. **`## Cierre` afirma una verificación que no existe** (`parcela.md:97`, `auditoria.md:82`).
+>    - `DosInstanciasEnElMismoMilisegundoNoSePisan` (`AlmacenTests.cs:76-86`) nunca provoca una colisión. Cada instancia toma `_secuencia` de forma perezosa en el primer `Guardar` (`AlmacenDeTickets.cs:39-40`), cuando el archivo de la anterior ya está escrito, así que sale 1, 2, 3 sin chocar. Un mutante con `overwrite: true` y sin reintento pasaría. La corrección #6 se da por probada con una prueba vacía. Para chocar haría falta intercalar: A guarda, B guarda, A guarda en el mismo milisegundo.
+>    - «Ocho mutantes… incluidas las agregadas tras la auditoría» es falso:
+>      - `EscTCambiaLaTablaDeCaracteres`, `ElEan13DelTicketSeDibujaConSusModulos`, `DosInstancias…` y `UnArchivoConFormaDeIdPeroFechaImposible…` no tienen ni rojo ni mutante.
+>      - M2 sólo pone en rojo `1D 99` (`mutacion.txt:12-13`). Los casos ESC, FS y DLE de la prueba de REQ-02 nunca estuvieron en rojo, y el rojo (`rojo.txt`) es de cuando esa prueba era un `Fact`.
+>
+> ### Menores
+>
+> 2. **Pendiente oculto: licencia OFL en la imagen** (`auditoria.md:83`). «Que la imagen lo incluya se verifica en PAR-PTE-05» sólo está en esa tabla. PAR-PTE-05 no lo menciona, no hay LAZ, y ninguna prueba ni evidencia muestra que `Licencias/TerminusFont-OFL.txt` llegue a la salida de `publish`. Es la misma figura que el hallazgo 2 de la primera ronda.
+> 3. **Regla de la especificación descartada sin rastro** (Especificacion §4.3, línea 127). Dice «responder GS I después de imprimir lo encolado; demora configurable». El emulador responde al instante (`Interprete.cs:312`) y `PerfilDeImpresora` no tiene esa demora. No figura en D6, ni en LAZ-0002, ni en PAR-PTE-03.
+> 4. **LAZ-0002 no es coherente con su propio criterio.** Deja afuera la falta de respuesta a GS ( L fn 48 y fn 64 (D6), a GS a/GS r y a GS I con n ≠ 67. Si la 58HB6 sí responde, la librería toma otro camino (NV, §2 y §4.2). Es exactamente el criterio que llevó GS I 67 a LAZ-0002.
+> 5. **La memoria sigue sin tope en un ticket sin fin** (`Interprete.cs:136-140, 476-480`).
+>    - El arreglo #5 sólo acotó el lienzo; `_bytes` y `_avisos` siguen sin límite.
+>    - Cada byte de control suelto genera un aviso de unos 100 bytes que queda en `_avisos` y se emite por `Aviso`: amplifica la entrada unas 100 veces.
+> 6. **El aviso del alto máximo no dice la verdad** (`Interprete.cs:514-521`, `Lienzo.cs:32`). Con `_y` clavado en `AltoMaximo − Margen`, cada línea o imagen posterior se dibuja encima del margen inferior (filas 19 992 a 19 999). La prueba no lo mira.
+> 7. **Si el almacén falla, se pierde el ticket** (`AlmacenDeTickets.cs:65`, `Interprete.cs:452-458`). Una `IOException` en `Guardar` (por ejemplo, carpeta montada sin permisos) sale por `Alimentar` hacia el transporte. El ticket se pierde (`_bytes` ya es null) y el corte se reprocesa como «corte suelto». No hay prueba, aviso ni LAZ.
+> 8. **La prueba de la carga desmesurada tiene un oráculo débil** (`InterpreteTests.cs:286-295`). Sólo consume `GS v`; el resto de la cabecera (`30 …`) se dibuja como el texto «0». Por eso `PuntosNegros > 0` se cumple aunque «Texto» se pierda. Debería compararse contra una referencia, como hace REQ-02.
+>
+> ### Notas
+>
+> 9. **REQ-01:**
+>    - El texto de 01, 02 y 07 (interlineado, negrita, márgenes) sólo tiene la revisión a ojo. Ninguna prueba distingue `Fuente.Negrita` de `Normal`.
+>    - Los oráculos de raster, QR, EAN-13 y ESC t son reales.
+>    - EAN-13 empieza en x=0 y el QR toca el texto, sin zonas de silencio; está declarado NO VERIFICADO.
+> 10. **REQ-04** (`InterpreteTests.cs:64-73`) compara sólo el PNG, no `Bytes`, avisos ni respuestas. Los vectores no ejercitan la medición incremental de FS q, GS ( L, GS 8 L, ESC D ni DLE DC4.
+> 11. **Comandos estándar que no están en la tabla de largos** (`Interprete.cs:159, 274`): ESC ?, ESC r, ESC T, ESC W, ESC &, GS b, GS \, GS $. Se consumen como 2 bytes y su parámetro se imprime como texto. La librería no los emite.
+> 12. **Inconsistencias chicas:**
+>     - Barras más anchas que 384 se recortan sin aviso (`Interprete.cs:697`), a diferencia de raster y QR.
+>     - Un ticket vacío con corte se guarda en blanco; con `Finalizar` se descarta.
+> 13. **Traza del audit:** `auditoria.md` audita `8d7ce53`, que no es ancestro de HEAD ni está en ninguna rama. Su árbol es igual al de `81b212c`; conviene citar ese.
+> 14. **Licencias:**
+>     - `CodigoQr.cs:6-16` dice «transcrito de QRCoder 1.8.0 (MIT)» sin el aviso MIT; es una tabla del estándar, riesgo bajo.
+>     - La OFL de Terminus Font es correcta y la fuente no se modifica.
+> 15. **Datos sensibles:** no hay IPs, MAC, credenciales ni nombres de equipos. `computerName` es el id de un contenedor. Que MotorDsl sea público sale de la primera ronda (afirma que la URL respondió 200 y que NuGet lista hasta 1.0.18); no lo volví a comprobar.
+>
+> ### Correcciones de la primera ronda que verifiqué como reales
+>
+> - #1: tope de carga y cálculo en `long`.
+> - #2: `Escuchar`, la prueba de punta a punta y LAZ-0001.
+> - #3: oráculos de raster, QR y EAN-13.
+> - #9, #10, #11 (GS r/GS a como consultas), #14 (búfer con inicio) y #15 (regex).
+>
+> La evidencia de 49 de 49 en verde coincide con las pruebas del árbol.
+>
+> VEREDICTO: refutado
+
+## 4. Qué se hizo en la segunda ronda
+
+| # | Hallazgo | Qué se hizo |
+|---|---|---|
+| 1 | La prueba de dos instancias no choca; mutantes que no cubren las pruebas nuevas | La prueba intercala las instancias: la segunda escritura de la primera choca con la de la otra y salta a la secuencia 3 (ids exactos). Mutación rehecha con 18 mutantes, uno por prueba de guarda, incluidos ESC, FS y DLE desconocidos (M03), dos instancias (M10), ESC t (M11), EAN-13 dibujado (M12) y fecha imposible (M13): todos en rojo |
+| 2 | La licencia en la imagen, sin registro | `LaLicenciaDeLaFuenteViajaConLoCompilado` prueba que llega a la salida de la compilación (mutante M18). La publicación de la imagen es trabajo de PAR-PTE-05 y se nombra en `## Cierre` |
+| 3 | Demora de GS I descartada sin rastro | En LAZ-0002: Core responde al interpretar; la demora, si hace falta, es del transporte |
+| 4 | LAZ-0002 incompleto | Suma GS ( L fn 48 y 64, GS a, GS r y GS I con n ≠ 67 |
+| 5 | Memoria sin tope en `_bytes` y `_avisos` | Tope de 200 avisos por ticket con un aviso de resumen (`LosAvisosDeUnTicketTienenTope`, M15) y de 32 MiB por ticket, que lo cierra con aviso |
+| 6 | El alto máximo dibujaba sobre el margen | El lienzo no dibuja desde `AltoMaximo − Margen`; la prueba exige el PNG en blanco después del tope (M16) |
+| 7 | Un error del almacén salía por `Alimentar` | `Escuchar` captura los errores de disco y los informa por `ErrorAlGuardar`; el intérprete sigue (`UnErrorDeDiscoNoTumbaAlInterprete`, M14) |
+| 8 | Oráculo débil de la carga desmesurada | Compara contra la referencia sin «1D 76» |
+| 9 | Negrita sin prueba | `LaNegritaUsaOtraFuente` (M17). El interlineado y los márgenes quedan con la revisión a ojo (supuestos sin medir) |
+| 10 | REQ-04 sólo compara el PNG | Compara también bytes y avisos, y suma un flujo con ESC D, DLE DC4, GS ( L, GS 8 L y FS q cortado en trozos |
+| 11 | Comandos estándar sin largo | ESC ?, ESC r, ESC T, ESC W, GS b, GS \\ y GS $ con su largo; ESC & sigue sin soporte (la librería no lo emite) |
+| 12 | Barras recortadas sin aviso; ticket vacío según cómo termina | Aviso al recortar barras. El ticket vacío con corte se guarda y sin corte se descarta: es D5 y queda escrito en `## Cierre` |
+| 13 | Auditoría sobre un commit que no quedó en la rama | Se cita `81b212c`, mismo árbol |
+| 14 | Aviso MIT de QRCoder | Copiado junto a la tabla en `CodigoQr.cs` desde `https://github.com/Shane32/QRCoder/blob/v1.8.0/LICENSE.txt` |
+| 15 | MotorDsl público sin volver a comprobar | Sin cambio: la comprobación está en §2, fila 8 |
+
+No se corrió una tercera ronda antes de este commit; si se corre, va en este archivo.

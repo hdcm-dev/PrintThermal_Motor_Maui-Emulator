@@ -39,7 +39,7 @@ public sealed class AlmacenTests : IDisposable
         // De punta a punta: el intérprete termina el ticket y el almacén lo guarda sin que nadie llame a Guardar.
         var almacen = new AlmacenDeTickets(_carpeta);
         var interprete = new Interprete();
-        using var _ = almacen.Escuchar(interprete);
+        using var suscripcion = almacen.Escuchar(interprete);
         TicketInterpretado? ticket = null;
         interprete.TicketTerminado += t => ticket = t;
         var bytes = Dorados.Leer("01-texto.bin");
@@ -75,14 +75,40 @@ public sealed class AlmacenTests : IDisposable
     [Fact]
     public void DosInstanciasEnElMismoMilisegundoNoSePisan()
     {
+        // Intercaladas: uno guarda (secuencia 1), el otro guarda (lee la carpeta: 2) y el primero vuelve con su secuencia
+        // propia, que también da 2 en el mismo milisegundo. Tiene que saltar a 3 sin pisar el ticket del otro.
         var reloj = new RelojFijo(new DateTimeOffset(2026, 11, 27, 12, 0, 0, TimeSpan.Zero));
-        var a = new AlmacenDeTickets(_carpeta, reloj).Guardar(Ticket("01-texto"));
-        var b = new AlmacenDeTickets(_carpeta, reloj).Guardar(Ticket("02-acentos"));
-        var c = new AlmacenDeTickets(_carpeta, reloj).Guardar(Ticket("03-imagen"));
+        var uno = new AlmacenDeTickets(_carpeta, reloj);
+        var otro = new AlmacenDeTickets(_carpeta, reloj);
+        var a = uno.Guardar(Ticket("01-texto"));
+        var b = otro.Guardar(Ticket("02-acentos"));
+        var c = uno.Guardar(Ticket("03-imagen"));
 
-        Assert.Equal(3, new[] { a.Id, b.Id, c.Id }.Distinct().Count());
-        Assert.Equal(Ticket("01-texto").Bytes, new AlmacenDeTickets(_carpeta).LeerBin(a.Id));
-        Assert.Equal(Ticket("02-acentos").Bytes, new AlmacenDeTickets(_carpeta).LeerBin(b.Id));
+        Assert.Equal(["20261127T120000000-0001", "20261127T120000000-0002", "20261127T120000000-0003"], new[] { a.Id, b.Id, c.Id });
+        Assert.Equal(Ticket("01-texto").Bytes, otro.LeerBin(a.Id));
+        Assert.Equal(Ticket("02-acentos").Bytes, otro.LeerBin(b.Id));
+        Assert.Equal(Ticket("03-imagen").Bytes, otro.LeerBin(c.Id));
+        Assert.Empty(Directory.EnumerateFiles(_carpeta, "*.tmp"));
+    }
+
+    [Fact]
+    public void UnErrorDeDiscoNoTumbaAlInterprete()
+    {
+        var almacen = new AlmacenDeTickets(_carpeta);
+        Directory.Delete(_carpeta);
+        File.WriteAllBytes(_carpeta, [0]); // la carpeta ahora es un archivo: toda escritura falla
+        var errores = new List<Exception>();
+        almacen.ErrorAlGuardar += (ticket, error) => errores.Add(error);
+        var interprete = new Interprete();
+        using var suscripcion = almacen.Escuchar(interprete);
+        var tickets = new List<TicketInterpretado>();
+        interprete.TicketTerminado += tickets.Add;
+
+        interprete.Alimentar(Dorados.Leer("01-texto.bin"));
+        interprete.Alimentar(Dorados.Leer("02-acentos.bin"));
+
+        Assert.Equal(2, tickets.Count);
+        Assert.Equal(2, errores.Count);
     }
 
     [Fact]

@@ -59,10 +59,26 @@ public sealed partial class AlmacenDeTickets
         }
     }
 
-    /// <summary>Guarda cada ticket que termine el intérprete (REQ-03: «cuando termina un ticket…»). Dispose deja de escuchar.</summary>
+    /// <summary>Un ticket que <see cref="Escuchar"/> no pudo guardar (carpeta sin permisos, disco lleno…), con la causa.</summary>
+    public event Action<TicketInterpretado, Exception>? ErrorAlGuardar;
+
+    /// <summary>
+    /// Guarda cada ticket que termine el intérprete (REQ-03: «cuando termina un ticket…»). Un error de disco no sale por
+    /// <see cref="Interprete.Alimentar"/>: se informa por <see cref="ErrorAlGuardar"/> y el intérprete sigue. Dispose deja de escuchar.
+    /// </summary>
     public IDisposable Escuchar(Interprete interprete)
     {
-        void AlTerminar(TicketInterpretado t) => Guardar(t);
+        void AlTerminar(TicketInterpretado t)
+        {
+            try
+            {
+                Guardar(t);
+            }
+            catch (Exception e) when (e is IOException or UnauthorizedAccessException)
+            {
+                ErrorAlGuardar?.Invoke(t, e);
+            }
+        }
         interprete.TicketTerminado += AlTerminar;
         return new Suscripcion(() => interprete.TicketTerminado -= AlTerminar);
     }

@@ -8,16 +8,20 @@ internal sealed class Lienzo
 {
     private readonly List<byte[]> _filas = [];
 
-    public Lienzo(int ancho, int altoMaximo)
+    public Lienzo(int ancho, int altoMaximo, int limiteDeDibujo)
     {
         Ancho = ancho;
         AltoMaximo = altoMaximo;
+        LimiteDeDibujo = Math.Min(limiteDeDibujo, altoMaximo);
     }
 
     public int Ancho { get; }
 
     /// <summary>Tope de filas: lo que cae más abajo no se dibuja (un flujo corrupto no agota la memoria).</summary>
     public int AltoMaximo { get; }
+
+    /// <summary>Primera fila donde ya no se dibuja (el margen inferior queda en blanco).</summary>
+    public int LimiteDeDibujo { get; }
 
     public int Alto => _filas.Count;
 
@@ -29,7 +33,7 @@ internal sealed class Lienzo
 
     public void Marcar(int x, int y)
     {
-        if (x < 0 || x >= Ancho || y < 0 || y >= AltoMaximo) return;
+        if (x < 0 || x >= Ancho || y < 0 || y >= LimiteDeDibujo) return;
         Asegurar(y + 1);
         _filas[y][x] = 1;
     }
