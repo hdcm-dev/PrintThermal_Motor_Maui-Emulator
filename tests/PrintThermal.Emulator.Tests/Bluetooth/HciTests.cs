@@ -4,7 +4,7 @@ using PrintThermal.Emulator.Bluetooth.Seguridad;
 
 namespace PrintThermal.Emulator.Tests.Bluetooth;
 
-/// <summary>Escenario no feliz de PAR-PTE-03: netsim no responde; el servicio lo informa en su estado y reintenta.</summary>
+/// <summary>PAR-PTE-03: escenario no feliz (netsim no responde: el servicio lo informa y reintenta) y señalización L2CAP.</summary>
 public class HciTests
 {
     [Fact]
@@ -45,6 +45,32 @@ public class HciTests
         cts.Cancel();
         await corrida.WaitAsync(TimeSpan.FromSeconds(5));
         Assert.Equal(EstadoPeriferico.Detenido, s.Estado);
+    }
+
+    [Fact]
+    public async Task UnaOpcionL2capDesconocidaQueNoEsSugerenciaSeRechaza()
+    {
+        var c = new ControladorFalso();
+        var p = new PerifericoBluetooth(c, new OpcionesPeriferico(), new ReceptorEnMemoria(), new AlmacenDeClavesEnMemoria());
+        var corrida = p.EjecutarAsync();
+        await p.Anunciando.WaitAsync(TimeSpan.FromSeconds(5));
+        var android = new AndroidSimulado(c);
+        await android.ConectarAclAsync();
+
+        android.Senal(0x02, 0x01, 0x01, 0x00, 0x41, 0x00); // Connection Request al PSM 1 (SDP) desde el CID 0x0041
+        var respuesta = await c.SiguienteL2capAsync();
+        Assert.Equal(0x03, respuesta[4]);
+        var cidHost = (ushort)(respuesta[8] | (respuesta[9] << 8));
+        Assert.Equal(0x04, (await c.SiguienteL2capAsync())[4]); // el host pide su configuración
+
+        // Configuration Request con una opción 0x20 (desconocida, sin el bit de sugerencia) y otra 0xA0 (sugerencia).
+        android.Senal(0x04, 0x02, (byte)cidHost, (byte)(cidHost >> 8), 0, 0, 0x20, 0x01, 0x00, 0xA0, 0x01, 0x00);
+        var r = await c.SiguienteL2capAsync();
+        Assert.Equal(0x05, r[4]);
+        Assert.Equal(new byte[] { 0x41, 0x00, 0x00, 0x00, 0x03, 0x00, 0x20 }, r[8..]); // resultado 0x0003 con la opción 0x20
+
+        c.Cortar();
+        await corrida.WaitAsync(TimeSpan.FromSeconds(5));
     }
 
     private static async Task Esperar(Func<bool> condicion)

@@ -28,7 +28,7 @@ Los bytes que la app envía por RFCOMM llegan al emulador sin cambios y se entre
 ## 3. Trazas
 
 - Sube de: REQ-EPI-Medio-Emulado
-- Implementado en: `src/PrintThermal.Emulator.Bluetooth/Rfcomm/` (PAR-PTE-03): la entrega va por `IReceptorDeBytes`, que el host del servicio conecta con el almacén de tickets.
+- Implementado en: `src/PrintThermal.Emulator.Bluetooth/Rfcomm/` (PAR-PTE-03): la entrega va por `IReceptorDeBytes`; la conexión con el almacén de tickets todavía no tiene parcela (LAZ-0006).
 
 ## 4. Historial
 

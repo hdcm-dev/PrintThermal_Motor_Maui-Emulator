@@ -62,10 +62,11 @@ public sealed class ServidorSdp
         var patron = ElementoSdp.Leer(p, ref pos);
         var maximo = LeerU16(p, ref pos);
         LeerContinuacion(p, ref pos); // la lista de handles entra siempre en una sola respuesta
-        var handles = Coincidentes(patron).Take(Math.Min(maximo, Math.Max(0, (mtu - 10) / 4))).ToList();
+        var todos = Coincidentes(patron).ToList();
+        var handles = todos.Take(Math.Min(maximo, Math.Max(0, (mtu - 10) / 4))).ToList();
         var r = new List<byte>();
-        AgregarU16(r, (ushort)handles.Count);
-        AgregarU16(r, (ushort)handles.Count);
+        AgregarU16(r, (ushort)Math.Min(todos.Count, (int)maximo)); // TotalServiceRecordCount
+        AgregarU16(r, (ushort)handles.Count); // CurrentServiceRecordCount
         foreach (var h in handles)
         {
             r.AddRange([(byte)(h >> 24), (byte)(h >> 16), (byte)(h >> 8), (byte)h]);
@@ -112,6 +113,10 @@ public sealed class ServidorSdp
         if (desde > completo.Length)
         {
             throw new ErrorSdpException(0x0005);
+        }
+        if (maximo < 7)
+        {
+            throw new ErrorSdpException(0x0003); // MaximumAttributeByteCount mínimo: 0x0007
         }
         // Cabecera 5 + cuenta 2 + continuación de hasta 3 bytes.
         var tope = Math.Min(maximo, mtu - 10);

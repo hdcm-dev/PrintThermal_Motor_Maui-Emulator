@@ -59,6 +59,18 @@ public class SdpTests
         return [];
     }
 
+    private static void Contiene(byte[] donde, byte[] que)
+    {
+        for (var i = 0; i + que.Length <= donde.Length; i++)
+        {
+            if (donde.AsSpan(i, que.Length).SequenceEqual(que))
+            {
+                return;
+            }
+        }
+        Assert.Fail($"no aparece {Convert.ToHexString(que)} en {Convert.ToHexString(donde)}");
+    }
+
     private static ElementoSdp Atributo(ElementoSdp registro, ushort id)
     {
         Assert.Equal(TipoElementoSdp.Secuencia, registro.Tipo);
@@ -77,7 +89,15 @@ public class SdpTests
     [Fact]
     public void ElRegistroSdpPublicaSppConNombre58HB6()
     {
-        var listas = ElementoSdp.Decodificar(BuscarTodo(ServidorConSpp(), [0x1C, .. Spp128], 0xFFFF, 672));
+        var crudo = BuscarTodo(ServidorConSpp(), [0x1C, .. Spp128], 0xFFFF, 672);
+
+        // Bytes esperados escritos a mano (sin el codificador de producción): id de atributo (uint16) y valor.
+        Contiene(crudo, [0x09, 0x00, 0x01, 0x35, 0x03, 0x19, 0x11, 0x01]); // ServiceClassIDList = {UUID16 0x1101}
+        Contiene(crudo, [0x09, 0x00, 0x04, 0x35, 0x0C, 0x35, 0x03, 0x19, 0x01, 0x00, 0x35, 0x05, 0x19, 0x00, 0x03, 0x08, 0x01]); // {{L2CAP}, {RFCOMM, 1}}
+        Contiene(crudo, [0x09, 0x01, 0x00, 0x25, 0x05, (byte)'5', (byte)'8', (byte)'H', (byte)'B', (byte)'6']); // ServiceName
+        Assert.Equal(0x35, crudo[0]); // lista de registros: secuencia
+
+        var listas = ElementoSdp.Decodificar(crudo);
         var registro = Assert.Single(listas.Hijos);
 
         var ids = registro.Hijos.Where((_, i) => i % 2 == 0).Select(e => (ushort)e.Valor).ToList();

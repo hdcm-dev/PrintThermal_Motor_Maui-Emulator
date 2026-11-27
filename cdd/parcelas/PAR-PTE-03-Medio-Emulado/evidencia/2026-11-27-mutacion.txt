@@ -19,3 +19,27 @@
 ## M4 REQ-03: no se reponen créditos RFCOMM (src/PrintThermal.Emulator.Bluetooth/Rfcomm/SesionRfcomm.cs: s/if (d.CreditosDados <= creditosIniciales \/ 2)/if (d.CreditosDados <= -1000)/)
      Failed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.LosBytesLleganIntegros [5 s]
    Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 5 s - PrintThermal.Emulator.Tests.dll (net10.0)
+
+# Mutaciones extra (turno 257) para las pruebas que no estuvieron en el rojo inicial: el transporte gRPC (HciNetsimTests, escritas
+# con la implementación), el reintento y la desconexión a mitad de ticket. M1 se repitió como control. Todas en rojo.
+## M1 REQ-01: SDP publica 0x1102 en vez de 0x1101 (src/PrintThermal.Emulator.Bluetooth/Sdp/ServidorSdp.cs: s/public const ushort PerfilPuertoSerie = 0x1101;/public const ushort PerfilPuertoSerie = 0x1102;/)
+     Failed PrintThermal.Emulator.Tests.Bluetooth.SdpTests.ElRegistroSdpPublicaSppConNombre58HB6 [77 ms]
+   Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 85 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+## M7 transporte: sin el encabezado te: trailers (src/PrintThermal.Emulator.Bluetooth/Hci/Netsim/TransporteNetsim.cs: s/pedido.Headers.TE.ParseAdd("trailers");/{ }/)
+     Failed PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests.ElTransporteHablaGrpcSobreHttp2ConNetsim [2 s]
+   Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 2 s - PrintThermal.Emulator.Tests.dll (net10.0)
+## M8 transporte: el chip se registra sin la dirección (src/PrintThermal.Emulator.Bluetooth/Hci/Netsim/MensajesNetsim.cs: s/.Cadena(9, direccion.ComoNetsim())//)
+     Failed PrintThermal.Emulator.Tests.Bluetooth.SeguridadTests.LaDireccionFijaViajaANetsimEnOrdenInvertido [65 ms]
+   Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 78 ms - PrintThermal.Emulator.Tests.dll (net10.0)
+## M9 servicio: no reintenta después de una falla (src/PrintThermal.Emulator.Bluetooth/Hci/ServicioPeriferico.cs: s/Fallo(e.Message);/Fallo(e.Message); break;/)
+     Failed PrintThermal.Emulator.Tests.Bluetooth.HciTests.SiNetsimNoRespondeElServicioLoInformaYReintenta [5 s]
+     Failed PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests.SinNetsimEscuchandoElServicioQuedaEnErrorYReintenta [20 s]
+   Failed!  - Failed:     2, Passed:     0, Skipped:     0, Total:     2, Duration: 20 s - PrintThermal.Emulator.Tests.dll (net10.0)
+## M10 borde: la desconexión ACL no cierra los canales (src/PrintThermal.Emulator.Bluetooth/Hci/PerifericoBluetooth.cs: s/c.L2cap.Cerrar();\n                }\n                _host.OlvidarConexion(h);/X/;s/                    c.L2cap.Cerrar();$/                    _ = c;/)
+     Failed PrintThermal.Emulator.Tests.Bluetooth.RfcommTests.UnaDesconexionAMitadDelTicketCierraLaConexionConLoRecibido [5 s]
+   Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 5 s - PrintThermal.Emulator.Tests.dll (net10.0)
+
+# M11 (turno 263): la prueba que impide volver a mandar pings de HTTP/2 (hallazgo h8 de la mesa).
+## M11 transporte: vuelve el ping de HTTP/2 cada 30 s (src/PrintThermal.Emulator.Bluetooth/Hci/Netsim/TransporteNetsim.cs: s/KeepAlivePingDelay = Timeout.InfiniteTimeSpan,/KeepAlivePingDelay = TimeSpan.FromSeconds(30),/)
+     Failed PrintThermal.Emulator.Tests.Bluetooth.HciNetsimTests.ElTransporteNoMandaPingsDeHttp2 [45 ms]
+   Failed!  - Failed:     1, Passed:     0, Skipped:     0, Total:     1, Duration: 57 ms - PrintThermal.Emulator.Tests.dll (net10.0)

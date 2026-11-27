@@ -108,6 +108,14 @@ public class HciNetsimTests
     }
 
     [Fact]
+    public void ElTransporteNoMandaPingsDeHttp2()
+    {
+        // netsim corta el flujo si recibe pings sin datos (prueba real, «Too many pings»).
+        using var manejador = TransporteNetsim.CrearManejador();
+        Assert.Equal(Timeout.InfiniteTimeSpan, manejador.KeepAlivePingDelay);
+    }
+
+    [Fact]
     public async Task SinNetsimEscuchandoElServicioQuedaEnErrorYReintenta()
     {
         // Un puerto local sin nadie escuchando.

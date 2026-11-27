@@ -174,6 +174,7 @@ internal sealed class MultiplexorL2cap(DireccionBluetooth par, ushort mtuLocal, 
         }
         var resultado = (ushort)0;
         var opcionesRespuesta = new List<byte>();
+        var desconocidas = new List<byte>();
         for (var o = 4; o + 2 <= d.Length && o + 2 + d[o + 1] <= d.Length; o += 2 + d[o + 1])
         {
             var tipo = d[o] & 0x7F;
@@ -188,6 +189,16 @@ internal sealed class MultiplexorL2cap(DireccionBluetooth par, ushort mtuLocal, 
                 resultado = 0x0001;
                 opcionesRespuesta.AddRange([0x04, 0x09, 0x00, 0, 0, 0, 0, 0, 0, 0, 0]);
             }
+            else if (tipo > 0x07 && (d[o] & 0x80) == 0)
+            {
+                // Opción desconocida que no es sugerencia: se rechaza con «unknown options» y su tipo.
+                desconocidas.Add(d[o]);
+            }
+        }
+        if (desconocidas.Count > 0)
+        {
+            resultado = 0x0003;
+            opcionesRespuesta = [.. desconocidas];
         }
         Senal(0x05, id, [(byte)canal.CidRemoto, (byte)(canal.CidRemoto >> 8), (byte)(banderas & 1), 0,
             (byte)resultado, (byte)(resultado >> 8), .. opcionesRespuesta]);

@@ -23,12 +23,7 @@ public sealed class TransporteNetsim : ITransporteHci
 
     private TransporteNetsim(Uri servidor, DireccionBluetooth direccion, string nombre)
     {
-        // Sin pings de HTTP/2: netsim corta el flujo con «grpc-status 14: Too many pings» si se le manda uno cada
-        // 30 s sin datos (visto en la prueba real del 2026-11-27).
-        _http = new HttpClient(new SocketsHttpHandler
-        {
-            ConnectTimeout = TimeSpan.FromSeconds(5),
-        })
+        _http = new HttpClient(CrearManejador())
         {
             Timeout = Timeout.InfiniteTimeSpan,
         };
@@ -44,6 +39,16 @@ public sealed class TransporteNetsim : ITransporteHci
         // No se espera a los encabezados de la respuesta: netsim puede no mandarlos hasta tener un paquete.
         _respuesta = _http.SendAsync(pedido, HttpCompletionOption.ResponseHeadersRead, _cierre.Token);
     }
+
+    /// <summary>
+    /// Manejador HTTP del transporte. Sin pings de HTTP/2: netsim corta el flujo con «grpc-status 14: Too many pings»
+    /// («ENHANCE_YOUR_CALM») si se le manda uno cada 30 s sin datos (prueba real del 2026-11-27).
+    /// </summary>
+    public static SocketsHttpHandler CrearManejador() => new()
+    {
+        ConnectTimeout = TimeSpan.FromSeconds(5),
+        KeepAlivePingDelay = Timeout.InfiniteTimeSpan,
+    };
 
     /// <summary>Abre el flujo con netsim (por ejemplo <c>http://127.0.0.1:8554</c>) y registra el chip.</summary>
     public static TransporteNetsim Conectar(Uri servidor, DireccionBluetooth direccion, string nombre) => new(servidor, direccion, nombre);

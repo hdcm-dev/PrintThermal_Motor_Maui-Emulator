@@ -8,6 +8,12 @@ la librería cliente). Emulador: Android 17, API 37, `emulator` 37.2.12 con nets
 2 vCPU / 6 GB. Direcciones: las del periférico (04:00:00:00:00:0X) son las fijas que se le pasan al emulador de impresora
 (sintéticas); la de Android va enmascarada como la muestra el propio Android.
 
+Código medido: el de `src/PrintThermal.Emulator.Bluetooth/` del commit 2cec4b8 de la rama (el binario se compiló de
+ese árbol). Cambios posteriores, por el auditor y la mesa, que la prueba real no recorrió: L2CAP rechaza opciones de
+configuración desconocidas que no son sugerencia (Android mandó sólo MTU); SDP corrige TotalServiceRecordCount y el
+mínimo de MaximumAttributeByteCount en ServiceSearch/ServiceAttribute (Android usó ServiceSearchAttribute con máximos
+grandes); el transporte declara explícito el ping de HTTP/2 desactivado, que ya era el valor del binario medido.
+
 ## 1. Red: el periférico no llega a netsim desde el equipo de cómputo (desvío)
 
 netsim publica su gRPC sólo en loopback dentro del contenedor del emulador (`/tmp/netsim.ini`: `grpc.port=37397`,
@@ -68,6 +74,14 @@ Diálogo: «Pair with 58HB6?» (variante 3, consentimiento). Lado del emulador d
         [BR/EDR UUIDs]: 00001101-0000-1000-8000-00805f9b34fb
 
 ## 4. Recepción íntegra (CE-3): SHA-256 igual, 5 de 5 (64 KB aleatorios) y 5 de 5 (ticket de 4104 B)
+
+Antes de la serie hubo un envío de prueba de 64 KB, el primero después de emparejar (conexión 1 del registro de §6),
+también igual y fuera de la cuenta:
+random 1 IGUAL
+  tx: 11-27 15:13:10.765 I/SPIKE   ( 4439): SENT kind=random bytes=65536 sha256=29a3dec6582887ef2519d0d16d1b93021921178f779bd9e616db08aa1f30f795
+  rx: 15:13:11.927 CIERRE conexion=1 bytes=65536 sha256=29a3dec6582887ef2519d0d16d1b93021921178f779bd9e616db08aa1f30f795
+
+La serie:
 
 random 1 IGUAL
   tx: 11-27 15:14:19.614 I/SPIKE   ( 4697): SENT kind=random bytes=65536 sha256=032cb242c4fdeb7860d85d153d7bed8781e2430b30e81e716f717233d0bec3f6
