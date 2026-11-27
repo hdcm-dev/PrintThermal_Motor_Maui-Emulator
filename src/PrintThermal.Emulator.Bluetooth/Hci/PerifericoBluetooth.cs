@@ -69,6 +69,10 @@ public sealed class PerifericoBluetooth
         {
             await foreach (var p in _host.Salida.ReadAllAsync(cts.Token))
             {
+                if (_opciones.TrazaHci && p.Tipo == TipoPaqueteHci.Comando)
+                {
+                    _registro($"HCI > {Convert.ToHexString(p.Datos)}");
+                }
                 await _transporte.EnviarAsync(p, cts.Token);
             }
         }, CancellationToken.None);
@@ -76,6 +80,10 @@ public sealed class PerifericoBluetooth
         {
             await foreach (var p in _transporte.RecibirAsync(cts.Token))
             {
+                if (_opciones.TrazaHci && p.Tipo == TipoPaqueteHci.Evento && p.Datos.Length > 0 && p.Datos[0] != 0x13)
+                {
+                    _registro($"HCI < {Convert.ToHexString(p.Datos)}");
+                }
                 try
                 {
                     _host.Procesar(p);

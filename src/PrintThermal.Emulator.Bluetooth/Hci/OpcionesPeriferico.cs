@@ -21,6 +21,9 @@ public sealed class OpcionesPeriferico
 
     /// <summary>Créditos RFCOMM que se le dan al otro lado al abrir el canal y al reponer.</summary>
     public byte CreditosRfcomm { get; init; } = 7;
+
+    /// <summary>Registra cada comando y evento HCI (sin los datos ACL ni el control de flujo), para diagnosticar.</summary>
+    public bool TrazaHci { get; init; }
 }
 
 /// <summary>Estado observable del periférico.</summary>
