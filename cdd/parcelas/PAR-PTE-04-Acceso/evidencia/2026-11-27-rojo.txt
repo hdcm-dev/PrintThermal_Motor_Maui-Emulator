@@ -1,0 +1,917 @@
+# Rojo: dotnet test PrintThermal.Emulator.slnx (2026-11-27) con las pruebas de PAR-PTE-04 sobre el esqueleto sin API, sin OpenAPI ni Scalar, visor vacío y cliente sin implementar: 29 de 37 en rojo, las seis de REQ-01 a REQ-06 entre ellas
+# Contenedor mcr.microsoft.com/dotnet/sdk:10.0.403 con turno en el equipo de cómputo, 2 CPU / 4 GB.
+10.0.403
+Microsoft.AspNetCore.App 10.0.14 [/usr/share/dotnet/shared/Microsoft.AspNetCore.App]
+  Determining projects to restore...
+  Restored /w/src/PrintThermal.Emulator.Client/PrintThermal.Emulator.Client.csproj (in 65 ms).
+  Restored /w/src/PrintThermal.Emulator.Core/PrintThermal.Emulator.Core.csproj (in 65 ms).
+  Restored /w/src/PrintThermal.Emulator.Bluetooth/PrintThermal.Emulator.Bluetooth.csproj (in 1 ms).
+  Restored /w/src/PrintThermal.Emulator.Api/PrintThermal.Emulator.Api.csproj (in 2.31 sec).
+  Restored /w/tests/PrintThermal.Emulator.Tests/PrintThermal.Emulator.Tests.csproj (in 4.78 sec).
+  PrintThermal.Emulator.Core -> /w/src/PrintThermal.Emulator.Core/bin/Debug/net10.0/PrintThermal.Emulator.Core.dll
+  PrintThermal.Emulator.Client -> /w/src/PrintThermal.Emulator.Client/bin/Debug/net10.0/PrintThermal.Emulator.Client.dll
+  PrintThermal.Emulator.Bluetooth -> /w/src/PrintThermal.Emulator.Bluetooth/bin/Debug/net10.0/PrintThermal.Emulator.Bluetooth.dll
+  PrintThermal.Emulator.Api -> /w/src/PrintThermal.Emulator.Api/bin/Debug/net10.0/PrintThermal.Emulator.Api.dll
+  PrintThermal.Emulator.Tests -> /w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll
+Test run for /w/tests/PrintThermal.Emulator.Tests/bin/Debug/net10.0/PrintThermal.Emulator.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 10.0.14)
+[xUnit.net 00:00:00.60]   Discovering: PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.66]   Discovered:  PrintThermal.Emulator.Tests
+[xUnit.net 00:00:00.68]   Starting:    PrintThermal.Emulator.Tests
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[58]
+      Creating key {56bb09e3-aed3-409e-83e3-53ebe4346fef} with creation date 2026-11-27 14:46:37Z, activation date 2026-11-27 14:46:37Z, and expiration date 2027-02-25 14:46:37Z.
+warn: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[35]
+      No XML encryptor configured. Key {56bb09e3-aed3-409e-83e3-53ebe4346fef} may be persisted to storage in unencrypted form.
+info: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[39]
+      Writing data to file '/root/.aspnet/DataProtection-Keys/key-56bb09e3-aed3-409e-83e3-53ebe4346fef.xml'.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/ - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '/ (/)'
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '/ (/)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/ - 200 - text/html;+charset=utf-8 153.5332ms
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/openapi/v1.json - - -
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/openapi/v1.json - 404 - - 4.3417ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/openapi/v1.json, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:01.81]     PrintThermal.Emulator.Tests.Api.OpenApiTests.OpenApiYScalarResponden [FAIL]
+[xUnit.net 00:00:01.81]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:01.81]       Expected: OK
+[xUnit.net 00:00:01.81]       Actual:   NotFound
+[xUnit.net 00:00:01.81]       Stack Trace:
+[xUnit.net 00:00:01.81]         /w/tests/PrintThermal.Emulator.Tests/Api/OpenApiTests.cs(16,0): at PrintThermal.Emulator.Tests.Api.OpenApiTests.OpenApiYScalarResponden()
+[xUnit.net 00:00:01.81]         /w/tests/PrintThermal.Emulator.Tests/Api/OpenApiTests.cs(29,0): at PrintThermal.Emulator.Tests.Api.OpenApiTests.OpenApiYScalarResponden()
+[xUnit.net 00:00:01.81]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:01.82]     PrintThermal.Emulator.Tests.Visor.VisorTests.SinTicketsElVisorMuestraElEstadoVacio [FAIL]
+[xUnit.net 00:00:01.82]       Assert.Contains() Failure: Sub-string not found
+[xUnit.net 00:00:01.82]       String:    "<!DOCTYPE html>\n<html lang="es"><head><me"···
+[xUnit.net 00:00:01.82]       Not found: "data-estado="vacio""
+[xUnit.net 00:00:01.82]       Stack Trace:
+[xUnit.net 00:00:01.82]         /w/tests/PrintThermal.Emulator.Tests/Visor/VisorTests.cs(39,0): at PrintThermal.Emulator.Tests.Visor.VisorTests.SinTicketsElVisorMuestraElEstadoVacio()
+[xUnit.net 00:00:01.82]         /w/tests/PrintThermal.Emulator.Tests/Visor/VisorTests.cs(40,0): at PrintThermal.Emulator.Tests.Visor.VisorTests.SinTicketsElVisorMuestraElEstadoVacio()
+[xUnit.net 00:00:01.82]         --- End of stack trace from previous location ---
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaSolucionDeclaraLosCincoProyectosEnNet10 [16 ms]
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.ElSdkEstaFijado [9 ms]
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.LaCiCompilaYPruebaSinDescargarLaNorma [1 ms]
+  Passed PrintThermal.Emulator.Tests.EsqueletoTests.CadaPaqueteTieneVersionFijaYCentral [2 ms]
+  Passed PrintThermal.Emulator.Tests.Api.FuenteSimuladaTests.ImprimeUnTicketDe384PuntosEnElAlmacen [32 ms]
+  Passed PrintThermal.Emulator.Tests.Api.FuenteSimuladaTests.ElAlmacenDescartaElMasViejoAlLlenarse [1 ms]
+  Failed PrintThermal.Emulator.Tests.Api.OpenApiTests.OpenApiYScalarResponden [133 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: OK
+Actual:   NotFound
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.OpenApiTests.OpenApiYScalarResponden() in /w/tests/PrintThermal.Emulator.Tests/Api/OpenApiTests.cs:line 16
+   at PrintThermal.Emulator.Tests.Api.OpenApiTests.OpenApiYScalarResponden() in /w/tests/PrintThermal.Emulator.Tests/Api/OpenApiTests.cs:line 29
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Visor.VisorTests.SinTicketsElVisorMuestraElEstadoVacio [1 s]
+  Error Message:
+   Assert.Contains() Failure: Sub-string not found
+String:    "<!DOCTYPE html>\n<html lang="es"><head><me"···
+Not found: "data-estado="vacio""
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Visor.VisorTests.SinTicketsElVisorMuestraElEstadoVacio() in /w/tests/PrintThermal.Emulator.Tests/Visor/VisorTests.cs:line 39
+   at PrintThermal.Emulator.Tests.Visor.VisorTests.SinTicketsElVisorMuestraElEstadoVacio() in /w/tests/PrintThermal.Emulator.Tests/Visor/VisorTests.cs:line 40
+--- End of stack trace from previous location ---
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/ - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '/ (/)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets - 404 - - 4.2153ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/api/tickets, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:02.61]     PrintThermal.Emulator.Tests.Api.TicketsApiTests.SinTicketsLaListaEstaVaciaYElUltimoDa404 [FAIL]
+[xUnit.net 00:00:02.61]       System.Net.Http.HttpRequestException : Response status code does not indicate success: 404 (Not Found).
+[xUnit.net 00:00:02.61]       Stack Trace:
+[xUnit.net 00:00:02.61]            at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+[xUnit.net 00:00:02.61]            at System.Net.Http.Json.HttpClientJsonExtensions.<FromJsonAsyncCore>g__Core|12_0[TValue,TJsonOptions](HttpClient client, Task`1 responseTask, Boolean usingResponseHeadersRead, CancellationTokenSource linkedCTS, Func`4 deserializeMethod, TJsonOptions jsonOptions, CancellationToken cancellationToken)
+[xUnit.net 00:00:02.61]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(114,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.SinTicketsLaListaEstaVaciaYElUltimoDa404()
+[xUnit.net 00:00:02.61]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(119,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.SinTicketsLaListaEstaVaciaYElUltimoDa404()
+[xUnit.net 00:00:02.61]         --- End of stack trace from previous location ---
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '/ (/)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/ - 200 - text/html;+charset=utf-8 12.8919ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:02.61]     PrintThermal.Emulator.Tests.Visor.VisorTests.ElVisorMuestraElUltimoTicket [FAIL]
+[xUnit.net 00:00:02.61]       Assert.Contains() Failure: Sub-string not found
+[xUnit.net 00:00:02.61]       String:    "<!DOCTYPE html>\n<html lang="es"><head><me"···
+[xUnit.net 00:00:02.61]       Not found: "data-estado="datos""
+[xUnit.net 00:00:02.61]       Stack Trace:
+[xUnit.net 00:00:02.61]         /w/tests/PrintThermal.Emulator.Tests/Visor/VisorTests.cs(21,0): at PrintThermal.Emulator.Tests.Visor.VisorTests.ElVisorMuestraElUltimoTicket()
+[xUnit.net 00:00:02.61]         /w/tests/PrintThermal.Emulator.Tests/Visor/VisorTests.cs(28,0): at PrintThermal.Emulator.Tests.Visor.VisorTests.ElVisorMuestraElUltimoTicket()
+[xUnit.net 00:00:02.61]         --- End of stack trace from previous location ---
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=abc - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=abc - 404 - - 0.9477ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/api/tickets/esperar, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:02.70]     PrintThermal.Emulator.Tests.Cliente.ClienteTests.SinTicketsElClienteDevuelveNull [FAIL]
+[xUnit.net 00:00:02.70]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:02.70]       Stack Trace:
+[xUnit.net 00:00:02.70]         /w/src/PrintThermal.Emulator.Client/ClienteDeTickets.cs(40,0): at PrintThermal.Emulator.Client.ClienteDeTickets.ObtenerUltimoAsync(CancellationToken ct)
+[xUnit.net 00:00:02.70]         /w/tests/PrintThermal.Emulator.Tests/Cliente/ClienteTests.cs(36,0): at PrintThermal.Emulator.Tests.Cliente.ClienteTests.SinTicketsElClienteDevuelveNull()
+[xUnit.net 00:00:02.70]         /w/tests/PrintThermal.Emulator.Tests/Cliente/ClienteTests.cs(42,0): at PrintThermal.Emulator.Tests.Cliente.ClienteTests.SinTicketsElClienteDevuelveNull()
+[xUnit.net 00:00:02.70]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:02.70]     PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(consulta: "segundos=abc") [FAIL]
+[xUnit.net 00:00:02.70]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:02.70]       Expected: BadRequest
+[xUnit.net 00:00:02.70]       Actual:   NotFound
+[xUnit.net 00:00:02.70]       Stack Trace:
+[xUnit.net 00:00:02.70]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(105,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(String consulta)
+[xUnit.net 00:00:02.70]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(105,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(String consulta)
+[xUnit.net 00:00:02.70]         --- End of stack trace from previous location ---
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=61 - - -
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=61 - 404 - - 0.9340ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/api/tickets/esperar, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:02.82]     PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteEsperaYBorra [FAIL]
+[xUnit.net 00:00:02.82]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:02.82]       Stack Trace:
+[xUnit.net 00:00:02.82]         /w/src/PrintThermal.Emulator.Client/ClienteDeTickets.cs(34,0): at PrintThermal.Emulator.Client.ClienteDeTickets.ObtenerEstadoAsync(CancellationToken ct)
+[xUnit.net 00:00:02.82]         /w/tests/PrintThermal.Emulator.Tests/Cliente/ClienteTests.cs(51,0): at PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteEsperaYBorra()
+[xUnit.net 00:00:02.82]         /w/tests/PrintThermal.Emulator.Tests/Cliente/ClienteTests.cs(65,0): at PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteEsperaYBorra()
+[xUnit.net 00:00:02.82]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:02.87]     PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(consulta: "segundos=61") [FAIL]
+[xUnit.net 00:00:02.87]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:02.87]       Expected: BadRequest
+[xUnit.net 00:00:02.87]       Actual:   NotFound
+[xUnit.net 00:00:02.87]       Stack Trace:
+[xUnit.net 00:00:02.87]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(105,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(String consulta)
+[xUnit.net 00:00:02.87]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(105,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(String consulta)
+[xUnit.net 00:00:02.87]         --- End of stack trace from previous location ---
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:02.99]     PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteDevuelveElMismoPngQueLaApi [FAIL]
+[xUnit.net 00:00:02.99]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:02.99]       Stack Trace:
+[xUnit.net 00:00:02.99]         /w/src/PrintThermal.Emulator.Client/ClienteDeTickets.cs(46,0): at PrintThermal.Emulator.Client.ClienteDeTickets.ObtenerPngDelUltimoAsync(CancellationToken ct)
+[xUnit.net 00:00:02.99]         /w/tests/PrintThermal.Emulator.Tests/Cliente/ClienteTests.cs(18,0): at PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteDevuelveElMismoPngQueLaApi()
+[xUnit.net 00:00:02.99]         /w/tests/PrintThermal.Emulator.Tests/Cliente/ClienteTests.cs(26,0): at PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteDevuelveElMismoPngQueLaApi()
+[xUnit.net 00:00:02.99]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:02.99]     PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: "http://[::]:8080", esperada: "http://localhost:8080/") [FAIL]
+[xUnit.net 00:00:02.99]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:02.99]       Expected: http://localhost:8080/
+[xUnit.net 00:00:02.99]       Actual:   http://127.0.0.1:5080/
+[xUnit.net 00:00:02.99]       Stack Trace:
+[xUnit.net 00:00:02.99]         /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs(42,0): at PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(String urlApi, String direccion, String esperada)
+[xUnit.net 00:00:02.99]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+[xUnit.net 00:00:02.99]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.SinTicketsLaListaEstaVaciaYElUltimoDa404 [791 ms]
+  Error Message:
+   System.Net.Http.HttpRequestException : Response status code does not indicate success: 404 (Not Found).
+  Stack Trace:
+     at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at System.Net.Http.Json.HttpClientJsonExtensions.<FromJsonAsyncCore>g__Core|12_0[TValue,TJsonOptions](HttpClient client, Task`1 responseTask, Boolean usingResponseHeadersRead, CancellationTokenSource linkedCTS, Func`4 deserializeMethod, TJsonOptions jsonOptions, CancellationToken cancellationToken)
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.SinTicketsLaListaEstaVaciaYElUltimoDa404() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 114
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.SinTicketsLaListaEstaVaciaYElUltimoDa404() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 119
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Visor.VisorTests.ElVisorMuestraElUltimoTicket [799 ms]
+  Error Message:
+   Assert.Contains() Failure: Sub-string not found
+String:    "<!DOCTYPE html>\n<html lang="es"><head><me"···
+Not found: "data-estado="datos""
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Visor.VisorTests.ElVisorMuestraElUltimoTicket() in /w/tests/PrintThermal.Emulator.Tests/Visor/VisorTests.cs:line 21
+   at PrintThermal.Emulator.Tests.Visor.VisorTests.ElVisorMuestraElUltimoTicket() in /w/tests/PrintThermal.Emulator.Tests/Visor/VisorTests.cs:line 28
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Cliente.ClienteTests.SinTicketsElClienteDevuelveNull [86 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Client.ClienteDeTickets.ObtenerUltimoAsync(CancellationToken ct) in /w/src/PrintThermal.Emulator.Client/ClienteDeTickets.cs:line 40
+   at PrintThermal.Emulator.Tests.Cliente.ClienteTests.SinTicketsElClienteDevuelveNull() in /w/tests/PrintThermal.Emulator.Tests/Cliente/ClienteTests.cs:line 36
+   at PrintThermal.Emulator.Tests.Cliente.ClienteTests.SinTicketsElClienteDevuelveNull() in /w/tests/PrintThermal.Emulator.Tests/Cliente/ClienteTests.cs:line 42
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(consulta: "segundos=abc") [90 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: BadRequest
+Actual:   NotFound
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(String consulta) in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 105
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(String consulta) in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 105
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteEsperaYBorra [121 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Client.ClienteDeTickets.ObtenerEstadoAsync(CancellationToken ct) in /w/src/PrintThermal.Emulator.Client/ClienteDeTickets.cs:line 34
+   at PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteEsperaYBorra() in /w/tests/PrintThermal.Emulator.Tests/Cliente/ClienteTests.cs:line 51
+   at PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteEsperaYBorra() in /w/tests/PrintThermal.Emulator.Tests/Cliente/ClienteTests.cs:line 65
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(consulta: "segundos=61") [168 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: BadRequest
+Actual:   NotFound
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(String consulta) in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 105
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(String consulta) in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 105
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteDevuelveElMismoPngQueLaApi [164 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Client.ClienteDeTickets.ObtenerPngDelUltimoAsync(CancellationToken ct) in /w/src/PrintThermal.Emulator.Client/ClienteDeTickets.cs:line 46
+   at PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteDevuelveElMismoPngQueLaApi() in /w/tests/PrintThermal.Emulator.Tests/Cliente/ClienteTests.cs:line 18
+   at PrintThermal.Emulator.Tests.Cliente.ClienteTests.ElClienteDevuelveElMismoPngQueLaApi() in /w/tests/PrintThermal.Emulator.Tests/Cliente/ClienteTests.cs:line 26
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: "http://[::]:8080", esperada: "http://localhost:8080/") [1 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: http://localhost:8080/
+Actual:   http://127.0.0.1:5080/
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(String urlApi, String direccion, String esperada) in /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs:line 42
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+[xUnit.net 00:00:02.99]     PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: "http://0.0.0.0:8080", esperada: "http://localhost:8080/") [FAIL]
+[xUnit.net 00:00:02.99]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:02.99]       Expected: http://localhost:8080/
+[xUnit.net 00:00:02.99]       Actual:   http://127.0.0.1:5080/
+[xUnit.net 00:00:02.99]       Stack Trace:
+[xUnit.net 00:00:02.99]         /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs(42,0): at PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(String urlApi, String direccion, String esperada)
+[xUnit.net 00:00:02.99]            at InvokeStub_EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(Object, Span`1)
+[xUnit.net 00:00:02.99]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:02.99]     PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: "http://+:8080", esperada: "http://localhost:8080/") [FAIL]
+[xUnit.net 00:00:02.99]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:02.99]       Expected: http://localhost:8080/
+[xUnit.net 00:00:02.99]       Actual:   http://127.0.0.1:5080/
+[xUnit.net 00:00:02.99]       Stack Trace:
+[xUnit.net 00:00:02.99]         /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs(42,0): at PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(String urlApi, String direccion, String esperada)
+[xUnit.net 00:00:02.99]            at InvokeStub_EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(Object, Span`1)
+[xUnit.net 00:00:02.99]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:02.99]     PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: "http://emulador:9000", direccion: "http://[::]:8080", esperada: "http://emulador:9000/") [FAIL]
+[xUnit.net 00:00:02.99]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:02.99]       Expected: http://emulador:9000/
+[xUnit.net 00:00:02.99]       Actual:   http://127.0.0.1:5080/
+[xUnit.net 00:00:02.99]       Stack Trace:
+[xUnit.net 00:00:02.99]         /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs(42,0): at PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(String urlApi, String direccion, String esperada)
+[xUnit.net 00:00:02.99]            at InvokeStub_EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(Object, Span`1)
+[xUnit.net 00:00:02.99]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:02.99]     PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: "Kestrel:Endpoints:Http:Url", valor: "http://0.0.0.0:8080") [FAIL]
+[xUnit.net 00:00:02.99]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:02.99]       Stack Trace:
+[xUnit.net 00:00:02.99]         /w/src/PrintThermal.Emulator.Api/Api/Direcciones.cs(10,0): at PrintThermal.Emulator.Api.Api.Direcciones.EscuchaSinConfigurar(IConfiguration configuracion)
+[xUnit.net 00:00:02.99]         /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs(31,0): at PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(String clave, String valor)
+[xUnit.net 00:00:02.99]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+[xUnit.net 00:00:02.99]            at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+[xUnit.net 00:00:02.99]     PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: "http_ports", valor: "8080") [FAIL]
+[xUnit.net 00:00:02.99]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:02.99]       Stack Trace:
+[xUnit.net 00:00:02.99]         /w/src/PrintThermal.Emulator.Api/Api/Direcciones.cs(10,0): at PrintThermal.Emulator.Api.Api.Direcciones.EscuchaSinConfigurar(IConfiguration configuracion)
+[xUnit.net 00:00:02.99]         /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs(31,0): at PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(String clave, String valor)
+[xUnit.net 00:00:02.99]            at InvokeStub_EscuchaTests.ConDireccionConfiguradaLaRespeta(Object, Span`1)
+[xUnit.net 00:00:02.99]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:02.99]     PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: "urls", valor: "http://0.0.0.0:8080") [FAIL]
+[xUnit.net 00:00:02.99]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:02.99]       Stack Trace:
+[xUnit.net 00:00:02.99]         /w/src/PrintThermal.Emulator.Api/Api/Direcciones.cs(10,0): at PrintThermal.Emulator.Api.Api.Direcciones.EscuchaSinConfigurar(IConfiguration configuracion)
+[xUnit.net 00:00:02.99]         /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs(31,0): at PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(String clave, String valor)
+[xUnit.net 00:00:02.99]            at InvokeStub_EscuchaTests.ConDireccionConfiguradaLaRespeta(Object, Span`1)
+[xUnit.net 00:00:02.99]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:02.99]     PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: "https_ports", valor: "8443") [FAIL]
+[xUnit.net 00:00:02.99]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:02.99]       Stack Trace:
+[xUnit.net 00:00:02.99]         /w/src/PrintThermal.Emulator.Api/Api/Direcciones.cs(10,0): at PrintThermal.Emulator.Api.Api.Direcciones.EscuchaSinConfigurar(IConfiguration configuracion)
+[xUnit.net 00:00:02.99]         /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs(31,0): at PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(String clave, String valor)
+[xUnit.net 00:00:02.99]            at InvokeStub_EscuchaTests.ConDireccionConfiguradaLaRespeta(Object, Span`1)
+[xUnit.net 00:00:02.99]            at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+[xUnit.net 00:00:02.99]     PrintThermal.Emulator.Tests.Api.EscuchaTests.SinConfiguracionEscuchaSoloEnLocal [FAIL]
+[xUnit.net 00:00:02.99]       System.NotImplementedException : The method or operation is not implemented.
+[xUnit.net 00:00:02.99]       Stack Trace:
+[xUnit.net 00:00:02.99]         /w/src/PrintThermal.Emulator.Api/Api/Direcciones.cs(10,0): at PrintThermal.Emulator.Api.Api.Direcciones.EscuchaSinConfigurar(IConfiguration configuracion)
+[xUnit.net 00:00:02.99]         /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs(18,0): at PrintThermal.Emulator.Tests.Api.EscuchaTests.SinConfiguracionEscuchaSoloEnLocal()
+[xUnit.net 00:00:02.99]            at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+[xUnit.net 00:00:02.99]            at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=0 - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=0 - 404 - - 2.0103ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/api/tickets/esperar, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:03.01]     PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(consulta: "segundos=0") [FAIL]
+[xUnit.net 00:00:03.01]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:03.01]       Expected: BadRequest
+[xUnit.net 00:00:03.01]       Actual:   NotFound
+[xUnit.net 00:00:03.01]       Stack Trace:
+[xUnit.net 00:00:03.01]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(105,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(String consulta)
+[xUnit.net 00:00:03.01]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(105,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(String consulta)
+[xUnit.net 00:00:03.01]         --- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: "http://0.0.0.0:8080", esperada: "http://localhost:8080/") [< 1 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: http://localhost:8080/
+Actual:   http://127.0.0.1:5080/
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(String urlApi, String direccion, String esperada) in /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs:line 42
+   at InvokeStub_EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Failed PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: "http://+:8080", esperada: "http://localhost:8080/") [< 1 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: http://localhost:8080/
+Actual:   http://127.0.0.1:5080/
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(String urlApi, String direccion, String esperada) in /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs:line 42
+   at InvokeStub_EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Passed PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: null, direccion: "http://127.0.0.1:5080", esperada: "http://127.0.0.1:5080/") [< 1 ms]
+  Failed PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(urlApi: "http://emulador:9000", direccion: "http://[::]:8080", esperada: "http://emulador:9000/") [< 1 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: http://emulador:9000/
+Actual:   http://127.0.0.1:5080/
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(String urlApi, String direccion, String esperada) in /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs:line 42
+   at InvokeStub_EscuchaTests.ElVisorLlamaALaApiDelMismoServicio(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Failed PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: "Kestrel:Endpoints:Http:Url", valor: "http://0.0.0.0:8080") [1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Api.Api.Direcciones.EscuchaSinConfigurar(IConfiguration configuracion) in /w/src/PrintThermal.Emulator.Api/Api/Direcciones.cs:line 10
+   at PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(String clave, String valor) in /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs:line 31
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+  Failed PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: "http_ports", valor: "8080") [< 1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Api.Api.Direcciones.EscuchaSinConfigurar(IConfiguration configuracion) in /w/src/PrintThermal.Emulator.Api/Api/Direcciones.cs:line 10
+   at PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(String clave, String valor) in /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs:line 31
+   at InvokeStub_EscuchaTests.ConDireccionConfiguradaLaRespeta(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Failed PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: "urls", valor: "http://0.0.0.0:8080") [< 1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Api.Api.Direcciones.EscuchaSinConfigurar(IConfiguration configuracion) in /w/src/PrintThermal.Emulator.Api/Api/Direcciones.cs:line 10
+   at PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(String clave, String valor) in /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs:line 31
+   at InvokeStub_EscuchaTests.ConDireccionConfiguradaLaRespeta(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Failed PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(clave: "https_ports", valor: "8443") [< 1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Api.Api.Direcciones.EscuchaSinConfigurar(IConfiguration configuracion) in /w/src/PrintThermal.Emulator.Api/Api/Direcciones.cs:line 10
+   at PrintThermal.Emulator.Tests.Api.EscuchaTests.ConDireccionConfiguradaLaRespeta(String clave, String valor) in /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs:line 31
+   at InvokeStub_EscuchaTests.ConDireccionConfiguradaLaRespeta(Object, Span`1)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Failed PrintThermal.Emulator.Tests.Api.EscuchaTests.SinConfiguracionEscuchaSoloEnLocal [< 1 ms]
+  Error Message:
+   System.NotImplementedException : The method or operation is not implemented.
+  Stack Trace:
+     at PrintThermal.Emulator.Api.Api.Direcciones.EscuchaSinConfigurar(IConfiguration configuracion) in /w/src/PrintThermal.Emulator.Api/Api/Direcciones.cs:line 10
+   at PrintThermal.Emulator.Tests.Api.EscuchaTests.SinConfiguracionEscuchaSoloEnLocal() in /w/tests/PrintThermal.Emulator.Tests/Api/EscuchaTests.cs:line 18
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(consulta: "segundos=0") [139 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: BadRequest
+Actual:   NotFound
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(String consulta) in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 105
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaFueraDeRangoDa400(String consulta) in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 105
+--- End of stack trace from previous location ---
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/20261127T144639690-000001.png - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/20261127T144639690-000001.png - 404 - - 2.5323ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/api/tickets/20261127T144639690-000001.png, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:03.10]     PrintThermal.Emulator.Tests.Api.TicketsApiTests.ElPngLlegaConLaMismaHuella [FAIL]
+[xUnit.net 00:00:03.10]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:03.10]       Expected: OK
+[xUnit.net 00:00:03.10]       Actual:   NotFound
+[xUnit.net 00:00:03.10]       Stack Trace:
+[xUnit.net 00:00:03.10]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(25,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.ElPngLlegaConLaMismaHuella()
+[xUnit.net 00:00:03.10]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(32,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.ElPngLlegaConLaMismaHuella()
+[xUnit.net 00:00:03.10]         --- End of stack trace from previous location ---
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/no-existe.bin - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/no-existe.bin - 404 - - 2.2451ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/api/tickets/no-existe.bin, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:03.15]     PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: "/api/tickets/no-existe.bin") [FAIL]
+[xUnit.net 00:00:03.15]       Assert.Equal() Failure: Strings differ
+[xUnit.net 00:00:03.15]       Expected: "application/problem+json"
+[xUnit.net 00:00:03.15]       Actual:   null
+[xUnit.net 00:00:03.15]       Stack Trace:
+[xUnit.net 00:00:03.15]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(135,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(String ruta)
+[xUnit.net 00:00:03.15]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(135,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(String ruta)
+[xUnit.net 00:00:03.15]         --- End of stack trace from previous location ---
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/no-existe - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/no-existe - 404 - - 0.9750ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/api/tickets/no-existe, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:03.22]     PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: "/api/tickets/no-existe") [FAIL]
+[xUnit.net 00:00:03.22]       Assert.Equal() Failure: Strings differ
+[xUnit.net 00:00:03.22]       Expected: "application/problem+json"
+[xUnit.net 00:00:03.22]       Actual:   null
+[xUnit.net 00:00:03.22]       Stack Trace:
+[xUnit.net 00:00:03.22]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(135,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(String ruta)
+[xUnit.net 00:00:03.22]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(135,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(String ruta)
+[xUnit.net 00:00:03.22]         --- End of stack trace from previous location ---
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/no-existe.png - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/no-existe.png - 404 - - 1.1633ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/api/tickets/no-existe.png, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:03.31]     PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: "/api/tickets/no-existe.png") [FAIL]
+[xUnit.net 00:00:03.31]       Assert.Equal() Failure: Strings differ
+[xUnit.net 00:00:03.31]       Expected: "application/problem+json"
+[xUnit.net 00:00:03.31]       Actual:   null
+[xUnit.net 00:00:03.31]       Stack Trace:
+[xUnit.net 00:00:03.31]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(135,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(String ruta)
+[xUnit.net 00:00:03.31]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(135,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(String ruta)
+[xUnit.net 00:00:03.31]         --- End of stack trace from previous location ---
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://localhost/api/tickets/20261127T144640004-000001 - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://localhost/api/tickets/20261127T144640004-000001 - 405 - - 1.1493ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:03.41]     PrintThermal.Emulator.Tests.Api.TicketsApiTests.BorrarUnoYBorrarTodos [FAIL]
+[xUnit.net 00:00:03.41]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:03.41]       Expected: NoContent
+[xUnit.net 00:00:03.41]       Actual:   MethodNotAllowed
+[xUnit.net 00:00:03.41]       Stack Trace:
+[xUnit.net 00:00:03.41]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(188,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.BorrarUnoYBorrarTodos()
+[xUnit.net 00:00:03.41]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(201,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.BorrarUnoYBorrarTodos()
+[xUnit.net 00:00:03.41]         --- End of stack trace from previous location ---
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - 404 - - 0.8511ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/api/tickets/esperar, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:03.51]     PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaVenceSinColgarse [FAIL]
+[xUnit.net 00:00:03.51]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:03.51]       Expected: NoContent
+[xUnit.net 00:00:03.51]       Actual:   NotFound
+[xUnit.net 00:00:03.51]       Stack Trace:
+[xUnit.net 00:00:03.51]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(47,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaVenceSinColgarse()
+[xUnit.net 00:00:03.51]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(48,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaVenceSinColgarse()
+[xUnit.net 00:00:03.51]         --- End of stack trace from previous location ---
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1&despuesDe=20261127T144640159-000001 - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1&despuesDe=20261127T144640159-000001 - 404 - - 7.3226ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/api/tickets/esperar, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:03.57]     PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaConDespuesDeDevuelveElSiguienteSinEsperar [FAIL]
+[xUnit.net 00:00:03.57]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:03.57]       Expected: OK
+[xUnit.net 00:00:03.57]       Actual:   NotFound
+[xUnit.net 00:00:03.57]       Stack Trace:
+[xUnit.net 00:00:03.57]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(78,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaConDespuesDeDevuelveElSiguienteSinEsperar()
+[xUnit.net 00:00:03.57]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(79,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaConDespuesDeDevuelveElSiguienteSinEsperar()
+[xUnit.net 00:00:03.57]         --- End of stack trace from previous location ---
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets - 404 - - 1.7709ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/api/tickets, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:03.63]     PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaListaYElBinRespondenConLosDatosDelTicket [FAIL]
+[xUnit.net 00:00:03.63]       System.Net.Http.HttpRequestException : Response status code does not indicate success: 404 (Not Found).
+[xUnit.net 00:00:03.63]       Stack Trace:
+[xUnit.net 00:00:03.63]            at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+[xUnit.net 00:00:03.63]            at System.Net.Http.Json.HttpClientJsonExtensions.<FromJsonAsyncCore>g__Core|12_0[TValue,TJsonOptions](HttpClient client, Task`1 responseTask, Boolean usingResponseHeadersRead, CancellationTokenSource linkedCTS, Func`4 deserializeMethod, TJsonOptions jsonOptions, CancellationToken cancellationToken)
+[xUnit.net 00:00:03.63]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(146,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaListaYElBinRespondenConLosDatosDelTicket()
+[xUnit.net 00:00:03.63]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(164,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaListaYElBinRespondenConLosDatosDelTicket()
+[xUnit.net 00:00:03.63]         --- End of stack trace from previous location ---
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.ElPngLlegaConLaMismaHuella [88 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: OK
+Actual:   NotFound
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.TicketsApiTests.ElPngLlegaConLaMismaHuella() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 25
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.ElPngLlegaConLaMismaHuella() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 32
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: "/api/tickets/no-existe.bin") [55 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+Expected: "application/problem+json"
+Actual:   null
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(String ruta) in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 135
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(String ruta) in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 135
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: "/api/tickets/no-existe") [62 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+Expected: "application/problem+json"
+Actual:   null
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(String ruta) in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 135
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(String ruta) in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 135
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(ruta: "/api/tickets/no-existe.png") [88 ms]
+  Error Message:
+   Assert.Equal() Failure: Strings differ
+Expected: "application/problem+json"
+Actual:   null
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(String ruta) in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 135
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.UnIdInexistenteDa404(String ruta) in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 135
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.BorrarUnoYBorrarTodos [103 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: NoContent
+Actual:   MethodNotAllowed
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.TicketsApiTests.BorrarUnoYBorrarTodos() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 188
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.BorrarUnoYBorrarTodos() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 201
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaVenceSinColgarse [98 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: NoContent
+Actual:   NotFound
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaVenceSinColgarse() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 47
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaVenceSinColgarse() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 48
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaConDespuesDeDevuelveElSiguienteSinEsperar [61 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: OK
+Actual:   NotFound
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaConDespuesDeDevuelveElSiguienteSinEsperar() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 78
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaConDespuesDeDevuelveElSiguienteSinEsperar() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 79
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaListaYElBinRespondenConLosDatosDelTicket [58 ms]
+  Error Message:
+   System.Net.Http.HttpRequestException : Response status code does not indicate success: 404 (Not Found).
+  Stack Trace:
+     at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at System.Net.Http.Json.HttpClientJsonExtensions.<FromJsonAsyncCore>g__Core|12_0[TValue,TJsonOptions](HttpClient client, Task`1 responseTask, Boolean usingResponseHeadersRead, CancellationTokenSource linkedCTS, Func`4 deserializeMethod, TJsonOptions jsonOptions, CancellationToken cancellationToken)
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaListaYElBinRespondenConLosDatosDelTicket() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 146
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaListaYElBinRespondenConLosDatosDelTicket() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 164
+--- End of stack trace from previous location ---
+  Passed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LosIdsSonOrdenablesYSinPuntos [105 ms]
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=1 - 404 - - 0.9224ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/api/tickets/esperar, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:03.84]     PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaSinDespuesDeNoDevuelveUnTicketViejo [FAIL]
+[xUnit.net 00:00:03.84]       Assert.Equal() Failure: Values differ
+[xUnit.net 00:00:03.84]       Expected: NoContent
+[xUnit.net 00:00:03.84]       Actual:   NotFound
+[xUnit.net 00:00:03.84]       Stack Trace:
+[xUnit.net 00:00:03.84]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(91,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaSinDespuesDeNoDevuelveUnTicketViejo()
+[xUnit.net 00:00:03.84]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(91,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaSinDespuesDeNoDevuelveUnTicketViejo()
+[xUnit.net 00:00:03.84]         --- End of stack trace from previous location ---
+warn: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[60]
+      Storing keys in a directory '/root/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://*:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /w/src/PrintThermal.Emulator.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=10 - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/api/tickets/esperar?segundos=10 - 404 - - 2.7207ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost/api/tickets/esperar, Response status code: 404
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+[xUnit.net 00:00:04.21]     PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaDevuelveElTicketQueLlega [FAIL]
+[xUnit.net 00:00:04.21]       la espera respondió antes de que llegara un ticket
+[xUnit.net 00:00:04.21]       Stack Trace:
+[xUnit.net 00:00:04.21]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(59,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaDevuelveElTicketQueLlega()
+[xUnit.net 00:00:04.21]         /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs(64,0): at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaDevuelveElTicketQueLlega()
+[xUnit.net 00:00:04.21]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:04.22]   Finished:    PrintThermal.Emulator.Tests
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaSinDespuesDeNoDevuelveUnTicketViejo [101 ms]
+  Error Message:
+   Assert.Equal() Failure: Values differ
+Expected: NoContent
+Actual:   NotFound
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaSinDespuesDeNoDevuelveUnTicketViejo() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 91
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaSinDespuesDeNoDevuelveUnTicketViejo() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 91
+--- End of stack trace from previous location ---
+  Failed PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaDevuelveElTicketQueLlega [373 ms]
+  Error Message:
+   la espera respondió antes de que llegara un ticket
+  Stack Trace:
+     at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaDevuelveElTicketQueLlega() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 59
+   at PrintThermal.Emulator.Tests.Api.TicketsApiTests.LaEsperaDevuelveElTicketQueLlega() in /w/tests/PrintThermal.Emulator.Tests/Api/TicketsApiTests.cs:line 64
+--- End of stack trace from previous location ---
+Test Run Failed.
+Total tests: 37
+     Passed: 8
+     Failed: 29
+ Total time: 4.7960 Seconds
+salida dotnet test: 1

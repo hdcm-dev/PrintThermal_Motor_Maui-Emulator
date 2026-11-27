@@ -8,5 +8,9 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.12.0" />
     <PackageVersion Include="xunit" Version="2.9.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <!-- Consultadas en nuget.org el 2026-11-27 (PAR-PTE-04, D1); 10.0.14 es el runtime ASP.NET Core del SDK 10.0.403. -->
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.14" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.14" />
+    <PackageVersion Include="Scalar.AspNetCore" Version="3.3.0" />
   </ItemGroup>
 </Project>
