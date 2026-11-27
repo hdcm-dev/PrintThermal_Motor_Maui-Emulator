@@ -1,25 +1,27 @@
-# Consola del navegador · recorrido de PAR-PTE-04 (2026-11-27)
-# Chrome 157 (contenedor del navegador de juicio, por chrome-devtools-mcp). La dirección del servidor se reemplazó por <emulador>.
-# Cada bloque es la consola de una navegación (list_console_messages, sin mensajes preservados), copiada literal salvo la dirección.
+# Consola del navegador · recorrido final de PAR-PTE-04 (2026-11-27, 15:29 a 15:34 UTC)
+# Chrome 157 (contenedor del navegador de juicio), por chrome-devtools-mcp (list_console_messages).
+# Literal salvo la dirección del servidor, reemplazada por <emulador> (puerto 18604: con fuente simulada; 18605: API en un
+# puerto cerrado; 18606: API inalcanzable). Los msgid no son correlativos entre bloques porque el navegador es compartido:
+# los números intermedios son de otras pestañas, no de esta.
 
-## Visor, servicio con la fuente simulada (1440 px): vacío, llegada de tickets, elegir, descargar, limpiar
-msgid=173 [info] [2026-11-27T14:59:42.570Z] Information: Normalizing '_blazor' to 'http://<emulador>/_blazor'. (1 args)
-msgid=174 [info] [2026-11-27T14:59:42.597Z] Information: WebSocket connected to ws://<emulador>/_blazor?id=lBBQeVrd-Ow97_su0ueHZw. (1 args)
-# Pedidos de red de esa navegación: 13, todos 200 (documento, visor.css, blazor.web.js, initializers, favicon.svg, negotiate,
-# cinco PNG de tickets, un .bin y /api/estado).
+## 18604 · 1440 px · carga, llegada de tickets, recarga, elegir, descargar, limpiar (navegación de 15:30:53)
+msgid=222 [info] [2026-11-27T15:30:53.672Z] Information: Normalizing '_blazor' to 'http://<emulador>:18604/_blazor'. (1 args)
+msgid=223 [info] [2026-11-27T15:30:53.693Z] Information: WebSocket connected to ws://<emulador>:18604/_blazor?id=C0UCT2iTH2mPpTD7N-r-EQ. (1 args)
+# Red de esa navegación: 10 pedidos, todos 200 (documento, visor.css, blazor.web.js, PNG del ticket, initializers,
+# negotiate, favicon.svg, el PNG elegido dos veces y su .bin).
 
-## Visor a 360 px (emulación móvil, recarga la página)
-msgid=175 [info] [2026-11-27T15:01:07.370Z] Information: Normalizing '_blazor' to 'http://<emulador>/_blazor'. (1 args)
-msgid=176 [info] [2026-11-27T15:01:07.389Z] Information: WebSocket connected to ws://<emulador>/_blazor?id=iJh-Kik2IBUeg_YDIgA_fQ. (1 args)
+## 18604 · 360 px (la emulación móvil recarga la página, 15:31:13)
+msgid=224 [info] [2026-11-27T15:31:13.472Z] Information: Normalizing '_blazor' to 'http://<emulador>:18604/_blazor'. (1 args)
+msgid=225 [info] [2026-11-27T15:31:13.492Z] Information: WebSocket connected to ws://<emulador>:18604/_blazor?id=pfn3hfg5A3annlO60avGaQ. (1 args)
 
-## Visor con la API inalcanzable (Visor:UrlApi a un puerto cerrado): estado de error, 360 y 1440 px
-msgid=179 [info] [2026-11-27T15:01:20.339Z] Information: Normalizing '_blazor' to 'http://<emulador>/_blazor'. (1 args)
-msgid=180 [info] [2026-11-27T15:01:20.362Z] Information: WebSocket connected to ws://<emulador>/_blazor?id=JC0HDCxQefDG-Mo8tvjBkA. (1 args)
+## 18606 · 360 px · API inalcanzable: «cargando» 75 s y después error (15:31:38 a 15:32:53)
+msgid=226 [info] [2026-11-27T15:32:53.066Z] Information: Normalizing '_blazor' to 'http://<emulador>:18606/_blazor'. (1 args)
+msgid=227 [info] [2026-11-27T15:32:53.094Z] Information: WebSocket connected to ws://<emulador>:18606/_blazor?id=02KqlcBrq-YXFC2BvM2ngw. (1 args)
 
-## Página Scalar en /scalar (1440 px)
-msgid=181 [info] @scalar/api-reference@1.85.0 (1 args)
+## 18605 · 360 px y 1440 px · API en un puerto cerrado: error y «Reintentar»
+msgid=228 [info] [2026-11-27T15:33:07.592Z] Information: Normalizing '_blazor' to 'http://<emulador>:18605/_blazor'. (1 args)
+msgid=229 [info] [2026-11-27T15:33:07.636Z] Information: WebSocket connected to ws://<emulador>:18605/_blazor?id=f_BVOPh9RYOH7hf_UAJ5Dw. (1 args)
+msgid=230 [info] [2026-11-27T15:33:11.901Z] Information: Normalizing '_blazor' to 'http://<emulador>:18605/_blazor'. (1 args)
+msgid=231 [info] [2026-11-27T15:33:11.921Z] Information: WebSocket connected to ws://<emulador>:18605/_blazor?id=8r6RPOIYQBftSkoqJV0vAQ. (1 args)
 
-# Errores: ninguno en estas navegaciones.
-# Corrida anterior, descartada: «Failed to load resource: 404» por /favicon.ico. Se agregó favicon.svg y se repitió el recorrido
-# completo con ese código. Los errores de WebSocket preservados de esa corrida son del servidor que se detuvo a propósito
-# para reiniciarlo, no del visor.
+# Errores y avisos: ninguno.

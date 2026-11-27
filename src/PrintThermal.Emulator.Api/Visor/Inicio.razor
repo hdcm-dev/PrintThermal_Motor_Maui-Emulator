@@ -1,4 +1,5 @@
 @page "/"
+@attribute [StreamRendering]
 @implements IAsyncDisposable
 @inject ClienteDeTickets Cliente
 
@@ -12,30 +13,30 @@
             <p class="bajada">Cada ticket que imprime la app aparece acá solo, a escala del papel de 58 mm.</p>
         </div>
         <p class="medio" role="status" aria-live="polite">
-            <span class="medio__punto @(_estado?.MedioConectado == true ? "medio__punto--si" : "")" aria-hidden="true"></span>
-            @if (_estado is null)
+            <span class="medio__punto @(EstadoActual?.MedioConectado == true ? "medio__punto--si" : "")" aria-hidden="true"></span>
+            @if (EstadoActual is null)
             {
-                <span>@(_error is null ? "Consultando el estado…" : "Sin conexión con la API")</span>
+                <span>@(ErrorDeCarga is null ? "Consultando el estado…" : "Sin conexión con la API")</span>
             }
             else
             {
-                <span>Medio @_estado.Medio, @(_estado.MedioConectado ? "conectado" : "sin conexión") · @Cantidad(_estado.Tickets)</span>
+                <span>Medio @EstadoActual.Medio, @(EstadoActual.MedioConectado ? "conectado" : "sin conexión") · @Cantidad(EstadoActual.Tickets)</span>
             }
         </p>
     </header>
 
-    @if (_error is not null)
+    @if (ErrorDeCarga is not null)
     {
         <section class="alerta alerta--error" role="alert" aria-label="Error">
-            <p><strong>No se pudo leer la API del emulador.</strong> @_error</p>
+            <p><strong>No se pudo leer la API del emulador.</strong> @ErrorDeCarga</p>
             <p>El visor vuelve a intentarlo solo; también podés reintentar ahora.</p>
             <button type="button" class="btn" @onclick="ReintentarAsync">Reintentar</button>
         </section>
     }
 
-    @if (_tickets is null)
+    @if (Tickets is null)
     {
-        @if (_error is null)
+        @if (ErrorDeCarga is null)
         {
             <section class="cargando" aria-busy="true" aria-label="Cargando">
                 <div class="skel skel--lista"></div>
@@ -43,7 +44,7 @@
             </section>
         }
     }
-    else if (_tickets.Count == 0)
+    else if (Tickets.Count == 0)
     {
         <section class="vacio" aria-label="Sin tickets">
             <svg class="vacio__icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z" /><path d="M9 8h6M9 12h6" /></svg>
@@ -60,7 +61,7 @@
                     @if (_confirmarLimpieza)
                     {
                         <div class="confirmar" role="group" aria-label="Confirmar limpieza">
-                            <span>¿Borrar @Cantidad(_tickets.Count)?</span>
+                            <span>¿Borrar @Cantidad(Tickets.Count)?</span>
                             <button type="button" class="btn btn--peligro" @onclick="LimpiarAsync">Borrar todo</button>
                             <button type="button" class="btn" @onclick="() => _confirmarLimpieza = false">Cancelar</button>
                         </div>
@@ -71,7 +72,7 @@
                     }
                 </div>
                 <ul>
-                    @foreach (var t in _tickets)
+                    @foreach (var t in Tickets)
                     {
                         var elegido = t.Id == _elegido?.Id;
                         <li>
@@ -113,16 +114,34 @@
     private static readonly TimeSpan PausaTrasError = TimeSpan.FromSeconds(3);
 
     private readonly CancellationTokenSource _vida = new();
-    private IReadOnlyList<TicketInfo>? _tickets;
-    private EstadoDelEmulador? _estado;
+    // Lo cargado en el prerenderizado pasa al circuito interactivo sin volver a «cargando».
+    [PersistentState]
+    public List<TicketInfo>? Tickets { get; set; }
+
+    [PersistentState]
+    public EstadoDelEmulador? EstadoActual { get; set; }
+
     private TicketInfo? _elegido;
-    private string? _error;
+    // También el error: si el prerenderizado terminó en error, el circuito no vuelve a «cargando».
+    [PersistentState]
+    public string? ErrorDeCarga { get; set; }
+
     private bool _confirmarLimpieza;
 
     private string EstadoDeLaVista =>
-        _error is not null ? "error" : _tickets is null ? "cargando" : _tickets.Count == 0 ? "vacio" : "datos";
+        ErrorDeCarga is not null ? "error" : Tickets is null ? "cargando" : Tickets.Count == 0 ? "vacio" : "datos";
 
-    protected override Task OnInitializedAsync() => CargarAsync();
+    protected override async Task OnInitializedAsync()
+    {
+        if (Tickets is null && ErrorDeCarga is null)
+        {
+            await CargarAsync();
+        }
+        else
+        {
+            _elegido = Tickets?.FirstOrDefault();
+        }
+    }
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -136,17 +155,17 @@
     {
         try
         {
-            var seguiaAlUltimo = _elegido is null || _elegido.Id == _tickets?.FirstOrDefault()?.Id;
-            _estado = await Cliente.ObtenerEstadoAsync(_vida.Token);
-            _tickets = await Cliente.ListarAsync(ct: _vida.Token);
+            var seguiaAlUltimo = _elegido is null || _elegido.Id == Tickets?.FirstOrDefault()?.Id;
+            EstadoActual = await Cliente.ObtenerEstadoAsync(_vida.Token);
+            Tickets = [.. await Cliente.ListarAsync(ct: _vida.Token)];
             _elegido = seguiaAlUltimo
-                ? _tickets.FirstOrDefault()
-                : _tickets.FirstOrDefault(t => t.Id == _elegido!.Id) ?? _tickets.FirstOrDefault();
-            _error = null;
+                ? Tickets.FirstOrDefault()
+                : Tickets.FirstOrDefault(t => t.Id == _elegido!.Id) ?? Tickets.FirstOrDefault();
+            ErrorDeCarga = null;
         }
         catch (Exception ex) when (!_vida.IsCancellationRequested)
         {
-            _error = ex.Message;
+            ErrorDeCarga = ex.Message;
         }
     }
 
@@ -157,14 +176,25 @@
         {
             try
             {
-                // Con la lista cargada, desde su ticket más nuevo (o desde el principio si estaba vacía).
-                var despuesDe = _tickets is null ? null : _tickets.FirstOrDefault()?.Id ?? ClienteDeTickets.DesdeElPrincipio;
-                await Cliente.EsperarAsync(despuesDe, PlazoDeEspera, ct);
+                // Con la lista cargada, espera desde su ticket más nuevo (o desde el principio si estaba vacía);
+                // sin lista (falló la carga), vuelve a cargar directamente.
+                if (Tickets is not null)
+                {
+                    await Cliente.EsperarAsync(
+                        Tickets.FirstOrDefault()?.Id ?? ClienteDeTickets.DesdeElPrincipio, PlazoDeEspera, ct);
+                }
+
                 await InvokeAsync(async () =>
                 {
                     await CargarAsync();
                     StateHasChanged();
                 });
+
+                if (ErrorDeCarga is not null)
+                {
+                    // Si la recarga falló, la lista no avanzó y la espera volvería al instante: pausa.
+                    await Task.Delay(PausaTrasError, ct);
+                }
             }
             catch (OperationCanceledException) when (ct.IsCancellationRequested)
             {
@@ -174,7 +204,7 @@
             {
                 await InvokeAsync(() =>
                 {
-                    _error = ex.Message;
+                    ErrorDeCarga = ex.Message;
                     StateHasChanged();
                 });
                 try
@@ -202,7 +232,7 @@
         }
         catch (Exception ex) when (!_vida.IsCancellationRequested)
         {
-            _error = ex.Message;
+            ErrorDeCarga = ex.Message;
             return;
         }
 

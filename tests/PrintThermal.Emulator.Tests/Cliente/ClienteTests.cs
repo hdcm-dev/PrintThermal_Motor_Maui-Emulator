@@ -24,6 +24,10 @@ public sealed class ClienteTests
         Assert.Equal(ultimo.Id, (await cliente.ObtenerUltimoAsync())?.Id);
         Assert.Equal(ultimo.Png, await cliente.ObtenerPngAsync(ultimo.Id));
         Assert.Equal(ultimo.Bin, await cliente.ObtenerBinAsync(ultimo.Id));
+        Assert.Equal(ultimo.Id, (await cliente.ObtenerAsync(ultimo.Id))?.Id);
+        Assert.Equal(2, (await cliente.ListarAsync()).Count);
+        Assert.Equal([ultimo.Id], (await cliente.ListarAsync(limite: 1)).Select(t => t.Id));
+        Assert.Equal(ultimo.Id, (await cliente.ObtenerEstadoAsync()).UltimoId);
     }
 
     [Fact]

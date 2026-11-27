@@ -103,6 +103,7 @@ public sealed class TicketsApiTests
         using var respuesta = await http.GetAsync("/api/tickets/esperar?" + consulta);
 
         Assert.Equal(HttpStatusCode.BadRequest, respuesta.StatusCode);
+        Assert.Equal("application/problem+json", respuesta.Content.Headers.ContentType?.MediaType);
     }
 
     [Fact]
@@ -123,6 +124,7 @@ public sealed class TicketsApiTests
     [InlineData("/api/tickets/no-existe")]
     [InlineData("/api/tickets/no-existe.png")]
     [InlineData("/api/tickets/no-existe.bin")]
+    [InlineData("/api/tickets/con.punto")]
     public async Task UnIdInexistenteDa404(string ruta)
     {
         await using var fabrica = new FabricaDelEmulador();
@@ -152,6 +154,7 @@ public sealed class TicketsApiTests
         Assert.Single((await http.GetFromJsonAsync<List<TicketInfo>>("/api/tickets?limite=1"))!);
         using var limiteMalo = await http.GetAsync("/api/tickets?limite=0");
         Assert.Equal(HttpStatusCode.BadRequest, limiteMalo.StatusCode);
+        Assert.Equal("application/problem+json", limiteMalo.Content.Headers.ContentType?.MediaType);
 
         using var bin = await http.GetAsync($"/api/tickets/{viejo.Id}.bin");
         Assert.Equal("application/octet-stream", bin.Content.Headers.ContentType?.MediaType);

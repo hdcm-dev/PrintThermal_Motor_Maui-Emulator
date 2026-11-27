@@ -27,6 +27,8 @@ appetite: dos días
 pendientes:
   - {que: "conectar el almacén en disco (PAR-PTE-02) y el medio Bluetooth (PAR-PTE-03) al host detrás de IAlmacenDeTickets e IEstadoDelMedio: ninguna parcela de SPR-01 lo nombra", registro: LAZ-0001}
   - {que: "escala del visor con 8 puntos por mm, sin medir en la 58HB6 (D6)", registro: LAZ-0002}
+  - {que: "las imágenes oficiales de .NET traen ASPNETCORE_HTTP_PORTS=8080 y anulan la escucha local por omisión (D7) dentro de un contenedor", registro: LAZ-0003}
+  - {que: "orden de fusión: la re-planificación (744a026) antes que esta parcela, y PAR-PTE-02 antes que PAR-PTE-04 según SPR-01", registro: LAZ-0004}
 decisiones:
   - {id: D1, tema: "versiones fijas de Microsoft.AspNetCore.OpenApi 10.0.14, Scalar.AspNetCore 3.3.0 y Microsoft.AspNetCore.Mvc.Testing 10.0.14 (nuget.org, 2026-11-27; 10.0.14 es el runtime ASP.NET Core del SDK 10.0.403)", clase: K1}
   - {id: D2, tema: "cliente HTTP tipado propio en PrintThermal.Emulator.Client, que usan el visor y las pruebas (opción A de ADR-0003)", clase: K2, adr: ADR-0003}
@@ -86,7 +88,7 @@ Que quien prueba obtenga el PNG de cada ticket por HTTP y lo vea en un navegador
 
 ## Plan
 
-En `plan.md`. Incluye la etapa T6: recorrido del visor en navegador real (`recorrido/`, `Rules-Decisiones.md` §7), por `interfaz: n2` de REQ-HIS-Visor-Web.
+En `plan.md`. Incluye la etapa que SPR-01 llama T6 (T4 de `tasks.md`): recorrido del visor en navegador real (`recorrido/`, `Rules-Decisiones.md` §7), por `interfaz: n2` de REQ-HIS-Visor-Web.
 
 ## Tareas
 
@@ -103,32 +105,58 @@ Esta corrida es un paso de un flujo de trabajo sin persona disponible para pregu
 
 ## Complexity Tracking
 
-- Precondición de 03 §2 («las olas anteriores, cerradas»): esta parcela es de la ola 3 y corrió con PAR-PTE-02 y PAR-PTE-03 (ola 2) abiertas, porque el flujo de trabajo pidió trabajar contra un almacén en memoria y una fuente simulada. La dependencia «PAR-PTE-02 antes que PAR-PTE-04 por REQ-HIS-Almacen-De-Tickets» se resolvió con D4: la parcela no toca `src/PrintThermal.Emulator.Core/Almacen/**` y declara la conexión en LAZ-0001. La fusión queda en orden de olas, a cargo de otra etapa.
+- Precondición de 03 §2 («las olas anteriores, cerradas»): esta parcela es de la ola 3 y corrió con PAR-PTE-02 y PAR-PTE-03 (ola 2) abiertas, porque el flujo de trabajo pidió trabajar contra un almacén en memoria y una fuente simulada. La dependencia «PAR-PTE-02 antes que PAR-PTE-04 por REQ-HIS-Almacen-De-Tickets» se resolvió con D4: la parcela no toca `src/PrintThermal.Emulator.Core/Almacen/**` y declara la conexión en LAZ-0001. La fusión queda en orden de olas, a cargo de otra etapa, y el orden está registrado en LAZ-0004.
 
 ## Cierre
 
-- Versiones subidas: REQ-HIS-Api-De-Tickets v1 → v2, REQ-HIS-Visor-Web v1 → v2 y REQ-HIS-Cliente-Tipado v2 → v3 (historias y `modifica`), y REQ-HIS-Compilacion-Verificada v2 → v3 (`modifica`, por `Directory.Packages.props`). Cada historia suma a sus `rutas:` la carpeta de sus pruebas. En REQ-HIS-Cliente-Tipado, `src/PrintThermal.Emulator.Client/**/*.cs` pasa a `*.cs`: la compuerta compara con `fnmatch`, y `**/*.cs` exige una subcarpeta, así que no cubría `ClienteDeTickets.cs` ni `Modelos.cs`.
+- Versiones subidas:
+  - REQ-HIS-Api-De-Tickets v1 → v2 (historias y `modifica`);
+  - REQ-HIS-Visor-Web v1 → v2 (historias y `modifica`);
+  - REQ-HIS-Cliente-Tipado v2 → v3 (historias y `modifica`);
+  - REQ-HIS-Compilacion-Verificada v2 → v3 (`modifica`, por `Directory.Packages.props`).
+
+  Cada historia suma a sus `rutas:` la carpeta de sus pruebas. En REQ-HIS-Cliente-Tipado, `src/PrintThermal.Emulator.Client/**/*.cs` pasa a `*.cs`: la compuerta compara con `fnmatch`, y `**/*.cs` exige una subcarpeta, así que no cubría `ClienteDeTickets.cs` ni `Modelos.cs`.
 - Changelog: «PAR-PTE-04 · API de tickets con OpenAPI y Scalar, visor Blazor y cliente tipado…» en `cdd/corpus/CHANGELOG.md`.
-- Evidencia:
-  - `evidencia/2026-11-27-rojo.txt`: 29 de 37 en rojo sobre el esqueleto, con las seis pruebas de REQ-01 a REQ-06 en rojo por falta de comportamiento.
-  - `evidencia/2026-11-27-pruebas.txt` y `.trx`: 37 de 37 en verde con el código final.
-  - `evidencia/2026-11-27-mutacion.txt`: seis mutantes, uno por REQ; los seis en rojo.
-  - Todas las corridas: SDK 10.0.403 en contenedor con turno.
+- Evidencia (todas las corridas con SDK 10.0.403 en contenedor con turno):
+  - `evidencia/2026-11-27-rojo.txt`: 29 de 37 en rojo sobre el esqueleto (commit `386c214`). Las seis pruebas de REQ-01 a REQ-06 fallan por falta de comportamiento.
+  - Tras la auditoría, las pruebas se reforzaron: ProblemDetails en los 400 y en una ruta inexistente, más el resto de las operaciones del cliente. Esos refuerzos no tienen un rojo propio; los cubre la mutación.
+  - `evidencia/2026-11-27-pruebas.txt` y `.trx`: 38 de 38 en verde con el código final. El `computerName` del TRX es el id efímero del contenedor.
+  - `evidencia/2026-11-27-mutacion.txt`: seis mutantes con su diff, uno por REQ; los seis en rojo.
+  - `evidencia/2026-11-27-escucha.txt`: el host publicado, sin `ASPNETCORE_HTTP_PORTS` ni `ASPNETCORE_URLS`, escucha sólo en `127.0.0.1:5080`. Responde 200 por loopback y no responde por la IP del contenedor. Así REQ-06 queda medido en el host, y no sólo en el ayudante que prueba la unidad.
   - La corrida de la CI pública del PR la mide la guarda del merge y no es evidencia de esta carpeta.
-- Recorrido en navegador real: `recorrido/guion.md`, nueve capturas a 1440 y 360 px y `recorrido/consola.txt`, sin errores. Se ven los estados vacío, datos (con llegada en vivo por la espera) y error, la elección de un ticket, las descargas y limpiar con confirmación. El estado «cargando» existe en el código, pero el recorrido no lo capturó: con prerenderizado no se llega a ver. La primera corrida del recorrido se descartó por un 404 de `/favicon.ico` y un rótulo equivocado en el estado de error; se corrigieron y el recorrido se repitió entero.
+- Recorrido en navegador real (`recorrido/guion.md`, doce capturas a 1440 y 360 px, `recorrido/consola.txt` sin errores ni avisos):
+  - se ven los cuatro estados: vacío (al abrir y tras limpiar), datos (con llegada en vivo por la espera), cargando (API que no responde) y error (por plazo e inmediato);
+  - se ven también elegir un ticket, las descargas, limpiar con confirmación y la escala de 48 mm en un papel de 58 mm;
+  - hubo dos corridas descartadas, y sus motivos y correcciones están en el guion.
 - Decisiones:
-  - D1, D4, D5 y D6 son K1, y D7 es K0.
+  - D1, D4, D5 y D6 son K1; D7 es K0.
   - D2 (ADR-0003, opción A) y D3 (contrato de la API sobre ADR-0001) son K2. Las decidió una mesa ciega del mismo modelo en otro contexto (`evidencia/2026-11-27-mesa.md`; garantía reducida) y van al lote de K2 de la Review de SPR-01.
-  - El contrato v1 cambió por la mesa en cinco puntos: espera sin `despuesDe`, ids ordenables con restricción de ruta, ProblemDetails, `limite` y documentación del patrón y del borrado.
+  - El contrato v1 cambió por la mesa en cinco puntos: espera sin `despuesDe`, ids ordenables con restricción de ruta, ProblemDetails, `limite`, y documentación del patrón y del borrado.
   - ADR-0003 sigue `propuesto` en su archivo (`gobierno: humano`): no se toca sin la K3 de la persona.
 - Divergencia corpus/código: ninguna que contradiga un ADR.
-  - ADR-0001 deja el contrato a la épica de acceso y queda escrito en REQ-HIS-Api-De-Tickets v2.
+  - ADR-0001 deja el contrato a la épica de acceso, y el contrato queda escrito en REQ-HIS-Api-De-Tickets v2.
   - `supuesto:` agregado al contrato: `despuesDe=0` («desde el principio»). Surgió al escribir la prueba del cliente: sin él, quien imprime con el almacén vacío pierde el ticket si llega antes de la espera.
-- Lo que queda abierto: LAZ-0001 (conectar el almacén y el medio reales) y LAZ-0002 (escala sin medir), en `pendientes:`.
+- Auditoría (`evidencia/2026-11-27-auditoria.md`). La primera ronda refutó el cierre. Cada hallazgo se corrigió en código o en pruebas, o se registró:
+  - pendientes sin registro → LAZ-0003 y LAZ-0004;
+  - ProblemDetails incompleto → `AddProblemDetails` y `UseStatusCodePages`, con pruebas;
+  - REQ-06 sólo en el ayudante → `escucha.txt`;
+  - cobertura del cliente → pruebas de cada operación;
+  - mutación sin diff → se rehízo;
+  - parpadeo a «cargando» y estados sin captura → estado persistido, renderizado en flujo y recorrido nuevo;
+  - bucle del visor sin pausa → pausa tras fallar la recarga;
+  - lectura no atómica de `/api/estado` → una sola lectura;
+  - contrato «sólo aditivo» → escrito en la historia.
+
+  La segunda ronda está en el mismo archivo.
+- Lo que queda abierto, en `pendientes:`:
+  - LAZ-0001: conectar el almacén y el medio reales;
+  - LAZ-0002: la escala, sin medir;
+  - LAZ-0003: escucha dentro de la imagen;
+  - LAZ-0004: orden de fusión.
 - NO VERIFICADO:
-  - el visor y la API con tickets reales del medio Bluetooth (esta parcela usa la fuente simulada);
+  - la API y el visor con tickets reales del medio Bluetooth (esta parcela usa la fuente simulada);
   - la escala de 8 puntos por mm en la 58HB6.
-- Auditor: `evidencia/2026-11-27-auditoria.md`.
 - Lo aprendido:
   - el navegador de juicio corre en un contenedor de la red puente: alcanza al servicio por la dirección del puente de Docker del equipo, no por su `127.0.0.1`;
-  - una restricción `regex(...)` con corchetes escapados en la plantilla de ruta no enrutó, y una restricción propia (`IRouteConstraint`) sí.
+  - una restricción `regex(...)` con corchetes escapados en la plantilla de ruta no enrutó, y una restricción propia (`IRouteConstraint`) sí;
+  - en Blazor Interactive Server con prerenderizado, lo cargado (y el error) se persiste con `[PersistentState]` para que el circuito no vuelva a «cargando».

@@ -32,9 +32,9 @@ public static class EndpointsDeTickets
 
         rutas.MapGet("/api/estado", (IAlmacenDeTickets almacen, IEstadoDelMedio medio, TimeProvider reloj) =>
             {
-                var ultimo = almacen.Ultimo();
+                var todos = almacen.Listar(); // una sola lectura: cantidad y último coherentes
                 return new EstadoDelEmulador(
-                    version, medio.Nombre, medio.Conectado, almacen.Listar().Count, ultimo?.Id, reloj.GetUtcNow());
+                    version, medio.Nombre, medio.Conectado, todos.Count, todos.FirstOrDefault()?.Id, reloj.GetUtcNow());
             })
             .WithName("ObtenerEstado")
             .WithTags("Estado")

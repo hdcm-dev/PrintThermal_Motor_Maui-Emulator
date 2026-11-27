@@ -32,6 +32,7 @@ else
 }
 
 builder.Services.AddRouting(o => o.ConstraintMap[EndpointsDeTickets.IdDeTicket.Nombre] = typeof(EndpointsDeTickets.IdDeTicket));
+builder.Services.AddProblemDetails(); // también para errores de enlace y rutas inexistentes
 builder.Services.AddOpenApi();
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 
@@ -45,6 +46,7 @@ builder.Services.AddHttpClient<ClienteDeTickets>((sp, http) =>
 
 var app = builder.Build();
 
+app.UseStatusCodePages();
 app.UseAntiforgery();
 app.MapStaticAssets();
 app.MapOpenApi();

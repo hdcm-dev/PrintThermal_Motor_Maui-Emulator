@@ -33,7 +33,8 @@ El contrato (PAR-PTE-04, D3 con los cambios de la mesa ciega; detalle en `cdd/pa
 | `GET /api/tickets/esperar?despuesDe=&segundos=` | El primer ticket con id mayor que `despuesDe`; 204 al vencer el plazo (1 a 60 s, 30 por omisión); 400 fuera de rango |
 | `DELETE /api/tickets`, `/{id}` | Borra todos o uno; 204, o 404 si el id no existe |
 
-- Los errores van en ProblemDetails.
+- Los cambios futuros del contrato son sólo aditivos.
+- Los errores van en ProblemDetails, también los de enlace de parámetros y las rutas inexistentes.
 - Los ids son ordenables, sin puntos y mayores que `0`.
 - Sin `despuesDe`, la espera devuelve sólo un ticket posterior a los presentes. Para no perder un ticket: leer `ultimoId`, imprimir y esperar con ese id, o con `0` si no había ninguno.
 - Sin dirección configurada (`urls`, `http_ports`, `https_ports` o `Kestrel:Endpoints`), el host escucha en `http://127.0.0.1:5080`.

@@ -32,7 +32,7 @@ En PAR-PTE-04 el visor es una sola página:
 - Limpiar, con confirmación.
 - Cuatro estados: cargando, vacío, datos y error.
 
-La página se actualiza sola con la espera larga de `/api/tickets/esperar`. Usa CSS propio, sin CDN.
+La página se actualiza sola con la espera larga de `/api/tickets/esperar`. Se renderiza en flujo: «cargando» se ve mientras la API no responde. Lo cargado y el error persisten entre el prerenderizado y el circuito. Usa CSS propio, sin CDN.
 
 ## 2. Criterios
 
